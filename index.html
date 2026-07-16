@@ -10,228 +10,159 @@
 <style>
   /* =========================================================
      noomi — Oferta Relâmpago
-     Animação 1920 x 1080  (formato paisagem)
-     Fonte: Outfit  •  Cores da arte original preservadas
+     Animação 1080 x 1920  (vertical / story)  •  Fonte: Outfit
+     Réplica fiel da arte original + animação
      ========================================================= */
   :root{
-    --blue:        #1b3ad1;   /* azul principal noomi        */
-    --blue-bright: #2a55f0;   /* azul de destaque (OF / preço)*/
-    --blue-deep:   #16309f;
-    --red:         #c31a1a;   /* vermelho selos              */
+    --blue:        #1f4dd6;   /* azul principal noomi         */
+    --blue-2:      #1b44c6;   /* azul banner/botão            */
+    --blue-bright: #2455ee;   /* azul do preço                */
+    --ink:         #0d1a33;   /* "preto" navy dos títulos     */
+    --red:         #c11a1a;
     --red-deep:    #8f0f0f;
-    --ink:         #14161c;   /* preto texto                 */
-    --paper:       #f3f4f6;   /* card claro                  */
-    --bg-1:        #e9eaec;
-    --bg-2:        #cdced2;
-    --stage-w: 1920px;
-    --stage-h: 1080px;
+    --paper:       #eef0f3;
+    --bg-1:        #e8e9eb;
+    --bg-2:        #c9cacd;
+    --stage-w: 1080px;
+    --stage-h: 1920px;
   }
-
   *{ box-sizing:border-box; margin:0; padding:0; }
-
-  html,body{
-    height:100%;
-    background:#0c0d10;
+  html,body{ height:100%; background:#0c0d10;
     font-family:"Outfit", system-ui, sans-serif;
-    display:grid;
-    place-items:center;
-    overflow:hidden;
-  }
+    display:grid; place-items:center; overflow:hidden; }
 
-  /* Escala o palco 1920x1080 para caber em qualquer tela mantendo proporção */
-  .viewport{
-    width:100vw; height:100vh;
-    display:grid; place-items:center;
-  }
-  .fit{
-    width:var(--stage-w); height:var(--stage-h);
-    transform-origin:center center;
-    /* min() garante que caiba tanto por largura quanto por altura */
-    transform:scale( min( calc(100vw / 1920), calc(100vh / 1080) ) );
-  }
+  .viewport{ width:100vw; height:100vh; display:grid; place-items:center; }
+  .fit{ width:var(--stage-w); height:var(--stage-h); transform-origin:center center;
+    transform:scale( min( calc(100vw / 1080), calc(100vh / 1920) ) ); }
 
   /* ---------------- PALCO ---------------- */
   .stage{
-    position:relative;
-    width:var(--stage-w); height:var(--stage-h);
+    position:relative; width:var(--stage-w); height:var(--stage-h);
     background:
-      radial-gradient(120% 100% at 30% 25%, #f2f3f5 0%, var(--bg-1) 42%, var(--bg-2) 100%);
-    overflow:hidden;
-    color:var(--ink);
+      radial-gradient(80% 46% at 50% 40%, #f4f5f7 0%, var(--bg-1) 55%, var(--bg-2) 100%);
+    overflow:hidden; color:var(--ink);
+    opacity:0; transition:opacity .35s ease;
   }
-  /* textura sutil (grão) igual ao fundo original */
-  .stage::before{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background-image:radial-gradient(rgba(0,0,0,.045) 1px, transparent 1px);
-    background-size:3px 3px; mix-blend-mode:multiply; opacity:.5;
-  }
-  /* vinheta */
-  .stage::after{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    box-shadow:inset 0 0 260px rgba(0,0,0,.20);
-  }
+  body.play .stage{ opacity:1; }
+  /* até iniciar (fontes prontas), congela todas as animações */
+  body:not(.play) *{ animation-play-state:paused !important; }
 
-  /* flash do relâmpago sobre a cena toda */
-  .flash{
-    position:absolute; inset:0; z-index:60; pointer-events:none;
-    background:#ffffff; opacity:0;
-    animation:flash 9s ease-out infinite;
-  }
-  @keyframes flash{
-    0%,100%{opacity:0}
-    6.0%{opacity:0}
-    6.6%{opacity:.85}
-    7.2%{opacity:0}
-    7.8%{opacity:.55}
-    8.4%{opacity:0}
-  }
+  .stage::before{ content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+    background-size:3px 3px; mix-blend-mode:multiply; opacity:.5; }
+  .stage::after{ content:""; position:absolute; inset:0; pointer-events:none;
+    box-shadow:inset 0 0 220px rgba(0,0,0,.22); }
 
-  /* ===================== LAYOUT ===================== */
-  .grid{
-    position:relative; z-index:10;
-    width:100%; height:100%;
-    display:grid;
-    grid-template-columns:1.02fr .98fr;
-    align-items:center;
-  }
+  .flash{ position:absolute; inset:0; z-index:80; pointer-events:none;
+    background:#fff; opacity:0; animation:flash 8.5s ease-out .2s infinite; }
+  @keyframes flash{ 0%,100%{opacity:0} 55%{opacity:0}
+    58%{opacity:.85} 61%{opacity:0} 64%{opacity:.5} 67%{opacity:0} }
 
-  /* --------- COLUNA ESQUERDA : carro + selo --------- */
-  .left{ position:relative; height:100%; }
-
-  .logo{
-    position:absolute; top:64px; left:96px;
-    font-weight:800; font-size:52px; letter-spacing:.02em;
-    color:var(--ink);
-    opacity:0; animation:dropIn .8s cubic-bezier(.2,.8,.2,1) .2s forwards;
-  }
-  .logo b{ color:var(--ink); font-weight:900; }
+  /* ---------------- CABEÇALHO ---------------- */
+  .logo{ text-align:center; margin-top:70px; font-weight:800; font-size:62px;
+    letter-spacing:.01em; color:var(--ink);
+    opacity:0; animation:dropIn .8s cubic-bezier(.2,.8,.2,1) .15s forwards; }
   .logo .o{ color:var(--blue); }
 
-  .car-wrap{
-    position:absolute; top:50%; left:50%;
-    transform:translate(-50%,-46%);
-    width:840px;
-    opacity:0;
-    animation:driveIn 1.1s cubic-bezier(.16,.84,.3,1) .55s forwards;
-  }
+  .headline{ text-align:center; margin-top:30px; line-height:.86; padding:0 30px; }
+  .headline div{ font-weight:900; text-transform:uppercase; letter-spacing:-.015em; }
+  .headline .l1{ font-size:205px; }
+  .headline .l2{ font-size:138px; margin-top:10px; }
+  .headline .of{ color:var(--blue); }
+  .headline .rest,.headline .rel{ color:var(--ink); }
+  .word{ display:inline-block; opacity:0; transform:translateY(-46px) scale(.94);
+    animation:dropWord .7s cubic-bezier(.2,.9,.25,1) forwards; }
+  .headline .l1 .word{ animation-delay:.55s; }
+  .headline .l2 .word{ animation-delay:.85s; }
+
+  /* ---------------- CARRO ---------------- */
+  .car-wrap{ position:absolute; top:560px; left:50%; width:1020px;
+    transform:translateX(-50%);
+    opacity:0; animation:carIn 1s cubic-bezier(.16,.84,.3,1) 1.05s forwards; }
+  .car-wrap .car-float{ animation:float 5s ease-in-out infinite 2s; }
   .car-wrap svg{ width:100%; height:auto; display:block;
-    filter:drop-shadow(0 46px 34px rgba(0,0,0,.35)); }
+    filter:drop-shadow(0 40px 30px rgba(0,0,0,.4)); }
   .car-photo{ display:none; width:100%; height:auto;
-    filter:drop-shadow(0 46px 34px rgba(0,0,0,.35)); }
+    filter:drop-shadow(0 40px 30px rgba(0,0,0,.4)); }
   .car-float.has-photo .car-photo{ display:block; }
   .car-float.has-photo svg{ display:none; }
-  .car-float{ animation:float 5s ease-in-out infinite 1.8s; transform-origin:center; }
 
-  /* selo vermelho circular */
-  .seal{
-    position:absolute; z-index:20;
-    right:70px; bottom:150px;
-    width:210px; height:210px; border-radius:50%;
-    background:radial-gradient(circle at 38% 34%, #e33 0%, var(--red) 46%, var(--red-deep) 100%);
-    color:#fff; box-shadow:0 16px 30px rgba(120,0,0,.35), inset 0 0 0 6px rgba(255,255,255,.16);
+  /* selo vermelho */
+  .seal{ position:absolute; z-index:30; right:52px; top:1030px;
+    width:214px; height:214px; border-radius:50%;
+    background:radial-gradient(circle at 38% 32%, #e23 0%, var(--red) 46%, var(--red-deep) 100%);
+    color:#fff; box-shadow:0 16px 30px rgba(120,0,0,.4), inset 0 0 0 7px rgba(255,255,255,.18);
     display:grid; place-items:center;
     opacity:0; transform:scale(.2) rotate(-30deg);
-    animation:stamp .7s cubic-bezier(.2,1.4,.4,1) 2.15s forwards;
-  }
-  .seal .ring{ position:absolute; inset:12px; border-radius:50%;
-    animation:spin 18s linear infinite; }
-  .seal .ring text{ font-size:15.5px; font-weight:800; letter-spacing:.12em; fill:#fff; }
-  .seal .x{ font-size:60px; font-weight:900; line-height:1; }
+    animation:stamp .7s cubic-bezier(.2,1.4,.4,1) 1.9s forwards; }
+  .seal .ring{ position:absolute; inset:13px; animation:spin 20s linear infinite; }
+  .seal .ring text{ font-size:15.5px; font-weight:800; letter-spacing:.10em; fill:#fff; }
+  .seal .x{ font-size:64px; font-weight:900; line-height:1; }
 
-  /* --------- COLUNA DIREITA : textos --------- */
-  .right{ padding:70px 96px 70px 20px; }
+  /* ---------------- BLOCO INFERIOR ---------------- */
+  .bottom{ position:absolute; left:0; right:0; bottom:0; height:718px;
+    background:var(--blue-2); border-radius:50px 50px 0 0;
+    box-shadow:0 -18px 40px rgba(0,0,0,.16);
+    transform:translateY(100%); animation:rise .9s cubic-bezier(.2,.8,.2,1) 1.15s forwards; }
 
-  .headline{ margin-bottom:26px; }
-  .headline .l1,.headline .l2{
-    font-weight:900; line-height:.9; letter-spacing:-.01em;
-    text-transform:uppercase;
-  }
-  .headline .l1{ font-size:150px; }
-  .headline .l2{ font-size:150px; }
-  .headline .of{ color:var(--blue); }
-  .headline .erta{ color:var(--ink); }
-  .headline .rel{ color:var(--ink); }
+  .tag{ position:absolute; top:-30px; left:40px; z-index:20;
+    background:var(--blue); color:#fff; font-weight:800; font-size:38px;
+    letter-spacing:.02em; text-transform:uppercase; padding:18px 36px; border-radius:16px;
+    box-shadow:0 12px 24px rgba(0,0,0,.28);
+    opacity:0; transform:translateX(-40px);
+    animation:slideX .6s ease-out 1.7s forwards; }
 
-  .word{ display:inline-block; opacity:0; transform:translateX(-40px);
-    animation:slideX .7s cubic-bezier(.2,.8,.2,1) forwards; }
-  .headline .l1 .word{ animation-delay:.9s; }
-  .headline .l2 .word{ animation-delay:1.15s; }
+  .card{ position:absolute; left:22px; right:22px; top:64px; bottom:20px;
+    background:linear-gradient(180deg,#fbfbfc,var(--paper));
+    border-radius:32px; padding:44px 48px 34px;
+    display:flex; flex-direction:column;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.04); }
 
-  /* tag azul CARRO POR ASSINATURA */
-  .tag{
-    display:inline-block; background:var(--blue); color:#fff;
-    font-weight:800; font-size:34px; letter-spacing:.03em; text-transform:uppercase;
-    padding:16px 34px; border-radius:14px; margin-bottom:22px;
-    box-shadow:0 10px 22px rgba(27,58,209,.28);
-    opacity:0; transform:translateY(18px);
-    animation:rise .6s ease-out 1.5s forwards;
-  }
-
-  /* card claro */
-  .card{
-    background:linear-gradient(180deg,#ffffff,var(--paper));
-    border-radius:26px; padding:40px 46px 44px;
-    box-shadow:0 30px 60px rgba(20,22,28,.16), inset 0 0 0 1px rgba(0,0,0,.04);
-    opacity:0; transform:translateY(40px);
-    animation:rise .8s cubic-bezier(.2,.8,.2,1) 1.7s forwards;
-    max-width:760px;
-  }
-  .model{ font-weight:800; font-size:66px; line-height:1; margin-bottom:20px; }
+  .model{ font-weight:800; font-size:70px; line-height:1; margin-top:2px; white-space:nowrap;
+    opacity:0; transform:translateY(20px); animation:rise .6s ease-out 1.95s forwards; }
   .model .b{ color:var(--blue); }
   .model .k{ color:var(--ink); }
 
-  .pill{
-    display:inline-block; background:var(--red); color:#fff;
-    font-weight:700; font-size:30px; padding:11px 26px; border-radius:999px;
-    margin-bottom:26px;
-    animation:pulseRed 2.2s ease-in-out infinite 2.6s;
-  }
+  .pill{ align-self:flex-start; margin-top:24px; background:var(--red); color:#fff;
+    font-weight:700; font-size:34px; padding:12px 30px; border-radius:999px;
+    opacity:0; transform:translateY(18px);
+    animation:rise .55s ease-out 2.15s forwards, pulseRed 2.2s ease-in-out infinite 3s; }
 
-  .price{ font-weight:700; font-size:52px; color:var(--ink); margin-bottom:28px;
-    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
-  .price .val{ font-weight:900; font-size:78px; color:var(--blue-bright); line-height:.9; }
-  .price .val small{ font-weight:700; font-size:40px; color:var(--blue-bright); }
+  .price{ margin-top:30px; font-weight:800; font-size:46px; color:var(--ink);
+    display:flex; align-items:baseline; gap:14px; white-space:nowrap;
+    opacity:0; transform:translateY(18px); animation:rise .55s ease-out 2.3s forwards; }
+  .price .val{ font-weight:900; font-size:66px; color:var(--blue-bright); line-height:.9; }
 
-  .cta{
-    display:block; width:100%; text-align:center;
-    background:var(--blue); color:#fff; text-decoration:none;
-    font-weight:600; font-size:38px; padding:22px; border-radius:16px;
-    box-shadow:0 14px 28px rgba(27,58,209,.30);
-    position:relative; overflow:hidden;
-    animation:beat 2.4s ease-in-out infinite 3s;
-  }
-  /* brilho passando no botão */
-  .cta::after{
-    content:""; position:absolute; top:0; left:-60%; width:50%; height:100%;
+  .cta{ margin-top:auto; display:block; text-align:center; text-decoration:none;
+    background:var(--blue-2); color:#fff; font-weight:600; font-size:46px;
+    padding:26px; border-radius:18px; position:relative; overflow:hidden;
+    box-shadow:0 14px 28px rgba(27,58,209,.32);
+    opacity:0; transform:translateY(20px);
+    animation:rise .6s ease-out 2.5s forwards, beat 2.4s ease-in-out infinite 3.2s; }
+  .cta::after{ content:""; position:absolute; top:0; left:-60%; width:45%; height:100%;
     background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
-    transform:skewX(-20deg);
-    animation:sheen 3.4s ease-in-out infinite 3.4s;
-  }
-  .disclaimer{
-    text-align:center; margin-top:20px; font-style:italic;
-    font-weight:500; font-size:26px; color:#33363e; opacity:.9;
-  }
+    transform:skewX(-20deg); animation:sheen 3.6s ease-in-out infinite 3.6s; }
 
-  /* ===================== KEYFRAMES ===================== */
+  .disclaimer{ text-align:center; margin-top:20px; font-style:italic;
+    font-weight:500; font-size:30px; color:#2b2f39; opacity:0;
+    animation:fadeIn .6s ease-out 2.7s forwards; }
+
+  /* ---------------- KEYFRAMES ---------------- */
   @keyframes dropIn{ from{opacity:0; transform:translateY(-34px)} to{opacity:1; transform:none} }
+  @keyframes dropWord{ to{opacity:1; transform:none} }
   @keyframes slideX{ to{opacity:1; transform:none} }
   @keyframes rise{ to{opacity:1; transform:none} }
-  @keyframes driveIn{
-    from{opacity:0; transform:translate(-50%,-46%) translateX(120px) scale(.94)}
-    to{opacity:1; transform:translate(-50%,-46%)}
-  }
-  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-  @keyframes stamp{
-    0%{opacity:0; transform:scale(.2) rotate(-30deg)}
-    70%{opacity:1; transform:scale(1.08) rotate(6deg)}
-    100%{opacity:1; transform:scale(1) rotate(-8deg)}
-  }
+  @keyframes fadeIn{ to{opacity:.92} }
+  @keyframes carIn{ from{opacity:0; transform:translateX(-50%) translateY(60px) scale(.95)}
+    to{opacity:1; transform:translateX(-50%)} }
+  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+  @keyframes stamp{ 0%{opacity:0; transform:scale(.2) rotate(-30deg)}
+    70%{opacity:1; transform:scale(1.08) rotate(6deg)} 100%{opacity:1; transform:scale(1) rotate(-8deg)} }
   @keyframes spin{ to{transform:rotate(360deg)} }
   @keyframes pulseRed{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-  @keyframes beat{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.028)} }
+  @keyframes beat{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.025)} }
   @keyframes sheen{ 0%{left:-60%} 55%,100%{left:130%} }
 
-  /* respeita quem prefere menos movimento */
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001s !important; animation-iteration-count:1 !important}
     .flash{display:none}
@@ -244,154 +175,160 @@
     <div class="stage">
       <div class="flash"></div>
 
-      <div class="grid">
-        <!-- ESQUERDA : logo + carro + selo -->
-        <div class="left">
-          <div class="logo"><span class="o">n</span><b>o</b><span class="o">o</span><b>mi</b></div>
+      <div class="logo"><span class="o">n</span>o<span class="o">o</span>mi</div>
 
-          <div class="car-wrap">
-            <div class="car-float">
-              <!-- Se existir assets/car.png (a foto real), ela aparece no lugar da ilustração automaticamente -->
-              <img class="car-photo" src="assets/car.png" alt="Peugeot 2008 Allure"
-                   onload="this.closest('.car-float').classList.add('has-photo')"
-                   onerror="this.remove()" />
-              <!-- Ilustração SUV (Peugeot 2008) — fallback caso não haja foto -->
-              <svg viewBox="0 0 900 420" role="img" aria-label="Peugeot 2008 Allure">
-                <defs>
-                  <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#6d7178"/>
-                    <stop offset="0.5" stop-color="#565a61"/>
-                    <stop offset="1" stop-color="#3a3d43"/>
-                  </linearGradient>
-                  <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#c9d2da"/>
-                    <stop offset="1" stop-color="#7f8790"/>
-                  </linearGradient>
-                  <radialGradient id="rim" cx="50%" cy="45%" r="60%">
-                    <stop offset="0" stop-color="#9aa0a8"/>
-                    <stop offset="0.6" stop-color="#4c5057"/>
-                    <stop offset="1" stop-color="#202226"/>
-                  </radialGradient>
-                  <linearGradient id="light" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#eaf6ff"/>
-                    <stop offset="1" stop-color="#a9c6e0"/>
-                  </linearGradient>
-                </defs>
+      <div class="headline">
+        <div class="l1"><span class="word"><span class="of">OF</span><span class="rest">ERTA</span></span></div>
+        <div class="l2"><span class="word rel">RELÂMPAGO</span></div>
+      </div>
 
-                <!-- sombra no chão -->
-                <ellipse cx="452" cy="392" rx="366" ry="24" fill="rgba(0,0,0,.28)"/>
+      <div class="car-wrap">
+        <div class="car-float">
+          <!-- Se existir assets/car.png (foto real recortada), ela aparece no lugar da ilustração -->
+          <img class="car-photo" src="assets/car.png" alt="Peugeot 2008 Allure"
+               onload="this.closest('.car-float').classList.add('has-photo')"
+               onerror="this.remove()" />
+          <!-- Ilustração SUV (Peugeot 2008) — fallback -->
+          <svg viewBox="0 0 1020 620" role="img" aria-label="Peugeot 2008 Allure">
+            <defs>
+              <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#8a8e95"/><stop offset=".5" stop-color="#5c6067"/>
+                <stop offset="1" stop-color="#34373d"/>
+              </linearGradient>
+              <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#797d84"/><stop offset="1" stop-color="#4c5057"/>
+              </linearGradient>
+              <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3a4048"/><stop offset="1" stop-color="#1f242b"/>
+              </linearGradient>
+              <radialGradient id="rim" cx="50%" cy="45%" r="60%">
+                <stop offset="0" stop-color="#aeb3ba"/><stop offset=".55" stop-color="#4c5057"/>
+                <stop offset="1" stop-color="#191b1e"/>
+              </radialGradient>
+              <linearGradient id="drl" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f4f6f7"/><stop offset="1" stop-color="#c2c8cd"/>
+              </linearGradient>
+            </defs>
 
-                <!-- corpo SUV (teto alto e reto, arcos marcados) -->
-                <path d="M72 356
-                         L72 300
-                         C72 286 82 276 100 272
-                         L150 262
-                         C168 232 196 212 236 202
-                         L260 176
-                         C272 162 288 156 312 156
-                         L560 156
-                         C586 156 604 164 616 184
-                         L646 232
-                         L742 244
-                         C806 252 844 272 852 300
-                         L852 356
-                         C852 364 846 368 838 368
-                         L86 368
-                         C78 368 72 364 72 356 Z"
-                      fill="url(#body)"/>
-                <!-- teto -->
-                <path d="M266 176 C278 164 292 160 312 160 L556 160 C580 160 596 168 606 186
-                         L620 210 L286 210 Z" fill="#4a4e55"/>
-                <!-- rack de teto -->
-                <rect x="300" y="150" width="250" height="7" rx="3" fill="#33363c"/>
-                <!-- linha de cintura -->
-                <path d="M150 300 L830 300" stroke="rgba(255,255,255,.10)" stroke-width="3" fill="none"/>
-                <!-- vinco lateral -->
-                <path d="M120 330 L820 322" stroke="rgba(0,0,0,.18)" stroke-width="3" fill="none"/>
+            <!-- sombra -->
+            <ellipse cx="520" cy="576" rx="420" ry="34" fill="rgba(0,0,0,.32)"/>
 
-                <!-- vidros (janelas altas de SUV) -->
-                <path d="M292 186 L556 186 C574 186 588 192 596 206 L610 226 L286 226 Z"
-                      fill="url(#glass)" opacity=".95"/>
-                <!-- montante central -->
-                <rect x="430" y="188" width="12" height="40" fill="#2c3238" opacity=".6"/>
-                <!-- retrovisor -->
-                <path d="M270 214 l-24 4 l0 12 l24 -2 Z" fill="#3a3d43"/>
+            <!-- teto / vidros -->
+            <path d="M300 210 C340 150 420 120 540 118 C650 120 720 150 754 208
+                     L764 300 L286 300 Z" fill="url(#glass)"/>
+            <path d="M330 210 C362 162 430 138 540 138 C640 138 706 162 736 210
+                     L742 250 L322 250 Z" fill="#454b53" opacity=".55"/>
+            <!-- rack teto -->
+            <path d="M360 132 C440 120 620 120 700 134" stroke="#2b2e34" stroke-width="10"
+                  fill="none" stroke-linecap="round"/>
 
-                <!-- faróis / DRL estilo garra -->
-                <path d="M74 288 L120 282 L120 300 L74 304 Z" fill="url(#light)"/>
-                <path d="M82 312 l34 -4 l0 8 l-34 5 Z" fill="#e9eef3" opacity=".85"/>
+            <!-- corpo / lateral -->
+            <path d="M96 470
+                     C90 420 96 372 120 344
+                     L250 300
+                     C300 250 360 224 460 216
+                     L620 216
+                     C716 222 772 252 812 312
+                     L900 344
+                     C936 360 950 392 948 442
+                     L948 486 C948 500 940 508 924 508
+                     L120 508 C104 508 98 496 96 470 Z" fill="url(#body)"/>
+            <!-- capô destaque -->
+            <path d="M120 344 L250 300 C300 250 360 224 460 216 L470 300 L150 372 Z"
+                  fill="url(#hood)" opacity=".65"/>
+            <!-- para-choque inferior -->
+            <path d="M110 470 L940 470 C946 492 938 508 918 508 L128 508 C110 508 104 490 110 470 Z"
+                  fill="#26292e"/>
 
-                <!-- maçanetas -->
-                <rect x="352" y="256" width="44" height="8" rx="4" fill="rgba(0,0,0,.35)"/>
-                <rect x="470" y="256" width="44" height="8" rx="4" fill="rgba(0,0,0,.35)"/>
+            <!-- grade frontal -->
+            <path d="M120 360 L250 322 L262 456 L128 468 Z" fill="#1c1f24"/>
+            <g stroke="#3b3f45" stroke-width="4">
+              <line x1="150" y1="356" x2="150" y2="462"/><line x1="178" y1="350" x2="178" y2="460"/>
+              <line x1="206" y1="344" x2="206" y2="458"/><line x1="234" y1="336" x2="234" y2="456"/>
+            </g>
+            <!-- emblema -->
+            <circle cx="196" cy="402" r="20" fill="#c9ccd1"/>
+            <path d="M196 388 l7 20 l-14 0 Z" fill="#3a3d43"/>
 
-                <!-- arcos de roda -->
-                <path d="M186 368 a76 76 0 0 1 152 0 Z" fill="#26282c"/>
-                <path d="M596 368 a76 76 0 0 1 152 0 Z" fill="#26282c"/>
+            <!-- faróis + "garras" DRL (assinatura Peugeot) -->
+            <path d="M250 322 L330 316 L336 360 L258 372 Z" fill="#0f1216"/>
+            <path d="M262 330 l60 -4 l3 20 l-60 8 Z" fill="url(#drl)"/>
+            <g fill="url(#drl)">
+              <path d="M300 378 l14 -1 l-6 78 l-12 0 Z"/>
+              <path d="M326 376 l14 -1 l-8 82 l-12 0 Z"/>
+              <path d="M352 374 l14 -1 l-10 86 l-12 0 Z"/>
+            </g>
 
-                <!-- rodas -->
-                <g>
-                  <circle cx="262" cy="356" r="70" fill="#16181b"/>
-                  <circle cx="262" cy="356" r="42" fill="url(#rim)"/>
-                  <circle cx="262" cy="356" r="10" fill="#0e0f11"/>
-                  <g stroke="#2a2c30" stroke-width="6">
-                    <line x1="262" y1="356" x2="262" y2="316"/><line x1="262" y1="356" x2="298" y2="374"/>
-                    <line x1="262" y1="356" x2="226" y2="374"/><line x1="262" y1="356" x2="298" y2="336"/>
-                    <line x1="262" y1="356" x2="226" y2="336"/>
-                  </g>
-                </g>
-                <g>
-                  <circle cx="672" cy="356" r="70" fill="#16181b"/>
-                  <circle cx="672" cy="356" r="42" fill="url(#rim)"/>
-                  <circle cx="672" cy="356" r="10" fill="#0e0f11"/>
-                  <g stroke="#2a2c30" stroke-width="6">
-                    <line x1="672" y1="356" x2="672" y2="316"/><line x1="672" y1="356" x2="708" y2="374"/>
-                    <line x1="672" y1="356" x2="636" y2="374"/><line x1="672" y1="356" x2="708" y2="336"/>
-                    <line x1="672" y1="356" x2="636" y2="336"/>
-                  </g>
-                </g>
+            <!-- placa 2008 -->
+            <rect x="150" y="474" width="120" height="40" rx="6" fill="#eef0f2"/>
+            <text x="210" y="503" text-anchor="middle" font-family="Outfit" font-weight="800"
+                  font-size="26" fill="#3a3d43">2008</text>
 
-                <!-- placa 2008 -->
-                <rect x="150" y="316" width="72" height="26" rx="4" fill="#eef0f2"/>
-                <text x="186" y="335" text-anchor="middle" font-family="Outfit" font-weight="800"
-                      font-size="17" fill="#3a3d43">2008</text>
-              </svg>
-            </div>
-          </div>
+            <!-- vinco lateral -->
+            <path d="M470 356 L900 372" stroke="rgba(255,255,255,.12)" stroke-width="4" fill="none"/>
+            <!-- maçaneta -->
+            <rect x="640" y="356" width="60" height="10" rx="5" fill="rgba(0,0,0,.4)"/>
 
-          <!-- selo NÃO ATENDEMOS APP DE MOBILIDADE -->
-          <div class="seal">
-            <svg class="ring" viewBox="0 0 210 210" width="210" height="210">
-              <defs><path id="cpath" d="M105,105 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs>
-              <text><textPath href="#cpath" startOffset="0%">NÃO ATENDEMOS • APP DE MOBILIDADE • </textPath></text>
-            </svg>
-            <span class="x">✕</span>
-          </div>
-        </div>
+            <!-- arcos -->
+            <path d="M300 508 a92 92 0 0 1 184 0 Z" fill="#202226"/>
+            <path d="M700 508 a92 92 0 0 1 168 0 Z" fill="#202226"/>
 
-        <!-- DIREITA : textos -->
-        <div class="right">
-          <div class="headline">
-            <div class="l1"><span class="word"><span class="of">OF</span><span class="erta">ERTA</span></span></div>
-            <div class="l2"><span class="word rel">RELÂMPAGO</span></div>
-          </div>
-
-          <span class="tag">Carro por assinatura</span>
-
-          <div class="card">
-            <div class="model"><span class="b">Peugeot</span> <span class="k">2008 Allure</span></div>
-            <span class="pill">Últimas unidades</span>
-            <div class="price">
-              <span>A partir de</span>
-              <span class="val">2.685,00<small>/mês</small></span>
-            </div>
-            <a class="cta" href="#">Oferta para CNPJ</a>
-            <div class="disclaimer">*Sujeito à análise de crédito*</div>
-          </div>
+            <!-- roda dianteira -->
+            <g>
+              <circle cx="392" cy="500" r="86" fill="#141619"/>
+              <circle cx="392" cy="500" r="52" fill="url(#rim)"/>
+              <circle cx="392" cy="500" r="12" fill="#0e0f11"/>
+              <g stroke="#2a2c30" stroke-width="8">
+                <line x1="392" y1="500" x2="392" y2="452"/><line x1="392" y1="500" x2="438" y2="524"/>
+                <line x1="392" y1="500" x2="346" y2="524"/><line x1="392" y1="500" x2="430" y2="470"/>
+                <line x1="392" y1="500" x2="354" y2="470"/>
+              </g>
+            </g>
+            <!-- roda traseira -->
+            <g>
+              <circle cx="784" cy="500" r="80" fill="#141619"/>
+              <circle cx="784" cy="500" r="48" fill="url(#rim)"/>
+              <circle cx="784" cy="500" r="11" fill="#0e0f11"/>
+              <g stroke="#2a2c30" stroke-width="8">
+                <line x1="784" y1="500" x2="784" y2="456"/><line x1="784" y1="500" x2="826" y2="522"/>
+                <line x1="784" y1="500" x2="742" y2="522"/><line x1="784" y1="500" x2="820" y2="472"/>
+                <line x1="784" y1="500" x2="748" y2="472"/>
+              </g>
+            </g>
+          </svg>
         </div>
       </div>
+
+      <!-- selo NÃO ATENDEMOS APP DE MOBILIDADE -->
+      <div class="seal">
+        <svg class="ring" viewBox="0 0 214 214" width="214" height="214">
+          <defs><path id="cpath" d="M107,107 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+          <text><textPath href="#cpath" startOffset="0%">NÃO ATENDEMOS • APP DE MOBILIDADE • </textPath></text>
+        </svg>
+        <span class="x">✕</span>
+      </div>
+
+      <!-- bloco inferior -->
+      <div class="bottom">
+        <span class="tag">Carro por assinatura</span>
+        <div class="card">
+          <div class="model"><span class="b">Peugeot</span> <span class="k">2008 Allure</span></div>
+          <span class="pill">Últimas unidades</span>
+          <div class="price"><span>A partir de</span><span class="val">2.685,00/mês</span></div>
+          <a class="cta" href="#">Oferta para CNPJ</a>
+          <div class="disclaimer">*Sujeito à análise de crédito*</div>
+        </div>
+      </div>
+
     </div>
    </div>
   </div>
+
+  <script>
+    (async () => {
+      try { await document.fonts.ready; } catch (e) {}
+      requestAnimationFrame(() => document.body.classList.add('play'));
+    })();
+  </script>
 </body>
 </html>
