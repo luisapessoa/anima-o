@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sudeste Assinaturas — vídeo vertical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #012019; height: 100%; }
+  a { color: #00d1b2; }
+  a:hover { color: #c6f6d6; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React / ReactDOM / Babel (mesmas versões usadas no projeto original) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+<script>
+  // Lista de telas (9 telas: 1 a 8 + Encerramento) e configuração de playback,
+  // consumidos por scenes.jsx / animations-v2.jsx.
+  window.OM_SCENES = '[{"name":"Tela 1","layout":"hero","dur":5.5,"head":["Se a Sudeste já é","referência Volkswagen","em Juiz de Fora","desde 1995,"],"boxes":["por que criar uma","frente exclusiva para","carro por assinatura?"]},{"name":"Tela 2","layout":"leftbar","dur":4.5,"head":["O mercado","automotivo **mudou.**"],"body":["E, junto com ele, mudou também","**a forma como as pessoas se**","**relacionam com o carro.**"]},{"name":"Tela 3","layout":"timeline","dur":6,"head":["Durante muito tempo,","**comprar ou financiar** foi","o caminho para dirigir","um carro novo."],"body":["A decisão girava em torno da posse: entrada, parcelas, documentação, IPVA, seguro, manutenção e revenda."]},{"name":"Tela 4","layout":"center","dur":5.2,"lead":["Mas hoje muitos clientes","passaram a olhar","para outra pergunta:"],"head":["Qual é a forma mais","**prática e previsível** de","usar um carro na rotina?"]},{"name":"Tela 5","layout":"cardup","dur":5.6,"head":["A assinatura responde","a essa mudança."],"sub":["Um carro **0km** por um período contratado."],"body":["Com **mensalidade fixa** e condições organizadas conforme o plano escolhido."]},{"name":"Tela 6","layout":"chips","dur":5,"chips":["Menos burocracia","Mais planejamento","Experiência simples"],"head":["A assinatura é uma","**alternativa** interessante","à compra tradicional."]},{"name":"Tela 7","layout":"framed","dur":4.8,"head":["A **Sudeste** entendeu esse movimento."],"body":["E estruturou uma frente própria para atender esse público com mais foco e orientação."]},{"name":"Tela 8","layout":"cta","dur":7,"head":["Evoluir também é abrir","espaço para novas","formas de dirigir."],"body":["A **Sudeste Assinaturas** nasce desse","movimento — uma maneira mais prática,","previsível e estruturada de acessar um","carro 0km, com atendimento consultivo."],"cta":["Vamos juntos nessa","nova forma de dirigir?"]},{"name":"Encerramento","layout":"closing","dur":4,"tag":"A confiança de quem já faz parte da **história da região**."}]';
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  // videoBg:true — fundos de vídeo ligados por padrão nas Telas 1, 3, 5, 7 e Encerramento.
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: true };
+</script>
+
+<script type="text/babel" src="animations-v2.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="scenes.jsx"></script>
+
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(SudesteVideo)
+  );
+</script>
+</body>
+</html>
