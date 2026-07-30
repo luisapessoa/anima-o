@@ -56,7 +56,8 @@ function Logo({ variant, lt }) {
 
 /* Black base + video (croppable via scale/posY) + optional colour overlay.
    Darken by lowering `op` (video opacity) so the black #000 shows through. */
-function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed }) {
+function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed, shiftY }) {
+  const [ready, setReady] = React.useState(false);
   if (!RUNTIME.videoBg) {
     return <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />;
   }
@@ -64,16 +65,24 @@ function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed }) {
     <React.Fragment>
       <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />
       <VideoSprite src={src || VID_HERO} start={start || 0} end={end || 3} speed={speed || 1}
+        onLoadedData={() => setReady(true)}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
-          transform: `scale(${scale || 1})`, opacity: op == null ? 1 : op }} />
-      {overlay ? <div style={{ position: 'absolute', inset: 0, background: overlay }} /> : null}
+          transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
+          opacity: ready ? (op == null ? 1 : op) : 0, transition: 'opacity .25s ease' }} />
+      {/* Held back until the first frame decodes — without this the base
+          black div shows through the (often tinted) overlay alone for a
+          beat, reading as a flat colour flash before the footage appears. */}
+      {overlay ? <div style={{ position: 'absolute', inset: 0, background: overlay,
+        opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} /> : null}
     </React.Fragment>
   );
 }
 
 const shell = { position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: FONT };
-const tealOverlay = `linear-gradient(160deg, rgba(3,72,69,0.6) 0%, rgba(1,32,31,0.8) 100%)`;
+// Mostly-neutral dark wash — darkens the video for text contrast without
+// leaning green/teal the way an all-brand-colour overlay would.
+const dimOverlay = `linear-gradient(160deg, rgba(8,14,16,0.42) 0%, rgba(2,4,5,0.6) 100%)`;
 
 /* ── 1 · HERO: dark video, centred title + bracket frame + mint box ── */
 function HeroVideo() {
@@ -163,7 +172,7 @@ function Timeline() {
   const HT = 800, HB = 1296; // arrow span, equal margins between paragraphs
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_TIMELINE} start={0} end={3.16} speed={0.52} scale={1.12} posY={50} op={0.85} overlay={tealOverlay} />
+      <VideoBg src={VID_TIMELINE} start={0} end={3.16} speed={0.52} scale={1.12} posY={50} op={0.85} overlay={dimOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 380, width: 840 }}>
         {(sc.head || []).map((ln, i) => (
@@ -221,7 +230,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_CARDUP} start={0} end={1.36} speed={0.24} scale={1} posY={50} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_CARDUP} start={0} end={1.36} speed={0.24} scale={1.18} posY={50} shiftY={-140} op={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -298,7 +307,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_FRAMED} start={0} end={2.8} speed={0.58} scale={1} posY={50} op={0.85} overlay={tealOverlay} />
+      <VideoBg src={VID_FRAMED} start={0} end={2.8} speed={0.58} scale={1} posY={50} op={0.85} overlay={dimOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
