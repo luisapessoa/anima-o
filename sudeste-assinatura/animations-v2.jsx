@@ -1032,6 +1032,15 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
   if (end != null) end = +end || undefined;
   const timeline = useTimeline();
   const ref = React.useRef(null);
+  // Anchor to the timeline value seen on first mount, not raw wall time:
+  // this sprite's scene can start well after t=0 (e.g. the 3rd scene in a
+  // deck), and looping on the unshifted clock would begin mid-clip and can
+  // land right on a wrap boundary the instant the element appears — the
+  // seek-plus-decode-restart that follows is exactly the startup freeze
+  // this was hit by. Anchoring makes elapsed-since-mount 0 at mount, so
+  // playback always begins at `start`.
+  const mountRef = React.useRef(null);
+  if (mountRef.current == null) mountRef.current = timeline.time;
   const span = Math.max(0.001, ((end ?? start + 1) - start));
   // Driving every frame purely via currentTime writes (no play()) is
   // unreliable for looping/seeking across browsers — some builds never
@@ -1043,16 +1052,23 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
   React.useEffect(() => {
     const v = ref.current;
     if (!v) return;
+    // Native playback always advances at 1x; without this, a `speed` !== 1
+    // sprite drifts from its target every single frame (native runs ahead
+    // of a slowed-down target, or falls behind a sped-up one), so the
+    // "large drift" correction below fires constantly and the picture
+    // never settles past the first fraction of a second.
+    if (v.playbackRate !== speed) v.playbackRate = speed;
     if (timeline.playing) {
       if (v.paused) v.play().catch(() => {});
     } else if (!v.paused) {
       v.pause();
     }
-  }, [timeline.playing]);
+  }, [timeline.playing, speed]);
   React.useEffect(() => {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
-    const target = start + ((timeline.time * speed) % span);
+    const elapsed = timeline.time - mountRef.current;
+    const target = start + ((elapsed * speed) % span);
     const drift = Math.abs(v.currentTime - target);
     // Large drift only: (a) first frame, (b) pause/scrub jump, (c) loop
     // wrap back to `start`. Anything smaller is native playback keeping up.

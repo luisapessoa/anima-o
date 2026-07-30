@@ -56,14 +56,14 @@ function Logo({ variant, lt }) {
 
 /* Black base + video (croppable via scale/posY) + optional colour overlay.
    Darken by lowering `op` (video opacity) so the black #000 shows through. */
-function VideoBg({ src, start, end, scale, posX, posY, op, overlay }) {
+function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed }) {
   if (!RUNTIME.videoBg) {
     return <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />;
   }
   return (
     <React.Fragment>
       <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />
-      <VideoSprite src={src || VID_HERO} start={start || 0} end={end || 3}
+      <VideoSprite src={src || VID_HERO} start={start || 0} end={end || 3} speed={speed || 1}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
           transform: `scale(${scale || 1})`, opacity: op == null ? 1 : op }} />
@@ -82,7 +82,7 @@ function HeroVideo() {
   const box = ease(lt, 1.35, 0.55);
   return (
     <div style={{ ...shell, background: '#000000' }}>
-      <VideoBg src={VID_HERO} start={0} end={2.4} scale={1.06} posY={50} op={0.55}
+      <VideoBg src={VID_HERO} start={0} end={2.4} speed={0.43} scale={1} posY={50} op={0.55}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.68) 100%)`} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* centred heading (kept inside the frame lines) */}
@@ -163,7 +163,7 @@ function Timeline() {
   const HT = 800, HB = 1296; // arrow span, equal margins between paragraphs
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_TIMELINE} start={0} end={3.16} scale={1.12} posY={50} op={0.6} overlay={tealOverlay} />
+      <VideoBg src={VID_TIMELINE} start={0} end={3.16} speed={0.52} scale={1.12} posY={50} op={0.85} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 380, width: 840 }}>
         {(sc.head || []).map((ln, i) => (
@@ -221,7 +221,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_CARDUP} start={0} end={1.36} scale={1.12} posY={50} op={0.6} overlay={tealOverlay} />
+      <VideoBg src={VID_CARDUP} start={0} end={1.36} speed={0.24} scale={1} posY={50} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -298,7 +298,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_FRAMED} start={0} end={2.8} scale={1.06} posY={50} op={0.6} overlay={tealOverlay} />
+      <VideoBg src={VID_FRAMED} start={0} end={2.8} speed={0.58} scale={1} posY={50} op={0.85} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -373,7 +373,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_CLOSING} start={0} end={3.0} scale={1.06} posY={50} op={0.55}
+      <VideoBg src={VID_CLOSING} start={0} end={3.0} speed={0.74} scale={1} posY={50} op={0.8}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,

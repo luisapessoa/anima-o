@@ -87,6 +87,15 @@
   a:hover { color: #c6f6d6; }
   #root { position: fixed; inset: 0; }
 </style>
+<!-- Preload the 5 background clips so each is already fetched by the time
+     its scene mounts — without this the first video request only starts
+     when the scene appears, and the fetch+decode startup shows as a stall
+     right as the clip should begin playing. -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-hero.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-timeline.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-cardup.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-framed.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" />
 </head>
 <body>
 <div id="root"></div>
