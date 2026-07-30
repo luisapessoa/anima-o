@@ -230,7 +230,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_CARDUP} start={0} end={1.36} speed={0.24} scale={1.18} posY={50} shiftY={-140} op={1} />
+      <VideoBg src={VID_CARDUP} start={0} end={2.53} speed={0.45} scale={1.18} posY={50} shiftY={-140} op={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -382,7 +382,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_CLOSING} start={0} end={3.0} speed={0.74} scale={1} posY={50} op={0.8}
+      <VideoBg src={VID_CLOSING} start={0} end={3.0} speed={0.46} scale={1} posY={50} op={0.8}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,

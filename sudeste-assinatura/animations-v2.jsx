@@ -1077,9 +1077,16 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
     const elapsed = timeline.time - mountRef.current;
     const target = start + ((elapsed * speed) % span);
     const drift = Math.abs(v.currentTime - target);
-    // Large drift only: (a) first frame, (b) pause/scrub jump, (c) loop
-    // wrap back to `start`. Anything smaller is native playback keeping up.
-    if (drift > 0.35) {
+    // While actually playing, only step in for large drift — (a) first
+    // frame, (b) pause/scrub jump, (c) loop wrap — anything smaller is
+    // native playback keeping up, and correcting on every frame would
+    // fight it. While paused (a host is scrubbing/stepping frame-by-frame,
+    // e.g. for export) there's no native playback to fight, so track
+    // exactly: without this a frame-stepped export leaves the video
+    // sitting on whatever frame it last had, unmoving, while the sub-0.35
+    // per-step deltas type never clear the playing-mode threshold.
+    const threshold = timeline.playing ? 0.35 : 0.02;
+    if (drift > threshold) {
       v.currentTime = target;
       // A loop wrap lands here right as native playback reaches `end` and
       // pauses itself (the 'ended' event) — resume so the next lap plays.
