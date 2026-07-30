@@ -529,6 +529,10 @@ function Stage({
   // passes the validated value from the OM_PLAYBACK authoring contract.
   playback = null,
   persistKey = 'animstage',
+  // false hides the play/pause + scrub bar entirely and lets the canvas
+  // fill the full container — for recording a clean export with nothing
+  // burned in but the animation itself.
+  controls = true,
   children,
 }) {
   // Props arrive as strings when Stage is mounted via <x-import> (DC
@@ -537,6 +541,7 @@ function Stage({
   duration = +duration || 10; fps = +fps || 60;
   if (typeof loop === 'string') loop = loop !== 'false';
   if (typeof autoplay === 'string') autoplay = autoplay !== 'false';
+  if (typeof controls === 'string') controls = controls !== 'false';
   const playTimes = playback && playback.mode === 'times' ? playback.count : null;
   const loopEff = playback ? playback.mode === 'loop' : loop;
 
@@ -574,7 +579,7 @@ function Stage({
     if (!stageRef.current) return;
     const el = stageRef.current;
     const measure = () => {
-      const barH = 44; // playback bar height
+      const barH = controls ? 44 : 0; // playback bar height
       const s = Math.min(
         el.clientWidth / width,
         (el.clientHeight - barH) / height
@@ -589,7 +594,7 @@ function Stage({
       ro.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [width, height]);
+  }, [width, height, controls]);
 
   // Passes completed since playback last started. Lives in a ref so the
   // per-frame wrap can count without re-running this effect; reset on
@@ -806,16 +811,18 @@ function Stage({
       </div>
 
       {/* Playback bar — stacked below canvas, never overlapping */}
-      <PlaybackBar
-        time={displayTime}
-        actualTime={time}
-        duration={duration}
-        playing={playing}
-        onPlayPause={() => setPlaying(p => !p)}
-        onReset={() => { setTime(0); }}
-        onSeek={(t) => setTime(t)}
-        onHover={(t) => setHoverTime(t)}
-      />
+      {controls && (
+        <PlaybackBar
+          time={displayTime}
+          actualTime={time}
+          duration={duration}
+          playing={playing}
+          onPlayPause={() => setPlaying(p => !p)}
+          onReset={() => { setTime(0); }}
+          onSeek={(t) => setTime(t)}
+          onHover={(t) => setHoverTime(t)}
+        />
+      )}
     </div>
   );
 }
@@ -1468,6 +1475,7 @@ function SceneStage(props) {
   var bg = props.bg || '#0b0b0e';
   var autoplay = props.autoplay == null ? true : String(props.autoplay) !== 'false';
   var loop = props.loop == null ? true : String(props.loop) !== 'false';
+  var controls = props.controls == null ? true : String(props.controls) !== 'false';
   // Anything other than the exact string 'overlap' means the default 'cut'
   // — a typo must degrade to today's behavior, never to a new one.
   var transition = props.transition === 'overlap' ? 'overlap' : 'cut';
@@ -1517,7 +1525,7 @@ function SceneStage(props) {
   );
   return (
     <Stage width={width} height={height} duration={total} background={bg}
-           autoplay={autoplay} loop={loop} playback={pb}>
+           autoplay={autoplay} loop={loop} playback={pb} controls={controls}>
       {inner}
     </Stage>
   );

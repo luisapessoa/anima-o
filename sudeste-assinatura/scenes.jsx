@@ -404,6 +404,12 @@ const LAYOUTS = {
   cardup: CardUp, chips: Chips, framed: Framed, cta: CTA, closing: Closing,
 };
 
+// ?bare=1 in the URL renders just the animation — no play/pause/scrub bar,
+// no tweaks panel — for recording a clean export with nothing but the
+// animation itself burned into the video.
+const BARE = typeof location !== 'undefined' &&
+  new URLSearchParams(location.search).get('bare') === '1';
+
 function SudesteVideo() {
   const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
   RUNTIME.showLogo = t.showLogo !== false;
@@ -414,19 +420,21 @@ function SudesteVideo() {
   return (
     <React.Fragment>
       <SceneStage width={W} height={H} scenes={window.OM_SCENES}
-        playback={window.OM_PLAYBACK} bg={'#000000'} transition="cut">
+        playback={window.OM_PLAYBACK} bg={'#000000'} transition="cut" controls={!BARE}>
         {children}
       </SceneStage>
-      <TweaksPanel>
-        <TweakSection label="Vídeo" />
-        <TweakToggle label="Mostrar logo" value={t.showLogo !== false}
-          onChange={(v) => setTweak('showLogo', v)} />
-        <TweakToggle label="Fundo de vídeo" value={t.videoBg === true}
-          onChange={(v) => setTweak('videoBg', v)} />
-        <TweakSection label="Edição" />
-        <TweakToggle label="Editor de tempo" value={t.motionEditor}
-          onChange={(v) => setTweak('motionEditor', v)} />
-      </TweaksPanel>
+      {!BARE && (
+        <TweaksPanel>
+          <TweakSection label="Vídeo" />
+          <TweakToggle label="Mostrar logo" value={t.showLogo !== false}
+            onChange={(v) => setTweak('showLogo', v)} />
+          <TweakToggle label="Fundo de vídeo" value={t.videoBg === true}
+            onChange={(v) => setTweak('videoBg', v)} />
+          <TweakSection label="Edição" />
+          <TweakToggle label="Editor de tempo" value={t.motionEditor}
+            onChange={(v) => setTweak('motionEditor', v)} />
+        </TweaksPanel>
+      )}
     </React.Fragment>
   );
 }
