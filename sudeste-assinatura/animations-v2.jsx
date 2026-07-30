@@ -1030,15 +1030,39 @@ function IconButton({ children, onClick, title }) {
 function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
   start = +start || 0; speed = +speed || 1;
   if (end != null) end = +end || undefined;
-  const t = useTime();
+  const timeline = useTimeline();
   const ref = React.useRef(null);
   const span = Math.max(0.001, ((end ?? start + 1) - start));
+  // Driving every frame purely via currentTime writes (no play()) is
+  // unreliable for looping/seeking across browsers — some builds never
+  // actually commit the seek, so the element just shows one static frame
+  // forever. Let the element decode natively (play()/pause() mirroring the
+  // Stage's own playing state) and only step in with a currentTime write
+  // to seed the start position and to correct large drift (pause, scrub,
+  // loop wrap) — small per-frame diffs are left to native playback.
+  React.useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (timeline.playing) {
+      if (v.paused) v.play().catch(() => {});
+    } else if (!v.paused) {
+      v.pause();
+    }
+  }, [timeline.playing]);
   React.useEffect(() => {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
-    const target = start + ((t * speed) % span);
-    if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
-  }, [t, start, span, speed]);
+    const target = start + ((timeline.time * speed) % span);
+    const drift = Math.abs(v.currentTime - target);
+    // Large drift only: (a) first frame, (b) pause/scrub jump, (c) loop
+    // wrap back to `start`. Anything smaller is native playback keeping up.
+    if (drift > 0.35) {
+      v.currentTime = target;
+      // A loop wrap lands here right as native playback reaches `end` and
+      // pauses itself (the 'ended' event) — resume so the next lap plays.
+      if (timeline.playing && v.paused) v.play().catch(() => {});
+    }
+  }, [timeline.time, start, span, speed, timeline.playing]);
   return (
     <video
       ref={ref}
