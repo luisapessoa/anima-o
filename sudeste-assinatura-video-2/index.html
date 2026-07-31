@@ -4,6 +4,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sudeste Assinaturas — vídeo vertical 2</title>
+<!-- Preload the 4 background clips as early as possible — before the CDN
+     scripts and the font @font-face block — so the browser starts
+     fetching bytes immediately. bg-hero.mp4 gets fetchpriority="high"
+     because it's needed the instant Tela 1 mounts, with zero runtime
+     head start (unlike the other clips, which get several seconds of
+     background buffering while earlier scenes play); without the boost
+     it can still be mid-decode when Tela 1 appears, causing a visible
+     catch-up jump right at the start. -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-hero.mp4" fetchpriority="high" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-card1.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-card2.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" />
 <style>
   /* DM Sans self-hospedada (mesmos arquivos usados no projeto original) —
      evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
@@ -87,12 +99,6 @@
   a:hover { color: #c6f6d6; }
   #root { position: fixed; inset: 0; }
 </style>
-<!-- Preload the 4 background clips so each is already fetched by the time
-     its scene mounts. -->
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-hero.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-card1.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-card2.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" />
 </head>
 <body>
 <div id="root"></div>
