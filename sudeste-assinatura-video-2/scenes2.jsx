@@ -133,6 +133,9 @@ function TealScreen() {
       {(() => {
         const hasRule = blocks.some((b) => b.rule);
         const bodyFs = sc.num === '01' ? 50 : 56;
+        // Telas 2/4 (rule present) sit lower, away from the title, while
+        // Tela 6 (no rule, has the car photo) keeps its original position.
+        const bodyTop = hasRule ? 1090 : 1016;
         const items = blocks.map((blk, bi) => {
           const start = d; d += (blk.lines.length) * 0.08 + 0.28;
           const inner = (
@@ -159,14 +162,14 @@ function TealScreen() {
         });
         if (hasRule) {
           return (
-            <div style={{ position: 'absolute', left: 0, right: 0, top: 1016, zIndex: 2,
+            <div style={{ position: 'absolute', left: 0, right: 0, top: bodyTop, zIndex: 2,
               display: 'flex', justifyContent: 'center' }}>
               <div style={{ display: 'inline-block' }}>{items}</div>
             </div>
           );
         }
         return (
-          <div style={{ position: 'absolute', left: 90, right: 84, top: 1016, zIndex: 2 }}>{items}</div>
+          <div style={{ position: 'absolute', left: 90, right: 84, top: bodyTop, zIndex: 2 }}>{items}</div>
         );
       })()}
       {/* carro (tela 6) */}
