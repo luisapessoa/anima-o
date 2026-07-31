@@ -93,7 +93,7 @@ function HeroCount() {
     <div style={{ ...shell }}>
       <VideoBg src={VID_HERO} start={0} end={4.6} speed={1} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
-      <div style={{ position: 'absolute', left: 76, top: 1250, display: 'flex', alignItems: 'flex-start', gap: 40 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 1250, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
           letterSpacing: '-0.05em', opacity: num, transform: `translateY(${(1 - num) * 26}px)` }}>5</div>
         <div style={{ marginTop: -8 }}>
