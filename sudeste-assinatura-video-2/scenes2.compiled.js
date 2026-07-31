@@ -44,9 +44,14 @@ function ease(lt, delay, d) {
 }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
+  // willChange promotes the element to its own GPU layer for the
+  // opacity+transform animation — without it, some browsers recompute
+  // text anti-aliasing on every intermediate frame of the fade, which
+  // reads as a flicker right as the text reveals rather than a smooth fade.
   return {
     opacity: p,
-    transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`
+    transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`,
+    willChange: 'opacity, transform'
   };
 }
 function fmt(text, accent, key) {
@@ -237,7 +242,8 @@ function HeroCount() {
       color: '#f2ff46',
       letterSpacing: '-0.05em',
       opacity: num,
-      transform: `translateY(${(1 - num) * 26}px)`
+      transform: `translateY(${(1 - num) * 26}px)`,
+      willChange: 'opacity, transform'
     }
   }, "5"), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -281,7 +287,8 @@ function TealScreen() {
       textAlign: 'center',
       zIndex: 0,
       opacity: ghost,
-      transform: `translateY(${(1 - ghost) * 24}px)`
+      transform: `translateY(${(1 - ghost) * 24}px)`,
+      willChange: 'opacity, transform'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {

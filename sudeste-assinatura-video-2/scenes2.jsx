@@ -29,7 +29,11 @@ const VID_CLOSING = 'assets/bg-closing.mp4';
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
-  return { opacity: p, transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)` };
+  // willChange promotes the element to its own GPU layer for the
+  // opacity+transform animation — without it, some browsers recompute
+  // text anti-aliasing on every intermediate frame of the fade, which
+  // reads as a flicker right as the text reveals rather than a smooth fade.
+  return { opacity: p, transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`, willChange: 'opacity, transform' };
 }
 function fmt(text, accent, key) {
   const parts = String(text).split('**');
@@ -111,7 +115,7 @@ function HeroCount() {
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1250, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
-          letterSpacing: '-0.05em', opacity: num, transform: `translateY(${(1 - num) * 26}px)` }}>5</div>
+          letterSpacing: '-0.05em', opacity: num, transform: `translateY(${(1 - num) * 26}px)`, willChange: 'opacity, transform' }}>5</div>
         <div style={{ marginTop: -8 }}>
           <Lines list={sc.head} lt={lt} delay={0.5} step={0.1} accent={WHITE}
             style={{ color: WHITE, fontWeight: 700, fontSize: 74, lineHeight: 1.12, letterSpacing: '-0.02em' }} />
@@ -132,7 +136,7 @@ function TealScreen() {
       {/* numeral fantasma — 2º dígito centralizado sobre o título, "0" cortado à esquerda */}
       {/* numeral fantasma — dígitos grandes e juntos; 2º dígito centralizado sobre o título, "0" cortado à esquerda */}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 96, textAlign: 'center', zIndex: 0,
-        opacity: ghost, transform: `translateY(${(1 - ghost) * 24}px)` }}>
+        opacity: ghost, transform: `translateY(${(1 - ghost) * 24}px)`, willChange: 'opacity, transform' }}>
         <span style={{ position: 'relative', display: 'inline-block', fontWeight: 700, fontSize: 860,
           lineHeight: 0.8, color: GHOST, letterSpacing: '-0.06em' }}>
           <span style={{ position: 'absolute', right: '100%', top: 0, whiteSpace: 'nowrap' }}>{(sc.num || '')[0]}</span>
