@@ -105,9 +105,16 @@ function Lines({ list, lt, delay, step, style, accent }) {
 function HeroCount() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   const num = ease(lt, 0.2, 0.7);
+  // Slow continuous push-in (Ken Burns) over the whole scene — the source
+  // clip itself is a near-static beauty shot (no driving motion), so this
+  // CSS-only zoom is what actually reads as "fluid and continuous" rather
+  // than depending on the clip's own (minimal) motion or an artificial
+  // slowdown/boomerang of it.
+  const zoomT = clamp(lt / (s.dur || 4.5), 0, 1);
+  const heroScale = 1.04 + zoomT * 0.1;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_HERO} start={0} end={3.2} speed={1} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
+      <VideoBg src={VID_HERO} start={0} end={1.1} speed={1} scale={heroScale} posY={42} op={0.62} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1250, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
