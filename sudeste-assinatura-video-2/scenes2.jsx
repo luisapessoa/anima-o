@@ -107,7 +107,7 @@ function HeroCount() {
   const num = ease(lt, 0.2, 0.7);
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_HERO} start={0} end={3.7} speed={1} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
+      <VideoBg src={VID_HERO} start={0} end={4.6} speed={1} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1250, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
@@ -161,7 +161,7 @@ function TealScreen() {
           if (blk.rule === 'v') {
             return (
               <div key={bi} style={{ position: 'relative', marginLeft: 120, paddingLeft: 60, marginTop: 54 }}>
-                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5), transform: 'translateY(-2px)' }} />
+                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5), transform: 'translateY(6px)' }} />
                 {inner}
               </div>
             );
@@ -210,7 +210,7 @@ function CardScreen() {
   // much of it — raised further so the whole trunk/car is visible above
   // the card on both takes.
   const videoScale = isCard2 ? 1.0 : 1.35;
-  const videoShiftY = isCard2 ? -340 : -260;
+  const videoShiftY = isCard2 ? -450 : -260;
   const videoPosY = isCard2 ? 38 : 35;
   return (
     <div style={{ ...shell }}>

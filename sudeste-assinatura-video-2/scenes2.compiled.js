@@ -210,7 +210,7 @@ function HeroCount() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_HERO,
     start: 0,
-    end: 3.7,
+    end: 4.6,
     speed: 1,
     scale: 1.04,
     posY: 42,
@@ -363,7 +363,7 @@ function TealScreen() {
             width: 4,
             background: MINT,
             opacity: ease(lt, start, 0.5),
-            transform: 'translateY(-2px)'
+            transform: 'translateY(6px)'
           }
         }), inner);
       }
@@ -450,7 +450,7 @@ function CardScreen() {
   // much of it — raised further so the whole trunk/car is visible above
   // the card on both takes.
   const videoScale = isCard2 ? 1.0 : 1.35;
-  const videoShiftY = isCard2 ? -340 : -260;
+  const videoShiftY = isCard2 ? -450 : -260;
   const videoPosY = isCard2 ? 38 : 35;
   return /*#__PURE__*/React.createElement("div", {
     style: {
