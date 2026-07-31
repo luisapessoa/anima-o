@@ -4,16 +4,17 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sudeste Assinaturas — vídeo vertical 2</title>
-<!-- Only bg-hero.mp4 is preloaded eagerly — it's needed the instant Tela 1
-     mounts, with zero runtime head start. The other three clips (Tela 3,
-     5, 7) each get many seconds of scene time before they're needed, so
-     preloading them this early just makes them compete with bg-hero.mp4,
-     the in-browser Babel transpile, and Tela 1/2's own rendering for
-     bandwidth and main-thread time right when it matters least to be
-     contended — the opening seconds of playback. Their <video> elements
-     start fetching on their own once mounted, well ahead of when they're
-     shown. -->
+<!-- bg-hero.mp4 is high-priority — needed the instant Tela 1 mounts, with
+     zero runtime head start. The other three clips (Tela 3, 5, 7) each
+     get many seconds of scene time before they're needed, so they're
+     preloaded at fetchpriority="low": still queued early (so their
+     multi-second head start isn't lost), but the browser won't let them
+     compete with bg-hero.mp4 for bandwidth/CPU during the critical
+     opening seconds. -->
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-hero.mp4" fetchpriority="high" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-card1.mp4" fetchpriority="low" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-card2.mp4" fetchpriority="low" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" fetchpriority="low" />
 <style>
   /* DM Sans self-hospedada (mesmos arquivos usados no projeto original) —
      evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
@@ -101,10 +102,16 @@
 <body>
 <div id="root"></div>
 
-<!-- React / ReactDOM / Babel (mesmas versões usadas no projeto original) -->
+<!-- React / ReactDOM (mesmas versões usadas no projeto original). Os
+     arquivos .jsx são pré-compilados para .compiled.js (ver *.compiled.js
+     ao lado de cada .jsx) em vez de transpilados no navegador — o
+     transpiler em si (@babel/standalone) pesa ~3MB para baixar e fazer
+     parse, e ainda gasta CPU real transpilando JSX a cada carregamento de
+     página; isso competia por banda/CPU bem na janela crítica dos
+     primeiros segundos, quando a Tela 1 e seu vídeo de fundo também estão
+     carregando, causando o travamento inicial. -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 
 <script>
   // Lista de telas (7 telas) e configuração de playback, consumidos por
@@ -116,11 +123,11 @@
   window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
 </script>
 
-<script type="text/babel" src="animations-v2.jsx"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="scenes2.jsx"></script>
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenes2.compiled.js"></script>
 
-<script type="text/babel">
+<script>
   ReactDOM.createRoot(document.getElementById('root')).render(
     React.createElement(SudesteVideo2)
   );

@@ -161,7 +161,7 @@ function TealScreen() {
           if (blk.rule === 'v') {
             return (
               <div key={bi} style={{ position: 'relative', marginLeft: 120, paddingLeft: 60, marginTop: 54 }}>
-                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5) }} />
+                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5), transform: 'translateY(18px)' }} />
                 {inner}
               </div>
             );
@@ -203,10 +203,17 @@ function CardScreen() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   const up = E.easeOutCubic(clamp((lt - 0.15) / 0.8, 0, 1));
   const cardTop = 980;
-  const videoSrc = sc.num === '04' ? VID_CARD2 : VID_CARD1;
+  const isCard2 = sc.num === '04';
+  const videoSrc = isCard2 ? VID_CARD2 : VID_CARD1;
+  // Tela 5's clip (open trunk, watermelon) frames its key content higher
+  // in the shot than Tela 3's GTI pan — the same aggressive up-shift used
+  // there was pushing the open trunk lid off the top of the screen here.
+  const videoScale = isCard2 ? 1.12 : 1.35;
+  const videoShiftY = isCard2 ? -40 : -260;
+  const videoPosY = isCard2 ? 38 : 35;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={videoSrc} start={0} end={6.2} speed={1} scale={1.35} shiftY={-260} posY={35} op={0.65} overlay={dimOverlay} />
+      <VideoBg src={videoSrc} start={0} end={6.2} speed={1} scale={videoScale} shiftY={videoShiftY} posY={videoPosY} op={0.65} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: cardTop, bottom: 0,
         background: CARD, borderTopLeftRadius: 66, borderTopRightRadius: 66,
