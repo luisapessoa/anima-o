@@ -58,6 +58,22 @@ const dimOverlay = `linear-gradient(160deg, rgba(8,14,16,0.38) 0%, rgba(2,4,5,0.
 // paints alone (flat colour flash) before the first frame decodes.
 function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed, shiftY }) {
   const [ready, setReady] = React.useState(false);
+  // Reveal on "canplaythrough" (browser estimates it can play to the end
+  // without further buffering stalls) instead of "loadeddata" (only
+  // guarantees the current frame decoded). The extra wait happens while
+  // the clip is still hidden behind the black fallback, so any seek the
+  // drift-correction effect needs to do to catch up to the scene's
+  // already-elapsed time happens off-screen — revealing too early was
+  // showing that catch-up as a visible stutter/jump right as the video
+  // appeared, worst on Tela 1 since its clip has zero preload head start.
+  // Falls back to a fixed delay in case the event never fires (some
+  // browsers are flaky about it for short/looping sources).
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => { if (!readyRef.current) { readyRef.current = true; setReady(true); } }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => { if (!readyRef.current) { readyRef.current = true; setReady(true); } };
   if (!RUNTIME2.videoBg) {
     return <div style={{ position: 'absolute', inset: 0, background: BLACK }} />;
   }
@@ -65,7 +81,7 @@ function VideoBg({ src, start, end, scale, posX, posY, op, overlay, speed, shift
     <React.Fragment>
       <div style={{ position: 'absolute', inset: 0, background: BLACK }} />
       <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
-        onLoadedData={() => setReady(true)}
+        onCanPlayThrough={markReady}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
           transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
