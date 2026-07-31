@@ -94,7 +94,7 @@ function HeroCount() {
       <VideoBg src={VID_HERO} start={0} end={4.6} speed={1} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 76, top: 1250, display: 'flex', alignItems: 'flex-start', gap: 40 }}>
-        <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: WHITE,
+        <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
           letterSpacing: '-0.05em', opacity: num, transform: `translateY(${(1 - num) * 26}px)` }}>5</div>
         <div style={{ marginTop: -8 }}>
           <Lines list={sc.head} lt={lt} delay={0.5} step={0.1} accent={WHITE}
@@ -145,7 +145,7 @@ function TealScreen() {
           if (blk.rule === 'v') {
             return (
               <div key={bi} style={{ position: 'relative', marginLeft: 120, paddingLeft: 60, marginTop: 54 }}>
-                <div style={{ position: 'absolute', left: 0, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5) }} />
+                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5) }} />
                 {inner}
               </div>
             );
@@ -219,7 +219,7 @@ function ClosingStatement() {
   const vx = 344, vTop = 1504, vBot = 1764;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_CLOSING} start={0} end={6.2} speed={1} scale={1.05} posY={50} op={0.6} overlay={dimOverlay} />
+      <VideoBg src={VID_CLOSING} start={0} end={6.2} speed={1} scale={1.1} posY={45} op={0.6} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, right: 90, top: 1230 }}>
         <Lines list={sc.head} lt={lt} delay={0.25} step={0.1}
