@@ -161,7 +161,7 @@ function TealScreen() {
           if (blk.rule === 'v') {
             return (
               <div key={bi} style={{ position: 'relative', marginLeft: 120, paddingLeft: 60, marginTop: 54 }}>
-                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5), transform: 'translateY(18px)' }} />
+                <div style={{ position: 'absolute', left: 16, top: 8, bottom: 8, width: 4, background: MINT, opacity: ease(lt, start, 0.5), transform: 'translateY(-8px)' }} />
                 {inner}
               </div>
             );
@@ -205,11 +205,12 @@ function CardScreen() {
   const cardTop = 980;
   const isCard2 = sc.num === '04';
   const videoSrc = isCard2 ? VID_CARD2 : VID_CARD1;
-  // Tela 5's clip (open trunk, watermelon) frames its key content higher
-  // in the shot than Tela 3's GTI pan — the same aggressive up-shift used
-  // there was pushing the open trunk lid off the top of the screen here.
-  const videoScale = isCard2 ? 1.12 : 1.35;
-  const videoShiftY = isCard2 ? -40 : -260;
+  // Tela 5's clip (backlit rear, then open trunk) frames its subject
+  // higher up than Tela 3's GTI pan, and the card was still covering too
+  // much of it — raised further so the whole trunk/car is visible above
+  // the card on both takes.
+  const videoScale = isCard2 ? 1.22 : 1.35;
+  const videoShiftY = isCard2 ? -180 : -260;
   const videoPosY = isCard2 ? 38 : 35;
   return (
     <div style={{ ...shell }}>

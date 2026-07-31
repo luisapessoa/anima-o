@@ -15,6 +15,14 @@
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-card1.mp4" fetchpriority="low" />
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-card2.mp4" fetchpriority="low" />
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" fetchpriority="low" />
+<!-- Now that the page renders almost immediately (no more in-browser Babel
+     transpile eating the first second-plus), Tela 1's text can appear
+     before these self-hosted woff2 files finish loading — with
+     font-display:swap that shows the fallback system font first and then
+     swaps to DM Sans the instant it arrives, which reads as a flicker
+     right as the reveal animation starts. Preloading closes that gap. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-ext.woff2" crossorigin="anonymous" />
 <style>
   /* DM Sans self-hospedada (mesmos arquivos usados no projeto original) —
      evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
