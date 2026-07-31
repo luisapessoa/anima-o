@@ -171,7 +171,7 @@ function TealScreen() {
       })()}
       {/* carro (tela 6) */}
       {sc.car ? (
-        <img src="assets/vw-car.webp" alt="" style={{ position: 'absolute', left: '50%', bottom: 96,
+        <img src="assets/vw-virtus.webp" alt="" style={{ position: 'absolute', left: '50%', bottom: 96,
           width: 1030, height: 'auto', transform: `translateX(-50%) translateY(${(1 - ease(lt, 0.9, 0.8)) * 26}px)`,
           opacity: ease(lt, 0.9, 0.8), zIndex: 1 }} />
       ) : null}
@@ -187,7 +187,7 @@ function CardScreen() {
   const videoSrc = sc.num === '04' ? VID_CARD2 : VID_CARD1;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={videoSrc} start={0} end={6.2} speed={1} scale={1.1} posY={38} op={0.6} overlay={dimOverlay} />
+      <VideoBg src={videoSrc} start={0} end={6.2} speed={1} scale={1.35} shiftY={-260} posY={35} op={0.65} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: cardTop, bottom: 0,
         background: CARD, borderTopLeftRadius: 66, borderTopRightRadius: 66,
@@ -216,7 +216,7 @@ function ClosingStatement() {
   const vx = 344, vTop = 1504, vBot = 1764;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_CLOSING} start={0} end={6.2} speed={1} scale={1.02} posY={45} op={0.55} overlay={dimOverlay} />
+      <VideoBg src={VID_CLOSING} start={0} end={6.2} speed={1} scale={1.05} posY={50} op={0.6} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, right: 90, top: 1230 }}>
         <Lines list={sc.head} lt={lt} delay={0.25} step={0.1}
