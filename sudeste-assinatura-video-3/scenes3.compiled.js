@@ -331,7 +331,8 @@ function Opening() {
     start: 0,
     end: 2.9,
     scale: 1.04,
-    posY: 45
+    posY: 45,
+    speed: 0.65
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -406,9 +407,15 @@ function Timeline() {
   return /*#__PURE__*/React.createElement("div", {
     style: {
       ...shell,
-      background: TEAL
+      background: '#034845'
     }
-  }, RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: '#034845'
+    }
+  }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -497,9 +504,10 @@ function HighlightBox() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_3,
     start: 0,
-    end: 3.76,
-    scale: 1.0,
-    posY: 40
+    end: 2.63,
+    scale: 1.06,
+    posY: 45,
+    speed: 0.6
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -746,10 +754,10 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 1.83,
-    scale: 1.06,
-    posY: 45,
-    speed: 0.55
+    end: 3.76,
+    scale: 1.0,
+    posY: 40,
+    speed: 0.6
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -821,9 +829,10 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideoBand, {
     src: VID_7,
     start: 0,
-    end: 1.04,
-    scale: 1.1,
+    end: 1.83,
+    scale: 1.06,
     posY: 45,
+    speed: 0.6,
     top: cardH,
     height: H - cardH,
     overlay: "transparent"

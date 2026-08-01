@@ -150,7 +150,10 @@ function Opening() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={2.9} scale={1.04} posY={45} />
+      {/* speed 0.65 stretches the 2.9s clip to ~4.46s — almost exactly
+          Tela 1's 4.5s duration, so it plays through essentially once
+          instead of visibly looping. */}
+      <BgVideo src={VID_1} start={0} end={2.9} scale={1.04} posY={45} speed={0.65} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: 1360, textAlign: 'center' }}>
         <Lines list={sc.head} lt={lt} delay={0.3} step={0.12}
@@ -178,7 +181,11 @@ function Timeline() {
   const grow = ease(lt, 0.7, 0.9);
   const c0 = rowTop[0] + 42, cN = rowTop[items.length - 1] + 42;
   return (
-    <div style={{ ...shell, background: TEAL }}>
+    <div style={{ ...shell, background: '#034845' }}>
+      {/* explicit, standalone flat backdrop — no gradient, no animation,
+          nothing else painting into this layer — per request to keep the
+          background a plain solid #034845. */}
+      <div style={{ position: 'absolute', inset: 0, background: '#034845' }} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: -40, right: 0, top: 320, bottom: 220, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ display: 'inline-block' }}>
@@ -209,7 +216,10 @@ function HighlightBox() {
   const PADL = 108;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_3} start={0} end={3.76} scale={1.0} posY={40} />
+      {/* reverted to the original forest 3-shot reel (no complaint about
+          this take specifically) — speed 0.6 stretches its 2.63s loop to
+          ~4.4s of scene time to cut down on how often it visibly repeats. */}
+      <BgVideo src={VID_3} start={0} end={2.63} scale={1.06} posY={45} speed={0.6} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 84, top: 320 }}>
         {sc.hi.map((ln, i) => (
@@ -305,7 +315,10 @@ function LineLeft() {
       {/* speed 0.55 stretches this clip's loop from 1.83s to ~3.3s of scene
           time — at full speed it was looping so often within Tela 6's 7s
           duration that it read as stuck in a short repeat. */}
-      <BgVideo src={VID_6} start={0} end={1.83} scale={1.06} posY={45} speed={0.55} />
+      {/* moved here from Tela 3 — the Nivus dusk silhouette, single
+          continuous take. speed 0.6 stretches its 3.76s loop to ~6.3s,
+          close to Tela 6's 7s duration (barely visible restart). */}
+      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.6} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -330,8 +343,10 @@ function TealCard() {
   return (
     <div style={{ ...shell }}>
       {/* no color overlay here — no text sits on this band, so the video
-          is left unfiltered per request. */}
-      <BgVideoBand src={VID_7} start={0} end={1.04} scale={1.1} posY={45}
+          is left unfiltered per request. Changed from the urban SUV clip
+          (disliked) to a second, distinct Virtus take. speed 0.6 stretches
+          its 1.83s loop to ~3.05s. */}
+      <BgVideoBand src={VID_7} start={0} end={1.83} scale={1.06} posY={45} speed={0.6}
         top={cardH} height={H - cardH} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
