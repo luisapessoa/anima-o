@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sudeste Assinaturas — vídeo vertical 3</title>
+<!-- bg-1.mp4 is high-priority — needed the instant Tela 1 mounts, with zero
+     runtime head start. The other clips (Telas 3, 4, 6) each get several
+     seconds of scene time before they're needed, so they're preloaded at
+     fetchpriority="low": still queued early (so their head start isn't
+     lost), but the browser won't let them compete with bg-1.mp4 for
+     bandwidth/CPU during the critical opening seconds. -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-1.mp4" fetchpriority="high" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-3.mp4" fetchpriority="low" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-4.mp4" fetchpriority="low" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-6.mp4" fetchpriority="low" />
+<!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
+     the font load (font-display:swap would otherwise flash a fallback
+     font first). -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-ext.woff2" crossorigin="anonymous" />
+<style>
+  /* DM Sans self-hospedada (mesmos arquivos usados nos projetos anteriores) —
+     evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
+     em algumas redes e trocar a fonte por um fallback com métricas
+     diferentes, quebrando as linhas nos pontos errados. */
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  html, body { margin: 0; padding: 0; background: #000000; height: 100%; }
+  a { color: #00d1b2; }
+  a:hover { color: #c6f6d6; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React / ReactDOM (mesmas versões usadas nos projetos anteriores). Os
+     arquivos .jsx são pré-compilados para .compiled.js em vez de
+     transpilados no navegador — o transpiler em si (@babel/standalone) pesa
+     ~3MB para baixar e fazer parse, e ainda gasta CPU real transpilando JSX
+     a cada carregamento de página; isso competia por banda/CPU bem na
+     janela crítica dos primeiros segundos (lição aprendida no Vídeo 2). -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+<script>
+  // Lista de telas (7 telas) e configuração de playback, consumidos por
+  // scenes3.jsx / animations-v2.jsx. Copiado verbatim do OM_SCENES do
+  // documento de referência — nenhum texto foi alterado.
+  window.OM_SCENES="[{\"name\":\"Tela 1\",\"layout\":\"opening\",\"dur\":4.5,\"head\":[\"E se o seu carro\",\"acompanhasse\"],\"hi\":\"as suas fases?\"},{\"name\":\"Tela 2\",\"layout\":\"timeline\",\"dur\":7,\"title\":[\"Pensa na sua\",\"vida há dois anos.\"],\"items\":[{\"icon\":\"clock\",\"lines\":[\"Sua rotina era igual?\"]},{\"icon\":\"cal\",\"lines\":[\"Seus planos\",\"eram os mesmos?\"]},{\"icon\":\"car\",\"lines\":[\"O carro que fazia\",\"sentido naquela época\",\"ainda combina com o\",\"seu momento de hoje?\"]}]},{\"name\":\"Tela 3\",\"layout\":\"highlight\",\"dur\":6,\"hi\":[\"A verdade é que\",\"a vida muda rápido.\"],\"body\":[\"Mudam os trajetos, o\",\"trabalho, a família, os planos,\",\"as prioridades e até o tipo de\",\"carro que faz sentido para você.\"]},{\"name\":\"Tela 4\",\"layout\":\"linesplit\",\"dur\":7,\"title\":[\"**Hoje,** talvez um carro\",\"compacto resolva\",\"perfeitamente sua rotina.\"],\"lead\":\"Mas daqui a alguns meses,\",\"body\":[\"você pode precisar de mais\",\"espaço, mais conforto, mais\",\"porta-malas ou uma categoria\",\"diferente.\"]},{\"name\":\"Tela 5\",\"layout\":\"truckcard\",\"dur\":7,\"body\":[\"Quando você compra\",\"ou financia um carro, a\",\"escolha costuma te\",\"acompanhar **por anos.**\"],\"body2\":[\"E, muitas vezes, sua vida\",\"muda antes do contrato\",\"acabar ou antes daquele\",\"carro continuar fazendo\",\"sentido.\"]},{\"name\":\"Tela 6\",\"layout\":\"lineleft\",\"dur\":7,\"title\":[\"Na assinatura, essa\",\"relação pode ser\",\"mais flexível.\"],\"body\":[\"Você dirige um carro 0km\",\"por um período contratado\",\"e, ao final, pode avaliar uma\",\"nova opção mais alinhada\",\"com a sua fase atual.\"]},{\"name\":\"Tela 7\",\"layout\":\"tealcard\",\"dur\":6,\"title\":[\"O carro ideal não precisa\",\"ser o mesmo para todos\",\"os momentos da vida.\"],\"body\":[\"Se a sua rotina muda, a forma\",\"como você escolhe seu carro\",\"também pode mudar!\"]}]";
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  // videoBg:true — fundos de vídeo ligados por padrão nas Telas 1, 3, 4 e 6
+  // (as telas de fundo preto — Tela 2/7 são teal e a Tela 5 é clara).
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenes3.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(SudesteVideo3)
+  );
+</script>
+</body>
+</html>
