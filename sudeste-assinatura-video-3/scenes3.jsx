@@ -23,6 +23,7 @@ const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_6 = 'assets/bg-6.mp4';
+const VID_7 = 'assets/bg-7.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -56,12 +57,12 @@ const shell = { position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: 
 // div + VideoSprite + dark overlay, opacity gated behind a "ready" state so
 // the overlay never paints alone (flat colour flash) before the first frame
 // decodes, and any drift-correction catch-up seek happens off-screen.
-// VideoSprite here only corrects drift via periodic seeks (no native
-// play() call), which alone can look choppier than real decode-driven
-// playback — passing autoPlay+loop through (VideoSprite spreads unknown
-// props onto the underlying <video>) lets the browser actually play the
-// clip natively; VideoSprite's own seeks then just keep it honest against
-// the scene clock instead of being the only thing advancing the frame.
+// VideoSprite now drives real play()/pause() natively (mirroring the Stage's
+// playing state, mount-anchored so a scene starting mid-timeline still
+// begins its clip at `start` instead of mid-loop) — do NOT also pass
+// autoPlay/loop here: that was fighting VideoSprite's own currentTime
+// corrections (two independent clocks racing) and caused exactly the
+// stutter/jump/boomerang behavior this is meant to avoid.
 function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shiftY }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
@@ -77,12 +78,41 @@ function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shift
     <React.Fragment>
       <div style={{ position: 'absolute', inset: 0, background: BLACK }} />
       <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
-        autoPlay loop onCanPlayThrough={markReady}
+        onLoadedData={markReady}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
           transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
           opacity: ready ? (op == null ? 1 : op) : 0, transition: 'opacity .25s ease' }} />
       <div style={{ position: 'absolute', inset: 0, background: overlay || 'rgba(0,0,0,0.55)',
+        opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
+    </React.Fragment>
+  );
+}
+
+// Same pattern as BgVideo but confined to a horizontal band (used for Tela
+// 7's bottom strip, below the teal card) instead of the full 1920px canvas.
+function BgVideoBand({ src, start, end, scale, posX, posY, op, overlay, speed, top, height }) {
+  const [ready, setReady] = React.useState(false);
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => { if (!readyRef.current) { readyRef.current = true; setReady(true); } }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => { if (!readyRef.current) { readyRef.current = true; setReady(true); } };
+  const band = { position: 'absolute', left: 0, right: 0, top, height, overflow: 'hidden' };
+  if (!RT.videoBg) {
+    return <div style={{ ...band, background: BLACK }} />;
+  }
+  return (
+    <React.Fragment>
+      <div style={{ ...band, background: BLACK }} />
+      <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
+        onLoadedData={markReady}
+        style={{ position: 'absolute', left: 0, top, width: W, height, objectFit: 'cover',
+          objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
+          transform: `scale(${scale || 1})`,
+          opacity: ready ? (op == null ? 1 : op) : 0, transition: 'opacity .25s ease' }} />
+      <div style={{ ...band, background: overlay || 'rgba(0,0,0,0.55)',
         opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
     </React.Fragment>
   );
@@ -117,7 +147,7 @@ function Opening() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={3.26} scale={1.04} posY={45} />
+      <BgVideo src={VID_1} start={0} end={2.9} scale={1.04} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: 1360, textAlign: 'center' }}>
         <Lines list={sc.head} lt={lt} delay={0.3} step={0.12}
@@ -203,7 +233,7 @@ function LineSplit() {
   const lTop = 652, lBot = 1342;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={4.62} scale={1.06} posY={45} />
+      <BgVideo src={VID_4} start={0} end={3.67} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 108, right: 84, top: 320 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1} accent={YEL}
@@ -269,7 +299,7 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={2.2} scale={1.06} posY={45} />
+      <BgVideo src={VID_6} start={0} end={1.83} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -293,6 +323,8 @@ function TealCard() {
   const cardH = 940;
   return (
     <div style={{ ...shell }}>
+      <BgVideoBand src={VID_7} start={0} end={1.04} scale={1.1} posY={45}
+        top={cardH} height={H - cardH} overlay="rgba(3,72,69,0.6)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>

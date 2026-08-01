@@ -1115,24 +1115,62 @@ function VideoSprite({
   start = +start || 0;
   speed = +speed || 1;
   if (end != null) end = +end || undefined;
-  const t = useTime();
+  const timeline = useTimeline();
   const ref = React.useRef(null);
+  // Anchor to the timeline value seen on first mount, not raw wall time:
+  // this sprite's scene can start well after t=0 (e.g. the 3rd scene in a
+  // deck), and looping on the unshifted clock would begin mid-clip and can
+  // land right on a wrap boundary the instant the element appears — the
+  // seek-plus-decode-restart that follows is exactly the startup freeze
+  // this was hit by. Anchoring makes elapsed-since-mount 0 at mount, so
+  // playback always begins at `start`.
+  const mountRef = React.useRef(null);
+  if (mountRef.current == null) mountRef.current = timeline.time;
   const span = Math.max(0.001, (end ?? start + 1) - start);
+  // Driving every frame purely via currentTime writes (no play()) is
+  // unreliable for looping/seeking across browsers — some builds never
+  // actually commit the seek, so the element just shows one static frame
+  // forever. Let the element decode natively (play()/pause() mirroring the
+  // Stage's own playing state) and only step in with a currentTime write
+  // to seed the start position and to correct large drift (pause, scrub,
+  // loop wrap) — small per-frame diffs are left to native playback.
+  React.useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    // Native playback always advances at 1x; without this, a `speed` !== 1
+    // sprite drifts from its target every single frame (native runs ahead
+    // of a slowed-down target, or falls behind a sped-up one), so the
+    // "large drift" correction below fires constantly and the picture
+    // never settles past the first fraction of a second.
+    if (v.playbackRate !== speed) v.playbackRate = speed;
+    if (timeline.playing) {
+      if (v.paused) v.play().catch(() => {});
+    } else if (!v.paused) {
+      v.pause();
+    }
+  }, [timeline.playing, speed]);
   React.useEffect(() => {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
-    const target = start + t * speed % span;
-    // Native autoPlay+loop already drives smooth continuous playback (see
-    // BgVideo in scenes3.jsx) — this seek only needs to catch gross desync
-    // (mount, a pause/stall, or an export-tool scrub), not the small
-    // millisecond-level drift that's expected between the browser's own
-    // decode clock and this rAF-driven timeline. A tight 0.05s tolerance
-    // fired on that expected drift almost every loop, and each forced
-    // v.currentTime jump — landing on a non-keyframe frame — made the
-    // decoder stall or briefly show a torn/duplicated frame, which read as
-    // stutter/flicker. 0.35s only trips for real desync.
-    if (Math.abs(v.currentTime - target) > 0.35) v.currentTime = target;
-  }, [t, start, span, speed]);
+    const elapsed = timeline.time - mountRef.current;
+    const target = start + elapsed * speed % span;
+    const drift = Math.abs(v.currentTime - target);
+    // While actually playing, only step in for large drift — (a) first
+    // frame, (b) pause/scrub jump, (c) loop wrap — anything smaller is
+    // native playback keeping up, and correcting on every frame would
+    // fight it. While paused (a host is scrubbing/stepping frame-by-frame,
+    // e.g. for export) there's no native playback to fight, so track
+    // exactly: without this a frame-stepped export leaves the video
+    // sitting on whatever frame it last had, unmoving, while the sub-0.35
+    // per-step deltas type never clear the playing-mode threshold.
+    const threshold = timeline.playing ? 0.35 : 0.02;
+    if (drift > threshold) {
+      v.currentTime = target;
+      // A loop wrap lands here right as native playback reaches `end` and
+      // pauses itself (the 'ended' event) — resume so the next lap plays.
+      if (timeline.playing && v.paused) v.play().catch(() => {});
+    }
+  }, [timeline.time, start, span, speed, timeline.playing]);
   return /*#__PURE__*/React.createElement("video", _extends({
     ref: ref,
     src: src,

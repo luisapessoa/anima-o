@@ -36,6 +36,7 @@ const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_6 = 'assets/bg-6.mp4';
+const VID_7 = 'assets/bg-7.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -100,12 +101,12 @@ const shell = {
 // div + VideoSprite + dark overlay, opacity gated behind a "ready" state so
 // the overlay never paints alone (flat colour flash) before the first frame
 // decodes, and any drift-correction catch-up seek happens off-screen.
-// VideoSprite here only corrects drift via periodic seeks (no native
-// play() call), which alone can look choppier than real decode-driven
-// playback — passing autoPlay+loop through (VideoSprite spreads unknown
-// props onto the underlying <video>) lets the browser actually play the
-// clip natively; VideoSprite's own seeks then just keep it honest against
-// the scene clock instead of being the only thing advancing the frame.
+// VideoSprite now drives real play()/pause() natively (mirroring the Stage's
+// playing state, mount-anchored so a scene starting mid-timeline still
+// begins its clip at `start` instead of mid-loop) — do NOT also pass
+// autoPlay/loop here: that was fighting VideoSprite's own currentTime
+// corrections (two independent clocks racing) and caused exactly the
+// stutter/jump/boomerang behavior this is meant to avoid.
 function BgVideo({
   src,
   start,
@@ -155,9 +156,7 @@ function BgVideo({
     start: start || 0,
     end: end || 3,
     speed: speed || 1,
-    autoPlay: true,
-    loop: true,
-    onCanPlayThrough: markReady,
+    onLoadedData: markReady,
     style: {
       position: 'absolute',
       inset: 0,
@@ -173,6 +172,87 @@ function BgVideo({
     style: {
       position: 'absolute',
       inset: 0,
+      background: overlay || 'rgba(0,0,0,0.55)',
+      opacity: ready ? 1 : 0,
+      transition: 'opacity .25s ease'
+    }
+  }));
+}
+
+// Same pattern as BgVideo but confined to a horizontal band (used for Tela
+// 7's bottom strip, below the teal card) instead of the full 1920px canvas.
+function BgVideoBand({
+  src,
+  start,
+  end,
+  scale,
+  posX,
+  posY,
+  op,
+  overlay,
+  speed,
+  top,
+  height
+}) {
+  const [ready, setReady] = React.useState(false);
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setReady(true);
+      }
+    }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => {
+    if (!readyRef.current) {
+      readyRef.current = true;
+      setReady(true);
+    }
+  };
+  const band = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top,
+    height,
+    overflow: 'hidden'
+  };
+  if (!RT.videoBg) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        ...band,
+        background: BLACK
+      }
+    });
+  }
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...band,
+      background: BLACK
+    }
+  }), /*#__PURE__*/React.createElement(VideoSprite, {
+    src: src,
+    start: start || 0,
+    end: end || 3,
+    speed: speed || 1,
+    onLoadedData: markReady,
+    style: {
+      position: 'absolute',
+      left: 0,
+      top,
+      width: W,
+      height,
+      objectFit: 'cover',
+      objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
+      transform: `scale(${scale || 1})`,
+      opacity: ready ? op == null ? 1 : op : 0,
+      transition: 'opacity .25s ease'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...band,
       background: overlay || 'rgba(0,0,0,0.55)',
       opacity: ready ? 1 : 0,
       transition: 'opacity .25s ease'
@@ -246,7 +326,7 @@ function Opening() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 3.26,
+    end: 2.9,
     scale: 1.04,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -483,7 +563,7 @@ function LineSplit() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 4.62,
+    end: 3.67,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -663,7 +743,7 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 2.2,
+    end: 1.83,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -734,7 +814,16 @@ function TealCard() {
     style: {
       ...shell
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(BgVideoBand, {
+    src: VID_7,
+    start: 0,
+    end: 1.04,
+    scale: 1.1,
+    posY: 45,
+    top: cardH,
+    height: H - cardH,
+    overlay: "rgba(3,72,69,0.6)"
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: 0,

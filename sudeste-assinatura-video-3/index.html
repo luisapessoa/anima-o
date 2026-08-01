@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sudeste Assinaturas — vídeo vertical 3</title>
 <!-- bg-1.mp4 is high-priority — needed the instant Tela 1 mounts, with zero
-     runtime head start. The other clips (Telas 3, 4, 6) each get several
+     runtime head start. The other clips (Telas 3, 4, 6, 7) each get several
      seconds of scene time before they're needed, so they're preloaded at
      fetchpriority="low": still queued early (so their head start isn't
      lost), but the browser won't let them compete with bg-1.mp4 for
@@ -14,6 +14,7 @@
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-3.mp4" fetchpriority="low" />
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-4.mp4" fetchpriority="low" />
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-6.mp4" fetchpriority="low" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-7.mp4" fetchpriority="low" />
 <!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
      the font load (font-display:swap would otherwise flash a fallback
      font first). -->
