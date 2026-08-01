@@ -28,7 +28,11 @@ const VID_6 = 'assets/bg-6.mp4';
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
-  return { opacity: p, transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)` };
+  // willChange promotes the element to its own GPU layer for the opacity+
+  // transform animation — without it, some browsers recompute text
+  // anti-aliasing on every intermediate frame of the fade, which reads as
+  // a flicker right as the text reveals rather than a smooth fade.
+  return { opacity: p, transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`, willChange: 'opacity, transform' };
 }
 function fmt(text, accent, key) {
   const parts = String(text).split('**');
@@ -43,7 +47,7 @@ function Logo({ lt, dark }) {
     <img src={dark ? "assets/logo-dark.png" : "assets/logo-white.png"} alt="Sudeste Assinaturas"
       style={{ position: 'absolute', top: LOGO_TOP, left: '50%',
                transform: `translateX(-50%) translateY(${(1 - p) * -12}px)`, opacity: p,
-               width: LOGO_W, height: 'auto', zIndex: 6 }} />
+               width: LOGO_W, height: 'auto', zIndex: 6, willChange: 'opacity, transform' }} />
   );
 }
 const shell = { position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: FONT, background: BLACK };
@@ -234,12 +238,21 @@ function TruckCard() {
         <Lines list={sc.body} lt={lt} delay={0.5} step={0.08} accent={TEAL}
           style={{ color: TEAL, fontWeight: 500, fontSize: 60, lineHeight: 1.22 }} />
       </div>
-      {/* conector diagonal com anel — centralizado na tela */}
+      {/* conector diagonal com anel — centralizado na tela.
+          left: '50%' + transform: translateX(-50%) doesn't resolve on this
+          <svg> in the target browser (percentage transforms on SVG root
+          elements aren't reliably supported the way they are on <div>s) —
+          the box's left edge stayed pinned at 50% with no leftward shift
+          at all, landing ~160px right of center. An explicit pixel left
+          offset ((1080-320)/2 = 380) centers it unconditionally. */}
       <svg viewBox="0 0 320 200" width="320" height="200"
-        style={{ position: 'absolute', left: '50%', top: 1108, transform: 'translateX(-50%)', opacity: cn }}>
-        <line x1="96" y1="20" x2="206" y2="150" stroke={MINT} strokeWidth="4" strokeLinecap="round"
+        style={{ position: 'absolute', left: 380, top: 1108, opacity: cn }}>
+        {/* content (line + circle) shifted -12 so it's centered within the
+            viewBox — it was previously off-center by 12 units, reading as
+            not centered on screen despite the wrapper itself being centered. */}
+        <line x1="84" y1="20" x2="194" y2="150" stroke={MINT} strokeWidth="4" strokeLinecap="round"
           strokeDasharray="180" strokeDashoffset={(1 - cn) * 180} />
-        <circle cx="218" cy="162" r="30" fill="none" stroke={MINT} strokeWidth="4" />
+        <circle cx="206" cy="162" r="30" fill="none" stroke={MINT} strokeWidth="4" />
       </svg>
       {/* 2º parágrafo — justificado à direita */}
       <div style={{ position: 'absolute', right: 110, top: 1346, textAlign: 'right' }}>

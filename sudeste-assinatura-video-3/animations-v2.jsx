@@ -1037,7 +1037,16 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
     const target = start + ((t * speed) % span);
-    if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
+    // Native autoPlay+loop already drives smooth continuous playback (see
+    // BgVideo in scenes3.jsx) — this seek only needs to catch gross desync
+    // (mount, a pause/stall, or an export-tool scrub), not the small
+    // millisecond-level drift that's expected between the browser's own
+    // decode clock and this rAF-driven timeline. A tight 0.05s tolerance
+    // fired on that expected drift almost every loop, and each forced
+    // v.currentTime jump — landing on a non-keyframe frame — made the
+    // decoder stall or briefly show a torn/duplicated frame, which read as
+    // stutter/flicker. 0.35s only trips for real desync.
+    if (Math.abs(v.currentTime - target) > 0.35) v.currentTime = target;
   }, [t, start, span, speed]);
   return (
     <video

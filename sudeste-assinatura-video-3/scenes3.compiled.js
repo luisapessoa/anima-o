@@ -43,9 +43,14 @@ function ease(lt, delay, d) {
 }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
+  // willChange promotes the element to its own GPU layer for the opacity+
+  // transform animation — without it, some browsers recompute text
+  // anti-aliasing on every intermediate frame of the fade, which reads as
+  // a flicker right as the text reveals rather than a smooth fade.
   return {
     opacity: p,
-    transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`
+    transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`,
+    willChange: 'opacity, transform'
   };
 }
 function fmt(text, accent, key) {
@@ -78,7 +83,8 @@ function Logo({
       opacity: p,
       width: LOGO_W,
       height: 'auto',
-      zIndex: 6
+      zIndex: 6,
+      willChange: 'opacity, transform'
     }
   });
 }
@@ -602,15 +608,14 @@ function TruckCard() {
     height: "200",
     style: {
       position: 'absolute',
-      left: '50%',
+      left: 380,
       top: 1108,
-      transform: 'translateX(-50%)',
       opacity: cn
     }
   }, /*#__PURE__*/React.createElement("line", {
-    x1: "96",
+    x1: "84",
     y1: "20",
-    x2: "206",
+    x2: "194",
     y2: "150",
     stroke: MINT,
     strokeWidth: "4",
@@ -618,7 +623,7 @@ function TruckCard() {
     strokeDasharray: "180",
     strokeDashoffset: (1 - cn) * 180
   }), /*#__PURE__*/React.createElement("circle", {
-    cx: "218",
+    cx: "206",
     cy: "162",
     r: "30",
     fill: "none",
