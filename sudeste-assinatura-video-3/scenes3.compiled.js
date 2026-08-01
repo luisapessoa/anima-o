@@ -44,13 +44,16 @@ function ease(lt, delay, d) {
 }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
-  // willChange promotes the element to its own GPU layer for the opacity+
-  // transform animation — without it, some browsers recompute text
-  // anti-aliasing on every intermediate frame of the fade, which reads as
-  // a flicker right as the text reveals rather than a smooth fade.
+  // GPU-layer promotion for the opacity+transform fade — without it, some
+  // browsers recompute text anti-aliasing on every intermediate frame,
+  // which reads as a flicker/ghosting right as the text reveals rather
+  // than a smooth fade. willChange alone didn't fully clear this on every
+  // device, so the transform also uses translate3d — a 3D transform is a
+  // much more universally-honored layer-promotion trigger (long-standing
+  // Safari/WebKit fix) than will-change by itself.
   return {
     opacity: p,
-    transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`,
+    transform: `translate3d(0, ${(1 - p) * (px == null ? 24 : px)}px, 0)`,
     willChange: 'opacity, transform'
   };
 }
@@ -80,7 +83,7 @@ function Logo({
       position: 'absolute',
       top: LOGO_TOP,
       left: '50%',
-      transform: `translateX(-50%) translateY(${(1 - p) * -12}px)`,
+      transform: `translateX(-50%) translateY(${(1 - p) * -12}px) translateZ(0)`,
       opacity: p,
       width: LOGO_W,
       height: 'auto',
@@ -494,9 +497,9 @@ function HighlightBox() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_3,
     start: 0,
-    end: 2.62,
-    scale: 1.06,
-    posY: 45
+    end: 3.76,
+    scale: 1.0,
+    posY: 40
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -745,7 +748,8 @@ function LineLeft() {
     start: 0,
     end: 1.83,
     scale: 1.06,
-    posY: 45
+    posY: 45,
+    speed: 0.55
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -822,7 +826,7 @@ function TealCard() {
     posY: 45,
     top: cardH,
     height: H - cardH,
-    overlay: "rgba(3,72,69,0.6)"
+    overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',

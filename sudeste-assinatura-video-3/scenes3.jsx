@@ -29,11 +29,14 @@ const VID_7 = 'assets/bg-7.mp4';
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
 function rise(lt, delay, px, d) {
   const p = ease(lt, delay, d);
-  // willChange promotes the element to its own GPU layer for the opacity+
-  // transform animation — without it, some browsers recompute text
-  // anti-aliasing on every intermediate frame of the fade, which reads as
-  // a flicker right as the text reveals rather than a smooth fade.
-  return { opacity: p, transform: `translateY(${(1 - p) * (px == null ? 24 : px)}px)`, willChange: 'opacity, transform' };
+  // GPU-layer promotion for the opacity+transform fade — without it, some
+  // browsers recompute text anti-aliasing on every intermediate frame,
+  // which reads as a flicker/ghosting right as the text reveals rather
+  // than a smooth fade. willChange alone didn't fully clear this on every
+  // device, so the transform also uses translate3d — a 3D transform is a
+  // much more universally-honored layer-promotion trigger (long-standing
+  // Safari/WebKit fix) than will-change by itself.
+  return { opacity: p, transform: `translate3d(0, ${(1 - p) * (px == null ? 24 : px)}px, 0)`, willChange: 'opacity, transform' };
 }
 function fmt(text, accent, key) {
   const parts = String(text).split('**');
@@ -47,7 +50,7 @@ function Logo({ lt, dark }) {
   return (
     <img src={dark ? "assets/logo-dark.png" : "assets/logo-white.png"} alt="Sudeste Assinaturas"
       style={{ position: 'absolute', top: LOGO_TOP, left: '50%',
-               transform: `translateX(-50%) translateY(${(1 - p) * -12}px)`, opacity: p,
+               transform: `translateX(-50%) translateY(${(1 - p) * -12}px) translateZ(0)`, opacity: p,
                width: LOGO_W, height: 'auto', zIndex: 6, willChange: 'opacity, transform' }} />
   );
 }
@@ -206,7 +209,7 @@ function HighlightBox() {
   const PADL = 108;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_3} start={0} end={2.62} scale={1.06} posY={45} />
+      <BgVideo src={VID_3} start={0} end={3.76} scale={1.0} posY={40} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 84, top: 320 }}>
         {sc.hi.map((ln, i) => (
@@ -299,7 +302,10 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={1.83} scale={1.06} posY={45} />
+      {/* speed 0.55 stretches this clip's loop from 1.83s to ~3.3s of scene
+          time — at full speed it was looping so often within Tela 6's 7s
+          duration that it read as stuck in a short repeat. */}
+      <BgVideo src={VID_6} start={0} end={1.83} scale={1.06} posY={45} speed={0.55} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -323,8 +329,10 @@ function TealCard() {
   const cardH = 940;
   return (
     <div style={{ ...shell }}>
+      {/* no color overlay here — no text sits on this band, so the video
+          is left unfiltered per request. */}
       <BgVideoBand src={VID_7} start={0} end={1.04} scale={1.1} posY={45}
-        top={cardH} height={H - cardH} overlay="rgba(3,72,69,0.6)" />
+        top={cardH} height={H - cardH} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
