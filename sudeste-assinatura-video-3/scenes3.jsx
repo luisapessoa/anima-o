@@ -336,7 +336,7 @@ function TealCard() {
           below the card, but it's genuinely rendered behind the whole
           canvas, not cropped to the band's own aspect ratio. No color
           overlay — no text sits directly on the video. */}
-      <BgVideo src={VID_7} start={0} end={1.83} scale={1.06} posY={45} speed={0.6} overlay="transparent" />
+      <BgVideo src={VID_7} start={0} end={1.08} scale={2.0} shiftY={650} speed={0.5} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>

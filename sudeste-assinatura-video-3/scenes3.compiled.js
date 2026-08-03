@@ -749,10 +749,10 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 1.83,
-    scale: 1.06,
-    posY: 45,
-    speed: 0.6,
+    end: 1.08,
+    scale: 2.0,
+    shiftY: 650,
+    speed: 0.5,
     overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
