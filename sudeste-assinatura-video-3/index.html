@@ -20,6 +20,9 @@
      font first). -->
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin.woff2" crossorigin="anonymous" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-ext.woff2" crossorigin="anonymous" />
+<!-- Tela 1's logo needs this the instant it mounts too — without a
+     preload it competes with bg-1.mp4 for the same early bandwidth. -->
+<link rel="preload" as="image" type="image/png" href="assets/logo-white.png" fetchpriority="high" />
 <style>
   /* DM Sans self-hospedada (mesmos arquivos usados nos projetos anteriores) —
      evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado

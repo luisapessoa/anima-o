@@ -182,87 +182,6 @@ function BgVideo({
   }));
 }
 
-// Same pattern as BgVideo but confined to a horizontal band (used for Tela
-// 7's bottom strip, below the teal card) instead of the full 1920px canvas.
-function BgVideoBand({
-  src,
-  start,
-  end,
-  scale,
-  posX,
-  posY,
-  op,
-  overlay,
-  speed,
-  top,
-  height
-}) {
-  const [ready, setReady] = React.useState(false);
-  const readyRef = React.useRef(false);
-  React.useEffect(() => {
-    const t = setTimeout(() => {
-      if (!readyRef.current) {
-        readyRef.current = true;
-        setReady(true);
-      }
-    }, 1200);
-    return () => clearTimeout(t);
-  }, []);
-  const markReady = () => {
-    if (!readyRef.current) {
-      readyRef.current = true;
-      setReady(true);
-    }
-  };
-  const band = {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top,
-    height,
-    overflow: 'hidden'
-  };
-  if (!RT.videoBg) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...band,
-        background: BLACK
-      }
-    });
-  }
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...band,
-      background: BLACK
-    }
-  }), /*#__PURE__*/React.createElement(VideoSprite, {
-    src: src,
-    start: start || 0,
-    end: end || 3,
-    speed: speed || 1,
-    onLoadedData: markReady,
-    style: {
-      position: 'absolute',
-      left: 0,
-      top,
-      width: W,
-      height,
-      objectFit: 'cover',
-      objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
-      transform: `scale(${scale || 1})`,
-      opacity: ready ? op == null ? 1 : op : 0,
-      transition: 'opacity .25s ease'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...band,
-      background: overlay || 'rgba(0,0,0,0.55)',
-      opacity: ready ? 1 : 0,
-      transition: 'opacity .25s ease'
-    }
-  }));
-}
-
 /* Uma <div> por linha = quebra exata do esquema. */
 function Lines({
   list,
@@ -298,7 +217,8 @@ function TLIcon({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      flex: '0 0 auto'
+      flex: '0 0 auto',
+      transform: 'translateZ(0)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -312,7 +232,8 @@ function TLIcon({
       WebkitMaskRepeat: 'no-repeat',
       maskRepeat: 'no-repeat',
       WebkitMaskPosition: 'center',
-      maskPosition: 'center'
+      maskPosition: 'center',
+      transform: 'translateZ(0)'
     }
   }));
 }
@@ -329,10 +250,9 @@ function Opening() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 2.9,
+    end: 4.73,
     scale: 1.04,
-    posY: 45,
-    speed: 0.65
+    posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -525,7 +445,7 @@ function HighlightBox() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'inline-block',
-      clipPath: `inset(0 ${(1 - ease(lt, 0.9 + i * 0.22, 0.5)) * 100}% 0 0)`
+      clipPath: `inset(0 ${(1 - ease(lt, 0.25 + i * 0.22, 0.5)) * 100}% 0 0)`
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -546,7 +466,7 @@ function HighlightBox() {
   }, /*#__PURE__*/React.createElement(Lines, {
     list: sc.body,
     lt: lt,
-    delay: 0.25,
+    delay: 1.0,
     step: 0.08,
     accent: MINT,
     style: {
@@ -757,7 +677,7 @@ function LineLeft() {
     end: 3.76,
     scale: 1.0,
     posY: 40,
-    speed: 0.6
+    speed: 0.53
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -826,15 +746,13 @@ function TealCard() {
     style: {
       ...shell
     }
-  }, /*#__PURE__*/React.createElement(BgVideoBand, {
+  }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
     end: 1.83,
     scale: 1.06,
     posY: 45,
     speed: 0.6,
-    top: cardH,
-    height: H - cardH,
     overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {
     style: {

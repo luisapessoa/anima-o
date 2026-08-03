@@ -92,35 +92,6 @@ function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shift
   );
 }
 
-// Same pattern as BgVideo but confined to a horizontal band (used for Tela
-// 7's bottom strip, below the teal card) instead of the full 1920px canvas.
-function BgVideoBand({ src, start, end, scale, posX, posY, op, overlay, speed, top, height }) {
-  const [ready, setReady] = React.useState(false);
-  const readyRef = React.useRef(false);
-  React.useEffect(() => {
-    const t = setTimeout(() => { if (!readyRef.current) { readyRef.current = true; setReady(true); } }, 1200);
-    return () => clearTimeout(t);
-  }, []);
-  const markReady = () => { if (!readyRef.current) { readyRef.current = true; setReady(true); } };
-  const band = { position: 'absolute', left: 0, right: 0, top, height, overflow: 'hidden' };
-  if (!RT.videoBg) {
-    return <div style={{ ...band, background: BLACK }} />;
-  }
-  return (
-    <React.Fragment>
-      <div style={{ ...band, background: BLACK }} />
-      <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
-        onLoadedData={markReady}
-        style={{ position: 'absolute', left: 0, top, width: W, height, objectFit: 'cover',
-          objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
-          transform: `scale(${scale || 1})`,
-          opacity: ready ? (op == null ? 1 : op) : 0, transition: 'opacity .25s ease' }} />
-      <div style={{ ...band, background: overlay || 'rgba(0,0,0,0.55)',
-        opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
-    </React.Fragment>
-  );
-}
-
 /* Uma <div> por linha = quebra exata do esquema. */
 function Lines({ list, lt, delay, step, style, accent }) {
   return (list || []).map((ln, i) => (
@@ -135,12 +106,18 @@ function TLIcon({ name }) {
   const sz = name === 'car' ? 60 : 52;
   return (
     <div style={{ width: 84, height: 84, borderRadius: '50%', background: YEL,
-      display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>
+      display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto',
+      transform: 'translateZ(0)' }}>
+      {/* CSS mask-image compositing on Tela 2's icons re-renders every
+          frame of the parent row's rise() fade — translateZ(0) promotes
+          the masked element to its own layer so the mask isn't
+          recomposited against a repainting ancestor every frame. */}
       <div style={{ width: sz, height: sz, background: TEAL,
         WebkitMaskImage: `url(${ICONS[name]})`, maskImage: `url(${ICONS[name]})`,
         WebkitMaskSize: 'contain', maskSize: 'contain',
         WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat',
-        WebkitMaskPosition: 'center', maskPosition: 'center' }} />
+        WebkitMaskPosition: 'center', maskPosition: 'center',
+        transform: 'translateZ(0)' }} />
     </div>
   );
 }
@@ -150,10 +127,14 @@ function Opening() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      {/* speed 0.65 stretches the 2.9s clip to ~4.46s — almost exactly
-          Tela 1's 4.5s duration, so it plays through essentially once
-          instead of visibly looping. */}
-      <BgVideo src={VID_1} start={0} end={2.9} scale={1.04} posY={45} speed={0.65} />
+      {/* Native speed 1x, no playbackRate manipulation — a non-1.0
+          playbackRate can itself cause decode judder on some devices, and
+          this scene's stutter reports persisted even after slowing it
+          down, so instead of relying on speed tricks this is now a
+          genuinely longer take: the front 3/4 approach concatenated with
+          a second Virtus shot (side/rear), totaling 4.73s against Tela
+          1's 4.5s scene — it plays through essentially once. */}
+      <BgVideo src={VID_1} start={0} end={4.73} scale={1.04} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: 1360, textAlign: 'center' }}>
         <Lines list={sc.head} lt={lt} delay={0.3} step={0.12}
@@ -222,16 +203,20 @@ function HighlightBox() {
       <BgVideo src={VID_3} start={0} end={2.63} scale={1.06} posY={45} speed={0.6} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 84, top: 320 }}>
+        {/* title (hi) now reveals first (delay 0.25), body follows after
+            both title lines finish (~1.0s) — previously the body's 0.25
+            delay was earlier than the title's 0.9, so the second
+            paragraph appeared before the title. */}
         {sc.hi.map((ln, i) => (
           <div key={i} style={{ marginBottom: 14 }}>
-            <div style={{ display: 'inline-block', clipPath: `inset(0 ${(1 - ease(lt, 0.9 + i * 0.22, 0.5)) * 100}% 0 0)` }}>
+            <div style={{ display: 'inline-block', clipPath: `inset(0 ${(1 - ease(lt, 0.25 + i * 0.22, 0.5)) * 100}% 0 0)` }}>
               <span style={{ display: 'inline-block', background: MINT, color: TEAL, fontWeight: 700,
                 fontSize: 80, lineHeight: 1.16, letterSpacing: '-0.02em', padding: `2px 22px 8px ${PADL}px` }}>{ln}</span>
             </div>
           </div>
         ))}
         <div style={{ marginTop: 40, paddingLeft: PADL }}>
-          <Lines list={sc.body} lt={lt} delay={0.25} step={0.08} accent={MINT}
+          <Lines list={sc.body} lt={lt} delay={1.0} step={0.08} accent={MINT}
             style={{ color: WHITE, fontWeight: 400, fontSize: 62, lineHeight: 1.2, textAlign: 'left' }} />
         </div>
       </div>
@@ -316,9 +301,12 @@ function LineLeft() {
           time — at full speed it was looping so often within Tela 6's 7s
           duration that it read as stuck in a short repeat. */}
       {/* moved here from Tela 3 — the Nivus dusk silhouette, single
-          continuous take. speed 0.6 stretches its 3.76s loop to ~6.3s,
-          close to Tela 6's 7s duration (barely visible restart). */}
-      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.6} />
+          continuous take. speed 0.53 stretches its 3.76s loop to ~7.1s —
+          slightly LONGER than Tela 6's 7s scene, so the single pass never
+          actually completes before the scene cuts away (0.6 left ~0.7s of
+          scene time after the loop restarted, which read as an
+          unnecessary repeat right at the end). */}
+      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.53} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -342,12 +330,13 @@ function TealCard() {
   const cardH = 940;
   return (
     <div style={{ ...shell }}>
-      {/* no color overlay here — no text sits on this band, so the video
-          is left unfiltered per request. Changed from the urban SUV clip
-          (disliked) to a second, distinct Virtus take. speed 0.6 stretches
-          its 1.83s loop to ~3.05s. */}
-      <BgVideoBand src={VID_7} start={0} end={1.83} scale={1.06} posY={45} speed={0.6}
-        top={cardH} height={H - cardH} overlay="transparent" />
+      {/* full-screen video (not confined to the band below the card) so
+          the crop matches every other scene's framing — the opaque teal
+          card slides down on top of it, so the video only ends up VISIBLE
+          below the card, but it's genuinely rendered behind the whole
+          canvas, not cropped to the band's own aspect ratio. No color
+          overlay — no text sits directly on the video. */}
+      <BgVideo src={VID_7} start={0} end={1.83} scale={1.06} posY={45} speed={0.6} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
