@@ -35,8 +35,8 @@ const RT = {
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-6.mp4';
-const VID_7 = 'assets/bg-6.mp4'; // reusing Tela 6's clip — see BgVideo call for why
+const VID_6 = 'assets/bg-8.mp4';
+const VID_7 = 'assets/bg-6.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -588,7 +588,7 @@ function TruckCard() {
     alt: "Amarok",
     style: {
       position: 'absolute',
-      left: 150,
+      left: 90,
       top: 380,
       width: 780,
       height: 'auto',
@@ -674,10 +674,8 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 3.76,
-    scale: 1.0,
-    posY: 40,
-    speed: 0.53
+    end: 2.08,
+    speed: 0.3
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {

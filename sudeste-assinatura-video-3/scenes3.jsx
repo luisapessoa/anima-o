@@ -22,8 +22,8 @@ const RT = { showLogo: true, videoBg: true };
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-6.mp4';
-const VID_7 = 'assets/bg-6.mp4'; // reusing Tela 6's clip — see BgVideo call for why
+const VID_6 = 'assets/bg-8.mp4';
+const VID_7 = 'assets/bg-6.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -259,7 +259,7 @@ function TruckCard() {
       <div style={{ position: 'absolute', left: 190, top: 440, width: 700, height: 250,
         background: MINT, borderRadius: '78px 0 78px 0', ...rise(lt, 0.15, 20) }} />
       <img src="assets/amarok.webp" alt="Amarok"
-        style={{ position: 'absolute', left: 150, top: 380, width: 780, height: 'auto',
+        style={{ position: 'absolute', left: 90, top: 380, width: 780, height: 'auto',
           objectFit: 'contain', ...rise(lt, 0.2, 22) }} />
       {/* 1º parágrafo — esquerda */}
       <div style={{ position: 'absolute', left: 130, top: 800 }}>
@@ -297,16 +297,16 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      {/* speed 0.55 stretches this clip's loop from 1.83s to ~3.3s of scene
-          time — at full speed it was looping so often within Tela 6's 7s
-          duration that it read as stuck in a short repeat. */}
-      {/* moved here from Tela 3 — the Nivus dusk silhouette, single
-          continuous take. speed 0.53 stretches its 3.76s loop to ~7.1s —
-          slightly LONGER than Tela 6's 7s scene, so the single pass never
-          actually completes before the scene cuts away (0.6 left ~0.7s of
-          scene time after the loop restarted, which read as an
-          unnecessary repeat right at the end). */}
-      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.53} />
+      {/* Tela 6 and Tela 7 both ended up on the Nivus dusk clip, which read
+          as the same video twice back to back — swapped Tela 6 to a
+          different car/location entirely: a clean, uncaptioned 2.08s take
+          of the Virtus sedan driving away down a sunlit forest road
+          (found unused between two caption/badge overlays in the same
+          source ad). speed 0.3 stretches it to ~6.9s, just under Tela 6's
+          7s scene, so it plays through essentially once with no visible
+          restart — same "stretch to ~scene length" approach that fixed
+          the looping complaints elsewhere. */}
+      <BgVideo src={VID_6} start={0} end={2.08} speed={0.3} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
