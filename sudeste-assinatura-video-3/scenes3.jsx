@@ -23,7 +23,7 @@ const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_6 = 'assets/bg-6.mp4';
-const VID_7 = 'assets/bg-7.mp4';
+const VID_7 = 'assets/bg-6.mp4'; // reusing Tela 6's clip — see BgVideo call for why
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -335,14 +335,16 @@ function TealCard() {
           card slides down on top of it, so the video only ends up VISIBLE
           below the card, but it's genuinely rendered behind the whole
           canvas, not cropped to the band's own aspect ratio. No color
-          overlay — no text sits directly on the video. */}
-      {/* Tried concatenating a second (badge close-up) shot here, but that
-          shot is already a tight zoom and looked wrong under the same
-          2.0x scale calibrated for this medium shot — mismatched framing
-          reads worse than a single consistent clip. Back to the single
-          0.92s medium shot alone, slowed further (0.45) so each loop is a
-          clean full pass (~2s) instead of a short, choppier repeat. */}
-      <BgVideo src={VID_7} start={0} end={0.92} scale={2.0} shiftY={650} speed={0.45} overlay="transparent" />
+          overlay — no text sits directly on the video.
+          None of the source clips had a long, low-in-frame, non-panning
+          take left unused — every short driving shot still visibly
+          restarted within an 8s scene. Reusing Tela 6's Nivus silhouette
+          instead: it's the one take proven to stretch to a near-single
+          pass without a visible loop. The car already sits right at the
+          card's boundary natively, so a tighter, lower crop (scale 1.6,
+          shiftY 380) than Tela 6's fuller view reads as a distinct shot
+          rather than a repeat of it. */}
+      <BgVideo src={VID_7} start={0} end={3.76} scale={1.6} shiftY={380} speed={0.47} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>

@@ -36,7 +36,7 @@ const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_6 = 'assets/bg-6.mp4';
-const VID_7 = 'assets/bg-7.mp4';
+const VID_7 = 'assets/bg-6.mp4'; // reusing Tela 6's clip — see BgVideo call for why
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -749,10 +749,10 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 0.92,
-    scale: 2.0,
-    shiftY: 650,
-    speed: 0.45,
+    end: 3.76,
+    scale: 1.6,
+    shiftY: 380,
+    speed: 0.47,
     overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
