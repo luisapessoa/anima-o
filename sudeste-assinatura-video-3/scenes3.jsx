@@ -336,7 +336,13 @@ function TealCard() {
           below the card, but it's genuinely rendered behind the whole
           canvas, not cropped to the band's own aspect ratio. No color
           overlay — no text sits directly on the video. */}
-      <BgVideo src={VID_7} start={0} end={1.08} scale={2.0} shiftY={650} speed={0.5} overlay="transparent" />
+      {/* Tried concatenating a second (badge close-up) shot here, but that
+          shot is already a tight zoom and looked wrong under the same
+          2.0x scale calibrated for this medium shot — mismatched framing
+          reads worse than a single consistent clip. Back to the single
+          0.92s medium shot alone, slowed further (0.45) so each loop is a
+          clean full pass (~2s) instead of a short, choppier repeat. */}
+      <BgVideo src={VID_7} start={0} end={0.92} scale={2.0} shiftY={650} speed={0.45} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
