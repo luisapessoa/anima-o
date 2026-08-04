@@ -675,8 +675,8 @@ function LineLeft() {
     src: VID_6,
     start: 0,
     end: 3.76,
-    scale: 1.0,
-    posY: 40,
+    scale: 1.1,
+    shiftY: -90,
     speed: 0.53
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
@@ -749,7 +749,7 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 1.6,
+    end: 2.44,
     speed: 0.5,
     overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {

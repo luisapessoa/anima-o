@@ -309,8 +309,11 @@ function LineLeft() {
           scene needs. Tela 7 gets a different clip instead (see
           TealCard) so they're still not duplicates. speed 0.53 stretches
           the 3.76s clip to ~7.1s, just over the 7s scene, so it plays
-          through essentially once with no visible restart. */}
-      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.53} />
+          through essentially once with no visible restart. Slight zoom
+          (scale 1.1) plus a negative shiftY nudges the whole frame up a
+          bit further, opening up more clear space between the car and
+          the title text below it. */}
+      <BgVideo src={VID_6} start={0} end={3.76} scale={1.1} shiftY={-90} speed={0.53} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -345,10 +348,14 @@ function TealCard() {
           the bottom of the frame — the opposite of what Tela 6 needed,
           but exactly the "action happens below the card" framing this
           scene wants, and at native scale the roofline already clears
-          the card boundary with no cropping required. Trimmed to 1.6s to
-          cut before the source's next hard cut (the previous 2.0s trim
-          bled into it, flashing a different parked scene in briefly). */}
-      <BgVideo src={VID_7} start={0} end={1.6} speed={0.5} overlay="transparent" />
+          the card boundary with no cropping required. A single 1.6s
+          take still looped too visibly across the 8s scene, so it's now
+          two takes of the same car concatenated — the original dusk
+          approach plus a second, closer approach shot found later in
+          the same source ad (different lighting, but the cut reads as
+          a deliberate second angle rather than a loop restart) — for a
+          total 2.44s clip. */}
+      <BgVideo src={VID_7} start={0} end={2.44} speed={0.5} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
