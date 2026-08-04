@@ -35,7 +35,7 @@ const RT = {
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-8.mp4';
+const VID_6 = 'assets/bg-9.mp4';
 const VID_7 = 'assets/bg-6.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
@@ -588,7 +588,7 @@ function TruckCard() {
     alt: "Amarok",
     style: {
       position: 'absolute',
-      left: 90,
+      left: 142,
       top: 380,
       width: 780,
       height: 'auto',
@@ -674,8 +674,8 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 2.08,
-    speed: 0.3
+    end: 2.0,
+    speed: 0.6
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {

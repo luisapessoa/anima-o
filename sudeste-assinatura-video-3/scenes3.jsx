@@ -22,7 +22,7 @@ const RT = { showLogo: true, videoBg: true };
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-8.mp4';
+const VID_6 = 'assets/bg-9.mp4';
 const VID_7 = 'assets/bg-6.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
@@ -258,8 +258,12 @@ function TruckCard() {
       {/* placa mint menor (cantos sup-dir e inf-esq retos) + Amarok maior */}
       <div style={{ position: 'absolute', left: 190, top: 440, width: 700, height: 250,
         background: MINT, borderRadius: '78px 0 78px 0', ...rise(lt, 0.15, 20) }} />
+      {/* left computed from the asset's actual alpha-channel content bbox
+          (not the 780px box's own geometric center) — the truck's pixels
+          inside amarok.webp aren't centered in the file, so centering the
+          <img> box itself left the truck reading off-center on screen. */}
       <img src="assets/amarok.webp" alt="Amarok"
-        style={{ position: 'absolute', left: 90, top: 380, width: 780, height: 'auto',
+        style={{ position: 'absolute', left: 142, top: 380, width: 780, height: 'auto',
           objectFit: 'contain', ...rise(lt, 0.2, 22) }} />
       {/* 1º parágrafo — esquerda */}
       <div style={{ position: 'absolute', left: 130, top: 800 }}>
@@ -297,16 +301,15 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      {/* Tela 6 and Tela 7 both ended up on the Nivus dusk clip, which read
-          as the same video twice back to back — swapped Tela 6 to a
-          different car/location entirely: a clean, uncaptioned 2.08s take
-          of the Virtus sedan driving away down a sunlit forest road
-          (found unused between two caption/badge overlays in the same
-          source ad). speed 0.3 stretches it to ~6.9s, just under Tela 6's
-          7s scene, so it plays through essentially once with no visible
-          restart — same "stretch to ~scene length" approach that fixed
-          the looping complaints elsewhere. */}
-      <BgVideo src={VID_6} start={0} end={2.08} speed={0.3} />
+      {/* New source clip (a different car/ad entirely from the previous
+          Virtus forest take, which is why VID_6 changed assets again).
+          That previous clip needed a 0.3x crawl to stretch across the 7s
+          scene, and playing back that slow read as sluggish/stuttery —
+          not a decode problem, just genuinely-too-slow motion. This clip
+          only needs 0.6x (the same ratio already proven fine on Tela 3's
+          bg-3), which lets it loop twice over cleanly instead of dragging
+          through one crawling pass. */}
+      <BgVideo src={VID_6} start={0} end={2.0} speed={0.6} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
