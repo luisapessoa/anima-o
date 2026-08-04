@@ -1064,24 +1064,6 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
       v.pause();
     }
   }, [timeline.playing, speed]);
-  // A scene switch under transition="cut" unmounts this element outright
-  // (SceneSwitch renders exactly one scene layer at a time), but nothing
-  // previously told the browser to release the decoder right then — that's
-  // left to whenever the element gets garbage-collected, which can land the
-  // resulting pause on whatever scene happens to be running at the time,
-  // not necessarily this one. Pausing and detaching the source on unmount
-  // makes the release deterministic instead of GC-timing-dependent.
-  React.useEffect(() => {
-    const v = ref.current;
-    return () => {
-      if (!v) return;
-      try {
-        v.pause();
-        v.removeAttribute('src');
-        v.load();
-      } catch (e) {}
-    };
-  }, []);
   React.useEffect(() => {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
@@ -1104,6 +1086,23 @@ function VideoSprite({ src, start = 0, end, speed = 1, style, ...rest }) {
       if (timeline.playing && v.paused) v.play().catch(() => {});
     }
   }, [timeline.time, start, span, speed, timeline.playing]);
+  // Belt-and-suspenders for the same loop-wrap moment: relying only on the
+  // drift-correction effect above to notice and resume after 'ended' means
+  // waiting for the next timeline.time-triggered render, and in practice
+  // that resume was landing unreliably — a video was observed stuck paused
+  // at a fixed currentTime for seconds, well past where it should have
+  // wrapped and resumed. Reacting to the browser's own 'ended' event
+  // directly, synchronously, removes that race entirely.
+  React.useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const onEnded = () => {
+      v.currentTime = start;
+      if (timeline.playing) v.play().catch(() => {});
+    };
+    v.addEventListener('ended', onEnded);
+    return () => v.removeEventListener('ended', onEnded);
+  }, [timeline.playing, start]);
   return (
     <video
       ref={ref}
