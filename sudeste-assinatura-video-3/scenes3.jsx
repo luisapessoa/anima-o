@@ -349,25 +349,28 @@ function TealCard() {
           the bottom of the frame — the opposite of what Tela 6 needed,
           but exactly the "action happens below the card" framing this
           scene wants, and at native scale the roofline already clears
-          the card boundary with no cropping required. Two takes still
-          looped too visibly across the 8s scene, so a third is now
-          concatenated in between — the original dusk approach, a
-          driving-past-palm-trees shot, then a closer approach shot
-          found later in the same source ad — 3.24s total, which at the
-          same 0.5x speed covers ~6.5s of the 8s scene (was ~4.9s),
-          leaving only a partial second pass instead of a full extra
-          loop.
+          the card boundary with no cropping required. The tight close-up
+          take (used for a round) didn't read as "driving on the street"
+          the way the other two do, and its clean window was short. Its
+          neighboring palm-tree shot turned out to have a much longer
+          clean run than first found (2.3s, not 0.8s) — dropping the
+          close-up for more of that shot gives two solid street-driving
+          takes at 1.6s + 2.3s = 3.9s total, which at 0.5x speed covers
+          ~7.8s of the 8s scene: effectively a single pass, not a loop.
+          The two takes are joined with a real crossfade (ffmpeg xfade)
+          instead of a hard cut, so the transition dissolves rather than
+          jump-cutting.
           The dusk approach segment's shadows carry a strong teal/cyan
           cast baked into the source footage's own color grade (a
           common "orange highlights, teal shadows" commercial look) —
           confirmed by sampling raw pixels straight off the canvas
           before any recording/encoding touches them, so it isn't
           something our export pipeline introduced. Sitting directly
-          under the teal card made it read as an unwanted green filter,
-          so a corrective CSS filter desaturates and rotates the hue
-          slightly warmer to neutralize it. */}
-      <BgVideo src={VID_7} start={0} end={3.24} speed={0.5} overlay="transparent"
-        filter="saturate(0.7) hue-rotate(-10deg)" />
+          under the teal card made it read as an unwanted green filter;
+          the first correction pass (saturate .7, hue-rotate -10deg)
+          wasn't strong enough, so it's pushed further here. */}
+      <BgVideo src={VID_7} start={0} end={3.64} speed={0.5} overlay="transparent"
+        filter="saturate(0.25) hue-rotate(-30deg) brightness(1.08)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>

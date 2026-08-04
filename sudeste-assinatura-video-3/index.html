@@ -6,15 +6,25 @@
 <title>Sudeste Assinaturas — vídeo vertical 3</title>
 <!-- bg-1.mp4 is high-priority — needed the instant Tela 1 mounts, with zero
      runtime head start. The other clips (Telas 3, 4, 6, 7) each get several
-     seconds of scene time before they're needed, so they're preloaded at
-     fetchpriority="low": still queued early (so their head start isn't
-     lost), but the browser won't let them compete with bg-1.mp4 for
-     bandwidth/CPU during the critical opening seconds. -->
+     seconds of scene time before they're needed. They used to be preloaded
+     as fetchpriority="low" <link> tags fired at the same time as bg-1's —
+     that's only a hint, not a guarantee of sequencing, and repeated Tela 1
+     stutter reports even after bg-1.mp4 itself checked out clean point at
+     several videos genuinely fetching/decoding in parallel during Tela 1's
+     opening seconds. They're now injected a couple seconds late instead, by
+     which point Tela 1 is already playing smoothly — Tela 3 doesn't start
+     until 11.5s in, so a 2s-delayed preload still lands with 9+s to spare. -->
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-1.mp4" fetchpriority="high" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-3.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-4.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-6.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-9.mp4" fetchpriority="low" />
+<script>
+  setTimeout(function () {
+    ['bg-3.mp4', 'bg-4.mp4', 'bg-6.mp4', 'bg-9.mp4'].forEach(function (name) {
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'video'; l.type = 'video/mp4';
+      l.href = 'assets/' + name;
+      document.head.appendChild(l);
+    });
+  }, 2000);
+</script>
 <!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
      the font load (font-display:swap would otherwise flash a fallback
      font first). -->
