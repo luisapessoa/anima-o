@@ -120,7 +120,8 @@ function BgVideo({
   op,
   overlay,
   speed,
-  shiftY
+  shiftY,
+  filter
 }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
@@ -168,6 +169,7 @@ function BgVideo({
       objectFit: 'cover',
       objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
       transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
+      filter: filter || 'none',
       opacity: ready ? op == null ? 1 : op : 0,
       transition: 'opacity .25s ease'
     }
@@ -675,8 +677,8 @@ function LineLeft() {
     src: VID_6,
     start: 0,
     end: 3.76,
-    scale: 1.1,
-    shiftY: -90,
+    scale: 1.25,
+    shiftY: -200,
     speed: 0.53
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
@@ -749,9 +751,10 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 2.44,
+    end: 3.24,
     speed: 0.5,
-    overlay: "transparent"
+    overlay: "transparent",
+    filter: "saturate(0.7) hue-rotate(-10deg)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',

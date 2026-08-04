@@ -66,7 +66,7 @@ const shell = { position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: 
 // autoPlay/loop here: that was fighting VideoSprite's own currentTime
 // corrections (two independent clocks racing) and caused exactly the
 // stutter/jump/boomerang behavior this is meant to avoid.
-function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shiftY }) {
+function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shiftY, filter }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
   React.useEffect(() => {
@@ -85,6 +85,7 @@ function BgVideo({ src, start, end, scale, posX, posY, op, overlay, speed, shift
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
           transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
+          filter: filter || 'none',
           opacity: ready ? (op == null ? 1 : op) : 0, transition: 'opacity .25s ease' }} />
       <div style={{ position: 'absolute', inset: 0, background: overlay || 'rgba(0,0,0,0.55)',
         opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
@@ -309,11 +310,11 @@ function LineLeft() {
           scene needs. Tela 7 gets a different clip instead (see
           TealCard) so they're still not duplicates. speed 0.53 stretches
           the 3.76s clip to ~7.1s, just over the 7s scene, so it plays
-          through essentially once with no visible restart. Slight zoom
-          (scale 1.1) plus a negative shiftY nudges the whole frame up a
-          bit further, opening up more clear space between the car and
-          the title text below it. */}
-      <BgVideo src={VID_6} start={0} end={3.76} scale={1.1} shiftY={-90} speed={0.53} />
+          through essentially once with no visible restart. Zoomed and
+          shifted up further still (scale 1.25, shiftY -200 — up from
+          1.1/-90) for more clear space between the car and the title
+          text below it. */}
+      <BgVideo src={VID_6} start={0} end={3.76} scale={1.25} shiftY={-200} speed={0.53} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -348,14 +349,25 @@ function TealCard() {
           the bottom of the frame — the opposite of what Tela 6 needed,
           but exactly the "action happens below the card" framing this
           scene wants, and at native scale the roofline already clears
-          the card boundary with no cropping required. A single 1.6s
-          take still looped too visibly across the 8s scene, so it's now
-          two takes of the same car concatenated — the original dusk
-          approach plus a second, closer approach shot found later in
-          the same source ad (different lighting, but the cut reads as
-          a deliberate second angle rather than a loop restart) — for a
-          total 2.44s clip. */}
-      <BgVideo src={VID_7} start={0} end={2.44} speed={0.5} overlay="transparent" />
+          the card boundary with no cropping required. Two takes still
+          looped too visibly across the 8s scene, so a third is now
+          concatenated in between — the original dusk approach, a
+          driving-past-palm-trees shot, then a closer approach shot
+          found later in the same source ad — 3.24s total, which at the
+          same 0.5x speed covers ~6.5s of the 8s scene (was ~4.9s),
+          leaving only a partial second pass instead of a full extra
+          loop.
+          The dusk approach segment's shadows carry a strong teal/cyan
+          cast baked into the source footage's own color grade (a
+          common "orange highlights, teal shadows" commercial look) —
+          confirmed by sampling raw pixels straight off the canvas
+          before any recording/encoding touches them, so it isn't
+          something our export pipeline introduced. Sitting directly
+          under the teal card made it read as an unwanted green filter,
+          so a corrective CSS filter desaturates and rotates the hue
+          slightly warmer to neutralize it. */}
+      <BgVideo src={VID_7} start={0} end={3.24} speed={0.5} overlay="transparent"
+        filter="saturate(0.7) hue-rotate(-10deg)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
