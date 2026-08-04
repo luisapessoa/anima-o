@@ -351,26 +351,30 @@ function TealCard() {
           scene wants, and at native scale the roofline already clears
           the card boundary with no cropping required. The tight close-up
           take (used for a round) didn't read as "driving on the street"
-          the way the other two do, and its clean window was short. Its
-          neighboring palm-tree shot turned out to have a much longer
-          clean run than first found (2.3s, not 0.8s) — dropping the
-          close-up for more of that shot gives two solid street-driving
-          takes at 1.6s + 2.3s = 3.9s total, which at 0.5x speed covers
-          ~7.8s of the 8s scene: effectively a single pass, not a loop.
-          The two takes are joined with a real crossfade (ffmpeg xfade)
-          instead of a hard cut, so the transition dissolves rather than
-          jump-cutting.
-          The dusk approach segment's shadows carry a strong teal/cyan
-          cast baked into the source footage's own color grade (a
-          common "orange highlights, teal shadows" commercial look) —
-          confirmed by sampling raw pixels straight off the canvas
-          before any recording/encoding touches them, so it isn't
-          something our export pipeline introduced. Sitting directly
-          under the teal card made it read as an unwanted green filter;
-          the first correction pass (saturate .7, hue-rotate -10deg)
-          wasn't strong enough, so it's pushed further here. */}
-      <BgVideo src={VID_7} start={0} end={3.64} speed={0.5} overlay="transparent"
-        filter="saturate(0.25) hue-rotate(-30deg) brightness(1.08)" />
+          the way the other two do, so it's gone in favor of more of the
+          palm-tree shot next to it. Both takes' actual clean windows
+          turned out shorter than earlier scans suggested — those scans
+          seeked with -ss before -i, which snaps to the nearest keyframe
+          and silently offsets every timestamp after it, so a spot check
+          "at 7.3s" could really be showing content from well before or
+          after that. Re-verified with accurate output-side seeking
+          (-ss after -i) and found a brief ghosting/double-exposure
+          transition effect baked into the source starting around 1.6s
+          into the dusk clip and 6.7s into the source's palm-tree shot —
+          both takes are now trimmed to end just before those points
+          (1.55s and 5.0-6.6s respectively), which is what was flashing
+          in as a "random extra photo of the car". Joined with a real
+          crossfade (ffmpeg xfade) instead of a hard cut.
+          The dusk approach segment's shadows carry a teal/cyan cast
+          baked into the source footage's own color grade (a common
+          "orange highlights, teal shadows" commercial look) — confirmed
+          by sampling raw pixels straight off the canvas before any
+          recording/encoding touches them, so it isn't something our
+          export pipeline introduced. The previous correction pass
+          (saturate .25, hue-rotate -30deg) overcorrected into a near
+          grayscale look; dialed back to a middle value. */}
+      <BgVideo src={VID_7} start={0} end={2.84} speed={0.5} overlay="transparent"
+        filter="saturate(0.55) hue-rotate(-16deg) brightness(1.02)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>

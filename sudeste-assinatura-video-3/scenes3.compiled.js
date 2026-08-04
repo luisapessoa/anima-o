@@ -751,10 +751,10 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 3.64,
+    end: 2.84,
     speed: 0.5,
     overlay: "transparent",
-    filter: "saturate(0.25) hue-rotate(-30deg) brightness(1.08)"
+    filter: "saturate(0.55) hue-rotate(-16deg) brightness(1.02)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
