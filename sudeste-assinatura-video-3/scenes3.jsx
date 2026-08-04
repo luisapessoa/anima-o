@@ -316,15 +316,22 @@ function LineLeft() {
           text below it. */}
       <BgVideo src={VID_6} start={0} end={3.76} scale={1.25} shiftY={-200} speed={0.53} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
-      <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
-        display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
+      {/* Title + body regrouped as one centered block (was left-aligned
+          at left:200, sitting off-center with a lopsided 200/40 margin)
+          — the accent line moves from beside the body to a short
+          centered tick between title and body, since a side rule reads
+          oddly once the text itself is centered. */}
+      <div style={{ position: 'absolute', left: 70, right: 70, top: 0, bottom: 0,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        paddingTop: 900, textAlign: 'center' }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1}
-          style={{ color: WHITE, fontWeight: 700, fontSize: 78, lineHeight: 1.14, letterSpacing: '-0.02em' }} />
-        <div style={{ position: 'relative', marginTop: 56, paddingLeft: 44 }}>
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4,
-            background: YEL, transformOrigin: 'top', transform: `scaleY(${grow})` }} />
-          <Lines list={sc.body} lt={lt} delay={0.75} step={0.08}
-            style={{ color: WHITE, fontWeight: 400, fontSize: 62, lineHeight: 1.24 }} />
+          style={{ color: WHITE, fontWeight: 700, fontSize: 78, lineHeight: 1.14, letterSpacing: '-0.02em', textAlign: 'center' }} />
+        <div style={{ position: 'relative', marginTop: 40, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ width: 4, height: 50, background: YEL, transformOrigin: 'top', transform: `scaleY(${grow})` }} />
+          <div style={{ marginTop: 20 }}>
+            <Lines list={sc.body} lt={lt} delay={0.75} step={0.08}
+              style={{ color: WHITE, fontWeight: 400, fontSize: 62, lineHeight: 1.24, textAlign: 'center' }} />
+          </div>
         </div>
       </div>
     </div>

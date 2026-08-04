@@ -685,14 +685,16 @@ function LineLeft() {
   }) : null, /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
-      left: 200,
-      right: 40,
+      left: 70,
+      right: 70,
       top: 0,
       bottom: 0,
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: 900
+      paddingTop: 900,
+      textAlign: 'center'
     }
   }, /*#__PURE__*/React.createElement(Lines, {
     list: sc.title,
@@ -704,26 +706,30 @@ function LineLeft() {
       fontWeight: 700,
       fontSize: 78,
       lineHeight: 1.14,
-      letterSpacing: '-0.02em'
+      letterSpacing: '-0.02em',
+      textAlign: 'center'
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
-      marginTop: 56,
-      paddingLeft: 44
+      marginTop: 40,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      bottom: 0,
       width: 4,
+      height: 50,
       background: YEL,
       transformOrigin: 'top',
       transform: `scaleY(${grow})`
     }
-  }), /*#__PURE__*/React.createElement(Lines, {
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 20
+    }
+  }, /*#__PURE__*/React.createElement(Lines, {
     list: sc.body,
     lt: lt,
     delay: 0.75,
@@ -732,9 +738,10 @@ function LineLeft() {
       color: WHITE,
       fontWeight: 400,
       fontSize: 62,
-      lineHeight: 1.24
+      lineHeight: 1.24,
+      textAlign: 'center'
     }
-  }))));
+  })))));
 }
 
 /* ── TELA 7 · card teal (topo) com fecho + logo ────────────── */
