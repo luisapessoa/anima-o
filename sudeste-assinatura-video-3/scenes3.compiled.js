@@ -35,8 +35,8 @@ const RT = {
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-9.mp4';
-const VID_7 = 'assets/bg-6.mp4';
+const VID_6 = 'assets/bg-6.mp4';
+const VID_7 = 'assets/bg-9.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -674,8 +674,10 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 2.0,
-    speed: 0.6
+    end: 3.76,
+    scale: 1.0,
+    posY: 40,
+    speed: 0.53
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -747,10 +749,8 @@ function TealCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 3.76,
-    scale: 1.6,
-    shiftY: 380,
-    speed: 0.47,
+    end: 1.6,
+    speed: 0.5,
     overlay: "transparent"
   }), /*#__PURE__*/React.createElement("div", {
     style: {

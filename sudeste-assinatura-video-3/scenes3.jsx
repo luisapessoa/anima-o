@@ -22,8 +22,8 @@ const RT = { showLogo: true, videoBg: true };
 const VID_1 = 'assets/bg-1.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
-const VID_6 = 'assets/bg-9.mp4';
-const VID_7 = 'assets/bg-6.mp4';
+const VID_6 = 'assets/bg-6.mp4';
+const VID_7 = 'assets/bg-9.mp4';
 
 /* ── helpers ─────────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -301,15 +301,16 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      {/* New source clip (a different car/ad entirely from the previous
-          Virtus forest take, which is why VID_6 changed assets again).
-          That previous clip needed a 0.3x crawl to stretch across the 7s
-          scene, and playing back that slow read as sluggish/stuttery —
-          not a decode problem, just genuinely-too-slow motion. This clip
-          only needs 0.6x (the same ratio already proven fine on Tela 3's
-          bg-3), which lets it loop twice over cleanly instead of dragging
-          through one crawling pass. */}
-      <BgVideo src={VID_6} start={0} end={2.0} speed={0.6} />
+      {/* Back to the Nivus dusk clip (moved to Tela 7 a couple of rounds
+          ago to stop Tela 6/7 from showing the same video) — its native
+          framing puts the car right at the horizon with a huge stretch of
+          sky above and plain dark ground below, which is exactly the
+          "car up top, clear space where the text sits" composition this
+          scene needs. Tela 7 gets a different clip instead (see
+          TealCard) so they're still not duplicates. speed 0.53 stretches
+          the 3.76s clip to ~7.1s, just over the 7s scene, so it plays
+          through essentially once with no visible restart. */}
+      <BgVideo src={VID_6} start={0} end={3.76} scale={1.0} posY={40} speed={0.53} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 200, right: 40, top: 0, bottom: 0,
         display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 900 }}>
@@ -339,15 +340,15 @@ function TealCard() {
           below the card, but it's genuinely rendered behind the whole
           canvas, not cropped to the band's own aspect ratio. No color
           overlay — no text sits directly on the video.
-          None of the source clips had a long, low-in-frame, non-panning
-          take left unused — every short driving shot still visibly
-          restarted within an 8s scene. Reusing Tela 6's Nivus silhouette
-          instead: it's the one take proven to stretch to a near-single
-          pass without a visible loop. The car already sits right at the
-          card's boundary natively, so a tighter, lower crop (scale 1.6,
-          shiftY 380) than Tela 6's fuller view reads as a distinct shot
-          rather than a repeat of it. */}
-      <BgVideo src={VID_7} start={0} end={3.76} scale={1.6} shiftY={380} speed={0.47} overlay="transparent" />
+          This clip (the same one Tela 6 tried and dropped) is a car
+          approaching the camera, so it naturally grows and sinks toward
+          the bottom of the frame — the opposite of what Tela 6 needed,
+          but exactly the "action happens below the card" framing this
+          scene wants, and at native scale the roofline already clears
+          the card boundary with no cropping required. Trimmed to 1.6s to
+          cut before the source's next hard cut (the previous 2.0s trim
+          bled into it, flashing a different parked scene in briefly). */}
+      <BgVideo src={VID_7} start={0} end={1.6} speed={0.5} overlay="transparent" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
