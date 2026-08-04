@@ -349,22 +349,19 @@ function TealCard() {
           the bottom of the frame — the opposite of what Tela 6 needed,
           but exactly the "action happens below the card" framing this
           scene wants, and at native scale the roofline already clears
-          the card boundary with no cropping required. The tight close-up
-          take (used for a round) didn't read as "driving on the street"
-          the way the other two do, so it's gone in favor of more of the
-          palm-tree shot next to it. Both takes' actual clean windows
-          turned out shorter than earlier scans suggested — those scans
-          seeked with -ss before -i, which snaps to the nearest keyframe
-          and silently offsets every timestamp after it, so a spot check
-          "at 7.3s" could really be showing content from well before or
-          after that. Re-verified with accurate output-side seeking
-          (-ss after -i) and found a brief ghosting/double-exposure
-          transition effect baked into the source starting around 1.6s
-          into the dusk clip and 6.7s into the source's palm-tree shot —
-          both takes are now trimmed to end just before those points
-          (1.55s and 5.0-6.6s respectively), which is what was flashing
-          in as a "random extra photo of the car". Joined with a real
-          crossfade (ffmpeg xfade) instead of a hard cut.
+          the card boundary with no cropping required. Three takes from
+          the same source ad now, each trimmed to end right before a
+          brief ghosting/double-exposure transition baked into the
+          source (verified with accurate output-side seeking — an
+          earlier pass using -ss before -i silently snapped to the
+          wrong timestamps and approved cut points that weren't
+          actually clean): the dusk approach (0-1.55s), a driving-past-
+          palm-trees shot (5.0-6.6s), and a third, closer approach shot
+          from the source's final seconds before it fades to black
+          (14.6-15.6s) — 3.56s total, joined pairwise with real
+          crossfades (ffmpeg xfade) instead of hard cuts. At 0.5x speed
+          that covers ~7.1s of the 8s scene, so each of the three takes
+          is used exactly once per playthrough.
           The dusk approach segment's shadows carry a teal/cyan cast
           baked into the source footage's own color grade (a common
           "orange highlights, teal shadows" commercial look) — confirmed
@@ -373,7 +370,7 @@ function TealCard() {
           export pipeline introduced. The previous correction pass
           (saturate .25, hue-rotate -30deg) overcorrected into a near
           grayscale look; dialed back to a middle value. */}
-      <BgVideo src={VID_7} start={0} end={2.84} speed={0.5} overlay="transparent"
+      <BgVideo src={VID_7} start={0} end={3.56} speed={0.5} overlay="transparent"
         filter="saturate(0.55) hue-rotate(-16deg) brightness(1.02)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
