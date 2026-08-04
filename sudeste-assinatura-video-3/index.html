@@ -5,22 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sudeste Assinaturas — vídeo vertical 3</title>
 <!-- bg-1.mp4 is high-priority — needed the instant Tela 1 mounts, with zero
-     runtime head start. The other clips (Telas 3, 4, 6, 7) each get several
-     seconds of scene time before they're needed, so they're preloaded at
-     fetchpriority="low": still queued early (so their head start isn't
-     lost), but the browser won't let them compete with bg-1.mp4 for
-     bandwidth/CPU during the critical opening seconds.
-     A 2s-delayed-injection version of this was tried to test whether
-     concurrent preload of the other four was the source of Tela 1's
-     stutter, but it pushed Tela 3's own preload late enough to bring back
-     the "doesn't start immediately when the scene begins" stutter Tela 3
-     had years ago — a confirmed regression for an unconfirmed fix, so it's
-     reverted back to static preloads for all of them. -->
+     runtime head start. bg-3.mp4 is next soonest-needed (Tela 3 at 11.5s)
+     so it also preloads immediately, just at low priority so it doesn't
+     compete with bg-1.mp4 in the first seconds.
+     A recording of an actual run pinpointed two multi-second freezes to
+     Tela 2 and Tela 5 — scenes with NO video of their own — which rules
+     out video decode as the direct cause but points at the four background
+     fetches all landing/initializing their decoders around the same time
+     as a plausible source of periodic main-thread stalls. A uniform
+     2s-delay on all four was tried before and broke Tela 3's own head
+     start (a confirmed regression), so this time bg-4/6/9 are injected on
+     individually staggered delays instead — spread out, but each still
+     landing many seconds ahead of the scene that needs it. -->
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-1.mp4" fetchpriority="high" />
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-3.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-4.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-6.mp4" fetchpriority="low" />
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-9.mp4" fetchpriority="low" />
+<script>
+  [
+    ['assets/bg-4.mp4', 3000],   // Tela 4 at 17.5s — 14.5s of lead time
+    ['assets/bg-6.mp4', 10000],  // Tela 6 at 31.5s — 21.5s of lead time
+    ['assets/bg-9.mp4', 20000],  // Tela 7 at 38.5s — 18.5s of lead time
+  ].forEach(function (pair) {
+    setTimeout(function () {
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'video'; l.type = 'video/mp4';
+      l.href = pair[0];
+      document.head.appendChild(l);
+    }, pair[1]);
+  });
+</script>
 <!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
      the font load (font-display:swap would otherwise flash a fallback
      font first). -->

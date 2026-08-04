@@ -367,8 +367,13 @@ function TealCard() {
           from the source's final seconds before it fades to black
           (14.6-15.6s) — 3.56s total, joined pairwise with real
           crossfades (ffmpeg xfade) instead of hard cuts. At 0.5x speed
-          that covers ~7.1s of the 8s scene, so each of the three takes
-          is used exactly once per playthrough.
+          that covers ~7.1s of the 8s scene, leaving a ~0.9s tail where it
+          has to restart — a screen recording of an actual run confirmed
+          the clip itself keeps changing throughout (no freeze), but that
+          tail restart is a real, if minor, repeat. speed nudged down
+          further (0.5 -> 0.47) to stretch coverage to ~7.6s and shrink the
+          repeat to well under half a second; closing it entirely needs
+          more source footage than what's been sent so far.
           The dusk approach segment's shadows carry a teal/cyan cast
           baked into the source footage's own color grade (a common
           "orange highlights, teal shadows" commercial look) — confirmed
@@ -377,7 +382,7 @@ function TealCard() {
           export pipeline introduced. The previous correction pass
           (saturate .25, hue-rotate -30deg) overcorrected into a near
           grayscale look; dialed back to a middle value. */}
-      <BgVideo src={VID_7} start={0} end={3.56} speed={0.5} overlay="transparent"
+      <BgVideo src={VID_7} start={0} end={3.56} speed={0.47} overlay="transparent"
         filter="saturate(0.55) hue-rotate(-16deg) brightness(1.02)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,

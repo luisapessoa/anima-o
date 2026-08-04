@@ -759,7 +759,7 @@ function TealCard() {
     src: VID_7,
     start: 0,
     end: 3.56,
-    speed: 0.5,
+    speed: 0.47,
     overlay: "transparent",
     filter: "saturate(0.55) hue-rotate(-16deg) brightness(1.02)"
   }), /*#__PURE__*/React.createElement("div", {
