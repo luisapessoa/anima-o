@@ -1149,6 +1149,24 @@ function VideoSprite({
       v.pause();
     }
   }, [timeline.playing, speed]);
+  // A scene switch under transition="cut" unmounts this element outright
+  // (SceneSwitch renders exactly one scene layer at a time), but nothing
+  // previously told the browser to release the decoder right then — that's
+  // left to whenever the element gets garbage-collected, which can land the
+  // resulting pause on whatever scene happens to be running at the time,
+  // not necessarily this one. Pausing and detaching the source on unmount
+  // makes the release deterministic instead of GC-timing-dependent.
+  React.useEffect(() => {
+    const v = ref.current;
+    return () => {
+      if (!v) return;
+      try {
+        v.pause();
+        v.removeAttribute('src');
+        v.load();
+      } catch (e) {}
+    };
+  }, []);
   React.useEffect(() => {
     const v = ref.current;
     if (!v || v.readyState < 1) return;
