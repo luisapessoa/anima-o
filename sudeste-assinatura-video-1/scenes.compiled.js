@@ -30,23 +30,23 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (10.68s, 9:16) — 7 clean takes from the client's T-Cross
-   Extreme footage plus one shot (a lakeside sunset) pulled from the
-   third source video, all trimmed to exclude every frame where a plate,
-   badge, or on-screen caption was legible. The Tiguan clip and the
-   driver-assist demo have a title card or legal-disclaimer paragraph
-   burned into essentially every frame and contributed nothing; the
-   third video (the vlog-style reel) is captioned almost everywhere too,
-   but has one genuinely clean ~0.9s cutaway — used here for the closing
-   scene instead of repeating T-Cross. Each of the 5 video scenes below
-   gets an equal proportion of this file (span ∝ scene duration, so every
-   scene loops at roughly the same rate) from a non-overlapping,
-   contiguous slice — nothing repeats between scenes. Both scene slots
-   point at the same file — the original vw-b.mp4 placeholder did too. */
+/* Taos clip (17.2s, 9:16) — now draws on all 4 source videos, not just
+   T-Cross. The Tiguan clip and driver-assist demo looked fully captioned
+   at first pass, but their text/UI overlays turn out to sit in fixed
+   top/bottom bands — cropping those bands out (via ffmpeg `crop`, before
+   the final scale) recovers real clean footage from both: an elevated-
+   highway driving shot from the Tiguan clip and a top-down drone shot
+   from the driver-assist demo. Combined with 7 T-Cross takes and one
+   lakeside-sunset cutaway from the vlog video, that's 4 different source
+   videos represented. Each of the 5 video scenes below gets a
+   non-overlapping, contiguous, proportional slice of this file (span ∝
+   scene duration, so every scene loops at close to the same ~1.5x rate)
+   — nothing repeats between scenes. Both scene slots point at the same
+   file — the original vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 10.68,
-  DUR_B = 10.68;
+const DUR_A = 17.2,
+  DUR_B = 17.2;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -173,7 +173,7 @@ function HeroVideo() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 0,
-    end: 2.27,
+    end: 3.65,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -349,8 +349,8 @@ function Timeline() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 2.27,
-    end: 4.74,
+    start: 3.65,
+    end: 7.63,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -473,10 +473,10 @@ function CardUp() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
-    start: 4.74,
-    end: 7.05,
-    scale: 1,
-    shiftY: -600,
+    start: 7.63,
+    end: 11.35,
+    scale: 1.24,
+    posY: 24,
     op: 1,
     overlay: tealOverlay
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -633,8 +633,8 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 7.05,
-    end: 9.03,
+    start: 11.35,
+    end: 14.54,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -787,8 +787,8 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 9.03,
-    end: 10.68,
+    start: 14.54,
+    end: 17.20,
     scale: 1.24,
     posY: 24,
     op: 0.72,

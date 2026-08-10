@@ -16,22 +16,22 @@ const LOGO_W = 640, LOGO_TOP = 252;   // logo size shared across all screens
 const E = Easing;
 const RUNTIME = { showLogo: true, videoBg: false };
 
-/* Taos clip (10.68s, 9:16) — 7 clean takes from the client's T-Cross
-   Extreme footage plus one shot (a lakeside sunset) pulled from the
-   third source video, all trimmed to exclude every frame where a plate,
-   badge, or on-screen caption was legible. The Tiguan clip and the
-   driver-assist demo have a title card or legal-disclaimer paragraph
-   burned into essentially every frame and contributed nothing; the
-   third video (the vlog-style reel) is captioned almost everywhere too,
-   but has one genuinely clean ~0.9s cutaway — used here for the closing
-   scene instead of repeating T-Cross. Each of the 5 video scenes below
-   gets an equal proportion of this file (span ∝ scene duration, so every
-   scene loops at roughly the same rate) from a non-overlapping,
-   contiguous slice — nothing repeats between scenes. Both scene slots
-   point at the same file — the original vw-b.mp4 placeholder did too. */
+/* Taos clip (17.2s, 9:16) — now draws on all 4 source videos, not just
+   T-Cross. The Tiguan clip and driver-assist demo looked fully captioned
+   at first pass, but their text/UI overlays turn out to sit in fixed
+   top/bottom bands — cropping those bands out (via ffmpeg `crop`, before
+   the final scale) recovers real clean footage from both: an elevated-
+   highway driving shot from the Tiguan clip and a top-down drone shot
+   from the driver-assist demo. Combined with 7 T-Cross takes and one
+   lakeside-sunset cutaway from the vlog video, that's 4 different source
+   videos represented. Each of the 5 video scenes below gets a
+   non-overlapping, contiguous, proportional slice of this file (span ∝
+   scene duration, so every scene loops at close to the same ~1.5x rate)
+   — nothing repeats between scenes. Both scene slots point at the same
+   file — the original vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 10.68, DUR_B = 10.68;
+const DUR_A = 17.2, DUR_B = 17.2;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -90,7 +90,7 @@ function HeroVideo() {
   const box = ease(lt, 1.35, 0.55);
   return (
     <div style={{ ...shell, background: '#000000' }}>
-      <VideoBg src={VID_A} start={0} end={2.27} scale={1.24} posY={24} op={0.6}
+      <VideoBg src={VID_A} start={0} end={3.65} scale={1.24} posY={24} op={0.6}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.68) 100%)`} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* centred heading (kept inside the frame lines) */}
@@ -171,7 +171,7 @@ function Timeline() {
   const HT = 800, HB = 1296; // arrow span, equal margins between paragraphs
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_B} start={2.27} end={4.74} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={3.65} end={7.63} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 380, width: 840 }}>
         {(sc.head || []).map((ln, i) => (
@@ -229,7 +229,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_A} start={4.74} end={7.05} scale={1} shiftY={-600} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_A} start={7.63} end={11.35} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -306,7 +306,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_B} start={7.05} end={9.03} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={11.35} end={14.54} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -381,7 +381,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_B} start={9.03} end={10.68} scale={1.24} posY={24} op={0.72}
+      <VideoBg src={VID_B} start={14.54} end={17.20} scale={1.24} posY={24} op={0.72}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,
