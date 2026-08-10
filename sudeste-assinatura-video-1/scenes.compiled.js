@@ -30,15 +30,21 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (4.96s, 9:16) — 3 concatenated clean takes from the client's
-   T-Cross Extreme footage (silhouette 0–1.08s, 3/4 driving 1.08–2.28s,
-   trunk/beach 2.28–4.96s), trimmed to exclude every frame where a plate,
-   badge, or on-screen caption was legible. Both scene slots point at the
-   same file — the original vw-b.mp4 placeholder did the same. */
+/* Taos clip (11.8s, 9:16) — 8 concatenated clean takes from the client's
+   T-Cross Extreme footage, trimmed to exclude every frame where a plate,
+   badge, or on-screen caption was legible (the other two source videos —
+   the Tiguan clip and the driver-assist demo — had a title card or a
+   legal-disclaimer paragraph burned into essentially every frame, so
+   neither contributed usable footage). Each of the 5 video scenes below
+   is assigned its OWN non-overlapping slice of this file — silhouette+
+   seatbelt [0–2.28], dashboard+driving [2.28–4.48], trunk/beach [4.48–
+   7.16], inflatable-seal+sunglasses [7.16–9.80], dino-toy [9.80–11.80] —
+   so no two scenes ever show the same footage. Both scene slots point at
+   the same file — the original vw-b.mp4 placeholder did the same. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 4.96,
-  DUR_B = 4.96;
+const DUR_A = 11.8,
+  DUR_B = 11.8;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -101,6 +107,7 @@ function VideoBg({
   scale,
   posX,
   posY,
+  shiftY,
   op,
   overlay
 }) {
@@ -130,7 +137,7 @@ function VideoBg({
       height: H,
       objectFit: 'cover',
       objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
-      transform: `scale(${scale || 1})`,
+      transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`,
       opacity: op == null ? 1 : op
     }
   }), overlay ? /*#__PURE__*/React.createElement("div", {
@@ -147,7 +154,7 @@ const shell = {
   overflow: 'hidden',
   fontFamily: FONT
 };
-const tealOverlay = `linear-gradient(160deg, rgba(3,72,69,0.6) 0%, rgba(1,32,31,0.8) 100%)`;
+const tealOverlay = `linear-gradient(160deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%)`;
 
 /* ── 1 · HERO: dark video, centred title + bracket frame + mint box ── */
 function HeroVideo() {
@@ -164,7 +171,7 @@ function HeroVideo() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 0,
-    end: 1.08,
+    end: 2.28,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -340,8 +347,8 @@ function Timeline() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 1.08,
-    end: 2.28,
+    start: 2.28,
+    end: 4.48,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -464,10 +471,10 @@ function CardUp() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
-    start: 2.28,
-    end: 4.96,
-    scale: 1.24,
-    posY: 24,
+    start: 4.48,
+    end: 7.16,
+    scale: 1,
+    shiftY: -852,
     op: 1,
     overlay: tealOverlay
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -624,8 +631,8 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 0,
-    end: 2.28,
+    start: 7.16,
+    end: 9.80,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -778,8 +785,8 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 2.28,
-    end: 4.96,
+    start: 9.80,
+    end: 11.80,
     scale: 1.24,
     posY: 24,
     op: 0.72,
