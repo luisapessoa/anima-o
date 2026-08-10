@@ -30,21 +30,23 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (11.8s, 9:16) — 8 concatenated clean takes from the client's
-   T-Cross Extreme footage, trimmed to exclude every frame where a plate,
-   badge, or on-screen caption was legible (the other two source videos —
-   the Tiguan clip and the driver-assist demo — had a title card or a
-   legal-disclaimer paragraph burned into essentially every frame, so
-   neither contributed usable footage). Each of the 5 video scenes below
-   is assigned its OWN non-overlapping slice of this file — silhouette+
-   seatbelt [0–2.28], dashboard+driving [2.28–4.48], trunk/beach [4.48–
-   7.16], inflatable-seal+sunglasses [7.16–9.80], dino-toy [9.80–11.80] —
-   so no two scenes ever show the same footage. Both scene slots point at
-   the same file — the original vw-b.mp4 placeholder did the same. */
+/* Taos clip (10.68s, 9:16) — 7 clean takes from the client's T-Cross
+   Extreme footage plus one shot (a lakeside sunset) pulled from the
+   third source video, all trimmed to exclude every frame where a plate,
+   badge, or on-screen caption was legible. The Tiguan clip and the
+   driver-assist demo have a title card or legal-disclaimer paragraph
+   burned into essentially every frame and contributed nothing; the
+   third video (the vlog-style reel) is captioned almost everywhere too,
+   but has one genuinely clean ~0.9s cutaway — used here for the closing
+   scene instead of repeating T-Cross. Each of the 5 video scenes below
+   gets an equal proportion of this file (span ∝ scene duration, so every
+   scene loops at roughly the same rate) from a non-overlapping,
+   contiguous slice — nothing repeats between scenes. Both scene slots
+   point at the same file — the original vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 11.8,
-  DUR_B = 11.8;
+const DUR_A = 10.68,
+  DUR_B = 10.68;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -171,7 +173,7 @@ function HeroVideo() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 0,
-    end: 2.28,
+    end: 2.27,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -347,8 +349,8 @@ function Timeline() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 2.28,
-    end: 4.48,
+    start: 2.27,
+    end: 4.74,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -471,10 +473,10 @@ function CardUp() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
-    start: 4.48,
-    end: 7.16,
+    start: 4.74,
+    end: 7.05,
     scale: 1,
-    shiftY: -852,
+    shiftY: -600,
     op: 1,
     overlay: tealOverlay
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -631,8 +633,8 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 7.16,
-    end: 9.80,
+    start: 7.05,
+    end: 9.03,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -785,8 +787,8 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 9.80,
-    end: 11.80,
+    start: 9.03,
+    end: 10.68,
     scale: 1.24,
     posY: 24,
     op: 0.72,
