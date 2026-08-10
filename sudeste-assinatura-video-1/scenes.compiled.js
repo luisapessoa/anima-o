@@ -30,25 +30,22 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (17.28s, 9:16) — draws on 4 source videos: 7 T-Cross takes,
-   a cropped elevated-highway shot from the Tiguan clip, a cropped drone
-   shot from the driver-assist demo, and a lakeside-sunset cutaway from
-   the vlog video. A 5th source ("Lindo de todos os ângulos...") was
-   caption-free but had a persistent ghosting/double-exposure effect
-   baked into the footage itself (semi-transparent duplicate car outlines
-   in nearly every frame — likely an intentional "all angles" visual for
-   the ad, but reads as a rendering glitch as a background layer), so it
-   was dropped entirely rather than repaired. Each of the 5 scenes below
-   gets a non-overlapping, contiguous, proportional slice (span ∝ scene
-   duration, ~1.5x loop for every scene) — nothing repeats between
-   scenes, and forced keyframes sit at every one of these 5 start points
-   (not just the source concat seams) so no scene entry seeks onto a
-   non-keyframe and decodes a corrupted frame. Both scene slots point at
-   the same file — the original vw-b.mp4 placeholder did too. */
+/* Taos clip (15.28s, 9:16) — 3 sources: 7 T-Cross takes, a cropped
+   elevated-highway shot from the Tiguan clip (cropped with `pad`, not
+   `scale`, so the aspect ratio isn't stretched — an earlier version
+   used scale and visibly distorted the car), and a lakeside-sunset
+   cutaway from the vlog video. Each of the 5 scenes below gets its own
+   non-overlapping segment PLUS a `speed` under 1 sized so the segment's
+   own natural duration, slowed down, exactly fills the scene's duration
+   — speed = span / scene-duration — so the clip plays through exactly
+   once and never wraps/repeats, no matter how short the source segment
+   is relative to the scene. Forced keyframes sit at all 5 scene-start
+   points. Both scene slots point at the same file — the original
+   vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 17.28,
-  DUR_B = 17.28;
+const DUR_A = 15.28,
+  DUR_B = 15.28;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -112,6 +109,7 @@ function VideoBg({
   posX,
   posY,
   shiftY,
+  speed,
   op,
   overlay
 }) {
@@ -134,6 +132,7 @@ function VideoBg({
     src: src || VID_A,
     start: start || 0,
     end: end || 49,
+    speed: speed || 1,
     style: {
       position: 'absolute',
       inset: 0,
@@ -175,7 +174,8 @@ function HeroVideo() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 0,
-    end: 3.68,
+    end: 2.28,
+    speed: 0.4145,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -351,8 +351,9 @@ function Timeline() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 3.68,
-    end: 7.68,
+    start: 2.28,
+    end: 4.48,
+    speed: 0.3667,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -475,10 +476,11 @@ function CardUp() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
-    start: 7.68,
-    end: 11.44,
-    scale: 1.24,
-    posY: 24,
+    start: 4.48,
+    end: 7.16,
+    speed: 0.4786,
+    scale: 1,
+    shiftY: -600,
     op: 1,
     overlay: tealOverlay
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -635,8 +637,9 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 11.44,
-    end: 14.64,
+    start: 7.16,
+    end: 11.76,
+    speed: 0.9583,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -789,8 +792,9 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 14.64,
-    end: 17.28,
+    start: 11.76,
+    end: 15.28,
+    speed: 0.88,
     scale: 1.24,
     posY: 24,
     op: 0.72,

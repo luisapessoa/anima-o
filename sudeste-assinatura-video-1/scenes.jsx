@@ -16,24 +16,21 @@ const LOGO_W = 640, LOGO_TOP = 252;   // logo size shared across all screens
 const E = Easing;
 const RUNTIME = { showLogo: true, videoBg: false };
 
-/* Taos clip (17.28s, 9:16) — draws on 4 source videos: 7 T-Cross takes,
-   a cropped elevated-highway shot from the Tiguan clip, a cropped drone
-   shot from the driver-assist demo, and a lakeside-sunset cutaway from
-   the vlog video. A 5th source ("Lindo de todos os ângulos...") was
-   caption-free but had a persistent ghosting/double-exposure effect
-   baked into the footage itself (semi-transparent duplicate car outlines
-   in nearly every frame — likely an intentional "all angles" visual for
-   the ad, but reads as a rendering glitch as a background layer), so it
-   was dropped entirely rather than repaired. Each of the 5 scenes below
-   gets a non-overlapping, contiguous, proportional slice (span ∝ scene
-   duration, ~1.5x loop for every scene) — nothing repeats between
-   scenes, and forced keyframes sit at every one of these 5 start points
-   (not just the source concat seams) so no scene entry seeks onto a
-   non-keyframe and decodes a corrupted frame. Both scene slots point at
-   the same file — the original vw-b.mp4 placeholder did too. */
+/* Taos clip (15.28s, 9:16) — 3 sources: 7 T-Cross takes, a cropped
+   elevated-highway shot from the Tiguan clip (cropped with `pad`, not
+   `scale`, so the aspect ratio isn't stretched — an earlier version
+   used scale and visibly distorted the car), and a lakeside-sunset
+   cutaway from the vlog video. Each of the 5 scenes below gets its own
+   non-overlapping segment PLUS a `speed` under 1 sized so the segment's
+   own natural duration, slowed down, exactly fills the scene's duration
+   — speed = span / scene-duration — so the clip plays through exactly
+   once and never wraps/repeats, no matter how short the source segment
+   is relative to the scene. Forced keyframes sit at all 5 scene-start
+   points. Both scene slots point at the same file — the original
+   vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 17.28, DUR_B = 17.28;
+const DUR_A = 15.28, DUR_B = 15.28;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -66,14 +63,14 @@ function Logo({ variant, lt }) {
 
 /* Black base + video (croppable via scale/posY) + optional colour overlay.
    Darken by lowering `op` (video opacity) so the black #000 shows through. */
-function VideoBg({ src, start, end, scale, posX, posY, shiftY, op, overlay }) {
+function VideoBg({ src, start, end, scale, posX, posY, shiftY, speed, op, overlay }) {
   if (!RUNTIME.videoBg) {
     return <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />;
   }
   return (
     <React.Fragment>
       <div style={{ position: 'absolute', inset: 0, background: '#000000' }} />
-      <VideoSprite src={src || VID_A} start={start || 0} end={end || 49}
+      <VideoSprite src={src || VID_A} start={start || 0} end={end || 49} speed={speed || 1}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
           transform: `translateY(${shiftY || 0}px) scale(${scale || 1})`, opacity: op == null ? 1 : op }} />
@@ -92,7 +89,7 @@ function HeroVideo() {
   const box = ease(lt, 1.35, 0.55);
   return (
     <div style={{ ...shell, background: '#000000' }}>
-      <VideoBg src={VID_A} start={0} end={3.68} scale={1.24} posY={24} op={0.6}
+      <VideoBg src={VID_A} start={0} end={2.28} speed={0.4145} scale={1.24} posY={24} op={0.6}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.68) 100%)`} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* centred heading (kept inside the frame lines) */}
@@ -173,7 +170,7 @@ function Timeline() {
   const HT = 800, HB = 1296; // arrow span, equal margins between paragraphs
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_B} start={3.68} end={7.68} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={2.28} end={4.48} speed={0.3667} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 380, width: 840 }}>
         {(sc.head || []).map((ln, i) => (
@@ -231,7 +228,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_A} start={7.68} end={11.44} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_A} start={4.48} end={7.16} speed={0.4786} scale={1} shiftY={-600} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -308,7 +305,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_B} start={11.44} end={14.64} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={7.16} end={11.76} speed={0.9583} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -383,7 +380,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_B} start={14.64} end={17.28} scale={1.24} posY={24} op={0.72}
+      <VideoBg src={VID_B} start={11.76} end={15.28} speed={0.88} scale={1.24} posY={24} op={0.72}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,
