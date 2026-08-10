@@ -30,30 +30,35 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (18.72s, 9:16) — 4 sources. Tela 1 uses a Taos-branded
-   walkaround/driving clip (vwbrasil.mp4, plate reads "TAOS") instead of
-   the T-Cross picnic ad's static parked/interior shots — those read as
-   frozen even before any slowdown, since there's near-zero camera motion
-   in the source itself. Tela 5 uses a single continuous window of that
-   same driving clip (a different, non-overlapping range) rather than
-   concatenating it after a slower T-Cross shot — two clips with
-   different motion energy cut together read as a jarring speed jump
-   even at one uniform `speed` value. Tela 7 uses an elevated-highway shot
-   from the Tiguan clip (caption band cropped off the bottom, zoomed back
-   to fill 720×1280 with a proportional scale+center-crop instead of a
-   plain `pad`, which left a black strip). Encerramento runs a bit faster
-   than real time (speed > 1) on purpose — its T-Cross segments were
-   widened to give it more source material to burn through in the same
-   scene time. Each of the 5 scenes gets its own non-overlapping segment
-   PLUS a `speed` sized so the segment's own natural duration, slowed or
-   sped as needed, exactly fills the scene's duration — speed = span /
-   scene-duration — so the clip plays through exactly once and never
-   wraps/repeats. Forced keyframes sit at all 5 scene-start points. Both
-   scene slots point at the same file. */
-const VID_A = 'assets/vw-taos.mp4';
-const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 18.72,
-  DUR_B = 18.72;
+/* Five separate background clips, one per video scene, each its own small
+   file starting at 0 — NOT one shared multi-scene composite. A shared
+   file meant every scene mount had to seek deep into a large file before
+   it could show anything, which under load painted a stray black frame
+   (or, worse, a stale frame from whatever scene last had the decoder)
+   for the first moment a scene was on screen. A dedicated small file
+   needs no seek at all — it already starts where the scene needs it.
+   Tela 1 uses a Taos-branded walkaround/driving clip (vwbrasil.mp4,
+   plate reads "TAOS") instead of the T-Cross picnic ad's static
+   parked/interior shots — those read as frozen even before any
+   slowdown, since there's near-zero camera motion in the source itself.
+   Tela 5 uses a different, non-overlapping window of that same driving
+   clip rather than concatenating it after a slower T-Cross shot — two
+   clips with different motion energy cut together read as a jarring
+   speed jump even at one uniform `speed` value. Tela 7 uses an
+   elevated-highway shot from the Tiguan clip (caption band cropped off
+   the bottom, zoomed back to fill 720×1280 with a proportional
+   scale+center-crop instead of a plain `pad`, which left a black
+   strip). Encerramento runs a bit faster than real time (speed > 1) on
+   purpose — its T-Cross segments were widened to give it more source
+   material to burn through in the same scene time. Each clip's `speed`
+   is sized so its own natural duration, slowed or sped as needed,
+   exactly fills the scene's duration — speed = clip length / scene
+   duration — so it plays through exactly once and never wraps/repeats. */
+const VID_T1 = 'assets/vw-t1.mp4';
+const VID_T3 = 'assets/vw-t3.mp4';
+const VID_T5 = 'assets/vw-t5.mp4';
+const VID_T7 = 'assets/vw-t7.mp4';
+const VID_ENC = 'assets/vw-enc.mp4';
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -137,7 +142,7 @@ function VideoBg({
       background: '#000000'
     }
   }), /*#__PURE__*/React.createElement(VideoSprite, {
-    src: src || VID_A,
+    src: src || VID_T1,
     start: start || 0,
     end: end || 49,
     speed: speed || 1,
@@ -180,10 +185,10 @@ function HeroVideo() {
       background: '#000000'
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
-    src: VID_A,
+    src: VID_T1,
     start: 0,
     end: 3.0,
-    speed: 0.5455,
+    speed: 0.546,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -277,7 +282,7 @@ function LeftBar() {
     variant: "dark",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("img", {
-    src: "assets/vw-car.webp",
+    src: "assets/vw-car.png",
     alt: "",
     style: {
       position: 'absolute',
@@ -358,9 +363,9 @@ function Timeline() {
       ...shell
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
-    src: VID_B,
-    start: 3.0,
-    end: 5.2,
+    src: VID_T3,
+    start: 0,
+    end: 2.2,
     speed: 0.3667,
     scale: 1.24,
     posY: 24,
@@ -483,9 +488,9 @@ function CardUp() {
       ...shell
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
-    src: VID_A,
-    start: 5.2,
-    end: 9.0,
+    src: VID_T5,
+    start: 0,
+    end: 3.795,
     speed: 0.6786,
     scale: 1,
     shiftY: -480,
@@ -644,10 +649,10 @@ function Framed() {
       padding: '0 72px'
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
-    src: VID_B,
-    start: 9.0,
-    end: 13.6,
-    speed: 0.9583,
+    src: VID_T7,
+    start: 0,
+    end: 4.629,
+    speed: 0.9645,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -799,9 +804,9 @@ function Closing() {
       justifyContent: 'center'
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
-    src: VID_B,
-    start: 13.6,
-    end: 18.72,
+    src: VID_ENC,
+    start: 0,
+    end: 5.12,
     speed: 1.28,
     scale: 1.24,
     posY: 24,
