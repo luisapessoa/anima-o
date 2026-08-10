@@ -30,23 +30,22 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (17.2s, 9:16) — now draws on all 4 source videos, not just
-   T-Cross. The Tiguan clip and driver-assist demo looked fully captioned
-   at first pass, but their text/UI overlays turn out to sit in fixed
-   top/bottom bands — cropping those bands out (via ffmpeg `crop`, before
-   the final scale) recovers real clean footage from both: an elevated-
-   highway driving shot from the Tiguan clip and a top-down drone shot
-   from the driver-assist demo. Combined with 7 T-Cross takes and one
-   lakeside-sunset cutaway from the vlog video, that's 4 different source
-   videos represented. Each of the 5 video scenes below gets a
-   non-overlapping, contiguous, proportional slice of this file (span ∝
-   scene duration, so every scene loops at close to the same ~1.5x rate)
-   — nothing repeats between scenes. Both scene slots point at the same
-   file — the original vw-b.mp4 placeholder did too. */
+/* Taos clip (27.24s, 9:16) — backbone is a full 16s take from a 5th
+   source video the client sent ("Lindo de todos os ângulos..."), which
+   turned out to be caption-free start to finish (hero driving, taillight
+   glow, door-open, interior, dash touchscreen, grille). Filled out with
+   a T-Cross trunk/silhouette pair, a cropped elevated-highway shot from
+   the Tiguan clip, a cropped drone shot from the driver-assist demo, and
+   a lakeside-sunset cutaway from the vlog video — 5 different source
+   videos total. Each of the 5 scenes below gets a non-overlapping,
+   contiguous, proportional slice (span ∝ scene duration) — the pool is
+   now bigger than the 25.9s of combined scene time, so every scene
+   plays through with zero or near-zero loop. Both scene slots point at
+   the same file — the original vw-b.mp4 placeholder did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 17.2,
-  DUR_B = 17.2;
+const DUR_A = 27.24,
+  DUR_B = 27.24;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -173,7 +172,7 @@ function HeroVideo() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 0,
-    end: 3.65,
+    end: 5.79,
     scale: 1.24,
     posY: 24,
     op: 0.6,
@@ -349,8 +348,8 @@ function Timeline() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 3.65,
-    end: 7.63,
+    start: 5.79,
+    end: 12.10,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -473,8 +472,8 @@ function CardUp() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
-    start: 7.63,
-    end: 11.35,
+    start: 12.10,
+    end: 17.99,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -633,8 +632,8 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 11.35,
-    end: 14.54,
+    start: 17.99,
+    end: 23.04,
     scale: 1.24,
     posY: 24,
     op: 1,
@@ -787,8 +786,8 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 14.54,
-    end: 17.20,
+    start: 23.04,
+    end: 27.24,
     scale: 1.24,
     posY: 24,
     op: 0.72,
