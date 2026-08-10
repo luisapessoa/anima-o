@@ -16,21 +16,24 @@ const LOGO_W = 640, LOGO_TOP = 252;   // logo size shared across all screens
 const E = Easing;
 const RUNTIME = { showLogo: true, videoBg: false };
 
-/* Taos clip (15.28s, 9:16) — 3 sources: 7 T-Cross takes, a cropped
-   elevated-highway shot from the Tiguan clip (cropped with `pad`, not
-   `scale`, so the aspect ratio isn't stretched — an earlier version
-   used scale and visibly distorted the car), and a lakeside-sunset
-   cutaway from the vlog video. Each of the 5 scenes below gets its own
-   non-overlapping segment PLUS a `speed` under 1 sized so the segment's
-   own natural duration, slowed down, exactly fills the scene's duration
-   — speed = span / scene-duration — so the clip plays through exactly
-   once and never wraps/repeats, no matter how short the source segment
-   is relative to the scene. Forced keyframes sit at all 5 scene-start
-   points. Both scene slots point at the same file — the original
-   vw-b.mp4 placeholder did too. */
+/* Taos clip (18.28s, 9:16) — 4 sources: 7 T-Cross takes, a Taos-branded
+   walkaround/driving clip (vwbrasil.mp4 — plate visibly reads "TAOS"),
+   an elevated-highway shot from the Tiguan clip (caption band cropped
+   off the bottom, then zoomed back to fill 720×1280 with a proportional
+   scale+center-crop instead of a plain `pad` — `pad` left a black strip
+   at the bottom; the zoom-crop covers the full frame with no distortion
+   and no letterboxing), and a lakeside-sunset cutaway from the vlog
+   video. Each of the 5 scenes below gets its own non-overlapping segment
+   PLUS a `speed` sized so the segment's own natural duration, slowed or
+   sped as needed, exactly fills the scene's duration — speed = span /
+   scene-duration — so the clip plays through exactly once and never
+   wraps/repeats, no matter how short the source segment is relative to
+   the scene. Forced keyframes sit at all 5 scene-start points. Both
+   scene slots point at the same file — the original vw-b.mp4 placeholder
+   did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 15.28, DUR_B = 15.28;
+const DUR_A = 18.28, DUR_B = 18.28;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -228,7 +231,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_A} start={4.48} end={7.16} speed={0.4786} scale={1} shiftY={-600} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_A} start={4.48} end={10.16} speed={1.0143} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -305,7 +308,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_B} start={7.16} end={11.76} speed={0.9583} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={10.16} end={14.76} speed={0.9583} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -380,7 +383,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_B} start={11.76} end={15.28} speed={0.88} scale={1.24} posY={24} op={0.72}
+      <VideoBg src={VID_B} start={14.76} end={18.28} speed={0.88} scale={1.24} posY={24} op={0.72}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,

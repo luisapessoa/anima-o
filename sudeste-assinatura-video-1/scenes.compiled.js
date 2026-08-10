@@ -30,22 +30,25 @@ const RUNTIME = {
   videoBg: false
 };
 
-/* Taos clip (15.28s, 9:16) — 3 sources: 7 T-Cross takes, a cropped
-   elevated-highway shot from the Tiguan clip (cropped with `pad`, not
-   `scale`, so the aspect ratio isn't stretched — an earlier version
-   used scale and visibly distorted the car), and a lakeside-sunset
-   cutaway from the vlog video. Each of the 5 scenes below gets its own
-   non-overlapping segment PLUS a `speed` under 1 sized so the segment's
-   own natural duration, slowed down, exactly fills the scene's duration
-   — speed = span / scene-duration — so the clip plays through exactly
-   once and never wraps/repeats, no matter how short the source segment
-   is relative to the scene. Forced keyframes sit at all 5 scene-start
-   points. Both scene slots point at the same file — the original
-   vw-b.mp4 placeholder did too. */
+/* Taos clip (18.28s, 9:16) — 4 sources: 7 T-Cross takes, a Taos-branded
+   walkaround/driving clip (vwbrasil.mp4 — plate visibly reads "TAOS"),
+   an elevated-highway shot from the Tiguan clip (caption band cropped
+   off the bottom, then zoomed back to fill 720×1280 with a proportional
+   scale+center-crop instead of a plain `pad` — `pad` left a black strip
+   at the bottom; the zoom-crop covers the full frame with no distortion
+   and no letterboxing), and a lakeside-sunset cutaway from the vlog
+   video. Each of the 5 scenes below gets its own non-overlapping segment
+   PLUS a `speed` sized so the segment's own natural duration, slowed or
+   sped as needed, exactly fills the scene's duration — speed = span /
+   scene-duration — so the clip plays through exactly once and never
+   wraps/repeats, no matter how short the source segment is relative to
+   the scene. Forced keyframes sit at all 5 scene-start points. Both
+   scene slots point at the same file — the original vw-b.mp4 placeholder
+   did too. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 15.28,
-  DUR_B = 15.28;
+const DUR_A = 18.28,
+  DUR_B = 18.28;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) {
@@ -477,10 +480,10 @@ function CardUp() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_A,
     start: 4.48,
-    end: 7.16,
-    speed: 0.4786,
+    end: 10.16,
+    speed: 1.0143,
     scale: 1,
-    shiftY: -600,
+    shiftY: -480,
     op: 1,
     overlay: tealOverlay
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -637,8 +640,8 @@ function Framed() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 7.16,
-    end: 11.76,
+    start: 10.16,
+    end: 14.76,
     speed: 0.9583,
     scale: 1.24,
     posY: 24,
@@ -792,8 +795,8 @@ function Closing() {
     }
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_B,
-    start: 11.76,
-    end: 15.28,
+    start: 14.76,
+    end: 18.28,
     speed: 0.88,
     scale: 1.24,
     posY: 24,
