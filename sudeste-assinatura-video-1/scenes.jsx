@@ -16,24 +16,29 @@ const LOGO_W = 640, LOGO_TOP = 252;   // logo size shared across all screens
 const E = Easing;
 const RUNTIME = { showLogo: true, videoBg: false };
 
-/* Taos clip (18.28s, 9:16) — 4 sources: 7 T-Cross takes, a Taos-branded
-   walkaround/driving clip (vwbrasil.mp4 — plate visibly reads "TAOS"),
-   an elevated-highway shot from the Tiguan clip (caption band cropped
-   off the bottom, then zoomed back to fill 720×1280 with a proportional
-   scale+center-crop instead of a plain `pad` — `pad` left a black strip
-   at the bottom; the zoom-crop covers the full frame with no distortion
-   and no letterboxing), and a lakeside-sunset cutaway from the vlog
-   video. Each of the 5 scenes below gets its own non-overlapping segment
+/* Taos clip (18.72s, 9:16) — 4 sources. Tela 1 uses a Taos-branded
+   walkaround/driving clip (vwbrasil.mp4, plate reads "TAOS") instead of
+   the T-Cross picnic ad's static parked/interior shots — those read as
+   frozen even before any slowdown, since there's near-zero camera motion
+   in the source itself. Tela 5 uses a single continuous window of that
+   same driving clip (a different, non-overlapping range) rather than
+   concatenating it after a slower T-Cross shot — two clips with
+   different motion energy cut together read as a jarring speed jump
+   even at one uniform `speed` value. Tela 7 uses an elevated-highway shot
+   from the Tiguan clip (caption band cropped off the bottom, zoomed back
+   to fill 720×1280 with a proportional scale+center-crop instead of a
+   plain `pad`, which left a black strip). Encerramento runs a bit faster
+   than real time (speed > 1) on purpose — its T-Cross segments were
+   widened to give it more source material to burn through in the same
+   scene time. Each of the 5 scenes gets its own non-overlapping segment
    PLUS a `speed` sized so the segment's own natural duration, slowed or
    sped as needed, exactly fills the scene's duration — speed = span /
    scene-duration — so the clip plays through exactly once and never
-   wraps/repeats, no matter how short the source segment is relative to
-   the scene. Forced keyframes sit at all 5 scene-start points. Both
-   scene slots point at the same file — the original vw-b.mp4 placeholder
-   did too. */
+   wraps/repeats. Forced keyframes sit at all 5 scene-start points. Both
+   scene slots point at the same file. */
 const VID_A = 'assets/vw-taos.mp4';
 const VID_B = 'assets/vw-taos.mp4';
-const DUR_A = 18.28, DUR_B = 18.28;
+const DUR_A = 18.72, DUR_B = 18.72;
 
 /* ── motion helpers ──────────────────────────────────────────── */
 function ease(lt, delay, d) { return E.easeOutCubic(clamp((lt - delay) / (d || 0.65), 0, 1)); }
@@ -92,7 +97,7 @@ function HeroVideo() {
   const box = ease(lt, 1.35, 0.55);
   return (
     <div style={{ ...shell, background: '#000000' }}>
-      <VideoBg src={VID_A} start={0} end={2.28} speed={0.4145} scale={1.24} posY={24} op={0.6}
+      <VideoBg src={VID_A} start={0} end={3.0} speed={0.5455} scale={1.24} posY={24} op={0.6}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.68) 100%)`} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* centred heading (kept inside the frame lines) */}
@@ -173,7 +178,7 @@ function Timeline() {
   const HT = 800, HB = 1296; // arrow span, equal margins between paragraphs
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_B} start={2.28} end={4.48} speed={0.3667} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={3.0} end={5.2} speed={0.3667} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 380, width: 840 }}>
         {(sc.head || []).map((ln, i) => (
@@ -231,7 +236,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_A} start={4.48} end={10.16} speed={1.0143} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_A} start={5.2} end={9.0} speed={0.6786} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -308,7 +313,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_B} start={10.16} end={14.76} speed={0.9583} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_B} start={9.0} end={13.6} speed={0.9583} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -383,7 +388,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_B} start={14.76} end={18.28} speed={0.88} scale={1.24} posY={24} op={0.72}
+      <VideoBg src={VID_B} start={13.6} end={18.72} speed={1.28} scale={1.24} posY={24} op={0.72}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,

@@ -1127,6 +1127,21 @@ function VideoSprite({
   const mountRef = React.useRef(null);
   if (mountRef.current == null) mountRef.current = timeline.time;
   const span = Math.max(0.001, (end ?? start + 1) - start);
+  // A freshly mounted <video> paints whatever it decodes first — frame 0 of
+  // the byte stream — before any async seek lands, which flashes an
+  // unrelated scene's content when `start` sits well into a file shared
+  // across scenes (e.g. every scene here shares one composite clip). Set
+  // currentTime the instant the DOM node exists, in the same commit as
+  // mount and before the browser's first paint, so the seek is queued
+  // before there's anything to paint rather than corrected after.
+  const setRef = React.useCallback(v => {
+    ref.current = v;
+    if (v) {
+      try {
+        v.currentTime = start;
+      } catch (e) {}
+    }
+  }, [start]);
   // Driving every frame purely via currentTime writes (no play()) is
   // unreliable for looping/seeking across browsers — some builds never
   // actually commit the seek, so the element just shows one static frame
@@ -1189,7 +1204,7 @@ function VideoSprite({
     return () => v.removeEventListener('ended', onEnded);
   }, [timeline.playing, start]);
   return /*#__PURE__*/React.createElement("video", _extends({
-    ref: ref,
+    ref: setRef,
     src: src,
     muted: true,
     playsInline: true,
