@@ -498,8 +498,8 @@ function CardUp() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_T5,
     start: 0,
-    end: 2.419,
-    speed: 0.4320,
+    end: 3.629,
+    speed: 0.6480,
     scale: 1,
     shiftY: -480,
     op: 1,

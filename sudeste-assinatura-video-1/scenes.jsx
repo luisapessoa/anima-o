@@ -250,7 +250,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_T5} start={0} end={2.419} speed={0.4320} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_T5} start={0} end={3.629} speed={0.6480} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
