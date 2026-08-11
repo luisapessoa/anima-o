@@ -353,8 +353,8 @@ function Ruled() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_2,
     start: 0,
-    end: 3.003,
-    speed: 0.5005,
+    end: 2.002,
+    speed: 0.6667,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -423,7 +423,7 @@ function Roads() {
     alt: "",
     style: {
       position: 'absolute',
-      top: -70,
+      top: 0,
       left: 0,
       width: 1080,
       height: 'auto',
@@ -522,8 +522,8 @@ function MintCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 2.68,
-    speed: 0.4123,
+    end: 1.6,
+    speed: 0.5970,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -734,8 +734,8 @@ function Closer() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 2.44,
-    speed: 0.4067,
+    end: 1.4,
+    speed: 0.5738,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {

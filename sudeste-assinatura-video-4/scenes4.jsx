@@ -152,7 +152,7 @@ function Ruled() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_2} start={0} end={3.003} speed={0.5005} scale={1.15} overlay="rgba(0,0,0,0.5)" />
+      <BgVideo src={VID_2} start={0} end={2.002} speed={0.6667} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 108, right: 90, top: 1140 }}>
         <div style={{ width: 210, height: 8, background: YEL, borderRadius: 4,
@@ -177,7 +177,7 @@ function Roads() {
   return (
     <div style={{ ...shell, background: CARD }}>
       <img src="assets/roads-top.png" alt=""
-        style={{ position: 'absolute', top: -70, left: 0, width: 1080, height: 'auto',
+        style={{ position: 'absolute', top: 0, left: 0, width: 1080, height: 'auto',
                  clipPath: clip(wipeT), WebkitClipPath: clip(wipeT),
                  maskImage: 'linear-gradient(to bottom, #000 72%, transparent 96%)',
                  WebkitMaskImage: 'linear-gradient(to bottom, #000 72%, transparent 96%)' }} />
@@ -209,7 +209,7 @@ function MintCard() {
   const b = { fontWeight: 700 };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={2.68} speed={0.4123} scale={1.15} overlay="rgba(0,0,0,0.5)" />
+      <BgVideo src={VID_4} start={0} end={1.6} speed={0.5970} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 130, right: 130, top: cardTop, height: cardH,
         background: LMINT, borderRadius: '66px 66px 0 66px', ...rise(lt, 0.15, 26) }}>
@@ -289,7 +289,7 @@ function Closer() {
   const box = ease(lt, 1.25, 0.7);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_7} start={0} end={2.44} speed={0.4067} scale={1.15} overlay="rgba(0,0,0,0.5)" />
+      <BgVideo src={VID_7} start={0} end={1.4} speed={0.5738} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 90, right: 90, top: 480, textAlign: 'center' }}>
         <Lines list={sc.top} lt={lt} delay={0.35} step={0.09}
