@@ -21,6 +21,19 @@ const LOGO_W = 640, LOGO_TOP = 200;
 const E = Easing;
 const RT = { showLogo: true, videoBg: true };
 
+/* Each video-background scene gets its own small dedicated clip file
+   (never a shared multi-scene composite — a shared file forces every
+   scene to seek into it before it can paint anything, which reads as a
+   stray black frame or a stutter under load). Each clip's `speed` is
+   set so its own natural duration exactly fills the scene's duration —
+   speed = clip length / scene duration — so it plays through once and
+   never wraps/repeats. Tela 4's clip (T-Cross trunk-open reveal) and
+   Tela 2's (Tiguan highway, caption band cropped off via a
+   scale+center-crop instead of a plain `pad`, which would leave a black
+   strip) are single continuous takes; Telas 5 and 7 each concatenate
+   two clips of comparable motion energy (two driving shots; a driving
+   shot + a hand/toy motion shot) rather than pairing something dynamic
+   with something static, which reads as a jarring speed change. */
 const VID_1 = 'assets/videos/t1.mp4';
 const VID_2 = 'assets/videos/t2.mp4';
 const VID_4 = 'assets/videos/t4.mp4';
@@ -111,7 +124,7 @@ function Bracket() {
   const num = { color: MINT };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={6} />
+      <BgVideo src={VID_1} start={0} end={2.967} speed={0.4945} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 108, right: 100, top: 420 }}>
         <div style={{ ...rise(lt, 0.25, 18), ...hs }}>Você acha que <span style={num}><Counter to={1000} lt={lt} delay={0.55} /></span></div>
@@ -139,7 +152,7 @@ function Ruled() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_2} start={0} end={6} />
+      <BgVideo src={VID_2} start={0} end={3.003} speed={0.5005} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 108, right: 90, top: 1140 }}>
         <div style={{ width: 210, height: 8, background: YEL, borderRadius: 4,
@@ -196,7 +209,7 @@ function MintCard() {
   const b = { fontWeight: 700 };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={6.5} />
+      <BgVideo src={VID_4} start={0} end={2.68} speed={0.4123} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 130, right: 130, top: cardTop, height: cardH,
         background: LMINT, borderRadius: '66px 66px 0 66px', ...rise(lt, 0.15, 26) }}>
@@ -220,7 +233,7 @@ function TitleLead() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_5} start={0} end={6} />
+      <BgVideo src={VID_5} start={0} end={2.8} speed={0.4667} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 108, right: 90, top: 380 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1}
@@ -276,7 +289,7 @@ function Closer() {
   const box = ease(lt, 1.25, 0.7);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_7} start={0} end={6} />
+      <BgVideo src={VID_7} start={0} end={2.44} speed={0.4067} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 90, right: 90, top: 480, textAlign: 'center' }}>
         <Lines list={sc.top} lt={lt} delay={0.35} step={0.09}
