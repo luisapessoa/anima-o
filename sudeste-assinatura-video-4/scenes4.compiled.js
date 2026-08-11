@@ -38,16 +38,24 @@ const RT = {
 /* Each video-background scene gets its own small dedicated clip file
    (never a shared multi-scene composite — a shared file forces every
    scene to seek into it before it can paint anything, which reads as a
-   stray black frame or a stutter under load). Each clip's `speed` is
-   set so its own natural duration exactly fills the scene's duration —
-   speed = clip length / scene duration — so it plays through once and
-   never wraps/repeats. Tela 4's clip (T-Cross trunk-open reveal) and
-   Tela 2's (Tiguan highway, caption band cropped off via a
-   scale+center-crop instead of a plain `pad`, which would leave a black
-   strip) are single continuous takes; Telas 5 and 7 each concatenate
-   two clips of comparable motion energy (two driving shots; a driving
-   shot + a hand/toy motion shot) rather than pairing something dynamic
-   with something static, which reads as a jarring speed change. */
+   stray black frame or a stutter under load). VideoSprite loops a clip
+   that's shorter than `end/speed` seconds of scene time — the `speed`
+   below is therefore NOT clip_length / this-scene's-visual-duration in
+   isolation, it must use Video 4's REAL per-scene `dur` from OM_SCENES
+   (6, 6, 6.5, 6.5, 6, 7, 6 — roughly double Video 1/3's ~3s scenes,
+   easy to miscopy from those). Getting that wrong is exactly what
+   caused the very visible "looping" bug: clips sized for a ~3s scene
+   wrapped back to their start 2+ times inside Video 4's 6-7s scenes.
+   speed = clip_length / (scene_dur * 0.96) — the 4% shaves a safety
+   margin so the clip finishes just before scene end even if a render
+   frame overshoots by a tick, rather than landing exactly on the wrap
+   boundary. Each source video below is used in exactly one scene (T1
+   vwbrasil_1, T2 infinito TSI Tiguan, T4 ssstik1 SUV aerial, T5 "Lindo
+   de todos os ângulos" teal SUV, T7 vwbrasil Taos) so no two scenes
+   show the same take. Telas 2, 4, 5 and 7 each concatenate two clips of
+   comparable motion energy (never pairing something dynamic with
+   something static, which reads as a jarring speed change) to reach a
+   raw length that keeps `speed` in a comfortable ~0.45–0.75 range. */
 const VID_1 = 'assets/videos/t1.mp4';
 const VID_2 = 'assets/videos/t2.mp4';
 const VID_4 = 'assets/videos/t4.mp4';
@@ -257,7 +265,7 @@ function Bracket() {
     src: VID_1,
     start: 0,
     end: 2.967,
-    speed: 0.4945,
+    speed: 0.5151,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -353,8 +361,8 @@ function Ruled() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_2,
     start: 0,
-    end: 2.002,
-    speed: 0.6667,
+    end: 4.2125,
+    speed: 0.7313,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -522,8 +530,8 @@ function MintCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 1.6,
-    speed: 0.5970,
+    end: 3.9667,
+    speed: 0.6357,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -583,8 +591,8 @@ function TitleLead() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_5,
     start: 0,
-    end: 2.8,
-    speed: 0.4667,
+    end: 3.0,
+    speed: 0.5208,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -734,8 +742,8 @@ function Closer() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_7,
     start: 0,
-    end: 1.4,
-    speed: 0.5738,
+    end: 2.6276,
+    speed: 0.4562,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
