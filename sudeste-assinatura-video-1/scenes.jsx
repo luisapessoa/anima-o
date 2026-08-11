@@ -30,16 +30,24 @@ const RUNTIME = { showLogo: true, videoBg: false };
    Tela 5 uses a different, non-overlapping window of that same driving
    clip rather than concatenating it after a slower T-Cross shot — two
    clips with different motion energy cut together read as a jarring
-   speed jump even at one uniform `speed` value. Tela 7 uses an
-   elevated-highway shot from the Tiguan clip (caption band cropped off
-   the bottom, zoomed back to fill 720×1280 with a proportional
-   scale+center-crop instead of a plain `pad`, which left a black
-   strip). Encerramento runs a bit faster than real time (speed > 1) on
-   purpose — its T-Cross segments were widened to give it more source
-   material to burn through in the same scene time. Each clip's `speed`
-   is sized so its own natural duration, slowed or sped as needed,
-   exactly fills the scene's duration — speed = clip length / scene
-   duration — so it plays through exactly once and never wraps/repeats. */
+   speed jump even at one uniform `speed` value. Its window stops at
+   6.9s of the source, not the 8.3s used earlier — the source settles
+   into a held, static hero shot right after that, which reads as the
+   video freezing at the scene's end no matter the speed (a still shot
+   IS still, at any playback rate — the fix is keeping the window inside
+   footage that's actually moving, not adjusting speed). Tela 7's
+   elevated-highway shot (Tiguan clip, caption band cropped off the
+   bottom, zoomed back to fill 720×1280 with a proportional
+   scale+center-crop instead of a plain `pad`, which left a black strip)
+   is trimmed for the same reason — the source itself holds still past
+   ~18.3s. Encerramento concatenates seal + lake + glasses in that
+   order specifically so the *last* clip (glasses) ends on a hand
+   raising photos, not the lake footage, which is static throughout —
+   putting static content mid-scene is fine, ending on it isn't. Each
+   clip's `speed` is sized so its own natural duration, slowed or sped
+   as needed, exactly fills the scene's duration — speed = clip length /
+   scene duration — so it plays through exactly once and never
+   wraps/repeats. */
 const VID_T1 = 'assets/vw-t1.mp4';
 const VID_T3 = 'assets/vw-t3.mp4';
 const VID_T5 = 'assets/vw-t5.mp4';
@@ -242,7 +250,7 @@ function CardUp() {
   const cardH = 880;
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_T5} start={0} end={3.795} speed={0.6786} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_T5} start={0} end={2.419} speed={0.4320} scale={1} shiftY={-480} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: cardH,
         background: WHITE, borderTopLeftRadius: 64, borderTopRightRadius: 64,
@@ -319,7 +327,7 @@ function Framed() {
   const box = ease(lt, 0.15, 0.6);
   return (
     <div style={{ ...shell, padding: '0 72px' }}>
-      <VideoBg src={VID_T7} start={0} end={4.629} speed={0.9645} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
+      <VideoBg src={VID_T7} start={0} end={3.003} speed={0.6256} scale={1.24} posY={24} op={1} overlay={tealOverlay} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 72, right: 72, top: 380,
         border: `3px solid ${MINT}`, borderRadius: '90px 0 90px 0',
@@ -394,7 +402,7 @@ function Closing() {
   return (
     <div style={{ ...shell, background: '#000000', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center' }}>
-      <VideoBg src={VID_ENC} start={0} end={5.12} speed={1.28} scale={1.24} posY={24} op={0.72}
+      <VideoBg src={VID_ENC} start={0} end={4.16} speed={1.04} scale={1.24} posY={24} op={0.72}
         overlay={`linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(1,32,31,0.68) 100%)`} />
       <img src="assets/logo-white.png" alt="Sudeste Assinaturas"
         style={{ position: 'relative', width: 760, height: 'auto', opacity: p,
