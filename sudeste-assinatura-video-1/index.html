@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sudeste Assinaturas — vídeo vertical 1</title>
+<!-- Only Tela 1's clip is preloaded — it has to be ready the instant the
+     page paints. The other four scenes' clips load on their own when
+     each scene mounts; preloading all five at once had them competing
+     with Tela 1 (and the fonts, and the logo) for bandwidth right at
+     page load, which is exactly when Tela 1 needs it least contested. -->
 <link rel="preload" as="video" type="video/mp4" href="assets/vw-t1.mp4" fetchpriority="high" />
-<link rel="preload" as="video" type="video/mp4" href="assets/vw-t3.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/vw-t5.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/vw-t7.mp4" />
-<link rel="preload" as="video" type="video/mp4" href="assets/vw-enc.mp4" />
 <!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
      the font load (font-display:swap would otherwise flash a fallback
      font first). -->

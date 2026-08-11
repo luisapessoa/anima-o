@@ -146,7 +146,7 @@ function LeftBar() {
     <div style={{ ...shell, background: WHITE, display: 'flex', flexDirection: 'column',
       justifyContent: 'flex-start', paddingTop: 1180, paddingLeft: 90, paddingRight: 90 }}>
       {RUNTIME.showLogo ? <Logo variant="dark" lt={lt} /> : null}
-      <img src="assets/vw-car.png" alt="" style={{ position: 'absolute', top: 430, left: '50%',
+      <img src="assets/vw-car.webp" alt="" style={{ position: 'absolute', top: 430, left: '50%',
         transform: `translateX(-50%) translateY(${(1 - ease(lt, 0.2, 0.7)) * 22}px)`,
         opacity: ease(lt, 0.2, 0.7), width: 1040, height: 'auto' }} />
       <div style={{ display: 'flex', gap: 34, marginBottom: 70 }}>

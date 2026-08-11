@@ -282,7 +282,7 @@ function LeftBar() {
     variant: "dark",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("img", {
-    src: "assets/vw-car.png",
+    src: "assets/vw-car.webp",
     alt: "",
     style: {
       position: 'absolute',
