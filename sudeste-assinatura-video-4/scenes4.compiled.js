@@ -530,8 +530,8 @@ function MintCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 4.0,
-    speed: 0.6410,
+    end: 2.6,
+    speed: 0.4167,
     scale: 1.15,
     overlay: "rgba(0,0,0,0.5)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {

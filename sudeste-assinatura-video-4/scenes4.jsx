@@ -217,7 +217,7 @@ function MintCard() {
   const b = { fontWeight: 700 };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={4.0} speed={0.6410} scale={1.15} overlay="rgba(0,0,0,0.5)" />
+      <BgVideo src={VID_4} start={0} end={2.6} speed={0.4167} scale={1.15} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 130, right: 130, top: cardTop, height: cardH,
         background: LMINT, borderRadius: '66px 66px 0 66px', ...rise(lt, 0.15, 26) }}>
