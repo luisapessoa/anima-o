@@ -225,8 +225,8 @@ function HeroCount() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_HERO,
     start: 0,
-    end: 3.0,
-    speed: 0.694,
+    end: 1.667,
+    speed: 0.3859,
     scale: 1.04,
     posY: 42,
     op: 0.62,

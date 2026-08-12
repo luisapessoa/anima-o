@@ -121,7 +121,7 @@ function HeroCount() {
   const num = ease(lt, 0.2, 0.7);
   return (
     <div style={{ ...shell }}>
-      <VideoBg src={VID_HERO} start={0} end={3.0} speed={0.694} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
+      <VideoBg src={VID_HERO} start={0} end={1.667} speed={0.3859} scale={1.04} posY={42} op={0.62} overlay={dimOverlay} />
       {RUNTIME2.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1250, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: 40 }}>
         <div style={{ fontWeight: 700, fontSize: 440, lineHeight: 0.78, color: '#f2ff46',
