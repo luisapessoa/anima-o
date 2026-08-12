@@ -3,7 +3,17 @@
    "5 preocupações que você pode tirar da lista ao assinar um carro."
    Layout fiel aos esboços do cliente. Vídeos de fundo nas telas pretas
    (Tela 1, 3, 5 e 7) — telas 2/4/6 (teal) permanecem sem vídeo.
-   Loaded after animations-v2.jsx + tweaks-panel.jsx. */
+   Loaded after animations-v2.jsx + tweaks-panel.jsx.
+
+   VideoBg's `speed` must be sized against this file's real OM_SCENES
+   `dur` (4.5, 6.5, 6, 6.5, 6, 6.5, 8.5), not the clip's own length —
+   speed = clip_length / (scene_dur * 0.96). The 4% shaves a safety
+   margin so playback always finishes a hair before the scene ends
+   instead of landing exactly on VideoSprite's loop-wrap boundary,
+   which is what turns into a visible restart/repeat mid-scene (see
+   Video 4's identical bug and fix). Tela 1's clip and Tela 5's own
+   sources are each used nowhere else in this project, so no two
+   scenes show the same take. */
 const {
   useScene,
   SceneStage,
@@ -215,8 +225,8 @@ function HeroCount() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: VID_HERO,
     start: 0,
-    end: 4.6,
-    speed: 1,
+    end: 3.0,
+    speed: 0.694,
     scale: 1.04,
     posY: 42,
     op: 0.62,
@@ -466,8 +476,8 @@ function CardScreen() {
   }, /*#__PURE__*/React.createElement(VideoBg, {
     src: videoSrc,
     start: 0,
-    end: 6.2,
-    speed: 1,
+    end: isCard2 ? 4.933 : 6.2,
+    speed: isCard2 ? 0.8565 : 1,
     scale: videoScale,
     shiftY: videoShiftY,
     posY: videoPosY,
@@ -555,7 +565,7 @@ function ClosingStatement() {
     src: VID_CLOSING,
     start: 0,
     end: 6.2,
-    speed: 0.73,
+    speed: 0.7598,
     scale: 1.1,
     posY: 45,
     op: 0.6,
