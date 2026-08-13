@@ -191,7 +191,7 @@ function HighlightBox() {
   const PADL = 108;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_3} start={0} end={1.333} speed={0.2315} scale={1.06} posY={45} />
+      <BgVideo src={VID_3} start={0} end={1.5} speed={0.2607} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 84, top: 320 }}>
         {/* title (hi) now reveals first (delay 0.25), body follows after
@@ -222,7 +222,7 @@ function LineSplit() {
   const lTop = 652, lBot = 1342;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={3.2} speed={0.4762} scale={1.06} posY={45} />
+      <BgVideo src={VID_4} start={0} end={1.12} speed={0.1676} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 108, right: 84, top: 320 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1} accent={YEL}
@@ -292,7 +292,7 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={2.0} speed={0.2976} scale={1.1} shiftY={-80} />
+      <BgVideo src={VID_6} start={0} end={2.0} speed={0.2979} scale={1.1} shiftY={-80} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       {/* Title + body regrouped as one centered block (was left-aligned
           at left:200, sitting off-center with a lopsided 200/40 margin)
@@ -328,7 +328,7 @@ function TealCard() {
           card slides down on top of it, so the video only ends up
           VISIBLE below the card, but it's genuinely rendered behind the
           whole canvas. */}
-      <BgVideo src={VID_7} start={0} end={3.0} speed={0.3906} overlay="rgba(0,0,0,0.35)" />
+      <BgVideo src={VID_7} start={0} end={1.25} speed={0.1629} overlay="rgba(0,0,0,0.35)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
