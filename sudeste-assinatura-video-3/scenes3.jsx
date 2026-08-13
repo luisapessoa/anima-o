@@ -292,7 +292,7 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={2.13} speed={0.2917} scale={1.1} />
+      <BgVideo src={VID_6} start={0} end={2.25} speed={0.3089} scale={1.1} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       {/* Title + body regrouped as one centered block (was left-aligned
           at left:200, sitting off-center with a lopsided 200/40 margin)
