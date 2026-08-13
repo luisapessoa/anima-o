@@ -678,8 +678,8 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 3.92,
-    speed: 0.5377,
+    end: 2.71,
+    speed: 0.3718,
     scale: 1.1
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
