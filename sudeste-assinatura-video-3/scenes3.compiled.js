@@ -428,7 +428,7 @@ function HighlightBox() {
     src: VID_3,
     start: 0,
     end: 5.67,
-    speed: 0.9848,
+    speed: 0.9076,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -498,7 +498,7 @@ function LineSplit() {
     src: VID_4,
     start: 0,
     end: 4.21,
-    speed: 0.6269,
+    speed: 0.5777,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -678,10 +678,9 @@ function LineLeft() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 5.0,
-    speed: 0.7449,
-    scale: 1.1,
-    shiftY: -80
+    end: 3.92,
+    speed: 0.5377,
+    scale: 1.1
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -761,7 +760,7 @@ function TealCard() {
     src: VID_7,
     start: 0,
     end: 3.92,
-    speed: 0.5106,
+    speed: 0.4705,
     overlay: "rgba(0,0,0,0.35)"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
