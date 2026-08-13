@@ -128,14 +128,7 @@ function Opening() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      {/* Native speed 1x, no playbackRate manipulation — a non-1.0
-          playbackRate can itself cause decode judder on some devices, and
-          this scene's stutter reports persisted even after slowing it
-          down, so instead of relying on speed tricks this is now a
-          genuinely longer take: the front 3/4 approach concatenated with
-          a second Virtus shot (side/rear), totaling 4.73s against Tela
-          1's 4.5s scene — it plays through essentially once. */}
-      <BgVideo src={VID_1} start={0} end={4.73} scale={1.04} posY={45} />
+      <BgVideo src={VID_1} start={0} end={3.333} speed={0.7716} scale={1.04} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: 1360, textAlign: 'center' }}>
         <Lines list={sc.head} lt={lt} delay={0.3} step={0.12}
@@ -198,10 +191,7 @@ function HighlightBox() {
   const PADL = 108;
   return (
     <div style={{ ...shell }}>
-      {/* reverted to the original forest 3-shot reel (no complaint about
-          this take specifically) — speed 0.6 stretches its 2.63s loop to
-          ~4.4s of scene time to cut down on how often it visibly repeats. */}
-      <BgVideo src={VID_3} start={0} end={2.63} scale={1.06} posY={45} speed={0.6} />
+      <BgVideo src={VID_3} start={0} end={1.333} speed={0.2315} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 84, top: 320 }}>
         {/* title (hi) now reveals first (delay 0.25), body follows after
@@ -232,7 +222,7 @@ function LineSplit() {
   const lTop = 652, lBot = 1342;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={3.67} scale={1.06} posY={45} />
+      <BgVideo src={VID_4} start={0} end={3.2} speed={0.4762} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 108, right: 84, top: 320 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1} accent={YEL}
@@ -302,19 +292,7 @@ function LineLeft() {
   const grow = ease(lt, 0.9, 0.8);
   return (
     <div style={{ ...shell }}>
-      {/* Back to the Nivus dusk clip (moved to Tela 7 a couple of rounds
-          ago to stop Tela 6/7 from showing the same video) — its native
-          framing puts the car right at the horizon with a huge stretch of
-          sky above and plain dark ground below, which is exactly the
-          "car up top, clear space where the text sits" composition this
-          scene needs. Tela 7 gets a different clip instead (see
-          TealCard) so they're still not duplicates. speed 0.53 stretches
-          the 3.76s clip to ~7.1s, just over the 7s scene, so it plays
-          through essentially once with no visible restart. Zoomed and
-          shifted up further still (scale 1.25, shiftY -200 — up from
-          1.1/-90) for more clear space between the car and the title
-          text below it. */}
-      <BgVideo src={VID_6} start={0} end={3.76} scale={1.25} shiftY={-200} speed={0.53} />
+      <BgVideo src={VID_6} start={0} end={2.0} speed={0.2976} scale={1.1} shiftY={-80} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       {/* Title + body regrouped as one centered block (was left-aligned
           at left:200, sitting off-center with a lopsided 200/40 margin)
@@ -345,45 +323,12 @@ function TealCard() {
   const cardH = 940;
   return (
     <div style={{ ...shell }}>
-      {/* full-screen video (not confined to the band below the card) so
+      {/* Full-screen video (not confined to the band below the card) so
           the crop matches every other scene's framing — the opaque teal
-          card slides down on top of it, so the video only ends up VISIBLE
-          below the card, but it's genuinely rendered behind the whole
-          canvas, not cropped to the band's own aspect ratio. No color
-          overlay — no text sits directly on the video.
-          This clip (the same one Tela 6 tried and dropped) is a car
-          approaching the camera, so it naturally grows and sinks toward
-          the bottom of the frame — the opposite of what Tela 6 needed,
-          but exactly the "action happens below the card" framing this
-          scene wants, and at native scale the roofline already clears
-          the card boundary with no cropping required. Three takes from
-          the same source ad now, each trimmed to end right before a
-          brief ghosting/double-exposure transition baked into the
-          source (verified with accurate output-side seeking — an
-          earlier pass using -ss before -i silently snapped to the
-          wrong timestamps and approved cut points that weren't
-          actually clean): the dusk approach (0-1.55s), a driving-past-
-          palm-trees shot (5.0-6.6s), and a third, closer approach shot
-          from the source's final seconds before it fades to black
-          (14.6-15.6s) — 3.56s total, joined pairwise with real
-          crossfades (ffmpeg xfade) instead of hard cuts. At 0.5x speed
-          that covers ~7.1s of the 8s scene, leaving a ~0.9s tail where it
-          has to restart — a screen recording of an actual run confirmed
-          the clip itself keeps changing throughout (no freeze), but that
-          tail restart is a real, if minor, repeat. speed nudged down
-          further (0.5 -> 0.47) to stretch coverage to ~7.6s and shrink the
-          repeat to well under half a second; closing it entirely needs
-          more source footage than what's been sent so far.
-          The dusk approach segment's shadows carry a teal/cyan cast
-          baked into the source footage's own color grade (a common
-          "orange highlights, teal shadows" commercial look) — confirmed
-          by sampling raw pixels straight off the canvas before any
-          recording/encoding touches them, so it isn't something our
-          export pipeline introduced. The previous correction pass
-          (saturate .25, hue-rotate -30deg) overcorrected into a near
-          grayscale look; dialed back to a middle value. */}
-      <BgVideo src={VID_7} start={0} end={3.56} speed={0.47} overlay="transparent"
-        filter="saturate(0.55) hue-rotate(-16deg) brightness(1.02)" />
+          card slides down on top of it, so the video only ends up
+          VISIBLE below the card, but it's genuinely rendered behind the
+          whole canvas. */}
+      <BgVideo src={VID_7} start={0} end={3.0} speed={0.3906} overlay="rgba(0,0,0,0.35)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: cardH,
         background: TEAL, borderBottomLeftRadius: 66, borderBottomRightRadius: 66,
         transform: `translateY(${(1 - up) * -cardH}px)` }}>
