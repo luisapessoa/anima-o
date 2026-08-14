@@ -119,13 +119,31 @@ function FrameScreen() {
   const pill = ease(lt, 1.15, 0.55);
   const FR = { l: 100, r: 100, t: 552, b: 300 };
   const fw = W - FR.l - FR.r, fh = H - FR.t - FR.b;
+  // Hand-drawn rounded-rect frame split into two arcs with deliberate gaps
+  // at the heading (top) and pill (bottom) — now that neither has an opaque
+  // backdrop, a single continuous path just gets chewed up by individual
+  // glyph shapes instead of "cutting" cleanly, and doubly so at the pill
+  // where its own border overlaps the frame's bottom edge. Two open paths
+  // with a real gap in the geometry (not text occlusion) draw a clean break
+  // on both sides, sized to each label's rendered width plus a small margin.
+  const r = 30;
+  const fx0 = FR.l, fy0 = FR.t, fx1 = FR.l + fw, fy1 = FR.t + fh;
+  const gapTopL = 216, gapTopR = 864;   // clears "Assinei um carro."
+  const gapBotL = 165, gapBotR = 915;   // clears the pill's outer box
+  const frameRightPath = `M ${gapTopR} ${fy0} L ${fx1 - r} ${fy0} A ${r} ${r} 0 0 1 ${fx1} ${fy0 + r} ` +
+    `L ${fx1} ${fy1 - r} A ${r} ${r} 0 0 1 ${fx1 - r} ${fy1} L ${gapBotR} ${fy1}`;
+  const frameLeftPath = `M ${gapBotL} ${fy1} L ${fx0 + r} ${fy1} A ${r} ${r} 0 0 1 ${fx0} ${fy1 - r} ` +
+    `L ${fx0} ${fy0 + r} A ${r} ${r} 0 0 1 ${fx0 + r} ${fy0} L ${gapTopL} ${fy0}`;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={2.4} speed={0.512} />
+      <BgVideo src={VID_1} start={0} end={2.1} speed={0.448} shiftY={-185} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* frame outline — draws on */}
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
-        <rect x={FR.l} y={FR.t} width={fw} height={fh} rx="30" ry="30" fill="none"
+        <path d={frameRightPath} fill="none"
+          stroke={BLUE} strokeWidth="4" pathLength="1"
+          strokeDasharray="1" strokeDashoffset={1 - draw} />
+        <path d={frameLeftPath} fill="none"
           stroke={BLUE} strokeWidth="4" pathLength="1"
           strokeDasharray="1" strokeDashoffset={1 - draw} />
       </svg>

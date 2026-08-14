@@ -220,6 +220,24 @@ function FrameScreen() {
   };
   const fw = W - FR.l - FR.r,
     fh = H - FR.t - FR.b;
+  // Hand-drawn rounded-rect frame split into two arcs with deliberate gaps
+  // at the heading (top) and pill (bottom) — now that neither has an opaque
+  // backdrop, a single continuous path just gets chewed up by individual
+  // glyph shapes instead of "cutting" cleanly, and doubly so at the pill
+  // where its own border overlaps the frame's bottom edge. Two open paths
+  // with a real gap in the geometry (not text occlusion) draw a clean break
+  // on both sides, sized to each label's rendered width plus a small margin.
+  const r = 30;
+  const fx0 = FR.l,
+    fy0 = FR.t,
+    fx1 = FR.l + fw,
+    fy1 = FR.t + fh;
+  const gapTopL = 216,
+    gapTopR = 864; // clears "Assinei um carro."
+  const gapBotL = 165,
+    gapBotR = 915; // clears the pill's outer box
+  const frameRightPath = `M ${gapTopR} ${fy0} L ${fx1 - r} ${fy0} A ${r} ${r} 0 0 1 ${fx1} ${fy0 + r} ` + `L ${fx1} ${fy1 - r} A ${r} ${r} 0 0 1 ${fx1 - r} ${fy1} L ${gapBotR} ${fy1}`;
+  const frameLeftPath = `M ${gapBotL} ${fy1} L ${fx0 + r} ${fy1} A ${r} ${r} 0 0 1 ${fx0} ${fy1 - r} ` + `L ${fx0} ${fy0 + r} A ${r} ${r} 0 0 1 ${fx0 + r} ${fy0} L ${gapTopL} ${fy0}`;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       ...shell,
@@ -228,8 +246,9 @@ function FrameScreen() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 2.4,
-    speed: 0.512
+    end: 2.1,
+    speed: 0.448,
+    shiftY: -185
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -240,13 +259,16 @@ function FrameScreen() {
       position: 'absolute',
       inset: 0
     }
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: FR.l,
-    y: FR.t,
-    width: fw,
-    height: fh,
-    rx: "30",
-    ry: "30",
+  }, /*#__PURE__*/React.createElement("path", {
+    d: frameRightPath,
+    fill: "none",
+    stroke: BLUE,
+    strokeWidth: "4",
+    pathLength: "1",
+    strokeDasharray: "1",
+    strokeDashoffset: 1 - draw
+  }), /*#__PURE__*/React.createElement("path", {
+    d: frameLeftPath,
     fill: "none",
     stroke: BLUE,
     strokeWidth: "4",
