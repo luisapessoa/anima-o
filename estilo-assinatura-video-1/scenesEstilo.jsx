@@ -136,7 +136,7 @@ function FrameScreen() {
     `L ${fx0} ${fy0 + r} A ${r} ${r} 0 0 1 ${fx0 + r} ${fy0} L ${gapTopL} ${fy0}`;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={3.5} speed={0.7467} />
+      <BgVideo src={VID_1} start={0} end={1.8} speed={0.384} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* frame outline — draws on */}
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
