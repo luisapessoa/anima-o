@@ -246,9 +246,8 @@ function FrameScreen() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 2.1,
-    speed: 0.448,
-    shiftY: -185
+    end: 3.5,
+    speed: 0.7467
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
