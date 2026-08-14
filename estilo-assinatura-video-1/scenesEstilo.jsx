@@ -17,6 +17,7 @@ const RUNTIME = { showLogo: true, videoBg: true };
 
 const VID_1 = 'assets/bg-1.mp4';
 const VID_2 = 'assets/bg-2.mp4';
+const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
 
@@ -54,7 +55,7 @@ function fmt(text, color, weight, key) {
    backdrop plus a dark gradient overlay on top so the white text keeps
    contrast. Black fallback + ready-gated opacity so nothing paints
    before the first frame decodes (mirrors the Sudeste BgVideo pattern). */
-function BgVideo({ src, start, end, speed }) {
+function BgVideo({ src, start, end, speed, shiftY }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
   React.useEffect(() => {
@@ -68,12 +69,32 @@ function BgVideo({ src, start, end, speed }) {
       <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
         onLoadedData={markReady}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
-          objectPosition: '50% 24%', transform: 'scale(1.2)',
+          transform: `translateY(${shiftY || 0}px) scale(1.2)`,
           opacity: ready ? 0.6 : 0, transition: 'opacity .25s ease' }} />
       <div style={{ position: 'absolute', inset: 0,
         background: 'linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.30) 45%, rgba(0,0,0,.68) 100%)',
         opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
     </React.Fragment>
+  );
+}
+
+/* Video for Tela 3's media card — full-bleed inside the rounded card
+   (parent has overflow:hidden), no dark overlay since no text sits on
+   top of it here; same ready-gated black fallback as BgVideo. */
+function CardVideo({ src, start, end, speed }) {
+  const [ready, setReady] = React.useState(false);
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => { if (!readyRef.current) { readyRef.current = true; setReady(true); } }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => { if (!readyRef.current) { readyRef.current = true; setReady(true); } };
+  if (!RUNTIME.videoBg) return null;
+  return (
+    <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
+      onLoadedData={markReady}
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+        opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
   );
 }
 
@@ -100,7 +121,7 @@ function FrameScreen() {
   const fw = W - FR.l - FR.r, fh = H - FR.t - FR.b;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={3.2} speed={0.6827} />
+      <BgVideo src={VID_1} start={0} end={3.67} speed={0.7830} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* frame outline — draws on */}
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
@@ -111,14 +132,14 @@ function FrameScreen() {
       {/* heading centred on the top edge — narrower than the frame so the corner ticks show */}
       <div style={{ position: 'absolute', left: 0, right: 0, top: FR.t, textAlign: 'center',
         transform: 'translateY(-50%)' }}>
-        <span style={{ ...rise(lt, 0.25, 20), display: 'inline-block', background: BLACK,
+        <span style={{ ...rise(lt, 0.25, 20), display: 'inline-block',
           padding: '0 14px', color: WHITE, fontWeight: 800, fontSize: 82, lineHeight: 1,
           letterSpacing: '-0.03em' }}>{sc.head}</span>
       </div>
       {/* pill centred on the bottom edge — narrower than the frame */}
       <div style={{ position: 'absolute', left: '50%', top: H - FR.b,
         transform: `translateX(-50%) translateY(-50%) scale(${0.94 + 0.06 * pill})`, opacity: pill,
-        background: BLACK, border: `4px solid ${BLUE}`, borderRadius: 26,
+        border: `4px solid ${BLUE}`, borderRadius: 26,
         padding: '24px 40px', whiteSpace: 'nowrap' }}>
         <span style={{ color: WHITE, fontWeight: 600, fontSize: 54, letterSpacing: '-0.01em' }}>
           {sc.pill}</span>
@@ -167,7 +188,9 @@ function MediaCard() {
       {RUNTIME.showLogo ? <Logo variant="dark" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: '50%', marginLeft: -cardW / 2, top: cardTop,
         width: cardW, height: cardH, background: BLACK, borderRadius: 44, opacity: card,
-        transform: `scale(${0.96 + 0.04 * card})`, transformOrigin: 'center' }} />
+        transform: `scale(${0.96 + 0.04 * card})`, transformOrigin: 'center', overflow: 'hidden' }}>
+        <CardVideo src={VID_3} start={0} end={3.2} speed={0.5585} />
+      </div>
       {/* line in from the left + dot sitting above the letter E */}
       <div style={{ position: 'absolute', left: 0, top: dotY - 3, width: (dotX - 13) * conn, height: 6,
         background: BLUE, borderRadius: 3 }} />

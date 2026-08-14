@@ -30,6 +30,7 @@ const RUNTIME = {
 };
 const VID_1 = 'assets/bg-1.mp4';
 const VID_2 = 'assets/bg-2.mp4';
+const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
 
@@ -82,7 +83,8 @@ function BgVideo({
   src,
   start,
   end,
-  speed
+  speed,
+  shiftY
 }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
@@ -114,8 +116,7 @@ function BgVideo({
       width: W,
       height: H,
       objectFit: 'cover',
-      objectPosition: '50% 24%',
-      transform: 'scale(1.2)',
+      transform: `translateY(${shiftY || 0}px) scale(1.2)`,
       opacity: ready ? 0.6 : 0,
       transition: 'opacity .25s ease'
     }
@@ -128,6 +129,51 @@ function BgVideo({
       transition: 'opacity .25s ease'
     }
   }));
+}
+
+/* Video for Tela 3's media card — full-bleed inside the rounded card
+   (parent has overflow:hidden), no dark overlay since no text sits on
+   top of it here; same ready-gated black fallback as BgVideo. */
+function CardVideo({
+  src,
+  start,
+  end,
+  speed
+}) {
+  const [ready, setReady] = React.useState(false);
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setReady(true);
+      }
+    }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => {
+    if (!readyRef.current) {
+      readyRef.current = true;
+      setReady(true);
+    }
+  };
+  if (!RUNTIME.videoBg) return null;
+  return /*#__PURE__*/React.createElement(VideoSprite, {
+    src: src,
+    start: start || 0,
+    end: end || 3,
+    speed: speed || 1,
+    onLoadedData: markReady,
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      opacity: ready ? 1 : 0,
+      transition: 'opacity .25s ease'
+    }
+  });
 }
 
 /* ── shared logo ─────────────────────────────────────────────── */
@@ -182,8 +228,8 @@ function FrameScreen() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 3.2,
-    speed: 0.6827
+    end: 3.67,
+    speed: 0.7830
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -220,7 +266,6 @@ function FrameScreen() {
     style: {
       ...rise(lt, 0.25, 20),
       display: 'inline-block',
-      background: BLACK,
       padding: '0 14px',
       color: WHITE,
       fontWeight: 800,
@@ -235,7 +280,6 @@ function FrameScreen() {
       top: H - FR.b,
       transform: `translateX(-50%) translateY(-50%) scale(${0.94 + 0.06 * pill})`,
       opacity: pill,
-      background: BLACK,
       border: `4px solid ${BLUE}`,
       borderRadius: 26,
       padding: '24px 40px',
@@ -357,9 +401,15 @@ function MediaCard() {
       borderRadius: 44,
       opacity: card,
       transform: `scale(${0.96 + 0.04 * card})`,
-      transformOrigin: 'center'
+      transformOrigin: 'center',
+      overflow: 'hidden'
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(CardVideo, {
+    src: VID_3,
+    start: 0,
+    end: 3.2,
+    speed: 0.5585
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: 0,
