@@ -121,7 +121,7 @@ function FrameScreen() {
   const fw = W - FR.l - FR.r, fh = H - FR.t - FR.b;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={1.29} speed={0.2758} />
+      <BgVideo src={VID_1} start={0} end={2.4} speed={0.512} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       {/* frame outline — draws on */}
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
