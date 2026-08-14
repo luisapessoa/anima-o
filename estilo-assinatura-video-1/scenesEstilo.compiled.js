@@ -247,7 +247,8 @@ function FrameScreen() {
     src: VID_1,
     start: 0,
     end: 1.8,
-    speed: 0.384
+    speed: 0.384,
+    shiftY: 80
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
