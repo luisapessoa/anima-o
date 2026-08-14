@@ -1165,12 +1165,23 @@ function VideoSprite({
     // per-step deltas type never clear the playing-mode threshold.
     const threshold = timeline.playing ? 0.35 : 0.02;
     if (drift > threshold) {
-      v.currentTime = target;
-      // A loop wrap lands here right as native playback reaches `end` and
-      // pauses itself (the 'ended' event) — resume so the next lap plays.
-      if (timeline.playing && v.paused) v.play().catch(() => {});
+      if (timeline.playing) {
+        v.currentTime = target;
+        // A loop wrap lands here right as native playback reaches `end` and
+        // pauses itself (the 'ended' event) — resume so the next lap plays.
+        if (v.paused) v.play().catch(() => {});
+      } else {
+        // Some decoders never actually commit a currentTime write issued to
+        // an already-paused element (the seek silently no-ops and the frame
+        // stays put) — reloading with a start-time media fragment seeks
+        // correctly because it lands during initial load instead of on a
+        // live decoder. Frame-stepped export/scrub is exactly this paused
+        // case, so pay the reload cost only here, never during playback.
+        v.src = src + '#t=' + target;
+        v.load();
+      }
     }
-  }, [timeline.time, start, span, speed, timeline.playing]);
+  }, [timeline.time, start, span, speed, timeline.playing, src]);
   // Belt-and-suspenders for the same loop-wrap moment: relying only on the
   // drift-correction effect above to notice and resume after 'ended' means
   // waiting for the next timeline.time-triggered render, and in practice
