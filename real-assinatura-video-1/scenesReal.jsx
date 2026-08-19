@@ -167,7 +167,7 @@ function Question() {
   const boxL = 90, boxTop = 1080, boxW = W - boxL * 2, sq = 200;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <TopVideo src={VID_1} start={0} end={1.3} speed={0.2496} w={W} h={1080} />
+      <FullVideoPlain src={VID_1} start={0} end={1.001} speed={0.192} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: boxL, top: boxTop, width: boxW, bottom: 0,
         background: NAVY, opacity: box, transform: `translateY(${(1 - box) * 40}px)` }} />
@@ -283,7 +283,7 @@ function Factors() {
     <div style={{ ...shell, background: GREY }}>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: splitY, background: BLACK,
         overflow: 'hidden' }}>
-        <TopVideo src={VID_4} start={0} end={3.003} speed={0.4436} w={W} h={splitY} />
+        <TopVideo src={VID_4} start={0} end={5.505} speed={0.8131} w={W} h={splitY} />
       </div>
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, right: 120, top: splitY + 160, ...groupIn(lt, 'up') }}>
@@ -383,7 +383,7 @@ function Line() {
   const rule = ease(lt, 0.3, 0.6);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoScrim src={VID_6} start={0} end={1.001} speed={0.1747} />
+      <FullVideoScrim src={VID_6} start={0} end={4.254} speed={0.7422} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, top: 1230, width: 300, height: 7,
         background: SKY, transform: `scaleX(${rule})`, transformOrigin: 'left' }} />
@@ -414,18 +414,15 @@ function LogoFrame() {
   const logoTop = LOGO_TOP + (FR.t - LOGO_TOP) * moveP;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoPlain src={VID_7} start={0} end={1.585} speed={0.2767} />
-      <div style={{ position: 'absolute', left: FR.l, top: FR.t, width: fw, height: fh,
-        background: 'rgba(0,0,0,.5)' }} />
+      <FullVideoPlain src={VID_7} start={0} end={2.127} speed={0.3706} />
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
         <rect x={FR.l} y={FR.t} width={fw} height={fh} fill="none"
           stroke={SKY} strokeWidth="4" pathLength="1"
           strokeDasharray="1" strokeDashoffset={1 - draw} />
       </svg>
-      {/* logo descends from the previous screen's fixed position down to the frame edge,
-          black backing fades in just as it settles to mask the border underneath */}
+      {/* logo descends from the previous screen's fixed position down to the frame edge */}
       <div style={{ position: 'absolute', left: '50%', top: logoTop, transform: 'translate(-50%,-50%)',
-        background: BLACK, padding: '0 26px' }}>
+        padding: '0 26px' }}>
         <img src="assets/real/logo-white.png" alt="Real Assinatura" style={{ height: 66, width: 'auto', display: 'block' }} />
       </div>
       <div style={{ position: 'absolute', left: FR.l, right: FR.r, top: FR.t + fh / 2,

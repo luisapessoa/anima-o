@@ -325,13 +325,11 @@ function Question() {
       ...shell,
       background: BLACK
     }
-  }, /*#__PURE__*/React.createElement(TopVideo, {
+  }, /*#__PURE__*/React.createElement(FullVideoPlain, {
     src: VID_1,
     start: 0,
-    end: 1.3,
-    speed: 0.2496,
-    w: W,
-    h: 1080
+    end: 1.001,
+    speed: 0.192
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -622,8 +620,8 @@ function Factors() {
   }, /*#__PURE__*/React.createElement(TopVideo, {
     src: VID_4,
     start: 0,
-    end: 3.003,
-    speed: 0.4436,
+    end: 5.505,
+    speed: 0.8131,
     w: W,
     h: splitY
   })), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -874,8 +872,8 @@ function Line() {
   }, /*#__PURE__*/React.createElement(FullVideoScrim, {
     src: VID_6,
     start: 0,
-    end: 1.001,
-    speed: 0.1747
+    end: 4.254,
+    speed: 0.7422
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -950,17 +948,8 @@ function LogoFrame() {
   }, /*#__PURE__*/React.createElement(FullVideoPlain, {
     src: VID_7,
     start: 0,
-    end: 1.585,
-    speed: 0.2767
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: FR.l,
-      top: FR.t,
-      width: fw,
-      height: fh,
-      background: 'rgba(0,0,0,.5)'
-    }
+    end: 2.127,
+    speed: 0.3706
   }), /*#__PURE__*/React.createElement("svg", {
     width: W,
     height: H,
@@ -985,7 +974,6 @@ function LogoFrame() {
       left: '50%',
       top: logoTop,
       transform: 'translate(-50%,-50%)',
-      background: BLACK,
       padding: '0 26px'
     }
   }, /*#__PURE__*/React.createElement("img", {
