@@ -328,8 +328,8 @@ function Question() {
   }, /*#__PURE__*/React.createElement(FullVideoPlain, {
     src: VID_1,
     start: 0,
-    end: 1.001,
-    speed: 0.192
+    end: 2.002,
+    speed: 0.3844
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -940,6 +940,20 @@ function LogoFrame() {
     fh = H - FR.t - FR.b;
   const moveP = ease(lt, 0.05, 0.55);
   const logoTop = LOGO_TOP + (FR.t - LOGO_TOP) * moveP;
+  // The logo lockup sits centered on the frame's top edge with no opaque
+  // backing behind it; relying on its glyphs to visually "cut" the border
+  // line reads as a broken/interrupted line rather than a deliberate gap.
+  // Build the border as a single open path with a real geometric gap
+  // sized to the logo's rendered box (height 66 * its 9498/1182 aspect
+  // ratio + the wrapper's 26px side padding) instead.
+  const logoHalfW = 66 * 9498 / 1182 / 2 + 26;
+  const gapL = W / 2 - logoHalfW,
+    gapR = W / 2 + logoHalfW;
+  const fx0 = FR.l,
+    fy0 = FR.t,
+    fx1 = FR.l + fw,
+    fy1 = FR.t + fh;
+  const framePath = `M ${gapL} ${fy0} L ${fx0} ${fy0} L ${fx0} ${fy1} L ${fx1} ${fy1} L ${fx1} ${fy0} L ${gapR} ${fy0}`;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       ...shell,
@@ -948,8 +962,8 @@ function LogoFrame() {
   }, /*#__PURE__*/React.createElement(FullVideoPlain, {
     src: VID_7,
     start: 0,
-    end: 2.127,
-    speed: 0.3706
+    end: 2.419,
+    speed: 0.4223
   }), /*#__PURE__*/React.createElement("svg", {
     width: W,
     height: H,
@@ -957,11 +971,8 @@ function LogoFrame() {
       position: 'absolute',
       inset: 0
     }
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: FR.l,
-    y: FR.t,
-    width: fw,
-    height: fh,
+  }, /*#__PURE__*/React.createElement("path", {
+    d: framePath,
     fill: "none",
     stroke: SKY,
     strokeWidth: "4",
