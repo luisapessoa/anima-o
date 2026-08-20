@@ -331,7 +331,7 @@ function Question() {
     end: 2.002,
     speed: 0.3844
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
-    variant: "white",
+    variant: "dark",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -964,6 +964,12 @@ function LogoFrame() {
     start: 0,
     end: 2.419,
     speed: 0.4223
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(0,0,0,.4)'
+    }
   }), /*#__PURE__*/React.createElement("svg", {
     width: W,
     height: H,

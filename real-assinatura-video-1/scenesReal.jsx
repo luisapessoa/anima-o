@@ -168,7 +168,7 @@ function Question() {
   return (
     <div style={{ ...shell, background: BLACK }}>
       <FullVideoPlain src={VID_1} start={0} end={2.002} speed={0.3844} />
-      {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
+      {RUNTIME.showLogo ? <Logo variant="dark" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: boxL, top: boxTop, width: boxW, bottom: 0,
         background: NAVY, opacity: box, transform: `translateY(${(1 - box) * 40}px)` }} />
       <div style={{ position: 'absolute', left: boxL + boxW - sq - 160, top: boxTop - sq * 0.55,
@@ -425,6 +425,7 @@ function LogoFrame() {
   return (
     <div style={{ ...shell, background: BLACK }}>
       <FullVideoPlain src={VID_7} start={0} end={2.419} speed={0.4223} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.4)' }} />
       <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
         <path d={framePath} fill="none" stroke={SKY} strokeWidth="4" pathLength="1"
           strokeDasharray="1" strokeDashoffset={1 - draw} />
