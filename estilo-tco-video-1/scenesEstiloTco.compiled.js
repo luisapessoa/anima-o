@@ -34,13 +34,13 @@ var BG_COLOR = {
 var BG_VIDEO = {
   'Tela 1': {
     src: 'assets/bg-1_frames',
-    dur: 4.0,
-    count: 120
+    dur: 2.033,
+    count: 61
   },
   'Tela 3': {
     src: 'assets/bg-3_frames',
-    dur: 5.133,
-    count: 154
+    dur: 5.2,
+    count: 156
   },
   'Tela 6': {
     src: 'assets/bg-6_frames',

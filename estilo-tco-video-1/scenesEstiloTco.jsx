@@ -20,8 +20,8 @@ var BG_COLOR = { black: BLACK, blue: BLUE, white: WHITE };
 // último quadro apenas congela (nunca reinicia/faz loop) — ver BgVideo
 // abaixo. `count` é o número de quadros extraídos a 30fps (fps/frames).
 var BG_VIDEO = {
-  'Tela 1': { src: 'assets/bg-1_frames', dur: 4.0, count: 120 },
-  'Tela 3': { src: 'assets/bg-3_frames', dur: 5.133, count: 154 },
+  'Tela 1': { src: 'assets/bg-1_frames', dur: 2.033, count: 61 },
+  'Tela 3': { src: 'assets/bg-3_frames', dur: 5.2, count: 156 },
   'Tela 6': { src: 'assets/bg-6_frames', dur: 4.1, count: 123 },
   'Tela 8': { src: 'assets/bg-8_frames', dur: 4.0, count: 120 },
 };
