@@ -26,14 +26,69 @@ var BG_COLOR = {
   blue: BLUE,
   white: WHITE
 };
-// Vídeo nos 4 fundos pretos — clipes a velocidade natural (sem desacelerar),
-// tocando em loop para preencher a duração da tela quando mais curtos que ela.
+// Vídeo nos 4 fundos pretos — clipes a velocidade natural do material de
+// origem (sem acelerar nem desacelerar). Cada clipe já cobre (ou quase
+// cobre) a duração da própria tela; quando o clipe termina antes da tela, o
+// último quadro apenas congela (nunca reinicia/faz loop) — ver BgVideo
+// abaixo. `count` é o número de quadros extraídos a 30fps (fps/frames).
 var BG_VIDEO = {
-  'Tela 1': 'assets/bg-1',
-  'Tela 3': 'assets/bg-3',
-  'Tela 6': 'assets/bg-6',
-  'Tela 8': 'assets/bg-8'
+  'Tela 1': {
+    src: 'assets/bg-1_frames',
+    dur: 1.633,
+    count: 49
+  },
+  'Tela 3': {
+    src: 'assets/bg-3_frames',
+    dur: 5.133,
+    count: 154
+  },
+  'Tela 6': {
+    src: 'assets/bg-6_frames',
+    dur: 4.1,
+    count: 123
+  },
+  'Tela 8': {
+    src: 'assets/bg-8_frames',
+    dur: 4.0,
+    count: 120
+  }
 };
+
+// Vídeo decorativo, mas a este engine (composição contínua, tudo montado o
+// tempo todo) NÃO se aplica o <video autoPlay loop> comum: ele começa a
+// tocar em tempo real desde o carregamento da página, não a partir do
+// instante em que a própria tela fica visível, então descola do timeline
+// autorado (aparece acelerado/em loop) tanto na exportação quanto numa
+// reprodução ao vivo comum. Buscar a solução por `currentTime`/seek também
+// não é confiável neste navegador (escritas em vídeo pausado são
+// silenciosamente ignoradas). Em vez disso, renderizamos o clipe como uma
+// sequência de quadros JPEG (extraídos do mesmo material, a 30fps) e
+// escolhemos o quadro certo puramente a partir de T — determinístico em
+// qualquer ambiente, sem nenhuma dependência de temporização real do vídeo.
+function BgVideo({
+  name,
+  T,
+  CUES
+}) {
+  var info = BG_VIDEO[name];
+  var start = CUES[name];
+  var lt = T - start;
+  if (lt < -0.05) return null;
+  var clamped = clamp(lt, 0, info.dur - 1 / 30);
+  var frameIdx = clamp(Math.round(clamped * 30) + 1, 1, info.count);
+  var frameName = ('00000' + frameIdx).slice(-5);
+  return /*#__PURE__*/React.createElement("img", {
+    src: info.src + '/f_' + frameName + '.jpg',
+    alt: "",
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    }
+  });
+}
 
 // three motion helpers, used everywhere
 var MOTION = {
@@ -867,25 +922,11 @@ function EstiloPiece(props) {
         overflow: 'hidden',
         background: BG_COLOR[BG_KIND[name]]
       }, w)
-    }, BG_VIDEO[name] ? /*#__PURE__*/React.createElement("video", {
-      autoPlay: true,
-      loop: true,
-      muted: true,
-      playsInline: true,
-      style: {
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover'
-      }
-    }, /*#__PURE__*/React.createElement("source", {
-      src: BG_VIDEO[name] + '.mp4',
-      type: "video/mp4"
-    }), /*#__PURE__*/React.createElement("source", {
-      src: BG_VIDEO[name] + '.webm',
-      type: "video/webm"
-    })) : null);
+    }, BG_VIDEO[name] ? /*#__PURE__*/React.createElement(BgVideo, {
+      name: name,
+      T: T,
+      CUES: CUES
+    }) : null);
   }), SCENE_ORDER.map(function (name, i) {
     var Content = CONTENT_BY_NAME[name];
     var visible = T >= CUES[name] - 0.05;
