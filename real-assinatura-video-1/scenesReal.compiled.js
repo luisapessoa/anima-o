@@ -328,8 +328,8 @@ function Question() {
   }, /*#__PURE__*/React.createElement(FullVideoPlain, {
     src: VID_1,
     start: 0,
-    end: 2.002,
-    speed: 0.3844
+    end: 4.254,
+    speed: 0.8168
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "dark",
     lt: lt
@@ -872,8 +872,8 @@ function Line() {
   }, /*#__PURE__*/React.createElement(FullVideoScrim, {
     src: VID_6,
     start: 0,
-    end: 4.254,
-    speed: 0.7422
+    end: 2.0,
+    speed: 0.3491
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt

@@ -167,7 +167,7 @@ function Question() {
   const boxL = 90, boxTop = 1080, boxW = W - boxL * 2, sq = 200;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoPlain src={VID_1} start={0} end={2.002} speed={0.3844} />
+      <FullVideoPlain src={VID_1} start={0} end={4.254} speed={0.8168} />
       {RUNTIME.showLogo ? <Logo variant="dark" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: boxL, top: boxTop, width: boxW, bottom: 0,
         background: NAVY, opacity: box, transform: `translateY(${(1 - box) * 40}px)` }} />
@@ -383,7 +383,7 @@ function Line() {
   const rule = ease(lt, 0.3, 0.6);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoScrim src={VID_6} start={0} end={4.254} speed={0.7422} />
+      <FullVideoScrim src={VID_6} start={0} end={2.0} speed={0.3491} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, top: 1230, width: 300, height: 7,
         background: SKY, transform: `scaleX(${rule})`, transformOrigin: 'left' }} />
