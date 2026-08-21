@@ -82,8 +82,8 @@ function TopVideo({
     }
   });
 }
-/* Full-bleed with a bottom-weighted scrim: used for Line's full-screen
-   video behind body text starting around y≈1230. */
+/* Full-bleed with a top-weighted scrim: used for Line's full-screen
+   video behind the heading/body text sitting near the top of the frame. */
 function FullVideoScrim({
   src,
   start,
@@ -129,7 +129,7 @@ function FullVideoScrim({
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(180deg, rgba(0,0,0,.40) 0%, rgba(0,0,0,.40) 50%, rgba(0,0,0,.68) 100%)',
+      background: 'linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.38) 32%, rgba(0,0,0,0) 62%)',
       opacity: ready ? 1 : 0,
       transition: 'opacity .25s ease'
     }
@@ -872,8 +872,8 @@ function Line() {
   }, /*#__PURE__*/React.createElement(FullVideoScrim, {
     src: VID_6,
     start: 0,
-    end: 3.933,
-    speed: 0.6867
+    end: 3.7,
+    speed: 0.6458
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -881,7 +881,7 @@ function Line() {
     style: {
       position: 'absolute',
       left: 150,
-      top: 1230,
+      top: 320,
       width: 300,
       height: 7,
       background: SKY,
@@ -893,7 +893,7 @@ function Line() {
       position: 'absolute',
       left: 150,
       right: 120,
-      top: 1310,
+      top: 400,
       ...groupIn(lt, 'up')
     }
   }, (sc.head || []).map((ln, i) => /*#__PURE__*/React.createElement("div", {

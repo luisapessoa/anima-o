@@ -41,8 +41,8 @@ function TopVideo({ src, start, end, speed, w, h, shiftY }) {
         opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
   );
 }
-/* Full-bleed with a bottom-weighted scrim: used for Line's full-screen
-   video behind body text starting around y≈1230. */
+/* Full-bleed with a top-weighted scrim: used for Line's full-screen
+   video behind the heading/body text sitting near the top of the frame. */
 function FullVideoScrim({ src, start, end, speed, shiftY }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
@@ -60,7 +60,7 @@ function FullVideoScrim({ src, start, end, speed, shiftY }) {
           transform: `translateY(${shiftY || 0}px) scale(1.15)`,
           opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
       <div style={{ position: 'absolute', inset: 0,
-        background: 'linear-gradient(180deg, rgba(0,0,0,.40) 0%, rgba(0,0,0,.40) 50%, rgba(0,0,0,.68) 100%)',
+        background: 'linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.38) 32%, rgba(0,0,0,0) 62%)',
         opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
     </React.Fragment>
   );
@@ -383,11 +383,11 @@ function Line() {
   const rule = ease(lt, 0.3, 0.6);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoScrim src={VID_6} start={0} end={3.933} speed={0.6867} />
+      <FullVideoScrim src={VID_6} start={0} end={3.7} speed={0.6458} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
-      <div style={{ position: 'absolute', left: 150, top: 1230, width: 300, height: 7,
+      <div style={{ position: 'absolute', left: 150, top: 320, width: 300, height: 7,
         background: SKY, transform: `scaleX(${rule})`, transformOrigin: 'left' }} />
-      <div style={{ position: 'absolute', left: 150, right: 120, top: 1310, ...groupIn(lt, 'up') }}>
+      <div style={{ position: 'absolute', left: 150, right: 120, top: 400, ...groupIn(lt, 'up') }}>
         {(sc.head || []).map((ln, i) => (
           <div key={i} style={{ ...rise(lt, 0.5 + i * 0.09, 16), color: WHITE, fontWeight: 700,
             fontSize: 64, lineHeight: 1.14, letterSpacing: '-0.02em' }}>{ln}</div>
