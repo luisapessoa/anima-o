@@ -34,8 +34,8 @@ var BG_COLOR = {
 var BG_VIDEO = {
   'Tela 1': {
     src: 'assets/bg-1_frames',
-    dur: 1.633,
-    count: 49
+    dur: 4.0,
+    count: 120
   },
   'Tela 3': {
     src: 'assets/bg-3_frames',
@@ -695,6 +695,12 @@ function Tela6(T, CUES) {
       justifyContent: 'space-between'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(0,0,0,0.38)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: FONT,
       fontWeight: 700,

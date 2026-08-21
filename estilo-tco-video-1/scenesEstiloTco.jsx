@@ -20,7 +20,7 @@ var BG_COLOR = { black: BLACK, blue: BLUE, white: WHITE };
 // último quadro apenas congela (nunca reinicia/faz loop) — ver BgVideo
 // abaixo. `count` é o número de quadros extraídos a 30fps (fps/frames).
 var BG_VIDEO = {
-  'Tela 1': { src: 'assets/bg-1_frames', dur: 1.633, count: 49 },
+  'Tela 1': { src: 'assets/bg-1_frames', dur: 4.0, count: 120 },
   'Tela 3': { src: 'assets/bg-3_frames', dur: 5.133, count: 154 },
   'Tela 6': { src: 'assets/bg-6_frames', dur: 4.1, count: 123 },
   'Tela 8': { src: 'assets/bg-8_frames', dur: 4.0, count: 120 },
@@ -296,6 +296,7 @@ function Tela6(T, CUES) {
   var body = MOTION.enter(T, s + 1.4);
   return (
     <div style={{ position: 'absolute', inset: 0, padding: PAD + 'px', paddingTop: TOP, paddingBottom: 120, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.38)' }} />
       <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 56, lineHeight: 1.3, color: WHITE, opacity: title.opacity, transform: title.transform }}>
         Além dos valores financeiros,<br />também existe o tempo dedicado<br />à gestão do veículo.
       </div>
