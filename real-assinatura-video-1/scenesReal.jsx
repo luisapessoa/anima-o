@@ -383,7 +383,7 @@ function Line() {
   const rule = ease(lt, 0.3, 0.6);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <FullVideoScrim src={VID_6} start={0} end={2.0} speed={0.3491} />
+      <FullVideoScrim src={VID_6} start={0} end={3.933} speed={0.6867} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, top: 1230, width: 300, height: 7,
         background: SKY, transform: `scaleX(${rule})`, transformOrigin: 'left' }} />

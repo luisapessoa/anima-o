@@ -872,8 +872,8 @@ function Line() {
   }, /*#__PURE__*/React.createElement(FullVideoScrim, {
     src: VID_6,
     start: 0,
-    end: 2.0,
-    speed: 0.3491
+    end: 3.933,
+    speed: 0.6867
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
