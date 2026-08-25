@@ -124,7 +124,25 @@ function WhyMatters() {
       ...shell,
       background: BLACK
     }
-  }, RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
+  }, /*#__PURE__*/React.createElement(VideoSprite, {
+    src: "assets/bg-1.mp4",
+    start: 0,
+    end: 5.767,
+    speed: 1,
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(0,0,0,.42)'
+    }
+  }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -272,7 +290,25 @@ function VLinePara() {
       ...shell,
       background: BLACK
     }
-  }, RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
+  }, /*#__PURE__*/React.createElement(VideoSprite, {
+    src: "assets/bg-3.mp4",
+    start: 0,
+    end: 6.6,
+    speed: 1,
+    style: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(0,0,0,.42)'
+    }
+  }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {
@@ -435,20 +471,10 @@ function VideoRule() {
       ...shell,
       background: BLACK
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      width: W,
-      height: zoneH,
-      background: BLACK,
-      overflow: 'hidden'
-    }
   }, /*#__PURE__*/React.createElement(VideoSprite, {
     src: "assets/bg-5.mp4",
     start: 0,
-    end: 6.533,
+    end: 6.333,
     speed: 1,
     style: {
       position: 'absolute',
@@ -457,7 +483,13 @@ function VideoRule() {
       height: '100%',
       objectFit: 'cover'
     }
-  })), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 62%, rgba(0,0,0,.72) 100%)'
+    }
+  }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
   }) : null, /*#__PURE__*/React.createElement("div", {

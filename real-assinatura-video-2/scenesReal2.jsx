@@ -74,6 +74,9 @@ function WhyMatters() {
   const draw = ease(lt, 1.05, 0.85);
   return (
     <div style={{ ...shell, background: BLACK }}>
+      <VideoSprite src="assets/bg-1.mp4" start={0} end={5.767} speed={1}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.42)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 160, right: 150, top: 420 }}>
         {(sc.head || []).map((ln, i) => (
@@ -141,6 +144,9 @@ function VLinePara() {
   const lineTop = 725, lineH = 620;
   return (
     <div style={{ ...shell, background: BLACK }}>
+      <VideoSprite src="assets/bg-3.mp4" start={0} end={6.6} speed={1}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.42)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, right: 120, top: 400, ...groupIn(lt, 'up') }}>
         {fmtLinesBold(lines1).map((el, i) => React.cloneElement(el, {
@@ -208,11 +214,11 @@ function VideoRule() {
   const zoneH = 1370;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      {/* video zone: full-width band above the rule — VW footage, natural speed, no loop */}
-      <div style={{ position: 'absolute', left: 0, top: 0, width: W, height: zoneH, background: BLACK, overflow: 'hidden' }}>
-        <VideoSprite src="assets/bg-5.mp4" start={0} end={6.533} speed={1}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      </div>
+      {/* video zone: full-bleed — VW footage, natural speed, no loop */}
+      <VideoSprite src="assets/bg-5.mp4" start={0} end={6.333} speed={1}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ position: 'absolute', inset: 0,
+        background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 62%, rgba(0,0,0,.72) 100%)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, top: zoneH, width: W - 300, height: 4, background: SKY,
         transform: `scaleX(${ruleTop})`, transformOrigin: 'center' }} />
