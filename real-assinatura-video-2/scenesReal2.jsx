@@ -74,7 +74,7 @@ function WhyMatters() {
   const draw = ease(lt, 1.05, 0.85);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <VideoSprite src="assets/bg-1.mp4" start={0} end={5.767} speed={1}
+      <VideoSprite src="assets/bg-1.mp4" start={0} end={5.5} speed={1}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.42)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
@@ -144,7 +144,7 @@ function VLinePara() {
   const lineTop = 725, lineH = 620;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <VideoSprite src="assets/bg-3.mp4" start={0} end={6.6} speed={1}
+      <VideoSprite src="assets/bg-3.mp4" start={0} end={6.5} speed={1}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.42)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
@@ -215,7 +215,7 @@ function VideoRule() {
   return (
     <div style={{ ...shell, background: BLACK }}>
       {/* video zone: full-bleed — VW footage, natural speed, no loop */}
-      <VideoSprite src="assets/bg-5.mp4" start={0} end={6.333} speed={1}
+      <VideoSprite src="assets/bg-5.mp4" start={0} end={6.0} speed={1}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       <div style={{ position: 'absolute', inset: 0,
         background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 62%, rgba(0,0,0,.72) 100%)' }} />
@@ -250,7 +250,7 @@ function VideoBoxBottom() {
       {/* video zone: box for VW footage, centered between the two paragraphs */}
       <div style={{ position: 'absolute', left: 150, top: 670, width: W - 300, height: 660, overflow: 'hidden',
         background: BLACK, opacity: box, transform: `translateY(${(1 - box) * 30}px)` }}>
-        <VideoSprite src="assets/bg-6.mp4" start={0} end={6.167} speed={1}
+        <VideoSprite src="assets/bg-6.mp4" start={0} end={6.0} speed={1}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
       <div style={{ position: 'absolute', left: 150, right: 120, top: 1400 }}>

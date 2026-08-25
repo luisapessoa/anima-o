@@ -127,7 +127,7 @@ function WhyMatters() {
   }, /*#__PURE__*/React.createElement(VideoSprite, {
     src: "assets/bg-1.mp4",
     start: 0,
-    end: 5.767,
+    end: 5.5,
     speed: 1,
     style: {
       position: 'absolute',
@@ -293,7 +293,7 @@ function VLinePara() {
   }, /*#__PURE__*/React.createElement(VideoSprite, {
     src: "assets/bg-3.mp4",
     start: 0,
-    end: 6.6,
+    end: 6.5,
     speed: 1,
     style: {
       position: 'absolute',
@@ -474,7 +474,7 @@ function VideoRule() {
   }, /*#__PURE__*/React.createElement(VideoSprite, {
     src: "assets/bg-5.mp4",
     start: 0,
-    end: 6.333,
+    end: 6.0,
     speed: 1,
     style: {
       position: 'absolute',
@@ -581,7 +581,7 @@ function VideoBoxBottom() {
   }, /*#__PURE__*/React.createElement(VideoSprite, {
     src: "assets/bg-6.mp4",
     start: 0,
-    end: 6.167,
+    end: 6.0,
     speed: 1,
     style: {
       position: 'absolute',
