@@ -208,7 +208,7 @@ function TickList() {
   const sc = s.scene;
   const items = sc.items || [];
   const rowH = 140;
-  const listTop = 480;
+  const listTop = 600;
   const staggerStep = 0.34,
     revealDur = 0.6;
   return /*#__PURE__*/React.createElement("div", {

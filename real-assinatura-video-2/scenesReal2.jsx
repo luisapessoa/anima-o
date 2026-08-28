@@ -104,7 +104,7 @@ function TickList() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   const items = sc.items || [];
   const rowH = 140;
-  const listTop = 480;
+  const listTop = 600;
   const staggerStep = 0.34, revealDur = 0.6;
   return (
     <div style={{ ...shell, background: SKY }}>
