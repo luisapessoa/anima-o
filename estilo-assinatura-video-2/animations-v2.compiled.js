@@ -1,4 +1,3 @@
-import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 // @ds-adherence-ignore -- omelette starter scaffold (raw elements/hex/px by design)
 // Copied omelette starter. Re-running copy_starter_component with this kind overwrites this file with the latest version (page content is unaffected).
 
@@ -282,10 +281,9 @@ function Sprite({
     duration,
     visible
   };
-  return /*#__PURE__*/_jsxDEV(SpriteContext.Provider, {
-    value: value,
-    children: typeof children === 'function' ? children(value) : children
-  }, void 0, false);
+  return /*#__PURE__*/React.createElement(SpriteContext.Provider, {
+    value: value
+  }, typeof children === 'function' ? children(value) : children);
 }
 
 // ── Sample sprite components ────────────────────────────────────────────────
@@ -324,7 +322,7 @@ function TextSprite({
     ty = -t * 8;
   }
   const translateX = align === 'center' ? '-50%' : align === 'right' ? '-100%' : '0';
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: x,
@@ -339,9 +337,8 @@ function TextSprite({
       whiteSpace: 'pre',
       lineHeight: 1.1,
       willChange: 'transform, opacity'
-    },
-    children: text
-  }, void 0, false);
+    }
+  }, text);
 }
 
 // ImageSprite: scales + fades in; optional Ken Burns drift during hold.
@@ -379,7 +376,7 @@ function ImageSprite({
     const holdT = holdSpan > 0 ? (localTime - entryDur) / holdSpan : 0;
     scale = 1 + (kenBurnsScale - 1) * holdT;
   }
-  const content = placeholder ? /*#__PURE__*/_jsxDEV("div", {
+  const content = placeholder ? /*#__PURE__*/React.createElement("div", {
     style: {
       width: '100%',
       height: '100%',
@@ -392,9 +389,8 @@ function ImageSprite({
       fontSize: 13,
       letterSpacing: '0.04em',
       textTransform: 'uppercase'
-    },
-    children: placeholder.label || 'image'
-  }, void 0, false) : /*#__PURE__*/_jsxDEV("img", {
+    }
+  }, placeholder.label || 'image') : /*#__PURE__*/React.createElement("img", {
     src: src,
     alt: "",
     style: {
@@ -403,8 +399,8 @@ function ImageSprite({
       objectFit: fit,
       display: 'block'
     }
-  }, void 0, false);
-  return /*#__PURE__*/_jsxDEV("div", {
+  });
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: x,
@@ -417,9 +413,8 @@ function ImageSprite({
       borderRadius: radius,
       overflow: 'hidden',
       willChange: 'transform, opacity'
-    },
-    children: content
-  }, void 0, false);
+    }
+  }, content);
 }
 
 // RectSprite: simple rectangle that animates position/size/color via props.
@@ -453,7 +448,7 @@ function RectSprite({
     scale = 1 - 0.15 * t;
   }
   const overrides = render ? render(spriteCtx) : {};
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: x,
@@ -468,7 +463,7 @@ function RectSprite({
       willChange: 'transform, opacity',
       ...overrides
     }
-  }, void 0, false);
+  });
 }
 
 // ── Font inlining ───────────────────────────────────────────────────────────
@@ -800,7 +795,7 @@ function Stage({
     /*#__PURE__*/
     // data-om-starter: inert presence marker — Claude Design's starter-usage
     // probe reads it; it renders nothing. Keep it on this root element.
-    _jsxDEV("div", {
+    React.createElement("div", {
       ref: stageRef,
       "data-om-starter": "animations-v2",
       style: {
@@ -811,63 +806,57 @@ function Stage({
         alignItems: 'center',
         background: '#0a0a0a',
         fontFamily: 'Inter, system-ui, sans-serif'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        minHeight: 0
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      ref: canvasRef,
+      width: width,
+      height: height,
+      "data-om-exportable-video-with-duration-secs": duration,
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'center',
+        flexShrink: 0,
+        boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+        display: 'block'
+      }
+    }, /*#__PURE__*/React.createElement("foreignObject", {
+      x: "0",
+      y: "0",
+      width: "100%",
+      height: "100%"
+    }, /*#__PURE__*/React.createElement("div", {
+      xmlns: "http://www.w3.org/1999/xhtml",
+      style: {
+        width,
+        height,
+        background,
+        position: 'relative',
+        overflow: 'hidden'
+      }
+    }, /*#__PURE__*/React.createElement(TimelineContext.Provider, {
+      value: ctxValue
+    }, children))))), /*#__PURE__*/React.createElement(PlaybackBar, {
+      time: displayTime,
+      actualTime: time,
+      duration: duration,
+      playing: playing,
+      onPlayPause: () => setPlaying(p => !p),
+      onReset: () => {
+        setTime(0);
       },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          flex: 1,
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          minHeight: 0
-        },
-        children: /*#__PURE__*/_jsxDEV("svg", {
-          ref: canvasRef,
-          width: width,
-          height: height,
-          "data-om-exportable-video-with-duration-secs": duration,
-          style: {
-            transform: `scale(${scale})`,
-            transformOrigin: 'center',
-            flexShrink: 0,
-            boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
-            display: 'block'
-          },
-          children: /*#__PURE__*/_jsxDEV("foreignObject", {
-            x: "0",
-            y: "0",
-            width: "100%",
-            height: "100%",
-            children: /*#__PURE__*/_jsxDEV("div", {
-              xmlns: "http://www.w3.org/1999/xhtml",
-              style: {
-                width,
-                height,
-                background,
-                position: 'relative',
-                overflow: 'hidden'
-              },
-              children: /*#__PURE__*/_jsxDEV(TimelineContext.Provider, {
-                value: ctxValue,
-                children: children
-              }, void 0, false)
-            }, void 0, false)
-          }, void 0, false)
-        }, void 0, false)
-      }, void 0, false), /*#__PURE__*/_jsxDEV(PlaybackBar, {
-        time: displayTime,
-        actualTime: time,
-        duration: duration,
-        playing: playing,
-        onPlayPause: () => setPlaying(p => !p),
-        onReset: () => {
-          setTime(0);
-        },
-        onSeek: t => setTime(t),
-        onHover: t => setHoverTime(t)
-      }, void 0, false)]
-    }, void 0, true)
+      onSeek: t => setTime(t),
+      onHover: t => setHoverTime(t)
+    }))
   );
 }
 
@@ -933,7 +922,7 @@ function PlaybackBar({
     return `${String(m).padStart(1, '0')}:${String(s).padStart(2, '0')}.${String(cs).padStart(2, '0')}`;
   };
   const mono = 'JetBrains Mono, ui-monospace, SFMono-Regular, monospace';
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     "data-omelette-chrome": true,
     style: {
       // Slimmed to visually match the host editor bar's basic row (the
@@ -954,139 +943,128 @@ function PlaybackBar({
       fontFamily: 'Inter, system-ui, sans-serif',
       userSelect: 'none',
       flexShrink: 0
-    },
-    children: [/*#__PURE__*/_jsxDEV(IconButton, {
-      onClick: onPlayPause,
-      title: "Play/pause (space)",
-      children: playing ? /*#__PURE__*/_jsxDEV("svg", {
-        width: "14",
-        height: "14",
-        viewBox: "0 0 14 14",
-        fill: "none",
-        children: [/*#__PURE__*/_jsxDEV("rect", {
-          x: "3",
-          y: "2",
-          width: "3",
-          height: "10",
-          fill: "currentColor"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("rect", {
-          x: "8",
-          y: "2",
-          width: "3",
-          height: "10",
-          fill: "currentColor"
-        }, void 0, false)]
-      }, void 0, true) : /*#__PURE__*/_jsxDEV("svg", {
-        width: "14",
-        height: "14",
-        viewBox: "0 0 14 14",
-        fill: "none",
-        children: /*#__PURE__*/_jsxDEV("path", {
-          d: "M3 2l9 5-9 5V2z",
-          fill: "currentColor"
-        }, void 0, false)
-      }, void 0, false)
-    }, void 0, false), /*#__PURE__*/_jsxDEV(IconButton, {
-      onClick: onReset,
-      title: "Return to start (0)",
-      children: /*#__PURE__*/_jsxDEV("svg", {
-        width: "14",
-        height: "14",
-        viewBox: "0 0 14 14",
-        fill: "none",
-        children: /*#__PURE__*/_jsxDEV("path", {
-          d: "M3 2v10M12 2L5 7l7 5V2z",
-          stroke: "currentColor",
-          strokeWidth: "1.5",
-          strokeLinejoin: "round",
-          strokeLinecap: "round"
-        }, void 0, false)
-      }, void 0, false)
-    }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-      style: {
-        fontFamily: mono,
-        fontSize: 12,
-        fontVariantNumeric: 'tabular-nums',
-        width: 64,
-        textAlign: 'right',
-        color: '#f6f4ef'
-      },
-      children: fmt(time)
-    }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-      ref: trackRef,
-      onMouseMove: onTrackMove,
-      onMouseLeave: onTrackLeave,
-      onMouseDown: onTrackDown,
-      style: {
-        flex: 1,
-        height: 22,
-        position: 'relative',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center'
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          height: 4,
-          background: 'rgba(255,255,255,0.12)',
-          borderRadius: 2
-        }
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          position: 'absolute',
-          left: 0,
-          width: `${pct}%`,
-          height: 4,
-          background: 'oklch(72% 0.12 250)',
-          borderRadius: 2
-        }
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          position: 'absolute',
-          left: `${pct}%`,
-          top: '50%',
-          width: 12,
-          height: 12,
-          marginLeft: -6,
-          marginTop: -6,
-          background: '#fff',
-          borderRadius: 6,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.4)'
-        }
-      }, void 0, false)]
-    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-      style: {
-        fontFamily: mono,
-        fontSize: 12,
-        fontVariantNumeric: 'tabular-nums',
-        width: 64,
-        textAlign: 'left',
-        color: 'rgba(246,244,239,0.55)'
-      },
-      children: fmt(duration)
-    }, void 0, false), typeof VideoEncoder !== 'undefined' && /*#__PURE__*/_jsxDEV(IconButton, {
-      title: "Export video",
-      onClick: () => window.parent.postMessage({
-        type: 'omelette:request-video-export'
-      }, '*'),
-      children: /*#__PURE__*/_jsxDEV("svg", {
-        width: "14",
-        height: "14",
-        viewBox: "0 0 14 14",
-        fill: "none",
-        children: /*#__PURE__*/_jsxDEV("path", {
-          d: "M7 2v7m0 0L4 6m3 3l3-3M2 12h10",
-          stroke: "currentColor",
-          strokeWidth: "1.5",
-          strokeLinecap: "round",
-          strokeLinejoin: "round"
-        }, void 0, false)
-      }, void 0, false)
-    }, void 0, false)]
-  }, void 0, true);
+    }
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    onClick: onPlayPause,
+    title: "Play/pause (space)"
+  }, playing ? /*#__PURE__*/React.createElement("svg", {
+    width: "14",
+    height: "14",
+    viewBox: "0 0 14 14",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "3",
+    y: "2",
+    width: "3",
+    height: "10",
+    fill: "currentColor"
+  }), /*#__PURE__*/React.createElement("rect", {
+    x: "8",
+    y: "2",
+    width: "3",
+    height: "10",
+    fill: "currentColor"
+  })) : /*#__PURE__*/React.createElement("svg", {
+    width: "14",
+    height: "14",
+    viewBox: "0 0 14 14",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3 2l9 5-9 5V2z",
+    fill: "currentColor"
+  }))), /*#__PURE__*/React.createElement(IconButton, {
+    onClick: onReset,
+    title: "Return to start (0)"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "14",
+    height: "14",
+    viewBox: "0 0 14 14",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3 2v10M12 2L5 7l7 5V2z",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinejoin: "round",
+    strokeLinecap: "round"
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: mono,
+      fontSize: 12,
+      fontVariantNumeric: 'tabular-nums',
+      width: 64,
+      textAlign: 'right',
+      color: '#f6f4ef'
+    }
+  }, fmt(time)), /*#__PURE__*/React.createElement("div", {
+    ref: trackRef,
+    onMouseMove: onTrackMove,
+    onMouseLeave: onTrackLeave,
+    onMouseDown: onTrackDown,
+    style: {
+      flex: 1,
+      height: 22,
+      position: 'relative',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      height: 4,
+      background: 'rgba(255,255,255,0.12)',
+      borderRadius: 2
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: 0,
+      width: `${pct}%`,
+      height: 4,
+      background: 'oklch(72% 0.12 250)',
+      borderRadius: 2
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      left: `${pct}%`,
+      top: '50%',
+      width: 12,
+      height: 12,
+      marginLeft: -6,
+      marginTop: -6,
+      background: '#fff',
+      borderRadius: 6,
+      boxShadow: '0 2px 4px rgba(0,0,0,0.4)'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: mono,
+      fontSize: 12,
+      fontVariantNumeric: 'tabular-nums',
+      width: 64,
+      textAlign: 'left',
+      color: 'rgba(246,244,239,0.55)'
+    }
+  }, fmt(duration)), typeof VideoEncoder !== 'undefined' && /*#__PURE__*/React.createElement(IconButton, {
+    title: "Export video",
+    onClick: () => window.parent.postMessage({
+      type: 'omelette:request-video-export'
+    }, '*')
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "14",
+    height: "14",
+    viewBox: "0 0 14 14",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7 2v7m0 0L4 6m3 3l3-3M2 12h10",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }))));
 }
 function IconButton({
   children,
@@ -1094,7 +1072,7 @@ function IconButton({
   title
 }) {
   const [hover, setHover] = React.useState(false);
-  return /*#__PURE__*/_jsxDEV("button", {
+  return /*#__PURE__*/React.createElement("button", {
     onClick: onClick,
     title: title,
     onMouseEnter: () => setHover(true),
@@ -1112,9 +1090,8 @@ function IconButton({
       cursor: 'pointer',
       padding: 0,
       transition: 'background 120ms'
-    },
-    children: children
-  }, void 0, false);
+    }
+  }, children);
 }
 
 // ── VideoSprite ─────────────────────────────────────────────────────────────
@@ -1220,7 +1197,7 @@ function VideoSprite({
     v.addEventListener('ended', onEnded);
     return () => v.removeEventListener('ended', onEnded);
   }, [timeline.playing, start]);
-  return /*#__PURE__*/_jsxDEV("video", {
+  return /*#__PURE__*/React.createElement("video", {
     ref: ref,
     src: src,
     muted: true,
@@ -1235,7 +1212,7 @@ function VideoSprite({
       ...style
     },
     ...rest
-  }, void 0, false);
+  });
 }
 Object.assign(window, {
   Easing,
@@ -1334,12 +1311,12 @@ function PlaybackSync(props) {
       root.removeAttribute('data-om-timeline-playback');
     };
   }, [raw, onUpdate]);
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       display: 'none'
     }
-  }, void 0, false);
+  });
 }
 var SceneContext = React.createContext(null);
 function useScene() {
@@ -1372,12 +1349,12 @@ function SceneSync(props) {
       root.removeAttribute('data-om-timeline-scenes');
     };
   }, [raw, onUpdate]);
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       display: 'none'
     }
-  }, void 0, false);
+  });
 }
 
 // ── Scene transitions ────────────────────────────────────────────────────
@@ -1480,30 +1457,25 @@ function ssSceneInner(scenes, idx, wallTime, total, map, timelineValue) {
   // Own-property lookup: a scene named "constructor" or "toString" must hit
   // the unmapped-scene diagnostic, not a prototype-chain member.
   var Comp = Object.prototype.hasOwnProperty.call(map, scene.name) ? map[scene.name] : null;
-  return /*#__PURE__*/_jsxDEV(TimelineContext.Provider, {
-    value: timelineValue,
-    children: /*#__PURE__*/_jsxDEV(SceneContext.Provider, {
-      value: ctx,
-      children: Comp ? /*#__PURE__*/_jsxDEV(Comp, {
-        ...ctx
-      }, void 0, false) :
-      /*#__PURE__*/
-      // An unmapped name renders a quiet diagnostic instead of a dead
-      // frame — the mismatch is an authoring bug worth seeing.
-      _jsxDEV("div", {
-        style: {
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'rgba(255,255,255,0.25)',
-          font: '500 18px Inter, system-ui, sans-serif'
-        },
-        children: ["unmapped scene: ", scene.name]
-      }, void 0, true)
-    }, void 0, false)
-  }, void 0, false);
+  return /*#__PURE__*/React.createElement(TimelineContext.Provider, {
+    value: timelineValue
+  }, /*#__PURE__*/React.createElement(SceneContext.Provider, {
+    value: ctx
+  }, Comp ? /*#__PURE__*/React.createElement(Comp, ctx) :
+  /*#__PURE__*/
+  // An unmapped name renders a quiet diagnostic instead of a dead
+  // frame — the mismatch is an authoring bug worth seeing.
+  React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'rgba(255,255,255,0.25)',
+      font: '500 18px Inter, system-ui, sans-serif'
+    }
+  }, "unmapped scene: ", scene.name)));
 }
 
 // One scene layer: the positioned wrapper that gives a scene its stable
@@ -1515,16 +1487,16 @@ function ssSceneInner(scenes, idx, wallTime, total, map, timelineValue) {
 // zIndex is set only while an overlap window is active (frozen beneath,
 // current above); outside a window the wrapper adds no stacking context.
 function ssSceneLayer(idx, z, frozen, inner) {
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
+    key: idx,
     "data-om-scene-layer": idx,
     style: {
       position: 'absolute',
       inset: 0,
       zIndex: z,
       pointerEvents: frozen ? 'none' : undefined
-    },
-    children: inner
-  }, idx, false);
+    }
+  }, inner);
 }
 
 // The active-scene selector. Lives INSIDE Stage so useTime sees the
@@ -1670,7 +1642,7 @@ function SceneStage(props) {
     return ppParse(praw);
   }, [praw]);
   if (!scenes) {
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         position: 'absolute',
         inset: 0,
@@ -1681,9 +1653,8 @@ function SceneStage(props) {
         color: '#c96442',
         font: '500 16px Inter, system-ui, sans-serif',
         textAlign: 'center'
-      },
-      children: ["animations-v2: the scenes prop isn't a valid JSON scene list", /*#__PURE__*/_jsxDEV("br", {}, void 0, false), "(expected '[", '{', "\"name\":\"…\",\"dur\":N", '}', ", …]')"]
-    }, void 0, true);
+      }
+    }, "animations-v2: the scenes prop isn't a valid JSON scene list", /*#__PURE__*/React.createElement("br", null), "(expected '[", '{', "\"name\":\"…\",\"dur\":N", '}', ", …]')");
   }
   var total = 0;
   for (var i = 0; i < scenes.length; i++) total += scenes[i].dur;
@@ -1692,30 +1663,27 @@ function SceneStage(props) {
   // EFFECTIVE mode: a run-N composition doesn't wrap on its final pass,
   // but its intermediate wraps cross the seam like any loop.
   var loopEff = pb ? pb.mode !== 'times' || pb.count > 1 : loop;
-  var inner = /*#__PURE__*/_jsxDEV(React.Fragment, {
-    children: [/*#__PURE__*/_jsxDEV(SceneSync, {
-      raw: raw,
-      onUpdate: setRaw
-    }, void 0, false), typeof praw === 'string' && praw !== '' && /*#__PURE__*/_jsxDEV(PlaybackSync, {
-      raw: praw,
-      onUpdate: setPraw
-    }, void 0, false), /*#__PURE__*/_jsxDEV(SceneSwitch, {
-      scenes: scenes,
-      map: props.children,
-      transition: transition,
-      loop: loopEff
-    }, void 0, false)]
-  }, void 0, true);
-  return /*#__PURE__*/_jsxDEV(Stage, {
+  var inner = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SceneSync, {
+    raw: raw,
+    onUpdate: setRaw
+  }), typeof praw === 'string' && praw !== '' && /*#__PURE__*/React.createElement(PlaybackSync, {
+    raw: praw,
+    onUpdate: setPraw
+  }), /*#__PURE__*/React.createElement(SceneSwitch, {
+    scenes: scenes,
+    map: props.children,
+    transition: transition,
+    loop: loopEff
+  }));
+  return /*#__PURE__*/React.createElement(Stage, {
     width: width,
     height: height,
     duration: total,
     background: bg,
     autoplay: autoplay,
     loop: loop,
-    playback: pb,
-    children: inner
-  }, void 0, false);
+    playback: pb
+  }, inner);
 }
 Object.assign(window, {
   SceneStage,
