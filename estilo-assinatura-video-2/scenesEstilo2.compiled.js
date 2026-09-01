@@ -166,7 +166,7 @@ function Bubble() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 5.5,
+    end: 4.4,
     speed: 1
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
@@ -315,8 +315,9 @@ function Rules() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_3,
     start: 0,
-    end: 2.9,
-    speed: 1
+    end: 6.0,
+    speed: 1,
+    shiftY: -110
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -378,7 +379,7 @@ function VRule() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 2.9667,
+    end: 6.5,
     speed: 1
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
@@ -553,7 +554,7 @@ function WhiteCard() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 2.2,
+    end: 3.1667,
     speed: 1
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
