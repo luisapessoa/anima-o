@@ -97,7 +97,7 @@ function Bubble() {
   const bx = 100, by = 390, bw = W - 200;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={5.1333} speed={0.85} shiftY={-160} />
+      <BgVideo src={VID_1} start={0} end={4.9333} speed={0.85} shiftY={-160} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: bx, top: by, width: bw, opacity: box,
         transform: `translateY(${(1 - box) * 34}px) scale(${0.96 + 0.04 * box})`,
@@ -317,7 +317,7 @@ function Final() {
   return (
     <div style={{ ...shell, background: BLACK, display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'flex-start', paddingTop: 470 }}>
-      <BgVideo src={VID_8} start={0} end={4.1} speed={0.85} />
+      <BgVideo src={VID_8} start={0} end={4.2333} speed={0.85} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ ...groupIn(lt, 'up'), textAlign: 'center' }}>
         {lines.map((ln, i) => {
