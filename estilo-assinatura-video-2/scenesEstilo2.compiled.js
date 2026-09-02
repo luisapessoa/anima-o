@@ -166,7 +166,7 @@ function Bubble() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 4.7,
+    end: 4.9,
     speed: 1,
     shiftY: -110
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -316,7 +316,7 @@ function Rules() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_3,
     start: 0,
-    end: 5.5333,
+    end: 6.0,
     speed: 1,
     shiftY: -110
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -694,7 +694,7 @@ function Final() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_8,
     start: 0,
-    end: 3.6,
+    end: 4.5,
     speed: 1
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
