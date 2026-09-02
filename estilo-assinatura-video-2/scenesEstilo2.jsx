@@ -92,7 +92,7 @@ function Bubble() {
   const bx = 100, by = 470, bw = W - 200;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={4.4} speed={1} />
+      <BgVideo src={VID_1} start={0} end={4.7} speed={1} shiftY={-110} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: bx, top: by, width: bw, opacity: box,
         transform: `translateY(${(1 - box) * 34}px) scale(${0.96 + 0.04 * box})`,
@@ -155,7 +155,7 @@ function Rules() {
   const rBot = rTop + gap + body.length * lineH + gap;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_3} start={0} end={6.0} speed={1} shiftY={-110} />
+      <BgVideo src={VID_3} start={0} end={5.5333} speed={1} shiftY={-110} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 150, top: rTop, width: W - 300, height: 4,
         background: BLUE, transform: `scaleX(${topRule})`, transformOrigin: 'center' }} />
@@ -255,7 +255,7 @@ function WhiteCard() {
   const cTop = 1250;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_6} start={0} end={3.1667} speed={1} />
+      <BgVideo src={VID_6} start={0} end={4.3667} speed={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, top: cTop, width: W, height: H - cTop,
         background: WHITE, borderTopLeftRadius: 60, borderTopRightRadius: 60, opacity: card,
@@ -312,7 +312,7 @@ function Final() {
   return (
     <div style={{ ...shell, background: BLACK, display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'flex-start', paddingTop: 470 }}>
-      <BgVideo src={VID_8} start={0} end={1.4} speed={1} />
+      <BgVideo src={VID_8} start={0} end={3.6} speed={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ ...groupIn(lt, 'up'), textAlign: 'center' }}>
         {lines.map((ln, i) => {
