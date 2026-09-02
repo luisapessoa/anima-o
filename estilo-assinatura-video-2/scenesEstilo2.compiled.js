@@ -134,7 +134,7 @@ function Bubble() {
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
-    React.createElement(BgVideo, { src: VID_1, start: 0, end: 3.7333, speed: 0.85, shiftY: -160 }),
+    React.createElement(BgVideo, { src: VID_1, start: 0, end: 5.1333, speed: 0.85, shiftY: -160 }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(
       'div',
