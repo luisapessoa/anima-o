@@ -46,10 +46,12 @@ function fmt(text, weight, key) {
 
 /* Background video for the black scenes (Telas 1, 3, 4, 6, 8), per the
    estilo-assinatura-video-1 BgVideo pattern: cover fit, slight scale to
-   fill, video opacity ~0.6 over the black backdrop plus a dark gradient
-   overlay on top so the white/navy text keeps contrast. Black fallback +
-   ready-gated opacity so nothing paints before the first frame decodes. */
-function BgVideo({ src, start, end, speed, shiftY }) {
+   fill. Black fallback + ready-gated opacity so nothing paints before the
+   first frame decodes. `dim` (default on) applies the ~0.6 opacity + dark
+   gradient overlay that keeps text-over-video scenes readable; Tela 6's
+   video sits in its own black zone above a white text card, so it passes
+   dim={false} to show at full brightness with no darkening filter. */
+function BgVideo({ src, start, end, speed, shiftY, dim }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
   React.useEffect(() => {
@@ -58,16 +60,19 @@ function BgVideo({ src, start, end, speed, shiftY }) {
   }, []);
   const markReady = () => { if (!readyRef.current) { readyRef.current = true; setReady(true); } };
   if (!RUNTIME.videoBg) return null;
+  const dimOn = dim !== false;
   return (
     <React.Fragment>
       <VideoSprite src={src} start={start || 0} end={end || 3} speed={speed || 1}
         onLoadedData={markReady}
         style={{ position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover',
           transform: `translateY(${shiftY || 0}px) scale(1.2)`,
-          opacity: ready ? 0.6 : 0, transition: 'opacity .25s ease' }} />
-      <div style={{ position: 'absolute', inset: 0,
-        background: 'linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.30) 45%, rgba(0,0,0,.68) 100%)',
-        opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
+          opacity: ready ? (dimOn ? 0.6 : 1) : 0, transition: 'opacity .25s ease' }} />
+      {dimOn ? (
+        <div style={{ position: 'absolute', inset: 0,
+          background: 'linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.30) 45%, rgba(0,0,0,.68) 100%)',
+          opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }} />
+      ) : null}
     </React.Fragment>
   );
 }
@@ -92,7 +97,7 @@ function Bubble() {
   const bx = 100, by = 470, bw = W - 200;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={4.9} speed={1} shiftY={-110} />
+      <BgVideo src={VID_1} start={0} end={3.7333} speed={0.85} shiftY={-110} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: bx, top: by, width: bw, opacity: box,
         transform: `translateY(${(1 - box) * 34}px) scale(${0.96 + 0.04 * box})`,
@@ -255,7 +260,7 @@ function WhiteCard() {
   const cTop = 1250;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_6} start={0} end={4.3667} speed={1} />
+      <BgVideo src={VID_6} start={0} end={4.3667} speed={0.85} dim={false} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 0, top: cTop, width: W, height: H - cTop,
         background: WHITE, borderTopLeftRadius: 60, borderTopRightRadius: 60, opacity: card,
@@ -312,7 +317,7 @@ function Final() {
   return (
     <div style={{ ...shell, background: BLACK, display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'flex-start', paddingTop: 470 }}>
-      <BgVideo src={VID_8} start={0} end={4.5} speed={1} />
+      <BgVideo src={VID_8} start={0} end={3.1} speed={0.85} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ ...groupIn(lt, 'up'), textAlign: 'center' }}>
         {lines.map((ln, i) => {

@@ -67,15 +67,18 @@ function fmt(text, weight, key) {
 
 /* Background video for the black scenes (Telas 1, 3, 4, 6, 8), per the
    estilo-assinatura-video-1 BgVideo pattern: cover fit, slight scale to
-   fill, video opacity ~0.6 over the black backdrop plus a dark gradient
-   overlay on top so the white/navy text keeps contrast. Black fallback +
-   ready-gated opacity so nothing paints before the first frame decodes. */
+   fill. Black fallback + ready-gated opacity so nothing paints before the
+   first frame decodes. `dim` (default on) applies the ~0.6 opacity + dark
+   gradient overlay that keeps text-over-video scenes readable; Tela 6's
+   video sits in its own black zone above a white text card, so it passes
+   dim={false} to show at full brightness with no darkening filter. */
 function BgVideo({
   src,
   start,
   end,
   speed,
-  shiftY
+  shiftY,
+  dim
 }) {
   const [ready, setReady] = React.useState(false);
   const readyRef = React.useRef(false);
@@ -95,6 +98,7 @@ function BgVideo({
     }
   };
   if (!RUNTIME.videoBg) return null;
+  const dimOn = dim !== false;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(VideoSprite, {
     src: src,
     start: start || 0,
@@ -108,10 +112,10 @@ function BgVideo({
       height: H,
       objectFit: 'cover',
       transform: `translateY(${shiftY || 0}px) scale(1.2)`,
-      opacity: ready ? 0.6 : 0,
+      opacity: ready ? dimOn ? 0.6 : 1 : 0,
       transition: 'opacity .25s ease'
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }), dimOn ? /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       inset: 0,
@@ -119,7 +123,7 @@ function BgVideo({
       opacity: ready ? 1 : 0,
       transition: 'opacity .25s ease'
     }
-  }));
+  }) : null);
 }
 function Logo({
   variant,
@@ -166,8 +170,8 @@ function Bubble() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 4.9,
-    speed: 1,
+    end: 3.7333,
+    speed: 0.85,
     shiftY: -110
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
@@ -556,7 +560,8 @@ function WhiteCard() {
     src: VID_6,
     start: 0,
     end: 4.3667,
-    speed: 1
+    speed: 0.85,
+    dim: false
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -694,8 +699,8 @@ function Final() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_8,
     start: 0,
-    end: 4.5,
-    speed: 1
+    end: 3.1,
+    speed: 0.85
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
