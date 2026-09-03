@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sudeste Assinaturas — vídeo vertical</title>
+<style>
+  /* DM Sans self-hospedada (mesmos arquivos usados no projeto original) —
+     evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
+     em algumas redes e trocar a fonte por um fallback com métricas
+     diferentes, quebrando as linhas nos pontos errados. */
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  html, body { margin: 0; padding: 0; background: #000000; height: 100%; }
+  a { color: #00d1b2; }
+  a:hover { color: #c6f6d6; }
+  #root { position: fixed; inset: 0; }
+</style>
+<!-- Preload the 5 background clips so each is already fetched by the time
+     its scene mounts — without this the first video request only starts
+     when the scene appears, and the fetch+decode startup shows as a stall
+     right as the clip should begin playing. -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-hero.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-timeline.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-cardup.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-framed.mp4" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-closing.mp4" />
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React / ReactDOM / Babel (mesmas versões usadas no projeto original) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+<script>
+  // Lista de telas (9 telas: 1 a 8 + Encerramento) e configuração de playback,
+  // consumidos por scenes.jsx / animations-v2.jsx.
+  window.OM_SCENES = '[{"name":"Tela 1","layout":"hero","dur":5.5,"head":["Se a Sudeste já é","referência Volkswagen","em Juiz de Fora","desde 1995,"],"boxes":["por que criar uma","frente exclusiva para","carro por assinatura?"]},{"name":"Tela 2","layout":"leftbar","dur":4.5,"head":["O mercado","automotivo **mudou.**"],"body":["E, junto com ele, mudou também","**a forma como as pessoas se**","**relacionam com o carro.**"]},{"name":"Tela 3","layout":"timeline","dur":6,"head":["Durante muito tempo,","**comprar ou financiar** foi","o caminho para dirigir","um carro novo."],"body":["A decisão girava em torno da posse: entrada, parcelas, documentação, IPVA, seguro, manutenção e revenda."]},{"name":"Tela 4","layout":"center","dur":5.2,"lead":["Mas hoje muitos clientes","passaram a olhar","para outra pergunta:"],"head":["Qual é a forma mais","**prática e previsível** de","usar um carro na rotina?"]},{"name":"Tela 5","layout":"cardup","dur":5.6,"head":["A assinatura responde","a essa mudança."],"sub":["Um carro **0km** por um período contratado."],"body":["Com **mensalidade fixa** e condições organizadas conforme o plano escolhido."]},{"name":"Tela 6","layout":"chips","dur":5,"chips":["Menos burocracia","Mais planejamento","Experiência simples"],"head":["A assinatura é uma","**alternativa** interessante","à compra tradicional."]},{"name":"Tela 7","layout":"framed","dur":4.8,"head":["A **Sudeste** entendeu esse movimento."],"body":["E estruturou uma frente própria para atender esse público com mais foco e orientação."]},{"name":"Tela 8","layout":"cta","dur":7,"head":["Evoluir também é abrir","espaço para novas","formas de dirigir."],"body":["A **Sudeste Assinaturas** nasce desse","movimento — uma maneira mais prática,","previsível e estruturada de acessar um","carro 0km, com atendimento consultivo."],"cta":["Vamos juntos nessa","nova forma de dirigir?"]},{"name":"Encerramento","layout":"closing","dur":6.5,"tag":"A confiança de quem já faz parte da **história da região**."}]';
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  // videoBg:true — fundos de vídeo ligados por padrão nas Telas 1, 3, 5, 7 e Encerramento.
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: true };
+</script>
+
+<script type="text/babel" src="animations-v2.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="scenes.jsx"></script>
+
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(SudesteVideo)
+  );
+</script>
+</body>
+</html>
