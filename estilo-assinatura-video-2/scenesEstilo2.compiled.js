@@ -129,18 +129,25 @@ function Bubble() {
   var s = useScene();var lt = s.localTime;var sc = s.scene;
   var box = ease(lt, 0.2, 0.6);
   var bx = 100,
-      by = 390,
+      by = 1370,
       bw = W - 200;
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
-    React.createElement(BgVideo, { src: VID_1, start: 0, end: 4.9333, speed: 0.85, shiftY: -160 }),
+    React.createElement(BgVideo, { src: VID_1, start: 0, end: 4.9333, speed: 0.85, shiftY: -160, dim: false }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(
       'div',
       { style: { position: 'absolute', left: bx, top: by, width: bw, opacity: box,
           transform: 'translateY(' + (1 - box) * 34 + 'px) scale(' + (0.96 + 0.04 * box) + ')',
-          transformOrigin: '20% 100%' } },
+          transformOrigin: '20% 0%' } },
+      React.createElement(
+        'svg',
+        { width: '200', height: '120', style: { position: 'absolute', left: 130, bottom: '100%',
+            marginBottom: -44, display: 'block' } },
+        React.createElement('path', { d: 'M 0 106 L 200 106 L 88 0 Z', fill: BLUE, stroke: BLUE, strokeWidth: '26',
+          strokeLinejoin: 'round' })
+      ),
       React.createElement(
         'div',
         { style: { background: BLUE, borderRadius: 46, padding: '96px 40px', textAlign: 'center' } },
@@ -152,13 +159,6 @@ function Bubble() {
             ln
           );
         })
-      ),
-      React.createElement(
-        'svg',
-        { width: '200', height: '120', style: { position: 'absolute', left: 130, top: '100%',
-            marginTop: -44, display: 'block' } },
-        React.createElement('path', { d: 'M 0 0 L 200 0 L 88 106 Z', fill: BLUE, stroke: BLUE, strokeWidth: '26',
-          strokeLinejoin: 'round' })
       )
     )
   );
