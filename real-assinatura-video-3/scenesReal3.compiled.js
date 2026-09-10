@@ -246,12 +246,13 @@ function FinalRule() {
     { style: _extends({}, shell, { background: BLACK }) },
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: 0, top: 340, width: W, height: 900,
-          overflow: 'hidden', background: BLACK, opacity: vid,
-          transform: 'translateY(' + (1 - vid) * 30 + 'px)' } },
+      { style: { position: 'absolute', inset: 0, overflow: 'hidden', background: BLACK,
+          opacity: vid, transform: 'translateY(' + (1 - vid) * 30 + 'px)' } },
       React.createElement(VideoSprite, { src: VID_7, start: 0, end: 6.2, speed: 1,
         style: { width: '100%', height: '100%', objectFit: 'cover' } })
     ),
+    React.createElement('div', { style: { position: 'absolute', inset: 0,
+        background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,.78) 100%)' } }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement('div', { style: { position: 'absolute', left: 0, top: ruleY, width: 145, height: 4,
         background: SKY, transform: 'scaleX(' + draw + ')', transformOrigin: 'left' } }),
