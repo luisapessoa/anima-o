@@ -168,7 +168,7 @@ function BlueVideo() {
       { style: { position: 'absolute', left: 125, right: 125, top: plateTop, height: plateH,
           background: BLACK, borderRadius: 60, overflow: 'hidden', opacity: plate,
           transform: 'translateY(' + (1 - plate) * 30 + 'px) scale(' + (0.97 + 0.03 * plate) + ')' } },
-      RUNTIME.videoBg ? React.createElement(VideoSprite, { src: VID_2, start: 0, end: 7, speed: 1,
+      RUNTIME.videoBg ? React.createElement(VideoSprite, { src: VID_2, start: 0, end: 3.7, speed: 0.85,
         style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } }) : null
     ),
     React.createElement(
@@ -202,7 +202,7 @@ function LongVRule() {
     React.createElement(
       'div',
       { style: { position: 'absolute', left: 0, top: 340, width: W, height: 940, overflow: 'hidden' } },
-      React.createElement(BgVideo, { src: VID_3, start: 0, end: 6, speed: 1 })
+      React.createElement(BgVideo, { src: VID_3, start: 0, end: 1.7667, speed: 0.8 })
     ),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement('div', { style: { position: 'absolute', left: 176, top: 0, width: 4, height: gapTop, zIndex: 4,
@@ -233,7 +233,7 @@ function LeadLines() {
     React.createElement(
       'div',
       { style: { position: 'absolute', left: 0, top: 900, width: W, height: 1020, overflow: 'hidden' } },
-      React.createElement(BgVideo, { src: VID_4, start: 0, end: 5.5, speed: 1 })
+      React.createElement(BgVideo, { src: VID_4, start: 0, end: 1.0, speed: 0.8 })
     ),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(

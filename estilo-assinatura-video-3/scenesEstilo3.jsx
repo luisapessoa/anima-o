@@ -122,7 +122,7 @@ function BlueVideo() {
         background: BLACK, borderRadius: 60, overflow: 'hidden', opacity: plate,
         transform: `translateY(${(1 - plate) * 30}px) scale(${0.97 + 0.03 * plate})` }}>
         {RUNTIME.videoBg ? (
-          <VideoSprite src={VID_2} start={0} end={7} speed={1}
+          <VideoSprite src={VID_2} start={0} end={3.7} speed={0.85}
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         ) : null}
       </div>
@@ -147,7 +147,7 @@ function LongVRule() {
   return (
     <div style={{ ...shell, background: BLACK }}>
       <div style={{ position: 'absolute', left: 0, top: 340, width: W, height: 940, overflow: 'hidden' }}>
-        <BgVideo src={VID_3} start={0} end={6} speed={1} />
+        <BgVideo src={VID_3} start={0} end={1.7667} speed={0.8} />
       </div>
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 176, top: 0, width: 4, height: gapTop, zIndex: 4,
@@ -170,7 +170,7 @@ function LeadLines() {
   return (
     <div style={{ ...shell, background: BLACK }}>
       <div style={{ position: 'absolute', left: 0, top: 900, width: W, height: 1020, overflow: 'hidden' }}>
-        <BgVideo src={VID_4} start={0} end={5.5} speed={1} />
+        <BgVideo src={VID_4} start={0} end={1.0} speed={0.8} />
       </div>
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 140, right: 80, top: 430, zIndex: 4 }}>
