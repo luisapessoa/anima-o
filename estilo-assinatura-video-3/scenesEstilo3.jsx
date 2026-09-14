@@ -12,7 +12,8 @@ const LOGO_W = 232, LOGO_TOP = 248;
 const E = Easing;
 const RUNTIME = { showLogo: true };
 
-// Background clips for the 4 video zones — pending client footage.
+// Background clips for the 5 video zones (Tela 5 has none, per the design).
+const VID_1 = 'assets/bg-1.mp4';
 const VID_2 = 'assets/bg-2.mp4';
 const VID_3 = 'assets/bg-3.mp4';
 const VID_4 = 'assets/bg-4.mp4';
@@ -74,6 +75,7 @@ function Opener() {
   const pillIn = ease(lt, 1.25, 0.45);
   return (
     <div style={{ ...shell, background: BLACK }}>
+      <BgVideo src={VID_1} start={0} end={4} speed={0.78} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 70, right: 70, top, textAlign: 'center' }}>
         {lines.map((ln, i) => (
@@ -146,9 +148,7 @@ function LongVRule() {
   const tailDraw = ease(lt, 0.95, 0.7);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <div style={{ position: 'absolute', left: 0, top: 340, width: W, height: 940, overflow: 'hidden' }}>
-        <BgVideo src={VID_3} start={0} end={1.7667} speed={0.8} />
-      </div>
+      <BgVideo src={VID_3} start={0} end={5.5333} speed={0.9} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 176, top: 0, width: 4, height: gapTop, zIndex: 4,
         background: BLUE, transform: `scaleY(${draw})`, transformOrigin: 'top' }} />
@@ -169,9 +169,7 @@ function LeadLines() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <div style={{ position: 'absolute', left: 0, top: 900, width: W, height: 1020, overflow: 'hidden' }}>
-        <BgVideo src={VID_4} start={0} end={1.0} speed={0.8} />
-      </div>
+      <BgVideo src={VID_4} start={0} end={8.5333} speed={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 140, right: 80, top: 430, zIndex: 4 }}>
         {(sc.head || []).map((ln, i) => (
@@ -225,9 +223,7 @@ function Bracket() {
   const bx = 905, by = 590, bh = 880;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <div style={{ position: 'absolute', left: 0, top: 1010, width: W, height: 500, overflow: 'hidden' }}>
-        <BgVideo src={VID_6} start={0} end={6.5} speed={1} />
-      </div>
+      <BgVideo src={VID_6} start={0} end={8.5333} speed={1} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 116, right: 200, top: 430, zIndex: 4 }}>
         {(sc.body || []).map((ln, i) => (

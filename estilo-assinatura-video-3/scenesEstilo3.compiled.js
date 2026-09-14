@@ -27,7 +27,8 @@ var LOGO_W = 232,
 var E = Easing;
 var RUNTIME = { showLogo: true };
 
-// Background clips for the 4 video zones — pending client footage.
+// Background clips for the 5 video zones (Tela 5 has none, per the design).
+var VID_1 = 'assets/bg-1.mp4';
 var VID_2 = 'assets/bg-2.mp4';
 var VID_3 = 'assets/bg-3.mp4';
 var VID_4 = 'assets/bg-4.mp4';
@@ -98,6 +99,7 @@ function Opener() {
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
+    React.createElement(BgVideo, { src: VID_1, start: 0, end: 4, speed: 0.78 }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(
       'div',
@@ -199,11 +201,7 @@ function LongVRule() {
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
-    React.createElement(
-      'div',
-      { style: { position: 'absolute', left: 0, top: 340, width: W, height: 940, overflow: 'hidden' } },
-      React.createElement(BgVideo, { src: VID_3, start: 0, end: 1.7667, speed: 0.8 })
-    ),
+    React.createElement(BgVideo, { src: VID_3, start: 0, end: 5.5333, speed: 0.9 }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement('div', { style: { position: 'absolute', left: 176, top: 0, width: 4, height: gapTop, zIndex: 4,
         background: BLUE, transform: 'scaleY(' + draw + ')', transformOrigin: 'top' } }),
@@ -230,11 +228,7 @@ function LeadLines() {
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
-    React.createElement(
-      'div',
-      { style: { position: 'absolute', left: 0, top: 900, width: W, height: 1020, overflow: 'hidden' } },
-      React.createElement(BgVideo, { src: VID_4, start: 0, end: 1.0, speed: 0.8 })
-    ),
+    React.createElement(BgVideo, { src: VID_4, start: 0, end: 8.5333, speed: 1 }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(
       'div',
@@ -309,11 +303,7 @@ function Bracket() {
   return React.createElement(
     'div',
     { style: _extends({}, shell, { background: BLACK }) },
-    React.createElement(
-      'div',
-      { style: { position: 'absolute', left: 0, top: 1010, width: W, height: 500, overflow: 'hidden' } },
-      React.createElement(BgVideo, { src: VID_6, start: 0, end: 6.5, speed: 1 })
-    ),
+    React.createElement(BgVideo, { src: VID_6, start: 0, end: 8.5333, speed: 1 }),
     RUNTIME.showLogo ? React.createElement(Logo, { variant: 'white', lt: lt }) : null,
     React.createElement(
       'div',
