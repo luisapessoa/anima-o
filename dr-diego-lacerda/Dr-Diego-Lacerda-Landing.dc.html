@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=1280">
 <script>
   window.__resources = {
     "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js",
@@ -473,10 +473,10 @@ class Component extends DCLogic {
     this.alignRight();
   }
 
-  // Keeps an absolutely-positioned block's edges locked to two anchors
-  // (start's left edge, end's right edge) so it spans exactly from one card
-  // to another, at any width — position:absolute keeps it out of the row's
-  // own flex flow so a wide gap to its sibling never wraps it onto a new line.
+  // Keeps a block's edges locked to two anchors (start's left edge, end's
+  // right edge) so it spans exactly from one card to another, at any width
+  // — position:absolute keeps it out of the row's own flex flow so a wide
+  // gap to its sibling never wraps it onto a new line.
   alignSpan() {
     document.querySelectorAll("[data-align-span-start]").forEach((el) => {
       const startId = el.getAttribute("data-align-span-start");
@@ -531,11 +531,25 @@ class Component extends DCLogic {
     const num = (this.props.whatsappNumber ?? "5531900000000").replace(/\D/g, "");
     const photos = this.state.photos || {};
     const uploading = this.state.uploading;
-    const slot = (id) => ({
-      bg: photos[id] ? 'url("' + photos[id] + '")' : "none",
-      emptyDisplay: photos[id] ? "none" : "flex",
-      uploadingDisplay: uploading === id ? "flex" : "none"
-    });
+    // Falls back to a same-folder file when there is no live (Claude-hosted)
+    // photo yet — lets this same page work as a plain static export too
+    // (e.g. on GitHub Pages), as long as img/<name>.jpg exists there.
+    const staticSrc = {
+      hero_cirurgia: "img/hero-cirurgia.jpg",
+      inclui_tricoscopia_a: "img/tricoscopia-a.jpg",
+      inclui_tricoscopia_b: "img/tricoscopia-b.jpg",
+      about_diego_retrato: "img/retrato-diego.jpg",
+      etapas_consulta_mesa: "img/consulta-mesa.jpg"
+    };
+    const useStatic = !window.claude;
+    const slot = (id) => {
+      const url = photos[id] || (useStatic ? staticSrc[id] : null);
+      return {
+        bg: url ? 'url("' + url + '")' : "none",
+        emptyDisplay: url ? "none" : "flex",
+        uploadingDisplay: uploading === id ? "flex" : "none"
+      };
+    };
     const heroCirurgia = slot("hero_cirurgia");
     const incluiTricoscopiaA = slot("inclui_tricoscopia_a");
     const incluiTricoscopiaB = slot("inclui_tricoscopia_b");
