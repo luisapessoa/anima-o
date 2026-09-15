@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ffffff; font-family: 'Lora', Georgia, serif; color: #2b2723; -webkit-font-smoothing: antialiased; }
+  a { color: #461828; text-decoration: none; }
+  a:hover { color: #272f22; }
+  strong { font-weight: 700; color: inherit; }
+  input, select, textarea { font-family: 'Lora', Georgia, serif; }
+  ::selection { background: #461828; color: #f9f1e2; }
+  :focus-visible { outline: 2px solid #272f22; outline-offset: 3px; }
+  summary { list-style: none; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .25s ease; }
+  @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="width:100%; background:#ffffff; overflow-x:hidden">
+
+  <section style="position:relative; min-height:min(92vh,920px); display:flex; align-items:flex-end; overflow:hidden; background:#461828">
+    <div style="position:absolute; top:0; right:0; bottom:0; left:48%; animation:heroZoom 16s ease-out both">
+      <image-slot id="hero-cirurgia" shape="rect" src="img/hero-cirurgia.jpg" placeholder="Foto do Dr. Diego em procedimento (tela cheia)"></image-slot>
+    </div>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg, #461828 0%, #461828 49%, rgba(70,24,40,0.62) 64%, rgba(70,24,40,0.34) 84%, rgba(70,24,40,0.22) 100%); pointer-events:none"></div>
+    <div style="position:absolute; top:0; left:0; right:0; height:150px; background:linear-gradient(180deg, rgba(70,24,40,0.88) 0%, rgba(70,24,40,0.6) 55%, rgba(70,24,40,0) 100%); pointer-events:none"></div>
+    <div style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; max-width:1280px; margin:0 auto; padding:clamp(20px,3vw,34px) clamp(18px,4vw,56px); pointer-events:none">
+      <span style="font-size:17px; font-weight:700; color:#f9f1e2; letter-spacing:0.01em">Dr. Diego Lacerda</span>
+      <span style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#f9f1e2">Médico • CRM-MG 64350</span>
+    </div>
+    
+  <div style="position:relative; width:100%; max-width:1280px; margin:0 auto; padding:clamp(70px,10vw,130px) clamp(18px,4vw,56px) clamp(44px,6vw,84px); pointer-events:none">
+      <div style="display:flex; flex-direction:column; align-items:flex-start; max-width:780px">
+        <span style="font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:#461828; background:#f9f1e2; padding:10px 16px; border-radius:999px; margin-bottom:26px">Belo Horizonte • Consulta presencial</span>
+        <h1 style="margin:0; font-size:clamp(34px,5.2vw,64px); line-height:1.06; font-weight:600; color:#f9f1e2; letter-spacing:-0.02em; max-width:19ch; text-wrap:balance">Volte a se reconhecer no espelho e <em style="font-style:italic">a se sentir bem consigo mesmo</em>.</h1>
+        <p style="margin:24px 0 0; font-size:clamp(15px,1.3vw,19px); line-height:1.7; color:rgba(249,241,226,0.92); max-width:52ch; text-wrap:pretty">Tratamentos capilares em Belo Horizonte. Entenda o que pode estar relacionado às mudanças no seu cabelo e quais cuidados podem ser considerados para o seu caso — <strong>do tratamento clínico à avaliação para transplante capilar</strong>.</p>
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 34px; pointer-events: auto">
+          <a href="#agendar" style="background:#f9f1e2; color:#461828; font-size:16px; font-weight:700; padding:18px 32px; border-radius:999px; transition:transform .25s ease, background .25s ease" style-hover="background:#ffffff; transform:translateY(-2px); color:#461828">Agendar consulta!</a>
+          
+        </div>
+        <span style="margin-top:24px; font-size:13px; color:rgba(249,241,226,0.78); font-style:italic">Atendimento realizado diretamente pelo Dr. Diego Lacerda.</span>
+      </div>
+    </div></section>
+
+  <section id="consulta-inclui" style="background:#ffffff">
+    <div style="max-width:1280px; margin:0 auto; padding:clamp(52px,6.5vw,104px) clamp(18px,4vw,56px)">
+      <div data-reveal="1" style="display:flex; gap:clamp(12px,1.2vw,16px); flex-wrap:wrap; align-items:flex-end; margin-bottom:clamp(28px,3.4vw,48px)">
+        <h2 style="flex:2 1 420px; min-width:280px; margin:0; font-size:clamp(26px,3.2vw,42px); line-height:1.12; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:none; text-wrap:balance">O que está incluído no<br><em style="font-style:italic">seu atendimento</em></h2><p data-align-follow="inclui01" style="flex: 0 1 300px; min-width: 240px; margin: 0; font-size: clamp(14px,1.5vw,17px); line-height: 1.6; color: #461828; max-width: 38ch; text-align: left">Um atendimento conduzido do início ao<br>fim pelo médico, com exame dos fios<br>e um plano construído a partir do seu caso.</p>
+        
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(12px,1.2vw,16px)">
+        <div data-reveal="1" style="position:relative; flex:2 1 420px; min-width:280px; height:clamp(240px,25vw,320px); border-radius:26px; overflow:hidden; background:#f4f3ef">
+          <image-slot id="inclui-tricoscopia-a" shape="rect" src="img/tricoscopia-a.jpg" placeholder="Tricoscopia sendo realizada"></image-slot>
+        </div>
+        <div data-reveal="1" data-align-anchor="inclui01" style="flex:1 1 250px; min-width:250px; height:clamp(240px,25vw,320px); background:#461828; color:#f9f1e2; border-radius:26px; padding:clamp(24px,2.2vw,30px); display:flex; flex-direction:column; justify-content:space-between">
+          <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(249,241,226,0.65)">01</span>
+          <div>
+            <div style="font-size:clamp(17px,1.72vw,22px); line-height:1.25; font-weight:700; max-width:none">Atendimento direto<br>com o médico</div>
+            <p style="margin:10px 0 0; font-size:14px; line-height:1.6; color:rgba(249,241,226,0.85); max-width:28ch">Todas as etapas com o Dr. Diego, do primeiro exame ao acompanhamento.</p>
+          </div>
+        </div>
+        <div data-reveal="1" style="flex:1 1 250px; min-width:250px; height:clamp(240px,25vw,320px); background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:26px; padding:clamp(24px,2.2vw,30px); display:flex; flex-direction:column; justify-content:space-between">
+          <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#272f22">02</span>
+          <div>
+            <div style="font-size:clamp(17px,1.72vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none">Exame dos fios e<br>do couro cabeludo</div>
+            <p style="margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: #461828; max-width: 28ch">A <strong>tricoscopia</strong> amplia a visualização e embasa o que<br>é observado.</p>
+          </div>
+        </div>
+        <div data-reveal="1" style="flex:1.4 1 320px; min-width:270px; height:clamp(240px,25vw,320px); background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:26px; padding:clamp(24px,2.2vw,30px); display:flex; flex-direction:column; justify-content:space-between">
+          <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#272f22">03</span>
+          <div>
+            <div style="font-size:clamp(17px,1.72vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none">Investigação das<br>possíveis causas da queda</div>
+            <p style="margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: #461828EB; max-width: 32ch">Histórico, hábitos e exames entram na leitura do quadro <strong>antes de qualquer conduta</strong>.</p>
+          </div>
+        </div>
+        <div data-reveal="1" style="position:relative; flex:1 1 250px; min-width:250px; height:clamp(240px,25vw,320px); border-radius:26px; overflow:hidden; background:#f4f3ef">
+          <image-slot id="inclui-tricoscopia-b" shape="rect" src="img/tricoscopia-b.jpg" placeholder="Exame do couro cabeludo com magnificação"></image-slot>
+        </div>
+        <div data-reveal="1" style="flex: 1.4 1 320px; min-width: 270px; height: clamp(240px,25vw,320px); border-radius: 26px; padding: clamp(24px,2.2vw,30px); display: flex; flex-direction: column; justify-content: space-between; background-color: #272F22">
+          <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(249,241,226,0.7)">04</span>
+          <div>
+            <div style="font-size: clamp(17px,1.72vw,22px); line-height: 1.25; font-weight: 700; color: #F9F1E2EB; max-width: none">Planejamento feito<br>para o seu caso</div>
+            <p style="margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: #F9F1E2; max-width: 32ch">As possibilidades são definidas a partir dos achados e das suas expectativas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" style="background:#461828; color:#f9f1e2">
+    <div style="max-width:1280px; margin:0 auto; padding:clamp(38px,4.4vw,68px) clamp(18px,4vw,56px)">
+      <h2 data-reveal="1" style="margin:0 auto clamp(24px,2.6vw,36px); font-size:clamp(28px,3.6vw,48px); line-height:1.1; font-weight:600; letter-spacing:-0.015em; max-width:none; white-space:nowrap; text-align:center">Conheça quem irá <em style="font-style:italic">cuidar de você</em>!</h2>
+      <div style="display:flex; gap:clamp(24px,4vw,60px); flex-wrap:wrap; align-items:stretch">
+        <div data-reveal="1" style="flex:1 1 340px; min-width:280px; display:flex; flex-direction:column">
+          <div style="position:relative; flex:1 1 auto; min-height:clamp(300px,30vw,420px); border-radius:26px; overflow:hidden; background:rgba(249,241,226,0.12)">
+            <image-slot id="about-diego-retrato" shape="rect" src="img/retrato-diego.jpg" placeholder="Retrato do Dr. Diego"></image-slot>
+          </div>
+        </div>
+        <div data-reveal="1" style="flex:1.15 1 400px; min-width:280px; display:flex; flex-direction:column; justify-content:space-between; gap:22px">
+          <div style="display:flex; flex-direction:column; gap:18px">
+            <p style="margin:0; font-size:clamp(16px,1.3vw,18px); line-height:1.75; color:#f9f1e2; text-wrap:pretty">Médico formado pela Universidade Federal de Ouro Preto em 2014, o Dr. Diego Lacerda reúne <strong>mais de uma década de atuação na Medicina</strong>, com experiência em serviços públicos e privados de saúde, além de gestão e coordenação hospitalar.</p>
+            <p style="margin:0; font-size:clamp(15px,1.2vw,17px); line-height:1.75; color:rgba(249,241,226,0.88); text-wrap:pretty">Sua aproximação com a saúde capilar também nasceu de uma experiência pessoal: após perceber o aumento das entradas e a redução da densidade dos próprios cabelos, <strong>realizou um transplante capilar em 2023</strong>.</p>
+            <p style="margin:0; font-size:clamp(15px,1.2vw,17px); line-height:1.75; color:rgba(249,241,226,0.88); text-wrap:pretty">O impacto dessa experiência o levou a uma formação complementar em Tricologia, concluída em 2024. Desde 2025, atua no atendimento clínico de alterações capilares, reunindo o olhar médico à <strong>compreensão de quem também já esteve no lugar do paciente</strong>.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,45%),1fr)); gap:12px">
+            <div style="border:1px solid rgba(249,241,226,0.28); border-radius:20px; padding:18px 20px; transition:transform .35s cubic-bezier(.2,.7,.2,1), background .35s ease, border-color .35s ease" style-hover="transform:translateY(-5px); background:rgba(249,241,226,0.1); border-color:rgba(249,241,226,0.65)"><div style="font-size:24px; font-weight:700">2014</div><div style="font-size:13px; line-height:1.45; color:rgba(249,241,226,0.78); margin-top:6px">Formação em Medicina pela UFOP</div></div>
+            <div style="border:1px solid rgba(249,241,226,0.28); border-radius:20px; padding:18px 20px; transition:transform .35s cubic-bezier(.2,.7,.2,1), background .35s ease, border-color .35s ease" style-hover="transform:translateY(-5px); background:rgba(249,241,226,0.1); border-color:rgba(249,241,226,0.65)"><div style="font-size:24px; font-weight:700">2023</div><div style="font-size:13px; line-height:1.45; color:rgba(249,241,226,0.78); margin-top:6px">Transplante capilar como paciente</div></div>
+            <div style="border:1px solid rgba(249,241,226,0.28); border-radius:20px; padding:18px 20px; transition:transform .35s cubic-bezier(.2,.7,.2,1), background .35s ease, border-color .35s ease" style-hover="transform:translateY(-5px); background:rgba(249,241,226,0.1); border-color:rgba(249,241,226,0.65)"><div style="font-size:24px; font-weight:700">2024</div><div style="font-size:13px; line-height:1.45; color:rgba(249,241,226,0.78); margin-top:6px">Formação complementar em Tricologia</div></div>
+            <div style="background:#f9f1e2; border:1px solid #f9f1e2; border-radius:20px; padding:18px 20px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease" style-hover="transform:translateY(-5px); box-shadow:0 16px 34px rgba(0,0,0,0.25)"><div style="font-size:24px; font-weight:700; color:#461828">2025</div><div style="font-size:13px; line-height:1.45; color:#461828; margin-top:6px">Atendimento clínico de alterações capilares</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sinais" style="background:#ffffff">
+    <div style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,112px) clamp(18px,4vw,56px)">
+      <div data-reveal="1" style="display:flex; gap:clamp(24px,4vw,64px); flex-wrap:wrap; align-items:flex-start; margin-bottom:clamp(30px,4vw,52px)">
+        <h2 style="flex:1 1 360px; min-width:280px; margin:0; font-size:clamp(26px,3.1vw,42px); line-height:1.1; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:22ch; text-wrap:balance">Quando o cabelo começa a<br>mudar, isso também afeta<br><em style="font-style: italic;">a forma como você se vê</em>.</h2>
+        <div data-align-right-follow="sinais-card03" style="flex:0 1 420px; min-width:250px; margin-left:auto; display:flex; flex-direction:column; gap:16px; max-width:420px">
+          <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #461828"><b>Talvez a diferença tenha aparecido aos poucos:<br></b>as entradas ficaram mais evidentes, o volume<br>diminuiu ou a queda passou a chamar sua atenção.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #461828"><strong>A avaliação ajuda a compreender essas mudanças<br></strong>e a conversar sobre o que pode ser feito.</p>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(12px,1.2vw,16px)">
+        <div data-reveal="1" style="flex:1 1 260px; min-width:0; background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.2vw,32px); display:flex; flex-direction:column; gap:14px; transition:transform .3s ease, border-color .3s ease" style-hover="transform:translateY(-4px); border-color:rgba(70,24,40,0.45)">
+          <span style="font-size:12px; letter-spacing:0.18em; color:#272f22">01</span>
+          <h3 style="margin:0; font-size:clamp(15px,2.05vw,21px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">As entradas aumentaram</h3>
+          <p style="margin:0; font-size:15px; line-height:1.65; color:#5a544d; max-width:34ch">A linha do cabelo parece mais recuada e você quer saber quais possibilidades existem para essa região.</p>
+        </div>
+        <div data-reveal="1" style="flex:1 1 260px; min-width:0; background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.2vw,32px); display:flex; flex-direction:column; gap:14px; transition:transform .3s ease, border-color .3s ease" style-hover="transform:translateY(-4px); border-color:rgba(70,24,40,0.45)">
+          <span style="font-size:12px; letter-spacing:0.18em; color:#272f22">02</span>
+          <h3 style="margin:0; font-size:clamp(15px,2.05vw,21px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">O cabelo perdeu volume</h3>
+          <p style="margin:0; font-size:15px; line-height:1.65; color:#5a544d; max-width:34ch">Os fios parecem mais finos, o couro cabeludo está mais aparente ou falta a densidade de antes.</p>
+        </div>
+        <div data-reveal="1" data-align-right-anchor="sinais-card03" style="flex:1 1 260px; min-width:0; background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.2vw,32px); display:flex; flex-direction:column; gap:14px; transition:transform .3s ease, border-color .3s ease" style-hover="transform:translateY(-4px); border-color:rgba(70,24,40,0.45)">
+          <span style="font-size:12px; letter-spacing:0.18em; color:#272f22">03</span>
+          <h3 style="margin:0; font-size:21px; line-height:1.25; font-weight:700; color:#461828; max-width:16ch">A queda começou a preocupar</h3>
+          <p style="margin:0; font-size:15px; line-height:1.65; color:#5a544d; max-width:34ch">Mudou a quantidade de fios que caem e você quer investigar o que pode estar relacionado a isso.</p>
+        </div>
+        <div data-reveal="1" style="flex:1 1 455px; min-width:0; background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.2vw,32px); display:flex; flex-direction:column; gap:14px; transition:transform .3s ease, border-color .3s ease" style-hover="transform:translateY(-4px); border-color:rgba(70,24,40,0.45)">
+          <span style="font-size:12px; letter-spacing:0.18em; color:#272f22">04</span>
+          <h3 style="margin:0; font-size:clamp(13px,1.95vw,19px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">Você tentou cuidar e continua com dúvidas</h3>
+          <p style="margin:0; font-size:15px; line-height:1.65; color:#5a544d; max-width:none; text-wrap:balance">Já usou produtos ou fez tratamentos, mas não compreendeu o quadro nem viu a evolução esperada.</p>
+        </div>
+        <div data-reveal="1" style="flex:1 1 380px; min-width:0; background:#272f22; color:#f9f1e2; border-radius:24px; padding:clamp(24px,2.2vw,32px); display:flex; flex-direction:column; gap:14px; transition:transform .3s ease" style-hover="transform:translateY(-4px)">
+          <span style="font-size:12px; letter-spacing:0.18em; color:rgba(249,241,226,0.7)">05</span>
+          <h3 style="margin:0; font-size:21px; line-height:1.25; font-weight:700; max-width:16ch">Você pensa em fazer um transplante</h3>
+          <p style="margin:0; font-size:15px; line-height:1.65; color:rgba(249,241,226,0.88); max-width:none">Existe a vontade de recuperar a cobertura, mas falta saber <strong>se o procedimento pode ser indicado para você</strong>.</p>
+        </div>
+      </div>
+      <div data-reveal="1" style="display:flex; gap:clamp(20px,3vw,48px); align-items:center; flex-wrap:wrap; margin-top:clamp(28px,3vw,44px); padding-top:clamp(24px,3vw,36px); border-top:1px solid rgba(70,24,40,0.16)">
+        <p style="flex:1 1 320px; margin:0; font-size:clamp(17px,1.6vw,22px); line-height:1.45; color:#461828; max-width:38ch; text-wrap:balance">Queixas parecidas podem exigir condutas diferentes. O primeiro passo é uma <em style="font-style:italic">avaliação médica individual</em>.</p>
+        <a href="#agendar" style="margin-left:auto; background:#272f22; color:#f9f1e2; font-size:16px; font-weight:700; padding:18px 32px; border-radius:999px; transition:transform .25s ease, background .25s ease" style-hover="background:#461828; transform:translateY(-2px); color:#f9f1e2">Agendar consulta!</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="etapas" style="background:#f9f1e2">
+    
+  <div style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,112px) clamp(18px,4vw,56px)">
+      <div data-reveal="1" style="display:flex; flex-wrap:wrap; gap:clamp(16px,2vw,28px); align-items:flex-start; margin-bottom:clamp(28px,3.4vw,46px)">
+        <h2 style="flex:1 1 400px; margin:0; font-size:clamp(23px,2.7vw,37px); line-height:1.12; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:none">Antes de escolher um tratamento,<br>é preciso <em style="font-style:italic">entender o que<br>está acontecendo</em>!</h2>
+        <p style="flex:0 1 520px; margin:0; margin-left:auto; font-size:16px; line-height:1.7; color:#461828; max-width:52ch; text-align:left">A consulta é uma avaliação médica: sua história, as alterações percebidas e as características dos fios são analisadas <strong>antes de definir os próximos passos</strong>.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,45%),1fr)); gap:clamp(12px,1.2vw,16px)">
+        <div data-reveal="1" style="background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.4vw,34px); display:flex; flex-direction:column; gap:14px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease" style-hover="transform:translateY(-6px); box-shadow:0 18px 40px rgba(70,24,40,0.14); border-color:rgba(70,24,40,0.5)">
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:999px; background:#461828; color:#f9f1e2"><svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg></span>
+          <h3 style="margin:0; font-size:clamp(15px,1.75vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">Conversa sobre a sua história</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#5a544d; max-width:44ch">Quando as mudanças começaram, o que você já utilizou, informações relevantes de saúde e <strong>o resultado que deseja alcançar</strong>.</p>
+        </div>
+        <div data-reveal="1" style="background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.4vw,34px); display:flex; flex-direction:column; gap:14px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease" style-hover="transform:translateY(-6px); box-shadow:0 18px 40px rgba(70,24,40,0.14); border-color:rgba(70,24,40,0.5)">
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:999px; background:#461828; color:#f9f1e2"><svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="11" cy="11" r="7"></circle><path d="M20.5 20.5 16 16"></path></svg></span>
+          <h3 style="margin:0; font-size:clamp(15px,1.75vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">Avaliação dos fios com tricoscopia</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#5a544d; max-width:44ch">O exame amplia a visualização dos fios e do couro cabeludo. <strong>As imagens ajudam a avaliar e a explicar os achados.</strong></p>
+        </div>
+        <div data-reveal="1" style="background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.4vw,34px); display:flex; flex-direction:column; gap:14px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease" style-hover="transform:translateY(-6px); box-shadow:0 18px 40px rgba(70,24,40,0.14); border-color:rgba(70,24,40,0.5)">
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:999px; background:#461828; color:#f9f1e2"><svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M8.5 11h7"></path><path d="M8.5 15.5h4.5"></path></svg></span>
+          <h3 style="margin:0; font-size:clamp(15px,1.75vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">Investigação complementar, quando necessária</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#5a544d; max-width:44ch">Exames já realizados podem ser analisados ou novas avaliações solicitadas para investigar fatores associados à queda.</p>
+        </div>
+        <div data-reveal="1" style="background:#ffffff; border:1px solid rgba(70,24,40,0.18); border-radius:24px; padding:clamp(24px,2.4vw,34px); display:flex; flex-direction:column; gap:14px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease" style-hover="transform:translateY(-6px); box-shadow:0 18px 40px rgba(70,24,40,0.14); border-color:rgba(70,24,40,0.5)">
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:999px; background:#461828; color:#f9f1e2"><svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"></circle><path d="M16.2 7.8l-2.1 6.4-6.3 2.1 2.1-6.4z"></path></svg></span>
+          <h3 style="margin:0; font-size:clamp(15px,1.75vw,22px); line-height:1.25; font-weight:700; color:#461828; max-width:none; white-space:nowrap">Orientação sobre os próximos passos</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#5a544d; max-width:44ch">O Dr. Diego explica quais possibilidades podem ser consideradas — ou o que ainda precisa ser investigado antes disso.</p>
+        </div>
+      </div>
+      <div data-reveal="1" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,45%),1fr)); gap:clamp(12px,1.2vw,16px); margin-top:clamp(12px,1.2vw,16px)">
+        <div style="position:relative; min-width:0; min-height:clamp(240px,24vw,300px); border-radius:24px; overflow:hidden; background:#efe6d4">
+          <image-slot id="etapas-consulta-mesa" shape="rect" src="img/consulta-mesa.jpg" placeholder="Consulta no consultório"></image-slot>
+        </div>
+        <div style="min-width:0; background:#272f22; color:#f9f1e2; border-radius:24px; padding:clamp(26px,2.6vw,40px); display:flex; flex-direction:column; justify-content:center; gap:26px; align-items:center">
+          
+          <p style="margin: 0; font-size: clamp(21px,2.5vw,33px); line-height: 1.22; font-weight: 600; max-width: none; text-align: center">Você sai da consulta<br>entendendo <em style="font-style:italic">o próprio<br>quadro</em> — e o que vem depois.</p><a href="#agendar" style="background:#f9f1e2; color:#272f22; font-size:16px; font-weight:700; padding:18px 32px; border-radius:999px; transition:transform .25s ease, background .25s ease" style-hover="background:#ffffff; transform:translateY(-2px); color:#272f22">Agendar consulta!</a>
+        </div>
+      </div>
+    </div></section>
+
+  <section id="tratamentos" style="background:#ffffff">
+    <div style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,112px) clamp(18px,4vw,56px)">
+      <div data-reveal="1" style="display:flex; gap:clamp(24px,4vw,64px); flex-wrap:wrap; align-items:flex-start; margin-bottom:clamp(28px,3.4vw,48px)">
+        <h2 style="flex:0 1 auto; min-width:280px; margin:0; font-size:clamp(26px,3.3vw,44px); line-height:1.1; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:none">Conheça as<br><em style="font-style:italic">possibilidades de tratamento</em>!</h2>
+        <p style="flex:0 1 42ch; min-width:250px; margin:0; margin-left:auto; font-size:16px; line-height:1.7; color:#461828; max-width:42ch; text-align:left">Toque em cada possibilidade para entender melhor. O caminho é definido após avaliar o histórico, a evolução da queda e as características do couro cabeludo.</p>
+      </div>
+      <div data-reveal="1" style="display:flex; flex-direction:column; border-top:1px solid rgba(70,24,40,0.2)">
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">01</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Investigação clínica e tricoscopia</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">A tricoscopia amplia a visualização dos fios e do couro cabeludo para analisar <strong>densidade, calibre, miniaturização</strong> e possíveis alterações. Exames laboratoriais também podem ser solicitados quando necessários.</p>
+        </details>
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">02</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Tratamento clínico</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">Pode incluir medicamentos tópicos ou orais, definidos de acordo com a condição identificada, o histórico de saúde e as possíveis contraindicações do paciente.</p>
+        </details>
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">03</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Microinfusão de medicamentos na pele (MMP)</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">A MMP utiliza microperfurações controladas para aplicar medicamentos selecionados diretamente no couro cabeludo. O protocolo e o número de sessões são definidos individualmente.</p>
+        </details>
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">04</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Mesoterapia capilar</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">Consiste na aplicação intradérmica de substâncias em pontos específicos do couro cabeludo. A composição e os intervalos entre as sessões dependem da indicação médica.</p>
+        </details>
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">05</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Biópsia do couro cabeludo</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">Quando necessária, uma pequena amostra do couro cabeludo é retirada para análise laboratorial e complementação da investigação.</p>
+        </details>
+        <details open="true" style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">06</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Avaliação para transplante capilar</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; background:#272f22; border:1px solid #272f22; color:#f9f1e2"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">O planejamento considera o padrão da perda, a área doadora, as regiões que precisam de cobertura e a linha de implantação. <strong>Um desenho preliminar pode ser realizado para orientar essa conversa.</strong></p>
+        </details>
+        <details style="border-bottom:1px solid rgba(70,24,40,0.14)">
+          <summary style="display:flex; align-items:center; gap:clamp(12px,2vw,24px); padding:clamp(18px,2vw,26px) 0">
+            <span style="flex:none; font-size:13px; letter-spacing:0.14em; color:#272f22; width:28px">07</span>
+            <span style="flex:1; font-size:clamp(17px,1.6vw,22px); line-height:1.3; font-weight:700; color:#461828">Acompanhamento</span>
+            <span class="chev" style="flex:none; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid rgba(70,24,40,0.28); color:#461828"><svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+          </summary>
+          <p style="margin:0 0 clamp(18px,2vw,26px); padding-left:clamp(40px,4vw,52px); font-size:16px; line-height:1.75; color:#272f22; max-width:70ch">As reavaliações permitem observar a resposta ao tratamento e realizar ajustes conforme a evolução de cada paciente.</p>
+        </details>
+      </div>
+      <div data-reveal="1" style="display:flex; gap:clamp(18px,3vw,40px); flex-wrap:wrap; align-items:center; margin-top:clamp(26px,3vw,40px)">
+        <p style="flex:1 1 300px; margin:0; font-size:clamp(16px,1.4vw,19px); line-height:1.5; color:#461828; font-style:italic; max-width:34ch">A indicação de cada caminho depende da avaliação médica individual.</p>
+        <a href="#agendar" style="margin-left:auto; background:#272f22; color:#f9f1e2; font-size:16px; font-weight:700; padding:18px 32px; border-radius:999px; transition:transform .25s ease, background .25s ease" style-hover="background:#461828; transform:translateY(-2px); color:#f9f1e2">Agendar consulta!</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="agendar" style="background:#461828; color:#f9f1e2">
+    <div style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,112px) clamp(18px,4vw,56px)">
+      <div style="display:flex; gap:clamp(28px,4vw,64px); flex-wrap:wrap; align-items:flex-start">
+        <div data-reveal="1" style="flex:1 1 380px; min-width:280px; display:flex; flex-direction:column; gap:20px">
+          <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#461828; background:#f9f1e2; padding:9px 15px; border-radius:999px; align-self:flex-start">Agende sua avaliação</span>
+          <h2 style="margin:0; font-size:clamp(27px,3.3vw,44px); line-height:1.1; font-weight:600; letter-spacing:-0.015em; max-width:19ch; text-wrap:balance">Voltar a se reconhecer no espelho pode começar com <em style="font-style:italic">uma avaliação</em>!</h2>
+          <p style="margin:0; font-size:clamp(15px,1.25vw,18px); line-height:1.75; color:rgba(249,241,226,0.88); max-width:46ch">Preencha o formulário e nossa equipe entrará em contato para esclarecer suas primeiras dúvidas e apresentar <strong>os horários disponíveis</strong> para uma consulta com o Dr. Diego.</p>
+          <div style="margin-top:8px; padding-top:20px; border-top:1px solid rgba(249,241,226,0.22); display:flex; flex-direction:column; gap:10px">
+            <span style="font-size:15px; color:rgba(249,241,226,0.9)">Consulta particular e presencial em Belo Horizonte.</span>
+            <span style="font-size:14px; color:rgba(249,241,226,0.65)">Dr. Diego Lacerda • Médico • CRM-MG 64350</span>
+          </div>
+        </div>
+        <div data-reveal="1" style="flex:1 1 380px; min-width:290px; background:#ffffff; color:#2b2723; border-radius:26px; padding:clamp(24px,2.6vw,38px)">
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0">
+              <h3 style="margin:0; font-size:24px; font-weight:700; color:#461828">Recebemos seus dados!</h3>
+              <p style="margin:0; font-size:16px; line-height:1.6; color:#5a544d; max-width:36ch">Nossa equipe entrará em contato pelo WhatsApp informado para apresentar os horários disponíveis.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:flex; flex-direction:column; gap:16px">
+              <label style="display:flex; flex-direction:column; gap:7px"><span style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#7a3f38">Nome completo</span><input required="true" name="nome" type="text" placeholder="Seu nome" style="width:100%; font-size:16px; padding:14px 16px; border:1px solid rgba(70,24,40,0.24); border-radius:14px; background:#ffffff; color:#2b2723" style-focus="border-color:#461828; outline:none"></label>
+              <label style="display:flex; flex-direction:column; gap:7px"><span style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#7a3f38">WhatsApp</span><input required="true" name="tel" type="tel" placeholder="(31) 90000-0000" style="width:100%; font-size:16px; padding:14px 16px; border:1px solid rgba(70,24,40,0.24); border-radius:14px; background:#ffffff; color:#2b2723" style-focus="border-color:#461828; outline:none"></label>
+              <label style="display:flex; flex-direction:column; gap:7px"><span style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#7a3f38">E-mail</span><input name="email" type="email" placeholder="seu@email.com" style="width:100%; font-size:16px; padding:14px 16px; border:1px solid rgba(70,24,40,0.24); border-radius:14px; background:#ffffff; color:#2b2723" style-focus="border-color:#461828; outline:none"></label>
+              <label style="display:flex; flex-direction:column; gap:7px"><span style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#7a3f38">Principal motivo do contato</span>
+                <select name="motivo" style="width:100%; font-size:16px; padding:14px 16px; border:1px solid rgba(70,24,40,0.24); border-radius:14px; background:#ffffff; color:#2b2723" style-focus="border-color:#461828; outline:none">
+                  <option>Aumento das entradas</option>
+                  <option>Perda de volume ou densidade</option>
+                  <option>Queda de cabelo</option>
+                  <option>Já fiz tratamentos e tenho dúvidas</option>
+                  <option>Avaliação para transplante capilar</option>
+                  <option>Outro motivo</option>
+                </select>
+              </label>
+              <label style="display:flex; flex-direction:column; gap:7px"><span style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#7a3f38">Quer contar mais? (opcional)</span><textarea name="msg" rows="3" placeholder="Desde quando percebeu as mudanças, tratamentos realizados..." style="width:100%; font-size:16px; padding:14px 16px; border:1px solid rgba(70,24,40,0.24); border-radius:14px; background:#ffffff; color:#2b2723; resize:vertical" style-focus="border-color:#461828; outline:none"></textarea></label>
+              <button type="submit" style="width:100%; margin-top:4px; background:#272f22; color:#f9f1e2; font-size:17px; font-weight:700; padding:18px 24px; border:none; border-radius:999px; cursor:pointer; transition:background .25s ease" style-hover="background:#461828">Agendar consulta!</button>
+              <span style="font-size:12px; line-height:1.5; color:#7a3f38">Seus dados são usados apenas para o contato da equipe do consultório.</span>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ floatingCta }}" hint-placeholder-val="{{ true }}">
+    <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="position:fixed; right:clamp(14px,3vw,28px); bottom:clamp(14px,3vw,28px); z-index:60; background:#272f22; color:#f9f1e2; font-size:15px; font-weight:700; padding:16px 24px; border-radius:999px; transition:transform .25s ease, background .25s ease" style-hover="background:#461828; transform:translateY(-2px); color:#f9f1e2">Falar no WhatsApp</a>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;floatingCta&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Contato&quot; },
+  &quot;whatsappNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;5531900000000&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contato&quot; }
+}">
+class Component extends DCLogic {
+  state = { sent: false };
+
+  componentDidMount() {
+    this.scan = this.scan.bind(this);
+    this.scan();
+    window.addEventListener("scroll", this.scan, { passive: true });
+    window.addEventListener("resize", this.scan, { passive: true });
+    window.addEventListener("hashchange", this.scan);
+    this._t = setInterval(this.scan, 400);
+  }
+
+  scan() {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const h = window.innerHeight;
+    document.querySelectorAll("[data-reveal]:not(.is-in)").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (reduce || (r.top < h * 0.94 && r.bottom > -h)) el.classList.add("is-in");
+    });
+    this.align();
+    this.alignRight();
+  }
+
+  // Keeps a paragraph's left edge locked to the card it points at, at any width.
+  align() {
+    document.querySelectorAll("[data-align-follow]").forEach((el) => {
+      const anchor = document.querySelector('[data-align-anchor="' + el.getAttribute("data-align-follow") + '"]');
+      const row = el.parentElement;
+      if (!anchor || !row) return;
+      const rowRect = row.getBoundingClientRect();
+      const offset = Math.round(anchor.getBoundingClientRect().left - rowRect.left);
+      const want = offset > 0 ? offset + "px" : "auto";
+      if (el.style.marginLeft !== want) el.style.marginLeft = want;
+    });
+  }
+
+  // Keeps a block's right edge locked to another element's right edge, at any width
+  // (the two can live in different rows/containers, e.g. a header paragraph
+  // matching a card further down the page).
+  alignRight() {
+    document.querySelectorAll("[data-align-right-follow]").forEach((el) => {
+      const anchor = document.querySelector('[data-align-right-anchor="' + el.getAttribute("data-align-right-follow") + '"]');
+      if (!anchor) return;
+      const elRect = el.getBoundingClientRect();
+      const anchorRect = anchor.getBoundingClientRect();
+      const delta = anchorRect.right - elRect.right;
+      if (Math.abs(delta) < 0.5) return;
+      const current = parseFloat(getComputedStyle(el).marginLeft) || 0;
+      el.style.marginLeft = Math.round(current + delta) + "px";
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._t);
+    window.removeEventListener("scroll", this.scan);
+    window.removeEventListener("resize", this.scan);
+    window.removeEventListener("hashchange", this.scan);
+  }
+
+  renderVals() {
+    const num = (this.props.whatsappNumber ?? "5531900000000").replace(/\D/g, "");
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      floatingCta: this.props.floatingCta ?? true,
+      whatsappHref: "https://wa.me/" + num,
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
