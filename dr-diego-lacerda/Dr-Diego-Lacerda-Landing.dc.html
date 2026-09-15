@@ -17,11 +17,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;display=swap" rel="stylesheet">
-<script src="./image-slot.js"></script>
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  [data-photo-id][data-drag-over] { outline: 2px solid #272f22; outline-offset: -2px; }
   body { margin: 0; background: #ffffff; font-family: 'Lora', Georgia, serif; color: #2b2723; -webkit-font-smoothing: antialiased; }
   a { color: #461828; text-decoration: none; }
   a:hover { color: #272f22; }
@@ -44,7 +44,14 @@
 
   <section style="position:relative; min-height:min(92vh,920px); display:flex; align-items:flex-end; overflow:hidden; background:#461828">
     <div style="position:absolute; top:0; right:0; bottom:0; left:48%; animation:heroZoom 16s ease-out both">
-      <image-slot id="hero-cirurgia" shape="rect" src="img/hero-cirurgia.jpg" placeholder="Foto do Dr. Diego em procedimento (tela cheia)"></image-slot>
+      <div data-photo-id="hero_cirurgia" style="position:absolute; inset:0; cursor:pointer; background-color:#2b1620; background-size:cover; background-position:center; background-image:{{heroCirurgiaBg}}">
+        <input type="file" accept="image/*" data-photo-input="hero_cirurgia" style="display:none">
+        <div style="position:absolute; inset:0; display:{{heroCirurgiaEmptyDisplay}}; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; padding:16px; background:rgba(43,22,32,0.5); border:1.5px dashed rgba(249,241,226,0.5); color:#f9f1e2; font-size:12px; line-height:1.4; pointer-events:none">
+          <span>Foto do Dr. Diego em procedimento (tela cheia)</span>
+          <span style="text-decoration:underline">Clique ou arraste uma imagem aqui</span>
+        </div>
+        <div style="position:absolute; inset:0; display:{{heroCirurgiaUploadingDisplay}}; align-items:center; justify-content:center; background:rgba(43,22,32,0.65); color:#f9f1e2; font-size:13px; pointer-events:none">Enviando…</div>
+      </div>
     </div>
     <div style="position:absolute; inset:0; background:linear-gradient(90deg, #461828 0%, #461828 49%, rgba(70,24,40,0.62) 64%, rgba(70,24,40,0.34) 84%, rgba(70,24,40,0.22) 100%); pointer-events:none"></div>
     <div style="position:absolute; top:0; left:0; right:0; height:150px; background:linear-gradient(180deg, rgba(70,24,40,0.88) 0%, rgba(70,24,40,0.6) 55%, rgba(70,24,40,0) 100%); pointer-events:none"></div>
@@ -75,7 +82,14 @@
 
       <div style="display:flex; flex-wrap:wrap; gap:clamp(12px,1.2vw,16px)">
         <div data-reveal="1" style="position:relative; flex:2 1 420px; min-width:280px; height:clamp(190px,19vw,250px); border-radius:26px; overflow:hidden; background:#f4f3ef">
-          <image-slot id="inclui-tricoscopia-a" shape="rect" src="img/tricoscopia-a.jpg" placeholder="Tricoscopia sendo realizada"></image-slot>
+          <div data-photo-id="inclui_tricoscopia_a" style="position:absolute; inset:0; cursor:pointer; background-color:#f4f3ef; background-size:cover; background-position:center; background-image:{{incluiTricoscopiaABg}}">
+            <input type="file" accept="image/*" data-photo-input="inclui_tricoscopia_a" style="display:none">
+            <div style="position:absolute; inset:0; display:{{incluiTricoscopiaAEmptyDisplay}}; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; padding:16px; background:rgba(70,24,40,0.05); border:1.5px dashed rgba(70,24,40,0.3); color:#461828; font-size:12px; line-height:1.4; pointer-events:none">
+              <span>Tricoscopia sendo realizada</span>
+              <span style="text-decoration:underline">Clique ou arraste uma imagem aqui</span>
+            </div>
+            <div style="position:absolute; inset:0; display:{{incluiTricoscopiaAUploadingDisplay}}; align-items:center; justify-content:center; background:rgba(70,24,40,0.55); color:#f9f1e2; font-size:13px; pointer-events:none">Enviando…</div>
+          </div>
         </div>
         <div data-reveal="1" data-align-anchor="inclui01" style="flex:1 1 250px; min-width:250px; height:clamp(190px,19vw,250px); background:#461828; color:#f9f1e2; border-radius:26px; padding:clamp(24px,2.2vw,30px); display:flex; flex-direction:column; justify-content:space-between">
           <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(249,241,226,0.65)">01</span>
@@ -99,7 +113,14 @@
           </div>
         </div>
         <div data-reveal="1" style="position:relative; flex:1 1 250px; min-width:250px; height:clamp(190px,19vw,250px); border-radius:26px; overflow:hidden; background:#f4f3ef">
-          <image-slot id="inclui-tricoscopia-b" shape="rect" src="img/tricoscopia-b.jpg" placeholder="Exame do couro cabeludo com magnificação"></image-slot>
+          <div data-photo-id="inclui_tricoscopia_b" style="position:absolute; inset:0; cursor:pointer; background-color:#f4f3ef; background-size:cover; background-position:center; background-image:{{incluiTricoscopiaBBg}}">
+            <input type="file" accept="image/*" data-photo-input="inclui_tricoscopia_b" style="display:none">
+            <div style="position:absolute; inset:0; display:{{incluiTricoscopiaBEmptyDisplay}}; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; padding:16px; background:rgba(70,24,40,0.05); border:1.5px dashed rgba(70,24,40,0.3); color:#461828; font-size:12px; line-height:1.4; pointer-events:none">
+              <span>Exame do couro cabeludo com magnificação</span>
+              <span style="text-decoration:underline">Clique ou arraste uma imagem aqui</span>
+            </div>
+            <div style="position:absolute; inset:0; display:{{incluiTricoscopiaBUploadingDisplay}}; align-items:center; justify-content:center; background:rgba(70,24,40,0.55); color:#f9f1e2; font-size:13px; pointer-events:none">Enviando…</div>
+          </div>
         </div>
         <div data-reveal="1" style="flex: 1.4 1 320px; min-width: 270px; height: clamp(190px,19vw,250px); border-radius: 26px; padding: clamp(24px,2.2vw,30px); display: flex; flex-direction: column; justify-content: space-between; background-color: #272F22">
           <span style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(249,241,226,0.7)">04</span>
@@ -118,7 +139,14 @@
       <div style="display:flex; gap:clamp(24px,4vw,60px); flex-wrap:wrap; align-items:stretch">
         <div data-reveal="1" style="flex:1 1 340px; min-width:280px; display:flex; flex-direction:column">
           <div style="position:relative; flex:1 1 auto; min-height:clamp(300px,30vw,420px); border-radius:26px; overflow:hidden; background:rgba(249,241,226,0.12)">
-            <image-slot id="about-diego-retrato" shape="rect" src="img/retrato-diego.jpg" placeholder="Retrato do Dr. Diego"></image-slot>
+            <div data-photo-id="about_diego_retrato" style="position:absolute; inset:0; cursor:pointer; background-color:rgba(249,241,226,0.12); background-size:cover; background-position:center; background-image:{{aboutDiegoRetratoBg}}">
+              <input type="file" accept="image/*" data-photo-input="about_diego_retrato" style="display:none">
+              <div style="position:absolute; inset:0; display:{{aboutDiegoRetratoEmptyDisplay}}; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; padding:16px; background:rgba(43,22,32,0.35); border:1.5px dashed rgba(249,241,226,0.5); color:#f9f1e2; font-size:12px; line-height:1.4; pointer-events:none">
+                <span>Retrato do Dr. Diego</span>
+                <span style="text-decoration:underline">Clique ou arraste uma imagem aqui</span>
+              </div>
+              <div style="position:absolute; inset:0; display:{{aboutDiegoRetratoUploadingDisplay}}; align-items:center; justify-content:center; background:rgba(43,22,32,0.65); color:#f9f1e2; font-size:13px; pointer-events:none">Enviando…</div>
+            </div>
           </div>
         </div>
         <div data-reveal="1" style="flex:1.15 1 400px; min-width:280px; display:flex; flex-direction:column; justify-content:space-between; gap:22px">
@@ -212,7 +240,14 @@
       </div>
       <div data-reveal="1" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,45%),1fr)); gap:clamp(12px,1.2vw,16px); margin-top:clamp(12px,1.2vw,16px)">
         <div style="position:relative; min-width:0; min-height:clamp(240px,24vw,300px); border-radius:24px; overflow:hidden; background:#efe6d4">
-          <image-slot id="etapas-consulta-mesa" shape="rect" src="img/consulta-mesa.jpg" placeholder="Consulta no consultório"></image-slot>
+          <div data-photo-id="etapas_consulta_mesa" style="position:absolute; inset:0; cursor:pointer; background-color:#efe6d4; background-size:cover; background-position:center; background-image:{{etapasConsultaMesaBg}}">
+            <input type="file" accept="image/*" data-photo-input="etapas_consulta_mesa" style="display:none">
+            <div style="position:absolute; inset:0; display:{{etapasConsultaMesaEmptyDisplay}}; flex-direction:column; align-items:center; justify-content:center; gap:6px; text-align:center; padding:16px; background:rgba(70,24,40,0.05); border:1.5px dashed rgba(70,24,40,0.3); color:#461828; font-size:12px; line-height:1.4; pointer-events:none">
+              <span>Consulta no consultório</span>
+              <span style="text-decoration:underline">Clique ou arraste uma imagem aqui</span>
+            </div>
+            <div style="position:absolute; inset:0; display:{{etapasConsultaMesaUploadingDisplay}}; align-items:center; justify-content:center; background:rgba(70,24,40,0.55); color:#f9f1e2; font-size:13px; pointer-events:none">Enviando…</div>
+          </div>
         </div>
         <div style="min-width:0; background:#272f22; color:#f9f1e2; border-radius:24px; padding:clamp(26px,2.6vw,40px); display:flex; flex-direction:column; justify-content:center; gap:26px; align-items:center">
           
@@ -347,7 +382,7 @@
   &quot;whatsappNumber&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;5531900000000&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contato&quot; }
 }">
 class Component extends DCLogic {
-  state = { sent: false };
+  state = { sent: false, photos: {}, uploading: null };
 
   componentDidMount() {
     this.scan = this.scan.bind(this);
@@ -356,6 +391,75 @@ class Component extends DCLogic {
     window.addEventListener("resize", this.scan, { passive: true });
     window.addEventListener("hashchange", this.scan);
     this._t = setInterval(this.scan, 400);
+    this._initPhotos();
+
+    this._onSlotClick = (e) => {
+      const slot = e.target.closest("[data-photo-id]");
+      if (!slot) return;
+      const input = document.querySelector('[data-photo-input="' + slot.getAttribute("data-photo-id") + '"]');
+      if (input) input.click();
+    };
+    this._onSlotChange = (e) => {
+      const input = e.target.closest("[data-photo-input]");
+      if (!input || !input.files || !input.files[0]) return;
+      this._uploadPhoto(input.getAttribute("data-photo-input"), input.files[0]);
+      input.value = "";
+    };
+    this._onDragOver = (e) => { if (e.target.closest("[data-photo-id]")) e.preventDefault(); };
+    this._onDragEnter = (e) => {
+      const slot = e.target.closest("[data-photo-id]");
+      if (slot) slot.setAttribute("data-drag-over", "");
+    };
+    this._onDragLeave = (e) => {
+      const slot = e.target.closest("[data-photo-id]");
+      if (slot) slot.removeAttribute("data-drag-over");
+    };
+    this._onDrop = (e) => {
+      const slot = e.target.closest("[data-photo-id]");
+      if (!slot) return;
+      e.preventDefault();
+      slot.removeAttribute("data-drag-over");
+      const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) this._uploadPhoto(slot.getAttribute("data-photo-id"), file);
+    };
+    document.addEventListener("click", this._onSlotClick);
+    document.addEventListener("change", this._onSlotChange);
+    document.addEventListener("dragover", this._onDragOver);
+    document.addEventListener("dragenter", this._onDragEnter);
+    document.addEventListener("dragleave", this._onDragLeave);
+    document.addEventListener("drop", this._onDrop);
+  }
+
+  async _initPhotos() {
+    if (!window.claude) return;
+    const [assets, db] = await Promise.all([window.claude.use("assets"), window.claude.use("db")]);
+    this._assets = assets;
+    this._db = db;
+    if (!db) return;
+    this._unsubPhotos = db.collection("photos").onSnapshot(
+      (snap) => {
+        const photos = {};
+        snap.docs.forEach((doc) => {
+          const data = doc.data();
+          if (data && typeof data.url === "string") photos[doc.id] = data.url;
+        });
+        this.setState({ photos });
+      },
+      (err) => console.error("[photos] snapshot error", err)
+    );
+  }
+
+  async _uploadPhoto(id, file) {
+    if (!this._assets || !this._db) return;
+    this.setState({ uploading: id });
+    try {
+      const res = await this._assets.upload(file);
+      await this._db.doc("photos/" + id).set({ url: res.url, assetId: res.id });
+    } catch (e) {
+      console.error("[photos] upload failed", e);
+    } finally {
+      this.setState({ uploading: null });
+    }
   }
 
   scan() {
@@ -414,16 +518,50 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this.scan);
     window.removeEventListener("resize", this.scan);
     window.removeEventListener("hashchange", this.scan);
+    if (this._unsubPhotos) this._unsubPhotos();
+    document.removeEventListener("click", this._onSlotClick);
+    document.removeEventListener("change", this._onSlotChange);
+    document.removeEventListener("dragover", this._onDragOver);
+    document.removeEventListener("dragenter", this._onDragEnter);
+    document.removeEventListener("dragleave", this._onDragLeave);
+    document.removeEventListener("drop", this._onDrop);
   }
 
   renderVals() {
     const num = (this.props.whatsappNumber ?? "5531900000000").replace(/\D/g, "");
+    const photos = this.state.photos || {};
+    const uploading = this.state.uploading;
+    const slot = (id) => ({
+      bg: photos[id] ? 'url("' + photos[id] + '")' : "none",
+      emptyDisplay: photos[id] ? "none" : "flex",
+      uploadingDisplay: uploading === id ? "flex" : "none"
+    });
+    const heroCirurgia = slot("hero_cirurgia");
+    const incluiTricoscopiaA = slot("inclui_tricoscopia_a");
+    const incluiTricoscopiaB = slot("inclui_tricoscopia_b");
+    const aboutDiegoRetrato = slot("about_diego_retrato");
+    const etapasConsultaMesa = slot("etapas_consulta_mesa");
     return {
       sent: this.state.sent,
       notSent: !this.state.sent,
       floatingCta: this.props.floatingCta ?? true,
       whatsappHref: "https://wa.me/" + num,
-      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      heroCirurgiaBg: heroCirurgia.bg,
+      heroCirurgiaEmptyDisplay: heroCirurgia.emptyDisplay,
+      heroCirurgiaUploadingDisplay: heroCirurgia.uploadingDisplay,
+      incluiTricoscopiaABg: incluiTricoscopiaA.bg,
+      incluiTricoscopiaAEmptyDisplay: incluiTricoscopiaA.emptyDisplay,
+      incluiTricoscopiaAUploadingDisplay: incluiTricoscopiaA.uploadingDisplay,
+      incluiTricoscopiaBBg: incluiTricoscopiaB.bg,
+      incluiTricoscopiaBEmptyDisplay: incluiTricoscopiaB.emptyDisplay,
+      incluiTricoscopiaBUploadingDisplay: incluiTricoscopiaB.uploadingDisplay,
+      aboutDiegoRetratoBg: aboutDiegoRetrato.bg,
+      aboutDiegoRetratoEmptyDisplay: aboutDiegoRetrato.emptyDisplay,
+      aboutDiegoRetratoUploadingDisplay: aboutDiegoRetrato.uploadingDisplay,
+      etapasConsultaMesaBg: etapasConsultaMesa.bg,
+      etapasConsultaMesaEmptyDisplay: etapasConsultaMesa.emptyDisplay,
+      etapasConsultaMesaUploadingDisplay: etapasConsultaMesa.uploadingDisplay
     };
   }
 }
