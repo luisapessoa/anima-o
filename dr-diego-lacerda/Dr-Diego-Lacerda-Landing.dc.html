@@ -68,8 +68,8 @@
 
   <section id="consulta-inclui" style="background:#ffffff">
     <div style="max-width:1280px; margin:0 auto; padding:clamp(52px,6.5vw,104px) clamp(18px,4vw,56px)">
-      <div data-reveal="1" style="display:flex; gap:clamp(12px,1.2vw,16px); flex-wrap:wrap; align-items:flex-start; margin-bottom:clamp(28px,3.4vw,48px)">
-        <h2 style="flex:2 1 420px; min-width:280px; margin:0; font-size:clamp(26px,3.2vw,42px); line-height:1.12; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:none; text-wrap:balance">O que está incluído no<br><em style="font-style:italic">seu atendimento</em></h2><p data-align-span-start="inclui01" data-align-span-end="inclui02" style="flex: 0 1 400px; min-width: 240px; margin: -5px 0 0 0; font-size: clamp(14px,1.5vw,17px); line-height: 1.6; color: #461828; text-align: left; text-wrap: pretty">Um atendimento conduzido do início ao fim pelo médico, com exame dos fios e um plano construído a partir do seu caso.</p>
+      <div data-reveal="1" style="position:relative; display:flex; gap:clamp(12px,1.2vw,16px); flex-wrap:wrap; align-items:flex-start; margin-bottom:clamp(28px,3.4vw,48px)">
+        <h2 style="flex:2 1 420px; min-width:280px; margin:0; font-size:clamp(26px,3.2vw,42px); line-height:1.12; font-weight:600; color:#461828; letter-spacing:-0.015em; max-width:none; text-wrap:balance">O que está incluído no<br><em style="font-style:italic">seu atendimento</em></h2><p data-align-span-start="inclui01" data-align-span-end="inclui02" style="position:absolute; top:0; right:0; width:min(400px, 100%); margin:0; font-size: clamp(14px,1.5vw,17px); line-height: 1.6; color: #461828; text-align: left; text-wrap: pretty">Um atendimento conduzido do início ao fim pelo médico, com exame dos fios e um plano construído a partir do seu caso.</p>
         
       </div>
 
@@ -369,24 +369,26 @@ class Component extends DCLogic {
     this.alignRight();
   }
 
-  // Keeps a block's edges locked to two anchors (start's left edge, end's
-  // right edge) so it spans exactly from one card to another, at any width.
+  // Keeps an absolutely-positioned block's edges locked to two anchors
+  // (start's left edge, end's right edge) so it spans exactly from one card
+  // to another, at any width — position:absolute keeps it out of the row's
+  // own flex flow so a wide gap to its sibling never wraps it onto a new line.
   alignSpan() {
     document.querySelectorAll("[data-align-span-start]").forEach((el) => {
       const startId = el.getAttribute("data-align-span-start");
       const endId = el.getAttribute("data-align-span-end") || startId;
       const startAnchor = document.querySelector('[data-align-anchor="' + startId + '"]');
       const endAnchor = document.querySelector('[data-align-anchor="' + endId + '"]');
-      const row = el.parentElement;
+      const row = el.offsetParent;
       if (!startAnchor || !endAnchor || !row) return;
       const rowRect = row.getBoundingClientRect();
       const left = Math.round(startAnchor.getBoundingClientRect().left - rowRect.left);
       const right = Math.round(endAnchor.getBoundingClientRect().right - rowRect.left);
       const width = right - left;
       if (left <= 0 || width < 40) return;
-      const wantML = left + "px";
+      const wantL = left + "px";
       const wantW = width + "px";
-      if (el.style.marginLeft !== wantML) el.style.marginLeft = wantML;
+      if (el.style.left !== wantL) { el.style.left = wantL; el.style.right = "auto"; }
       if (el.style.width !== wantW) el.style.width = wantW;
     });
   }
