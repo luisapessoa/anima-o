@@ -221,7 +221,7 @@ h1,h2,h3,h4,p{margin:0}
 
 /* ---------- form ---------- */
 .form-section{background:var(--navy);padding:clamp(64px,7vw,104px) 0}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px 64px;align-items:stretch}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px 64px;align-items:start}
 .form-copy{display:flex;flex-direction:column;align-items:flex-start}
 .form-copy > img{margin:0 0 28px;height:34px;width:auto}
 .form-copy h2{font-size:clamp(20px,2.5vw,36px);line-height:1.16;font-weight:700;letter-spacing:-.022em;color:var(--cream);max-width:24ch;text-wrap:balance}
@@ -231,8 +231,8 @@ h1,h2,h3,h4,p{margin:0}
 .form-cars img{position:absolute}
 .form-cars .car-t{top:8%;left:0;width:68%}
 .form-cars .car-p{top:26%;left:36%;width:68%;z-index:1}
-.form-card{background:var(--cream);border-radius:28px;padding:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(0,0,0,.22);display:flex;flex-direction:column}
-.form-card form{flex:1;display:flex;flex-direction:column;gap:14px}
+.form-card{background:var(--cream);border-radius:28px;padding:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.form-card form{display:flex;flex-direction:column;gap:14px}
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 20px}
 .field{display:flex;flex-direction:column;gap:1px}
 .field span{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
@@ -246,9 +246,9 @@ legend{padding:0;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing
 .chip input{position:absolute;opacity:0;width:1px;height:1px}
 .chip input:focus-visible ~ span,.chip:has(input:focus-visible){outline:2px solid var(--cyan);outline-offset:2px}
 .chip.is-checked{background:var(--navy);color:var(--cream);border-color:var(--navy)}
-.form-submit{margin-top:auto;width:100%}
+.form-submit{margin-top:6px;width:100%}
 .form-note{font-size:13px;line-height:1.55;max-width:48ch;text-wrap:pretty}
-.success-panel{display:none;flex:1;min-height:340px;flex-direction:column;justify-content:center;gap:14px}
+.success-panel{display:none;min-height:340px;flex-direction:column;justify-content:center;gap:14px}
 .success-panel.is-visible{display:flex}
 .success-check{width:48px;height:48px;border-radius:50%;background:var(--link-hover);color:var(--lime);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
 .success-panel h3{margin-top:6px;font-size:22px;line-height:1.24;font-weight:700;letter-spacing:-.018em}
