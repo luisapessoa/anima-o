@@ -173,6 +173,7 @@ h1,h2,h3,h4,p{margin:0}
 .circle-stage{position:relative;width:1100px;height:744px;margin:0 auto}
 .circle-ring{position:absolute;left:325px;top:147px;width:450px;height:450px;border:2px solid var(--navy);border-radius:50%;animation:ringIn .8s cubic-bezier(.22,.8,.3,1) both}
 .circle-ring-inner{position:absolute;left:370px;top:192px;width:360px;height:360px;border:1px dashed var(--lime);border-radius:50%}
+.circle-flow{position:absolute;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px rgba(188,254,136,.28),0 0 14px 3px rgba(188,254,136,.65);offset-path:circle(225px at 550px 372px);offset-distance:0%;animation:circleFlow 10s linear infinite;animation-delay:-7.5s}
 .circle-title{position:absolute;left:550px;top:372px;transform:translate(-50%,-50%);margin:0;width:340px;text-align:center;font-size:28px;line-height:1.14;font-weight:700;letter-spacing:-.024em;color:var(--navy);text-wrap:balance}
 .circle-topic{position:absolute;width:0;height:0;animation:itemIn .6s ease-out both}
 .circle-icon{position:absolute;left:-26px;top:-26px;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:12px;background:var(--cyan);box-shadow:0 0 0 8px var(--cream)}
@@ -181,8 +182,10 @@ h1,h2,h3,h4,p{margin:0}
 .circle-text p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(3,4,94,.82);text-wrap:pretty}
 @keyframes ringIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 @keyframes itemIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes circleFlow{from{offset-distance:0%}to{offset-distance:100%}}
 @media (prefers-reduced-motion:reduce){
   .circle-ring,.circle-topic{animation:none;opacity:1;transform:none}
+  .circle-flow{display:none}
 }
 
 /* ---------- how it works ---------- */
@@ -228,8 +231,8 @@ h1,h2,h3,h4,p{margin:0}
 .form-cars img{position:absolute}
 .form-cars .car-t{top:8%;left:0;width:68%}
 .form-cars .car-p{top:26%;left:36%;width:68%;z-index:1}
-.form-card{align-self:start;background:var(--cream);border-radius:28px;padding:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(0,0,0,.22)}
-.form-card form{display:flex;flex-direction:column;gap:14px}
+.form-card{background:var(--cream);border-radius:28px;padding:clamp(20px,2.4vw,30px);box-shadow:0 24px 60px rgba(0,0,0,.22);display:flex;flex-direction:column}
+.form-card form{flex:1;display:flex;flex-direction:column;gap:14px}
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 20px}
 .field{display:flex;flex-direction:column;gap:1px}
 .field span{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
@@ -243,9 +246,9 @@ legend{padding:0;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing
 .chip input{position:absolute;opacity:0;width:1px;height:1px}
 .chip input:focus-visible ~ span,.chip:has(input:focus-visible){outline:2px solid var(--cyan);outline-offset:2px}
 .chip.is-checked{background:var(--navy);color:var(--cream);border-color:var(--navy)}
-.form-submit{margin-top:6px;width:100%}
+.form-submit{margin-top:auto;width:100%}
 .form-note{font-size:13px;line-height:1.55;max-width:48ch;text-wrap:pretty}
-.success-panel{display:none;min-height:340px;flex-direction:column;justify-content:center;gap:14px}
+.success-panel{display:none;flex:1;min-height:340px;flex-direction:column;justify-content:center;gap:14px}
 .success-panel.is-visible{display:flex}
 .success-check{width:48px;height:48px;border-radius:50%;background:var(--link-hover);color:var(--lime);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
 .success-panel h3{margin-top:6px;font-size:22px;line-height:1.24;font-weight:700;letter-spacing:-.018em}
@@ -561,6 +564,7 @@ legend{padding:0;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing
     <div class="circle-stage">
       <div class="circle-ring" aria-hidden="true"></div>
       <div class="circle-ring-inner" aria-hidden="true"></div>
+      <div class="circle-flow" aria-hidden="true"></div>
       <h2 class="circle-title">Uma operação completa, do posicionamento ao contrato</h2>
 
       <div class="circle-topic" style="left:550px;top:148px;animation-delay:.10s">
