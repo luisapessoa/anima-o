@@ -22,9 +22,17 @@ arquivo).
 1. **Destino do formulário.** Hoje o envio é só uma simulação local
    (mostra a mensagem de sucesso, não envia para lugar nenhum) — dá
    para demonstrar o funcionamento, mas precisa apontar para
-   e-mail/CRM/webhook real antes de ir ao ar.
-2. **Domínio + HTTPS.**
-3. Analytics/pixel (GA4, Meta) e evento de conversão no envio do
+   e-mail/CRM/webhook real antes de ir ao ar. O ponto exato para
+   trocar isso está marcado com um comentário `TODO(integração)` no
+   `<script>` no final do `index.html` (procure por `data-form`).
+2. **Remover a faixa de pré-visualização** no topo da página (`<!--
+   Pré-visualização: remover esta faixa antes de publicar no domínio
+   final. -->`, logo no início do `<body>`).
+3. **Domínio + HTTPS.** O arquivo é 100% estático (HTML/CSS/JS num
+   único arquivo, sem build, sem dependências externas) — sobe em
+   qualquer hospedagem estática (Vercel, Netlify, S3 + CloudFront,
+   etc.) ou atrás de um servidor simples.
+4. Analytics/pixel (GA4, Meta) e evento de conversão no envio do
    formulário.
-4. Aviso de privacidade/consentimento (LGPD) no formulário.
-5. Meta description, Open Graph/Twitter card, favicon definitivo.
+5. Aviso de privacidade/consentimento (LGPD) no formulário.
+6. Meta description, Open Graph/Twitter card, favicon definitivo.

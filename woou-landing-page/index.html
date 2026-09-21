@@ -371,6 +371,7 @@ legend{padding:0;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing
 }
 </style>
 
+<!-- Pré-visualização: remover esta faixa antes de publicar no domínio final. -->
 <div class="demo-banner" role="note">
   <span><b>Pré-visualização</b> — destino do formulário e domínio final ainda a definir. Envios não são registrados.</span>
 </div>
@@ -975,6 +976,12 @@ legend{padding:0;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing
       });
     }
 
+    // TODO(integração): este handler só simula o envio (não manda os dados a lugar
+    // nenhum). Troque o corpo da função por um envio real, por exemplo:
+    //   fetch('https://SEU-ENDPOINT', { method:'POST', body:new FormData(form) })
+    //     .then(function(){ /* mostrar sucesso */ })
+    //     .catch(function(){ /* mostrar erro */ });
+    // e só então exibir o painel de sucesso abaixo.
     var form = document.querySelector('[data-form]');
     if(form){
       form.addEventListener('submit', function(e){
