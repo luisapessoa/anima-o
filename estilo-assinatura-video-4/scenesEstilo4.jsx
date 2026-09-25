@@ -13,8 +13,10 @@ const LOGO_W = 232, LOGO_TOP = 248;
 const E = Easing;
 const RUNTIME = { showLogo: true };
 
-// Background clips for the video zones — all 4 are the same Amarok pickup,
-// so Telas 1 and 2 also reuse the Tela 4 / Tela 7 clips (not other vehicles).
+// Background clips for the video zones — all the same Amarok pickup.
+// VID_2 is a 3-cut edit (mountain / dirt-road approach / rear driving away),
+// reused on Telas 2 and 7 so those two don't repeat Tela 4's or Tela 1's clip.
+const VID_2 = 'assets/bg-2.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
 
@@ -86,7 +88,7 @@ function OutlineBox() {
   const draw = ease(lt, 0.2, 0.9);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_4} start={0} end={6.0} speed={0.85} overlay={0.5} />
+      <BgVideo src={VID_2} start={0} end={3.68} speed={0.54} overlay={0.5} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: -60, top: 431, width: 1001, height: 422,
         boxSizing: 'border-box', border: `3px solid ${BLUE}`, borderRadius: 34,
@@ -259,7 +261,7 @@ function Closing() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_7} start={0} end={4.4} speed={0.78} overlay={0.25} />
+      <BgVideo src={VID_2} start={0} end={3.68} speed={0.62} overlay={0.3} />
       <div style={{ position: 'absolute', inset: 0,
         background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,.85) 100%)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
