@@ -13,9 +13,8 @@ const LOGO_W = 232, LOGO_TOP = 248;
 const E = Easing;
 const RUNTIME = { showLogo: true };
 
-// Background clips for the video zones.
-const VID_1 = 'assets/bg-1.mp4';
-const VID_2 = 'assets/bg-2.mp4';
+// Background clips for the video zones — all 4 are the same Amarok pickup,
+// so Telas 1 and 2 also reuse the Tela 4 / Tela 7 clips (not other vehicles).
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
 
@@ -62,7 +61,7 @@ function QuoteCard() {
   const card = ease(lt, 0.25, 0.7);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_1} start={0} end={4.2125} speed={0.7} overlay={0.5} />
+      <BgVideo src={VID_7} start={0} end={4.4} speed={0.78} overlay={0.45} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 455, width: 900, height: 374,
         background: NAVY, borderRadius: 46, opacity: card,
@@ -87,7 +86,7 @@ function OutlineBox() {
   const draw = ease(lt, 0.2, 0.9);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_2} start={0} end={4.0} speed={0.58} overlay={0.4} />
+      <BgVideo src={VID_4} start={0} end={6.0} speed={0.85} overlay={0.5} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: -60, top: 431, width: 1001, height: 422,
         boxSizing: 'border-box', border: `3px solid ${BLUE}`, borderRadius: 34,
