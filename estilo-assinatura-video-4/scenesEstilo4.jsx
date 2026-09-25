@@ -15,8 +15,8 @@ const RUNTIME = { showLogo: true };
 
 // Background clips for the video zones — all the same Amarok pickup.
 // VID_2 is a 3-cut edit (mountain / dirt-road approach / rear driving away).
-// VID_7B is its own 3-cut edit (grille + wheel water splash / dirt-road
-// approach) so Tela 7 doesn't repeat Tela 1's (VID_7) or Tela 4's (VID_4) clip.
+// VID_7B is its own 3-cut water-splash edit (wide impact / grille closeup /
+// wheel closeup) so Tela 7 doesn't repeat any clip used on another screen.
 const VID_2 = 'assets/bg-2.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
@@ -263,7 +263,7 @@ function Closing() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_7B} start={0} end={3.2} speed={0.54} overlay={0.3} />
+      <BgVideo src={VID_7B} start={0} end={3.28} speed={0.55} overlay={0.3} />
       <div style={{ position: 'absolute', inset: 0,
         background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,.85) 100%)' }} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
