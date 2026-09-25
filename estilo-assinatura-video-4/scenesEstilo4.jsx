@@ -87,7 +87,7 @@ function OutlineBox() {
   const draw = ease(lt, 0.2, 0.9);
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_2} start={0} end={5.005} speed={0.72} overlay={0.55} />
+      <BgVideo src={VID_2} start={0} end={4.0} speed={0.58} overlay={0.4} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: -60, top: 431, width: 1001, height: 422,
         boxSizing: 'border-box', border: `3px solid ${BLUE}`, borderRadius: 34,
@@ -156,7 +156,7 @@ function Panel() {
   const t0 = MORPH + 0.05;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_4} start={0} end={3.0} speed={0.36} />
+      <BgVideo src={VID_4} start={0} end={6.0} speed={0.72} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} delay={0.55} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top, height: H,
         background: WHITE, borderRadius: `${PANEL_R * m}px ${PANEL_R * m}px 0 0`, overflow: 'hidden' }}>
