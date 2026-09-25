@@ -26,11 +26,13 @@ const RUNTIME = {
 };
 
 // Background clips for the video zones — all the same Amarok pickup.
-// VID_2 is a 3-cut edit (mountain / dirt-road approach / rear driving away),
-// reused on Telas 2 and 7 so those two don't repeat Tela 4's or Tela 1's clip.
+// VID_2 is a 3-cut edit (mountain / dirt-road approach / rear driving away).
+// VID_7B is its own 3-cut edit (grille + wheel water splash / dirt-road
+// approach) so Tela 7 doesn't repeat Tela 1's (VID_7) or Tela 4's (VID_4) clip.
 const VID_2 = 'assets/bg-2.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
+const VID_7B = 'assets/bg-7b.mp4';
 function ease(lt, delay, d) {
   return E.easeOutCubic(clamp((lt - delay) / (d || 0.6), 0, 1));
 }
@@ -610,10 +612,10 @@ function Closing() {
       background: BLACK
     }
   }, /*#__PURE__*/React.createElement(BgVideo, {
-    src: VID_2,
+    src: VID_7B,
     start: 0,
-    end: 3.68,
-    speed: 0.62,
+    end: 3.2,
+    speed: 0.54,
     overlay: 0.3
   }), /*#__PURE__*/React.createElement("div", {
     style: {

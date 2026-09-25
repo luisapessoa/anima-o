@@ -4,12 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Estilo Assinaturas — vídeo vertical 4</title>
-<!-- background videos: same Amarok pickup, bg-2 reused on Telas 2/7 and bg-4 on Tela 4 (full-bleed) -->
+<!-- background videos: same Amarok pickup across Telas 1, 2, 4 and 7, each with its own clip (full-bleed) -->
 <link rel="preload" as="video" type="video/mp4" href="assets/bg-7.mp4" fetchpriority="high" />
 <script>
   [
-    ['assets/bg-2.mp4', 500],   // Tela 2 ~5.5s in (also reused on Tela 7)
-    ['assets/bg-4.mp4', 9000],  // Tela 4 ~19s in
+    ['assets/bg-2.mp4', 500],    // Tela 2 ~5.5s in
+    ['assets/bg-4.mp4', 9000],   // Tela 4 ~19s in
+    ['assets/bg-7b.mp4', 38000], // Tela 7 ~42s in
   ].forEach(function (pair) {
     setTimeout(function () {
       var l = document.createElement('link');
