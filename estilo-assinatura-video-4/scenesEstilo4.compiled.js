@@ -196,9 +196,9 @@ function OutlineBox() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_2,
     start: 0,
-    end: 3.9,
-    speed: 0.55,
-    overlay: 0.5
+    end: 5.005,
+    speed: 0.72,
+    overlay: 0.55
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt
@@ -366,8 +366,8 @@ function Panel() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 4.0,
-    speed: 0.48
+    end: 3.0,
+    speed: 0.36
   }), RUNTIME.showLogo ? /*#__PURE__*/React.createElement(Logo, {
     variant: "white",
     lt: lt,
