@@ -4,11 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Estilo Assinaturas — vídeo vertical 4</title>
-<!-- background videos for Telas 4 and 7 (full-bleed) -->
-<link rel="preload" as="video" type="video/mp4" href="assets/bg-4.mp4" fetchpriority="high" />
+<!-- background videos for Telas 1, 2, 4 and 7 (full-bleed) -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-1.mp4" fetchpriority="high" />
 <script>
   [
-    ['assets/bg-7.mp4', 15000],  // Tela 7 ~42s in
+    ['assets/bg-2.mp4', 3000],   // Tela 2 ~5.5s in
+    ['assets/bg-4.mp4', 9000],   // Tela 4 ~12s in
+    ['assets/bg-7.mp4', 38000],  // Tela 7 ~42s in
   ].forEach(function (pair) {
     setTimeout(function () {
       var l = document.createElement('link');

@@ -13,7 +13,9 @@ const LOGO_W = 232, LOGO_TOP = 248;
 const E = Easing;
 const RUNTIME = { showLogo: true };
 
-// Background clips for the 2 video zones (Telas 1 and 2 have none yet).
+// Background clips for the video zones.
+const VID_1 = 'assets/bg-1.mp4';
+const VID_2 = 'assets/bg-2.mp4';
 const VID_4 = 'assets/bg-4.mp4';
 const VID_7 = 'assets/bg-7.mp4';
 
@@ -60,6 +62,7 @@ function QuoteCard() {
   const card = ease(lt, 0.25, 0.7);
   return (
     <div style={{ ...shell, background: BLACK }}>
+      <BgVideo src={VID_1} start={0} end={4.2125} speed={0.7} overlay={0.5} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 90, top: 455, width: 900, height: 374,
         background: NAVY, borderRadius: 46, opacity: card,
@@ -84,6 +87,7 @@ function OutlineBox() {
   const draw = ease(lt, 0.2, 0.9);
   return (
     <div style={{ ...shell, background: BLACK }}>
+      <BgVideo src={VID_2} start={0} end={3.9} speed={0.55} overlay={0.5} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} /> : null}
       <div style={{ position: 'absolute', left: -60, top: 431, width: 1001, height: 422,
         boxSizing: 'border-box', border: `3px solid ${BLUE}`, borderRadius: 34,
@@ -152,7 +156,7 @@ function Panel() {
   const t0 = MORPH + 0.05;
   return (
     <div style={{ ...shell, background: BLACK }}>
-      <BgVideo src={VID_4} start={0} end={4.9667} speed={0.6} />
+      <BgVideo src={VID_4} start={0} end={4.0} speed={0.48} />
       {RUNTIME.showLogo ? <Logo variant="white" lt={lt} delay={0.55} /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top, height: H,
         background: WHITE, borderRadius: `${PANEL_R * m}px ${PANEL_R * m}px 0 0`, overflow: 'hidden' }}>
