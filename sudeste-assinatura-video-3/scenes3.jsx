@@ -222,7 +222,7 @@ function LineSplit() {
   const lTop = 652, lBot = 1342;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={4.21} speed={0.5777} scale={1.06} posY={45} />
+      <BgVideo src={VID_4} start={0} end={6.0} speed={0.8} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 108, right: 84, top: 320 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1} accent={YEL}

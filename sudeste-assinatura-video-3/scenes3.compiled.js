@@ -1,4 +1,3 @@
-(function(){
 /* Sudeste Assinatura — VÍDEO 3 (1080×1920).
    "E se o seu carro acompanhasse as suas fases?"
    Mesma estrutura do Vídeo 2 (logo, escalas de tipo, cores, fonte).
@@ -497,8 +496,8 @@ function LineSplit() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 4.21,
-    speed: 0.5777,
+    end: 6.0,
+    speed: 0.8,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -842,17 +841,17 @@ function SudesteVideo3() {
     bg: BLACK,
     transition: "cut"
   }, children), /*#__PURE__*/React.createElement(TweaksPanel, null, /*#__PURE__*/React.createElement(TweakSection, {
-    label: "V\xEDdeo"
+    label: "Vídeo"
   }), /*#__PURE__*/React.createElement(TweakToggle, {
     label: "Mostrar logo",
     value: t.showLogo !== false,
     onChange: v => setTweak('showLogo', v)
   }), /*#__PURE__*/React.createElement(TweakToggle, {
-    label: "V\xEDdeo de fundo",
+    label: "Vídeo de fundo",
     value: t.videoBg !== false,
     onChange: v => setTweak('videoBg', v)
   }), /*#__PURE__*/React.createElement(TweakSection, {
-    label: "Edi\xE7\xE3o"
+    label: "Edição"
   }), /*#__PURE__*/React.createElement(TweakToggle, {
     label: "Editor de tempo",
     value: t.motionEditor,
@@ -860,4 +859,3 @@ function SudesteVideo3() {
   })));
 }
 window.SudesteVideo3 = SudesteVideo3;
-})();
