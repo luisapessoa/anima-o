@@ -251,8 +251,8 @@ function Opening() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 3.333,
-    speed: 0.7716,
+    end: 4.4,
+    speed: 0.92,
     scale: 1.04,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {
@@ -496,8 +496,8 @@ function LineSplit() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 6.0,
-    speed: 0.8,
+    end: 5.68,
+    speed: 0.78,
     scale: 1.06,
     posY: 45
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, {

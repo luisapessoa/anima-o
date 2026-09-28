@@ -128,7 +128,7 @@ function Opening() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={3.333} speed={0.7716} scale={1.04} posY={45} />
+      <BgVideo src={VID_1} start={0} end={4.4} speed={0.92} scale={1.04} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: 1360, textAlign: 'center' }}>
         <Lines list={sc.head} lt={lt} delay={0.3} step={0.12}
@@ -222,7 +222,7 @@ function LineSplit() {
   const lTop = 652, lBot = 1342;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={6.0} speed={0.8} scale={1.06} posY={45} />
+      <BgVideo src={VID_4} start={0} end={5.68} speed={0.78} scale={1.06} posY={45} />
       {RT.showLogo ? <Logo lt={lt} /> : null}
       <div style={{ position: 'absolute', left: 108, right: 84, top: 320 }}>
         <Lines list={sc.title} lt={lt} delay={0.3} step={0.1} accent={YEL}
