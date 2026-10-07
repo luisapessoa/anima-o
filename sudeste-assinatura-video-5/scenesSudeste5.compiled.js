@@ -33,10 +33,11 @@ const RT = {
   videoBg: true
 };
 
-// Background clips for Telas 3 e 4 (detalhes internos do Tera: painel
-// com infotainment/câmbio e ângulo alto do painel/para-brisa).
+// Background clips for Telas 1, 3, 4 e 6 (detalhes internos do Tera e do Virtus GT).
+const VID_1 = 'assets/videos/t1.mp4';
 const VID_3 = 'assets/videos/t3.mp4';
 const VID_4 = 'assets/videos/t4.mp4';
+const VID_6 = 'assets/videos/t6.mp4';
 function ease(lt, delay, d) {
   return E.easeOutCubic(clamp((lt - (delay || 0)) / (d || 0.65), 0, 1));
 }
@@ -238,6 +239,62 @@ function BgVideo({
   }));
 }
 
+/* Video confined to a box (Tela 6's reserved vídeo slot) instead of
+   full-bleed — same ready-gated fade-in pattern as BgVideo, but sized to
+   `left/top/width/height` and with no extra dark overlay (the box already
+   reveals from black via the clipPath in VideoClose). */
+function BoxVideo({
+  src,
+  start,
+  end,
+  scale,
+  posX,
+  posY,
+  speed,
+  left,
+  top,
+  width,
+  height
+}) {
+  const [ready, setReady] = React.useState(false);
+  const readyRef = React.useRef(false);
+  React.useEffect(() => {
+    const t = setTimeout(() => {
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setReady(true);
+      }
+    }, 1200);
+    return () => clearTimeout(t);
+  }, []);
+  const markReady = () => {
+    if (!readyRef.current) {
+      readyRef.current = true;
+      setReady(true);
+    }
+  };
+  if (!RT.videoBg) return null;
+  return /*#__PURE__*/React.createElement(VideoSprite, {
+    src: src,
+    start: start || 0,
+    end: end || 3,
+    speed: speed || 1,
+    onLoadedData: markReady,
+    style: {
+      position: 'absolute',
+      left,
+      top,
+      width,
+      height,
+      objectFit: 'cover',
+      objectPosition: `${posX == null ? 50 : posX}% ${posY == null ? 50 : posY}%`,
+      transform: `scale(${scale || 1})`,
+      opacity: ready ? 1 : 0,
+      transition: 'opacity .25s ease'
+    }
+  });
+}
+
 /* 1 · preto — pergunta centralizada, sublinhado, alvo + linha descendo */
 function Question() {
   const s = useScene();
@@ -250,7 +307,14 @@ function Question() {
     style: {
       ...shell
     }
-  }, RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(BgVideo, {
+    src: VID_1,
+    start: 0,
+    end: 1.84,
+    speed: 0.35,
+    scale: 1.1,
+    overlay: "rgba(0,0,0,0.5)"
+  }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: 0,
@@ -271,7 +335,7 @@ function Question() {
     delay: 0.5,
     step: 0.1,
     uDelay: 1.0,
-    uTop: 74,
+    uTop: 90,
     style: BOLD(77, 76)
   })), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -422,8 +486,8 @@ function Rule() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_3,
     start: 0,
-    end: 1.2,
-    speed: 0.2,
+    end: 1.7,
+    speed: 0.29,
     scale: 1.1,
     overlay: "rgba(0,0,0,0.45)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -496,8 +560,8 @@ function Panel() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 1.8,
-    speed: 0.25,
+    end: 2.5,
+    speed: 0.36,
     scale: 1.1,
     overlay: "rgba(0,0,0,0.45)"
   }), /*#__PURE__*/React.createElement("div", {
@@ -604,9 +668,19 @@ function VideoClose() {
       width: 664,
       height: 857,
       background: BLACK,
+      overflow: 'hidden',
       clipPath: `inset(${(1 - box) * 100}% 0 0 0)`
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(BoxVideo, {
+    src: VID_6,
+    start: 0,
+    end: 1.5,
+    speed: 0.2,
+    left: 0,
+    top: 0,
+    width: 664,
+    height: 857
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: 155,
@@ -635,7 +709,7 @@ function VideoClose() {
     delay: 1.4,
     step: 0.09,
     uDelay: 2.0,
-    uTop: 66,
+    uTop: 82,
     origin: "right",
     style: BOLD(67, 65)
   })));
