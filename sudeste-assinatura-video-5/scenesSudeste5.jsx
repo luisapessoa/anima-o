@@ -250,9 +250,9 @@ function VideoClose() {
   return (
     <div style={{ ...shell, background: GREY }}>
       {RT.showLogo ? <Logo dark /> : null}
-      <div data-video-slot="tela6" style={{ position: 'absolute', left: 208, top: 722, width: 664, height: 600,
+      <div data-video-slot="tela6" style={{ position: 'absolute', left: 208, top: 652, width: 664, height: 740,
         background: BLACK, overflow: 'hidden' }}>
-        <BoxVideo src={VID_6} start={0} end={4.9} speed={0.65} left={0} top={0} width={664} height={600} />
+        <BoxVideo src={VID_6} start={0} end={4.9} speed={0.65} left={0} top={0} width={664} height={740} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.4)' }}></div>
       </div>
       <div style={{ position: 'absolute', left: 155, top: 429, color: INK, zIndex: 2 }}>
