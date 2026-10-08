@@ -1,9 +1,10 @@
 /* Sudeste Assinatura — VÍDEO 5 (1080×1920). "E se o seu próximo 0km pudesse ser mais a sua cara?"
    Mesmo motor/padrão dos vídeos anteriores (SceneStage, DM Sans, paleta, logo top 200 / 640px).
    Tela 2: grifo animado no 2º parágrafo. Tela 4→5: painel teal expande e preenche a tela.
-   Telas 3 e 4 ganharam vídeo de fundo full-bleed (detalhes internos do Tera e do Virtus GT) —
-   não previsto no handoff original, adicionado a pedido. Tela 6 mantém o slot de vídeo
-   reservado do handoff (ainda sem material definido). */
+   Telas 1, 3 e 4 ganharam vídeo de fundo full-bleed (detalhes do Tera e do Virtus GT) —
+   não previsto no handoff original, adicionado a pedido. Tela 6 usa o slot de vídeo
+   reservado do handoff, preenchido com um vídeo do carro andando na estrada (claro, sem
+   animação de revelação — visível desde o frame 0). */
 const { useScene, SceneStage, Easing, clamp, useTweaks, TweaksPanel,
         TweakSection, TweakToggle, VideoSprite } = window;
 
@@ -164,7 +165,7 @@ function Highlight() {
       <div style={{ position: 'absolute', left: 125, top: 932, color: INK }}>
         <Lines list={sc.head} lt={lt} delay={1.1} step={0.1} style={BOLD(77, 76)} />
       </div>
-      <div style={{ position: 'absolute', left: 262, top: 1328, display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ position: 'absolute', left: 262, top: 1326, display: 'flex', flexDirection: 'column', gap: 16 }}>
         {(sc.body || []).map((ln, i) => {
           const t = ease(lt, 1.7 + i * 0.08, 0.5);
           const g = easeIO(lt, 2.35 + i * 0.42, 0.5);
@@ -192,7 +193,7 @@ function Rule() {
       <div style={{ position: 'absolute', left: 0, top: 441 - 1.5, width: W, height: 3, background: MINT,
         transform: `scaleX(${line})`, transformOrigin: 'left' }}></div>
       <div style={{ position: 'absolute', left: 157 - 17, top: 441 - 17, width: 34, height: 34, boxSizing: 'border-box',
-        border: `3px solid ${MINT}`, borderRadius: '50%', background: BLACK,
+        border: `3px solid ${MINT}`, borderRadius: '50%',
         opacity: ease(lt, 0.35, 0.3), transform: `scale(${ring})` }}></div>
       <div style={{ position: 'absolute', left: 157 - 6, top: 441 - 6, width: 12, height: 12, borderRadius: '50%',
         background: MINT, opacity: ease(lt, 0.55, 0.3) }}></div>
@@ -243,16 +244,15 @@ function Center() {
   );
 }
 
-/* 6 · cinza — título, retângulo preto (vídeo ainda não definido), fecho alinhado à direita sublinhado */
+/* 6 · cinza — título, retângulo com vídeo (carro na estrada, claro, sem wipe-in), fecho alinhado à direita sublinhado */
 function VideoClose() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
-  const box = easeIO(lt, 0.15, 0.8);
   return (
     <div style={{ ...shell, background: GREY }}>
       {RT.showLogo ? <Logo dark /> : null}
       <div data-video-slot="tela6" style={{ position: 'absolute', left: 208, top: 593, width: 664, height: 857,
-        background: BLACK, overflow: 'hidden', clipPath: `inset(${(1 - box) * 100}% 0 0 0)` }}>
-        <BoxVideo src={VID_6} start={0} end={1.5} speed={0.2} left={0} top={0} width={664} height={857} />
+        background: BLACK, overflow: 'hidden' }}>
+        <BoxVideo src={VID_6} start={0} end={4.9} speed={0.65} left={0} top={0} width={664} height={857} />
       </div>
       <div style={{ position: 'absolute', left: 155, top: 429, color: INK, zIndex: 2 }}>
         <Lines list={sc.head} lt={lt} delay={0.5} step={0.09} style={BOLD(67, 66)} />

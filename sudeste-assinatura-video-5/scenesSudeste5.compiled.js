@@ -1,9 +1,10 @@
 /* Sudeste Assinatura — VÍDEO 5 (1080×1920). "E se o seu próximo 0km pudesse ser mais a sua cara?"
    Mesmo motor/padrão dos vídeos anteriores (SceneStage, DM Sans, paleta, logo top 200 / 640px).
    Tela 2: grifo animado no 2º parágrafo. Tela 4→5: painel teal expande e preenche a tela.
-   Telas 3 e 4 ganharam vídeo de fundo full-bleed (detalhes internos do Tera e do Virtus GT) —
-   não previsto no handoff original, adicionado a pedido. Tela 6 mantém o slot de vídeo
-   reservado do handoff (ainda sem material definido). */
+   Telas 1, 3 e 4 ganharam vídeo de fundo full-bleed (detalhes do Tera e do Virtus GT) —
+   não previsto no handoff original, adicionado a pedido. Tela 6 usa o slot de vídeo
+   reservado do handoff, preenchido com um vídeo do carro andando na estrada (claro, sem
+   animação de revelação — visível desde o frame 0). */
 const {
   useScene,
   SceneStage,
@@ -432,7 +433,7 @@ function Highlight() {
     style: {
       position: 'absolute',
       left: 262,
-      top: 1328,
+      top: 1326,
       display: 'flex',
       flexDirection: 'column',
       gap: 16
@@ -511,7 +512,6 @@ function Rule() {
       boxSizing: 'border-box',
       border: `3px solid ${MINT}`,
       borderRadius: '50%',
-      background: BLACK,
       opacity: ease(lt, 0.35, 0.3),
       transform: `scale(${ring})`
     }
@@ -646,12 +646,11 @@ function Center() {
   })));
 }
 
-/* 6 · cinza — título, retângulo preto (vídeo ainda não definido), fecho alinhado à direita sublinhado */
+/* 6 · cinza — título, retângulo com vídeo (carro na estrada, claro, sem wipe-in), fecho alinhado à direita sublinhado */
 function VideoClose() {
   const s = useScene();
   const lt = s.localTime;
   const sc = s.scene;
-  const box = easeIO(lt, 0.15, 0.8);
   return /*#__PURE__*/React.createElement("div", {
     style: {
       ...shell,
@@ -668,14 +667,13 @@ function VideoClose() {
       width: 664,
       height: 857,
       background: BLACK,
-      overflow: 'hidden',
-      clipPath: `inset(${(1 - box) * 100}% 0 0 0)`
+      overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement(BoxVideo, {
     src: VID_6,
     start: 0,
-    end: 1.5,
-    speed: 0.2,
+    end: 4.9,
+    speed: 0.65,
     left: 0,
     top: 0,
     width: 664,
