@@ -663,9 +663,9 @@ function VideoClose() {
     style: {
       position: 'absolute',
       left: 208,
-      top: 593,
+      top: 722,
       width: 664,
-      height: 857,
+      height: 600,
       background: BLACK,
       overflow: 'hidden'
     }
@@ -677,7 +677,7 @@ function VideoClose() {
     left: 0,
     top: 0,
     width: 664,
-    height: 857
+    height: 600
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
