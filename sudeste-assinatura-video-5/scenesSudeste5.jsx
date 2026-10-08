@@ -258,8 +258,19 @@ function VideoClose() {
       <div style={{ position: 'absolute', left: 155, top: 429, color: INK, zIndex: 2 }}>
         <Lines list={sc.head} lt={lt} delay={0.5} step={0.09} style={BOLD(67, 66)} />
       </div>
-      <div style={{ position: 'absolute', right: 1080 - 924, top: 1343, textAlign: 'right', color: INK, zIndex: 2 }}>
-        <ULines list={sc.close} lt={lt} delay={1.4} step={0.09} uDelay={2.0} uTop={82} origin="right" style={BOLD(67, 65)} />
+      <div style={{ position: 'absolute', right: 1080 - 924, top: 1343, display: 'flex', flexDirection: 'column',
+        alignItems: 'flex-end', zIndex: 2 }}>
+        {(sc.close || []).map((ln, i) => {
+          const t = ease(lt, 1.4 + i * 0.09, 0.5);
+          const g = easeIO(lt, 2.0 + i * 0.22, 0.5);
+          return (
+            <div key={i} style={{ position: 'relative', alignSelf: 'flex-end', height: 65, padding: '0 14px',
+              display: 'flex', alignItems: 'center', opacity: t, transform: `translateY(${(1 - t) * 14}px)` }}>
+              <div style={{ position: 'absolute', inset: 0, background: HL, transform: `scaleX(${g})`, transformOrigin: 'right' }}></div>
+              <span style={{ position: 'relative', color: INK, ...BOLD(67, 65), whiteSpace: 'nowrap' }}>{ln}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

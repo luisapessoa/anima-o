@@ -703,19 +703,42 @@ function VideoClose() {
       position: 'absolute',
       right: 1080 - 924,
       top: 1343,
-      textAlign: 'right',
-      color: INK,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
       zIndex: 2
     }
-  }, /*#__PURE__*/React.createElement(ULines, {
-    list: sc.close,
-    lt: lt,
-    delay: 1.4,
-    step: 0.09,
-    uDelay: 2.0,
-    uTop: 82,
-    origin: "right",
-    style: BOLD(67, 65)
+  }, (sc.close || []).map((ln, i) => {
+    const t = ease(lt, 1.4 + i * 0.09, 0.5);
+    const g = easeIO(lt, 2.0 + i * 0.22, 0.5);
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        position: 'relative',
+        alignSelf: 'flex-end',
+        height: 65,
+        padding: '0 14px',
+        display: 'flex',
+        alignItems: 'center',
+        opacity: t,
+        transform: `translateY(${(1 - t) * 14}px)`
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'absolute',
+        inset: 0,
+        background: HL,
+        transform: `scaleX(${g})`,
+        transformOrigin: 'right'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        position: 'relative',
+        color: INK,
+        ...BOLD(67, 65),
+        whiteSpace: 'nowrap'
+      }
+    }, ln));
   })));
 }
 const LAYOUTS = {
