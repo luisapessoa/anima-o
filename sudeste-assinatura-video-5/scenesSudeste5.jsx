@@ -253,7 +253,7 @@ function VideoClose() {
       <div data-video-slot="tela6" style={{ position: 'absolute', left: 208, top: 652, width: 664, height: 740,
         background: BLACK, overflow: 'hidden' }}>
         <BoxVideo src={VID_6} start={0} end={4.9} speed={0.65} left={0} top={0} width={664} height={740} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.55)' }}></div>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.4)' }}></div>
       </div>
       <div style={{ position: 'absolute', left: 155, top: 429, color: INK, zIndex: 2 }}>
         <Lines list={sc.head} lt={lt} delay={0.5} step={0.09} style={BOLD(67, 66)} />
