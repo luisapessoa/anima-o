@@ -342,7 +342,7 @@ function Question() {
     style: {
       position: 'absolute',
       left: 540 - 26,
-      top: 1182 - 26,
+      top: 1202 - 26,
       width: 52,
       height: 52,
       boxSizing: 'border-box',
@@ -355,7 +355,7 @@ function Question() {
     style: {
       position: 'absolute',
       left: 540 - 8,
-      top: 1182 - 8,
+      top: 1202 - 8,
       width: 16,
       height: 16,
       borderRadius: '50%',
@@ -367,9 +367,9 @@ function Question() {
     style: {
       position: 'absolute',
       left: 540 - 1.5,
-      top: 1182,
+      top: 1202,
       width: 3,
-      height: H - 1182,
+      height: H - 1202,
       background: MINT,
       transform: `scaleY(${line})`,
       transformOrigin: 'top'
@@ -433,7 +433,7 @@ function Highlight() {
     style: {
       position: 'absolute',
       left: 262,
-      top: 1326,
+      top: 1320,
       display: 'flex',
       flexDirection: 'column',
       gap: 16
@@ -678,6 +678,12 @@ function VideoClose() {
     top: 0,
     width: 664,
     height: 857
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      inset: 0,
+      background: 'rgba(255,255,255,0.4)'
+    }
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',

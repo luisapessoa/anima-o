@@ -139,11 +139,11 @@ function Question() {
         <Lines list={sc.a} lt={lt} delay={0.3} step={0.1} style={BOLD(77, 76)} />
         <ULines list={sc.b} lt={lt} delay={0.5} step={0.1} uDelay={1.0} uTop={90} style={BOLD(77, 76)} />
       </div>
-      <div style={{ position: 'absolute', left: 540 - 26, top: 1182 - 26, width: 52, height: 52, boxSizing: 'border-box',
+      <div style={{ position: 'absolute', left: 540 - 26, top: 1202 - 26, width: 52, height: 52, boxSizing: 'border-box',
         border: `3px solid ${MINT}`, borderRadius: '50%', opacity: ease(lt, 1.55, 0.3), transform: `scale(${ring})` }}></div>
-      <div style={{ position: 'absolute', left: 540 - 8, top: 1182 - 8, width: 16, height: 16, borderRadius: '50%',
+      <div style={{ position: 'absolute', left: 540 - 8, top: 1202 - 8, width: 16, height: 16, borderRadius: '50%',
         background: MINT, opacity: dot, transform: `scale(${dot})` }}></div>
-      <div style={{ position: 'absolute', left: 540 - 1.5, top: 1182, width: 3, height: H - 1182, background: MINT,
+      <div style={{ position: 'absolute', left: 540 - 1.5, top: 1202, width: 3, height: H - 1202, background: MINT,
         transform: `scaleY(${line})`, transformOrigin: 'top' }}></div>
     </div>
   );
@@ -165,7 +165,7 @@ function Highlight() {
       <div style={{ position: 'absolute', left: 125, top: 932, color: INK }}>
         <Lines list={sc.head} lt={lt} delay={1.1} step={0.1} style={BOLD(77, 76)} />
       </div>
-      <div style={{ position: 'absolute', left: 262, top: 1326, display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ position: 'absolute', left: 262, top: 1320, display: 'flex', flexDirection: 'column', gap: 16 }}>
         {(sc.body || []).map((ln, i) => {
           const t = ease(lt, 1.7 + i * 0.08, 0.5);
           const g = easeIO(lt, 2.35 + i * 0.42, 0.5);
@@ -253,6 +253,7 @@ function VideoClose() {
       <div data-video-slot="tela6" style={{ position: 'absolute', left: 208, top: 593, width: 664, height: 857,
         background: BLACK, overflow: 'hidden' }}>
         <BoxVideo src={VID_6} start={0} end={4.9} speed={0.65} left={0} top={0} width={664} height={857} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.4)' }}></div>
       </div>
       <div style={{ position: 'absolute', left: 155, top: 429, color: INK, zIndex: 2 }}>
         <Lines list={sc.head} lt={lt} delay={0.5} step={0.09} style={BOLD(67, 66)} />
