@@ -682,7 +682,7 @@ function VideoClose() {
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'rgba(255,255,255,0.4)'
+      background: 'rgba(255,255,255,0.55)'
     }
   })), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -706,6 +706,7 @@ function VideoClose() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-end',
+      gap: 16,
       zIndex: 2
     }
   }, (sc.close || []).map((ln, i) => {
