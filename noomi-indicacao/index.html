@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programa de Indicação Noomi</title>
+<meta name="description" content="Indique alguém para um carro por assinatura Noomi. Sua indicação pode valer até R$ 500 em premiações, conforme o regulamento.">
+<!--
+  DESIGN SYSTEM
+  Paleta 60-30-10: 60% branco #FFFFFF / azul #02319E alternando por seção · 30% azul Noomi #02319E (seções de destaque, títulos, cards) · 10% ciano #09DDE0 (CTAs, números, detalhes — nunca como fundo de texto corrido)
+  Tipografia: Outfit — 700 nos títulos (tracking apertado), 400/500 nos textos.
+-->
+<link rel="preload" href="assets/fonts/Outfit-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="top">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Noomi — início"><img src="assets/img/logo-noomi-branco.png" alt="Noomi"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#quem-pode">Quem pode participar</a>
+      <a href="#premiacao">Premiação</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a href="#indicar" class="btn btn-cyan">Indicar agora</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= BLOCO 1 — PRIMEIRA DOBRA ================= -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Conhece alguém que quer um carro por assinatura? Sua indicação pode valer <em>até R$ 500</em> em premiações.</h1>
+    <p class="sub">Indique uma pessoa para conhecer as opções da Noomi. Se sua indicação resultar em uma contratação elegível, você poderá receber uma recompensa de <span class="nw">até R$ 500</span> em premiações, de acordo com o regulamento.</p>
+    <div class="ctas">
+      <a href="#indicar" class="btn btn-cyan">Quero fazer uma indicação</a>
+      <a href="#como-funciona" class="btn btn-line">Como funciona</a>
+    </div>
+    <p class="micro">Participação gratuita. Sujeita às condições do regulamento.</p>
+
+    <!-- Celular ilustrativo + balões (o celular pode ser trocado por um mockup final) -->
+    <div class="stage" aria-hidden="true">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="app-top"><img src="assets/img/logo-noomi-cor.png" alt=""><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></div>
+          <p class="app-title">Sua indicação</p>
+          <div class="who">
+            <div class="pair"><span class="me"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><span class="link"></span><span class="avatar av-blue">AS</span></div>
+            <p>Você indicou <strong>Ana Souza</strong></p>
+            <small>Pessoa física</small>
+          </div>
+          <div class="prize-chip"><small>Sua indicação pode valer</small><strong>até R$ 500</strong><small>em premiações</small></div>
+          <div class="app-btn">Registrar indicação</div>
+        </div>
+      </div>
+      <!-- Selo do programa (pode ser trocado pelo selo final) -->
+      <div class="float f-seal"><svg viewBox="0 0 120 120"><defs><path id="seal-c" d="M60,60 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><circle cx="60" cy="60" r="58" fill="#02319e" stroke="#fff" stroke-width="1.6"/><g class="ring"><text font-family="Outfit" font-size="10" font-weight="600" letter-spacing=".6" fill="#fff"><textPath href="#seal-c" textLength="230" lengthAdjust="spacing">PROGRAMA DE INDICAÇÃO • NOOMI • </textPath></text></g><image href="assets/img/infinity.png" x="34" y="45.5" width="52" height="29"/></svg></div>
+      <div class="float f-people"><div class="stack"><span class="avatar av-cyan">AS</span><span class="avatar av-blue">RM</span><span class="avatar av-cyan">JP</span></div><div><strong>Essas pessoas já indicaram.</strong><small>Indique você também.</small></div></div>
+      <div class="float f-prize"><small>Premiação de</small><strong><em>até</em>R$ 500</strong></div>
+      <div class="float f-type"><span class="ck"></span><strong>Pessoa física ou empresa</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOCO 2 — COMO FUNCIONA ================= -->
+<section class="sec how" id="como-funciona">
+  <div class="wrap">
+    <h2 class="center-head reveal">Sua próxima premiação pode <br>começar com uma indicação.</h2>
+    <div class="steps seq">
+      <article class="step"><span class="n">1</span><div class="box"><h3>Pense em alguém</h3><p>Conhece uma pessoa ou empresa buscando um carro 0km por assinatura?</p></div></article>
+      <article class="step"><span class="n">2</span><div class="box"><h3>Registre a indicação</h3><p>Preencha o formulário com seus dados e os da pessoa indicada, com a autorização necessária para compartilhar o contato.</p></div></article>
+      <article class="step"><span class="n">3</span><div class="box"><h3>A Noomi entra em contato</h3><p>A equipe avalia a indicação e apresenta as possibilidades de assinatura conforme o perfil do interessado.</p></div></article>
+      <article class="step"><span class="n">4</span><div class="box"><h3>A contratação pode gerar recompensa</h3><p>Se a indicação for validada e resultar em contrato elegível, o prêmio será apurado e pago conforme as regras do programa.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOCO 3 — QUEM PODE PARTICIPAR ================= -->
+<section class="sec who-sec-wrap" id="quem-pode">
+  <div class="wrap who-sec"><div class="grid">
+    <div class="who-text reveal">
+      <h2>Não precisa ser cliente da Noomi para indicar.</h2>
+      <p class="lead">A campanha é aberta a pessoas físicas com 18 anos ou mais, CPF válido, inclusive quem ainda não contratou com a Noomi. Você pode indicar uma pessoa física ou uma empresa interessada em contratar um carro por assinatura.</p>
+    </div>
+    <!-- Cards sem imagem por enquanto — layout final aguardando referência -->
+    <div class="cards">
+      <div class="card k1 reveal"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span><div><h3>18 anos ou mais</h3><p>Pessoas físicas maiores de idade podem participar.</p></div></div>
+      <div class="card k2 reveal d1"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M3 21c1.3-4 4-6 7-6s5.7 2 7 6M19 8v6M16 11h6"/></svg></span><div><h3>Sem ser cliente</h3><p>Quem nunca contratou com a Noomi também pode indicar.</p></div></div>
+      <div class="card k3 reveal d2"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M6 16c.6-1.6 1.7-2.4 3-2.4s2.4.8 3 2.4M14.5 10h4M14.5 13.5h3"/></svg></span><div><h3>CPF válido</h3><p>Necessário para registrar e validar a sua indicação.</p></div></div>
+      <div class="card k4 reveal d3"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l7-3v18M11 9h9v12M7.5 8v.01M7.5 12v.01M7.5 16v.01M15 13h2M15 17h2M2 21h20"/></svg></span><div><h3>Pessoa ou empresa</h3><p>Indique uma pessoa física ou uma empresa interessada.</p></div></div>
+    </div>
+    <div class="who-notice reveal">
+      <div class="notice"><span class="ic">!</span><div><b>Atenção</b><p>A pessoa indicada deve ser um potencial novo cliente, sem negociação comercial ativa com a Noomi no momento do registro da indicação.</p></div></div>
+    </div>
+    <div class="who-cta reveal"><a href="#indicar" class="btn btn-cyan">Indicar agora</a></div>
+  </div></div>
+</section>
+
+<!-- ================= BLOCO 4 — QUANTO POSSO RECEBER ================= -->
+<section class="sec prize" id="premiacao">
+  <!-- Notas de R$ 100 (fotos recortadas) -->
+  <img class="bill bill-a" src="assets/img/bill-curve.webp" alt="" aria-hidden="true">
+  <img class="bill bill-b" src="assets/img/bill-flutter.webp" alt="" aria-hidden="true">
+  <img class="bill bill-c" src="assets/img/bill-pair.webp" alt="" aria-hidden="true">
+  <div class="wrap grid">
+    <div class="prize-head reveal">
+      <span class="ate">até</span>
+      <div class="big" data-count="500">R$ 500</div>
+      <h2>em premiações por<br>contratação elegível.</h2>
+      <p class="lead">O valor depende do lucro elegível da operação e do prazo do contrato, respeitando os limites estabelecidos no regulamento. Por isso, o prêmio pode ser inferior ao valor máximo divulgado.</p>
+    </div>
+    <div>
+      <div class="calc reveal d1">
+        <span class="k">O valor depende de</span>
+        <div class="formula">
+          <div class="chip">Lucro elegível<small>da operação</small></div>
+          <span class="op">+</span>
+          <div class="chip">Prazo<small>do contrato</small></div>
+          <span class="op">=</span>
+          <div class="chip result">Sua premiação<small>até R$ 500</small></div>
+        </div>
+        <p class="note">Respeitando os limites do regulamento, o prêmio pode ser inferior ao valor máximo divulgado.</p>
+      </div>
+      <div class="pay reveal d2">
+        <span class="k">Pagamento</span>
+        <h3>Em até 10 dias úteis</h3>
+        <p>O pagamento é realizado em até 10 dias úteis após o cumprimento de todas as condições do programa, incluindo:</p>
+        <div class="conds">
+          <div class="cond"><i></i>Contrato ativo</div>
+          <div class="cond"><i></i>Recebimento da comissão pela Noomi</div>
+          <div class="cond"><i></i>Validação do valor devido</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOCO 5 — PERGUNTAS FREQUENTES ================= -->
+<section class="sec faq" id="duvidas">
+  <div class="wrap grid">
+    <div class="reveal">
+      <h2>Perguntas frequentes</h2>
+      <p>Reunimos as principais dúvidas sobre o programa. As regras completas estão no regulamento.</p>
+    </div>
+    <div class="reveal d1">
+      <details open><summary>Preciso ser cliente?<span class="pm"></span></summary><p>Não. A participação também está disponível para quem nunca contratou com a Noomi, desde que cumpra os requisitos do regulamento.</p></details>
+      <details><summary>A pessoa indicada precisa ser física?<span class="pm"></span></summary><p>Não. Ela pode ser pessoa física ou jurídica.</p></details>
+      <details><summary>Recebo R$ 500 por qualquer indicação?<span class="pm"></span></summary><p>Não. A recompensa é de até R$ 500 e depende de uma contratação elegível e da apuração prevista no regulamento.</p></details>
+      <details><summary>É só preencher o formulário para receber?<span class="pm"></span></summary><p>Não. O registro é o início do processo; a indicação precisa ser validada e resultar em contratação elegível, além das demais condições para pagamento.</p></details>
+      <details><summary>Quando recebo a premiação?<span class="pm"></span></summary><p>Em até 10 dias úteis após todas as condições para pagamento terem sido cumpridas, ressalvadas pendências cadastrais ou bancárias.</p></details>
+      <details><summary>Posso indicar alguém que já está falando com a Noomi?<span class="pm"></span></summary><p>Indicações de pessoas com negociação comercial ativa no momento do registro não são elegíveis.</p></details>
+      <details><summary>E se duas pessoas indicarem o mesmo contato?<span class="pm"></span></summary><p>O regulamento prioriza a primeira indicação válida registrada, desde que não exista negociação comercial ativa anterior.</p></details>
+      <details><summary>A pessoa indicada precisa concordar com o contato?<span class="pm"></span></summary><p>Você deve ter autorização ou outra base legal adequada para compartilhar os dados dela.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOCO 6 — FORMULÁRIO ================= -->
+<section class="sec form-sec" id="indicar">
+  <div class="wrap grid">
+    <div class="intro reveal">
+      <h2>Já pensou em quem você pode indicar?</h2>
+      <p>Preencha os dados abaixo para registrar sua indicação. A equipe Noomi fará a validação de acordo com o regulamento.</p>
+      <!-- Esquema ilustrativo (só desktop) com os pontos-chave do programa -->
+      <div class="collage seq" aria-hidden="true">
+        <div class="cc cc-gauge"><span class="k">Sua premiação</span>
+          <svg viewBox="0 0 190 104"><path d="M15 95A80 80 0 0 1 175 95" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="14" stroke-linecap="round"/><path class="arc" d="M15 95A80 80 0 0 1 175 95" fill="none" stroke="#09dde0" stroke-width="14" stroke-linecap="round"/></svg>
+          <strong><em>até</em> R$ 500</strong></div>
+        <div class="cc cc-pay"><span class="k">Pagamento</span><b>Em até 10 dias úteis</b>
+          <ul><li><i></i>Contrato ativo</li><li><i></i>Recebimento da comissão</li><li><i></i>Validação do valor</li></ul></div>
+        <div class="cc cc-person"><span class="avatar av-blue">AS</span><div><b>Você indicou Ana Souza</b><small>Pessoa física ou empresa</small></div></div>
+        <svg class="cc-seal" viewBox="0 0 120 120"><defs><path id="seal-c2" d="M60,60 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><circle cx="60" cy="60" r="58" fill="#fff" stroke="#02319e" stroke-width="1.6"/><g class="ring"><text font-family="Outfit" font-size="10" font-weight="600" letter-spacing=".6" fill="#02319e"><textPath href="#seal-c2" textLength="230" lengthAdjust="spacing">PROGRAMA DE INDICAÇÃO • NOOMI • </textPath></text></g><image href="assets/img/infinity-blue.png" x="34" y="45.5" width="52" height="29"/></svg>
+      </div>
+    </div>
+
+    <!-- Destino do formulário: configurar em js/config.js (os nomes dos campos são os atributos "name") -->
+    <form id="ref-form" class="reveal d1" novalidate>
+      <div class="form-body">
+        <fieldset>
+          <legend>Seus dados</legend>
+          <div class="fields">
+            <div class="field full"><label for="f-nome">Seu nome completo <span class="req">*</span></label><input id="f-nome" name="indicador_nome" autocomplete="name" required><span class="err">Informe seu nome completo.</span></div>
+            <div class="field"><label for="f-wpp">Seu WhatsApp com DDD <span class="req">*</span></label><input id="f-wpp" name="indicador_whatsapp" type="tel" inputmode="numeric" data-mask="phone" placeholder="(00) 00000-0000" required><span class="err">Informe um WhatsApp válido.</span></div>
+            <div class="field"><label for="f-email">Seu e-mail <span class="req">*</span></label><input id="f-email" name="indicador_email" type="email" autocomplete="email" required><span class="err">Informe um e-mail válido.</span></div>
+            <div class="field full"><label for="f-cpf">Seu CPF <span class="req">*</span></label><input id="f-cpf" name="indicador_cpf" inputmode="numeric" data-mask="cpf" placeholder="000.000.000-00" required><span class="err">Informe um CPF válido.</span></div>
+            <p class="hint">Os dados necessários para a entrega da premiação serão solicitados após a validação da indicação, de acordo com o regulamento aprovado.</p>
+          </div>
+        </fieldset>
+
+        <fieldset id="indicado">
+          <legend>Quem você está indicando</legend>
+          <div class="fields">
+            <div class="field full"><span class="lbl">Quem você está indicando? <span class="req">*</span></span>
+              <div class="seg" role="radiogroup">
+                <label><input type="radio" name="tipo_indicado" value="pessoa_fisica" checked><span>Pessoa física</span></label>
+                <label><input type="radio" name="tipo_indicado" value="empresa"><span>Empresa</span></label>
+              </div>
+            </div>
+            <div class="field full"><label for="f-ind-nome" id="l-ind-nome">Nome da pessoa indicada <span class="req">*</span></label><input id="f-ind-nome" name="indicado_nome" required><span class="err">Preencha este campo.</span></div>
+            <div class="field full company-only"><label for="f-resp">Nome do responsável</label><input id="f-resp" name="indicado_responsavel"></div>
+            <div class="field"><label for="f-ind-wpp">WhatsApp do contato, com DDD <span class="req">*</span></label><input id="f-ind-wpp" name="indicado_whatsapp" type="tel" inputmode="numeric" data-mask="phone" placeholder="(00) 00000-0000" required><span class="err">Informe um WhatsApp válido.</span></div>
+            <div class="field"><label for="f-cidade">Cidade e estado do contato</label><input id="f-cidade" name="indicado_cidade_uf" placeholder="Ex.: Belo Horizonte / MG"></div>
+          </div>
+        </fieldset>
+
+        <div class="checks">
+          <label class="check" id="c1"><input type="checkbox" name="aceite_regulamento" required><span>Li e concordo com o <a href="#" data-link="regulamento" target="_blank" rel="noopener">Regulamento do Programa de Indicação Noomi</a>. <span class="req">*</span></span></label>
+          <label class="check" id="c2"><input type="checkbox" name="aceite_autorizacao" required><span>Declaro que tenho autorização da pessoa indicada, ou outra base legal adequada, para compartilhar seus dados com a Noomi para contato relacionado a esta indicação. <span class="req">*</span></span></label>
+        </div>
+        <p class="privacy">Os dados serão utilizados para registrar, validar e acompanhar a indicação, entrar em contato sobre o interesse em assinatura e administrar eventual recompensa, conforme a legislação aplicável. Saiba mais: <a href="#" data-link="privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+        <p class="form-error" role="alert" hidden>Não foi possível registrar sua indicação agora. Tente novamente em instantes.</p>
+        <button type="submit" class="btn btn-blue">Registrar indicação</button>
+      </div>
+      <div class="success" role="status" aria-live="polite">
+        <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#02319e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+        <h3>Indicação registrada!</h3>
+        <p>A equipe Noomi fará a validação de acordo com o regulamento e entrará em contato com a pessoa indicada.</p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ================= RODAPÉ — uma linha ================= -->
+<!-- Links do Regulamento e da Privacidade: configurar em js/config.js -->
+<footer>
+  <div class="wrap">
+    <p>© 2026 Noomi — Todos os direitos reservados. · <a href="#" data-link="regulamento" target="_blank" rel="noopener">Regulamento</a> · <a href="#" data-link="privacidade" target="_blank" rel="noopener">Privacidade</a></p>
+    <img class="logo-f" src="assets/img/logo-noomi-cor.png" alt="Noomi">
+    <p class="r">CNPJ: 61.433.648/0001-46</p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
