@@ -355,7 +355,8 @@ footer a{color:var(--blue)}
   .center-head br{display:none}
   /* passo a passo vertical: linha liga os números */
   .steps{grid-template-columns:1fr;row-gap:12px}
-  .steps::before,.steps::after{display:block;top:23px;bottom:60px;left:22px;right:auto;width:2px;height:auto}
+  /* a linha termina no centro do círculo 4 (--line-end é calculado em js/main.js) */
+  .steps::before,.steps::after{display:block;top:23px;bottom:var(--line-end,60px);left:22px;right:auto;width:2px;height:auto}
   .steps::after{transform:scaleY(0);transform-origin:top center}
   .steps.in::after{transform:scaleY(1)}
   .step{flex-direction:row;align-items:flex-start;text-align:left;gap:14px}

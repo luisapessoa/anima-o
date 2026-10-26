@@ -20,6 +20,15 @@
     requestAnimationFrame(step);
   }
 
+  // Passo a passo no celular: a linha vertical termina no centro do círculo 4
+  var steps=document.querySelector('.steps');
+  function fitLine(){
+    var nums=steps.querySelectorAll('.n'),last=nums[nums.length-1];
+    var end=steps.getBoundingClientRect().bottom-(last.getBoundingClientRect().top+last.offsetHeight/2);
+    steps.style.setProperty('--line-end',end+'px');
+  }
+  if(steps){fitLine();window.addEventListener('resize',fitLine);if(document.fonts)document.fonts.ready.then(fitLine)}
+
   // Animações de entrada ao rolar
   var els=document.querySelectorAll('.reveal,.seq');
   function show(el){el.classList.add('in');var c=el.querySelector('[data-count]');if(c&&!reduce)countUp(c)}
