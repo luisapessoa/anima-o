@@ -414,7 +414,7 @@ function Word() {
     style: {
       position: 'absolute',
       left: 540 - 1.5,
-      top: 1030,
+      top: 1055,
       width: 3,
       height: 90,
       background: MINT,

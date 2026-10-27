@@ -155,7 +155,7 @@ function Word() {
           <div style={{ position: 'relative', color: TEAL, ...BOLD(210, 230), letterSpacing: '-0.03em' }}>{sc.word}</div>
         </div>
       </div>
-      <div style={{ position: 'absolute', left: 540 - 1.5, top: 1030, width: 3, height: 90, background: MINT,
+      <div style={{ position: 'absolute', left: 540 - 1.5, top: 1055, width: 3, height: 90, background: MINT,
         transform: `scaleY(${easeIO(lt, 2.2, 0.5)})`, transformOrigin: 'top' }}></div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1160, textAlign: 'center', color: INK }}>
         <Lines list={sc.body} lt={lt} delay={2.5} step={0.09} style={REG(62, 68)} accent={TEAL} />
