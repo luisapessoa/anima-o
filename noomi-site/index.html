@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noomi | Carro por assinatura</title>
+<meta name="description" content="Carro por assinatura é com a Noomi: praticidade, economia e carro 0km sempre. Seguro, IPVA, manutenção e assistência 24h inclusos.">
+<!--
+  NOOMI — SITE INSTITUCIONAL
+  Paleta: preto #181818 · branco #FFFFFF · bege #EBEBEB · ciano #09DDE0
+  Fonte: Outfit
+  Fluxo: todos os "Fale com um consultor" levam ao Passo a passo (#como-funciona).
+         "Solicite sua cotação" leva ao formulário → altere FORM_URL no fim do arquivo.
+-->
+<style>
+@font-face{font-family:"Outfit";src:url(assets/fonts/Outfit-Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Outfit";src:url(assets/fonts/Outfit-Medium.ttf) format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"Outfit";src:url(assets/fonts/Outfit-SemiBold.ttf) format("truetype");font-weight:600;font-display:swap}
+@font-face{font-family:"Outfit";src:url(assets/fonts/Outfit-Bold.ttf) format("truetype");font-weight:700;font-display:swap}
+:root{
+  --ink:#181818;--white:#ffffff;--beige:#ebebeb;--cyan:#09dde0;
+  --muted:#5c5c5c;--line:rgba(24,24,24,.12);--line-d:rgba(255,255,255,.16);
+  --r:26px;--wrap:1240px;--gut:clamp(22px,4.4vw,48px);--sp:clamp(56px,7vw,96px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:"Outfit",system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+p{margin:0;text-wrap:pretty}
+h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.035em;line-height:1.02;text-wrap:balance}
+h2{font-size:clamp(32px,4.2vw,56px)}
+ol{list-style:none;margin:0;padding:0}
+.c{color:var(--cyan)}
+.wrap{width:100%;max-width:calc(var(--wrap) + 2*var(--gut));margin:0 auto;padding:0 var(--gut)}
+.sec{padding:var(--sp) 0;position:relative}
+.beige{background:var(--beige)}
+.dark{background:var(--ink);color:#fff}
+
+.btn{display:inline-flex;align-items:center;gap:6px;font:500 15px/1 "Outfit",sans-serif;color:inherit}
+.btn .t{display:inline-flex;align-items:center;height:52px;padding:0 26px;border-radius:999px;background:var(--ink);color:#fff;transition:background .3s,color .3s}
+.btn .o{width:52px;height:52px;border-radius:50%;background:var(--cyan);color:var(--ink);display:grid;place-items:center;transition:transform .45s var(--ease),background .3s,color .3s}
+.btn svg{width:16px;height:16px}
+.btn.light .t{background:#fff;color:var(--ink)}
+.btn:hover .t{background:var(--cyan);color:var(--ink)}
+.btn:hover .o{background:var(--ink);color:var(--cyan);transform:rotate(135deg)}
+.btn[data-form]:hover .o{transform:rotate(45deg)}
+.btn.up:hover .o{transform:rotate(-45deg)}
+.btn.light:hover .o{background:#fff;color:var(--ink)}
+.btn.light:hover .t{background:var(--cyan)}
+.btn.xl .t{height:64px;padding:0 36px;font-size:17px}
+.btn.xl .o{width:64px;height:64px}
+.btn.xl svg{width:20px;height:20px}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(28px,3.4vw,44px)}
+.shead p{max-width:360px;color:var(--muted)}
+.center{text-align:center;justify-content:center}
+
+/* ===== HEADER ===== */
+.hd{position:fixed;inset:0 0 auto;z-index:50;transition:background .35s}
+.hd.s{background:rgba(24,24,24,.86);backdrop-filter:blur(14px)}
+.hd .wrap{height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hd .logo img{height:27px;width:auto}
+.nav{display:flex;gap:36px;color:#fff;font-size:15px}
+.nav a{opacity:.78;transition:opacity .2s}
+.nav a:hover{opacity:1}
+.cta-h{height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:#fff;font-size:14px;font-weight:500;display:inline-flex;align-items:center;transition:background .3s,color .3s}
+.cta-h:hover{background:var(--cyan);border-color:var(--cyan);color:var(--ink)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:none;cursor:pointer;place-items:center}
+.burger i,.burger i::before{display:block;width:16px;height:1.5px;background:#fff;position:relative;transition:.3s}
+.burger i::before{content:"";position:absolute;top:5px}
+.burger i{transform:translateY(-2.5px)}
+.open .burger i{transform:rotate(45deg)}
+.open .burger i::before{top:0;transform:rotate(-90deg)}
+.mm{position:fixed;inset:0;z-index:49;background:var(--ink);color:#fff;padding:110px var(--gut) 40px;display:flex;flex-direction:column;gap:4px;opacity:0;pointer-events:none;transition:opacity .35s}
+.mm a.l{font-size:clamp(30px,8vw,44px);letter-spacing:-.03em;padding:8px 0;border-bottom:1px solid var(--line-d)}
+.mm .btn{margin-top:auto}
+.open .mm{opacity:1;pointer-events:auto}
+
+/* ===== 1. CAPA ===== */
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;max-height:980px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--ink)}
+.hero .bg{position:absolute;inset:0;will-change:transform}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:58% 70%;transform:translate(-2%,-8%) scale(1.5);transform-origin:80% 74%;animation:zoom 2.8s var(--ease) forwards}
+@keyframes zoom{to{transform:translate(-3%,-11%) scale(1.36)}}
+@media (min-width:1600px){.hero .bg img{transform:translate(5%,-8%) scale(1.5)}@keyframes zoom{to{transform:translate(5%,-11%) scale(1.36)}}}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,24,24,.55) 0%,rgba(24,24,24,0) 55%),linear-gradient(180deg,rgba(24,24,24,.6) 0%,rgba(24,24,24,.05) 28%,rgba(24,24,24,.1) 45%,rgba(24,24,24,.85) 100%)}
+.hero .wrap{position:relative;z-index:2}
+.hero-main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:clamp(22px,3vh,30px);padding-top:80px;padding-bottom:clamp(110px,13vh,150px)}
+.kick{display:block;font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hero h1{font-size:clamp(44px,6.2vw,92px);letter-spacing:-.05em;line-height:.95;max-width:6.6em}
+.hero-side{display:grid;gap:22px;justify-items:start;max-width:none}
+.hero-side p{font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.88);line-height:1.4}
+.bens{position:relative;z-index:5;margin-top:calc(-1*clamp(64px,6vw,84px))}
+.bens .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ben{position:relative;background:#fff;border-radius:22px;padding:22px 22px 24px;display:grid;gap:14px;align-content:space-between;min-height:150px;box-shadow:0 20px 50px rgba(24,24,24,.12);overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s}
+.ben .ic{width:30px;height:30px;color:var(--cyan)}
+.ben .ic svg{width:100%;height:100%}
+.ben p{font-size:16.5px;line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.ben:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(24,24,24,.16)}
+
+/* ===== 2. PLANOS ===== */
+#modelos{padding:clamp(28px,3vw,40px) 0 clamp(56px,6vw,80px)}
+#modelos .shead{margin-bottom:clamp(22px,2.6vw,32px)}
+#modelos h2{font-size:clamp(40px,6vw,84px);letter-spacing:-.05em}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.4vw,18px)}
+.card{position:relative;isolation:isolate;background:var(--beige);border-radius:var(--r);padding:24px 26px 22px;display:grid;grid-template-rows:auto auto auto 1fr;gap:10px;overflow:hidden;transition:color .45s}
+/* preenchimento preto que "carrega" de baixo para cima */
+.card::before{content:"";position:absolute;inset:0;background:var(--ink);clip-path:inset(100% 0 0 0);transition:clip-path .6s var(--ease);z-index:-1}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.card h3{font-size:clamp(28px,2.4vw,34px)}
+.card .ar{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:background .35s,border-color .35s,transform .45s var(--ease),color .35s}
+.card .ar svg{width:16px;height:16px}
+.card .car{display:flex;align-items:center;justify-content:center;position:relative}
+.card .car{margin:0 -6px}
+.card .car img{width:100%;height:auto;aspect-ratio:1000/520;transition:transform .6s var(--ease)}
+.card .md{position:relative;padding-right:84px;min-height:72px;font-size:clamp(21px,1.8vw,25px);font-weight:600;letter-spacing:-.025em;line-height:1.15}
+.card .md small{display:block;font-size:14px;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:4px;transition:color .45s}
+.card .ds{position:relative;font-size:14.5px;line-height:1.5;color:var(--muted);align-self:end;padding-top:12px;border-top:1px solid var(--line);transition:color .45s,border-color .45s}
+.card:hover{color:#fff}
+.card:hover::before{clip-path:inset(0 0 0 0)}
+.card:hover .md small{color:rgba(255,255,255,.55)}
+.card:hover .ds{color:#fff;border-color:var(--cyan)}
+.card:hover .ar{background:var(--cyan);border-color:var(--cyan);color:var(--ink);transform:rotate(135deg)}
+.card:hover .car img{transform:translateX(10px) scale(1.04)}
+
+/* ===== 3. POR QUE ===== */
+.why{padding-top:clamp(40px,4.4vw,64px);padding-bottom:clamp(110px,12vw,170px)}
+.why .shead .r{display:grid;gap:22px;justify-items:end;text-align:right;max-width:380px}
+.wrow{display:flex;gap:12px;height:clamp(230px,19vw,260px)}
+.wc{position:relative;flex:1 1 0;min-width:0;background:#fff;border-radius:24px;padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:flex-grow .7s var(--ease)}
+.wc::before{content:"";position:absolute;inset:auto 0 0 0;height:0;background:url(assets/grain-w.png),linear-gradient(0deg,rgba(9,221,224,.95) 0%,rgba(9,221,224,.35) 55%,rgba(9,221,224,0) 100%);-webkit-mask-image:linear-gradient(0deg,#000 40%,transparent);mask-image:linear-gradient(0deg,#000 40%,transparent);transition:height .7s var(--ease);z-index:0}
+.wc>*{position:relative;z-index:1}
+.wc .ic{width:40px;height:40px;color:#a3a3a3;transition:color .4s,transform .6s var(--ease)}
+.wc .ic svg{width:100%;height:100%}
+.wc h3{font-size:clamp(19px,1.6vw,23px);letter-spacing:-.02em;line-height:1.15;max-width:260px}
+.wc p{color:var(--ink);font-size:15px;max-width:360px;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .4s,margin .5s;margin-top:0}
+.wc.on{flex-grow:2.2}
+.wc.on::before{height:78%}
+.wc.on .ic{color:var(--ink);transform:scale(1.08)}
+.wc.on p{max-height:120px;opacity:1;margin-top:10px;transition-delay:.15s}
+
+/* ===== 4. FAIXA — transição entre bege e preto ===== */
+.band{background:linear-gradient(180deg,var(--beige) 50%,var(--ink) 50%);margin-bottom:-2px;position:relative;z-index:1;margin-top:calc(-1*clamp(80px,9vw,130px))}
+.band .in{position:relative;border-radius:30px;overflow:hidden;clip-path:inset(0 round 30px);isolation:isolate;min-height:clamp(280px,27vw,390px);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
+.band .in{background:var(--ink)}
+.band .in img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% 77%}
+.band .in::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(24,24,24,.6) 0%,rgba(24,24,24,.3) 55%,rgba(24,24,24,.12) 100%)}
+.band .cnt{position:relative;z-index:2;padding:clamp(22px,2.6vw,36px) clamp(24px,4vw,56px)}
+.band .big{text-shadow:0 2px 24px rgba(0,0,0,.25);font-size:clamp(28px,3.4vw,46px);letter-spacing:-.045em;line-height:1.06;font-weight:500}
+.band .big .ch{opacity:0;transition:opacity .08s}
+.band .big.typed .ch{opacity:1}
+.band .in.dim::after{opacity:1}
+.band .big{position:relative;z-index:2}
+
+/* ===== 5. LOCADORAS ===== */
+.partners{padding:clamp(30px,3.4vw,44px) 0 clamp(40px,4.4vw,58px)}
+.partners h2{text-align:center;font-size:clamp(26px,3vw,40px);margin:0 auto clamp(22px,2.6vw,34px);max-width:720px}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;width:max-content;animation:roll 30s linear infinite;will-change:transform}
+.track span{flex:none;height:clamp(34px,3.4vw,46px);width:clamp(140px,14vw,190px);margin-right:clamp(48px,6vw,96px);display:flex;align-items:center;justify-content:center}
+.track img{max-height:100%;max-width:100%;object-fit:contain}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* ===== 6. DEPOIMENTOS — card central + laterais cortados, setas ===== */
+.tst{position:relative;overflow:hidden;padding:clamp(40px,4.4vw,60px) 0;background:#fff}
+.tst-h{text-align:center;margin-bottom:clamp(22px,2.6vw,34px)}
+.tst h2 .c{color:var(--cyan)}
+.stage3{position:relative;height:var(--h,360px);transition:height .5s var(--ease)}
+.tc{position:absolute;left:50%;top:0;width:min(680px,80vw);margin-left:calc(min(680px,80vw)/-2);background:var(--beige);border-radius:26px;padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:100%;transition:transform .7s var(--ease),opacity .5s,background .5s,color .5s;user-select:none}
+.tc p{font-size:clamp(16px,1.3vw,19px);line-height:1.38;letter-spacing:-.015em;color:#6f6f6f;transition:color .5s}
+.tc p b{font-weight:500;color:var(--ink);transition:color .5s}
+.tc .tf{display:flex;align-items:center;gap:14px}
+.tc .av{width:48px;height:48px;flex:none;border-radius:50%;background:var(--ink);color:var(--cyan);display:grid;place-items:center;font-weight:600;font-size:17px}
+.tc .tf div{display:grid;gap:1px;line-height:1.2}
+.tc .tf i{font-style:normal;color:var(--cyan);letter-spacing:2px;font-size:13px;margin-bottom:3px}
+.tc .tf strong{font-weight:500;font-size:16px;color:var(--ink);transition:color .5s}
+.tc .tf span{font-size:13.5px;color:var(--muted)}
+.tc .tf .av{font-size:17px;color:var(--cyan)}
+.tc.c0{transform:translateX(0);z-index:2;background:var(--ink)}
+.tc.c0 p{color:rgba(255,255,255,.7)}
+.tc.c0 p b,.tc.c0 .tf strong{color:#fff}
+.tc.c0 .tf span:not(.av){color:rgba(255,255,255,.55)}
+.tc.c0 .av{background:var(--cyan);color:var(--ink)}
+.tc.cl{transform:translateX(calc(-100% - clamp(18px,2.4vw,32px)));opacity:.85;cursor:pointer}
+.tc.cr{transform:translateX(calc(100% + clamp(18px,2.4vw,32px)));opacity:.85;cursor:pointer}
+.tc.cl,.tc.cr{pointer-events:auto}
+.ctrl{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:clamp(18px,2.2vw,28px)}
+.ctrl button{width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--ink);transition:background .3s,color .3s,border-color .3s}
+.ctrl button:hover{background:var(--cyan);border-color:var(--cyan)}
+.ctrl svg{width:16px;height:16px}
+
+/* ===== 7. COMO FUNCIONA — linhas numeradas + imagem com faixas (ref. Superside) ===== */
+.how{display:grid;grid-template-columns:1fr 1fr;background:var(--beige);min-height:min(calc(100vh - 80px),940px)}
+.how .l{display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,8vh,88px) 0}
+.how .hh{padding:0 var(--gut) 0 max(var(--gut),calc((100vw - var(--wrap))/2));margin-bottom:clamp(22px,3.4vh,36px)}
+.how .hh h2{font-size:clamp(30px,3vw,46px)}
+.how .hh p{color:var(--muted);margin-top:8px;font-size:clamp(15px,1.2vw,17px)}
+.how .go{display:grid;grid-template-columns:max-content max-content;justify-content:start;column-gap:6px;row-gap:10px;padding:clamp(24px,3.4vh,36px) var(--gut) 0 max(var(--gut),calc((100vw - var(--wrap))/2))}
+.how .go .btn{display:contents}
+.how .go small{grid-column:1;text-align:center;font-size:12.5px;color:var(--muted)}
+/* brilho único quando o botão aparece (não fica piscando) */
+.how .go .t{position:relative;overflow:hidden}
+.how .go .t::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg)}
+.how .go.in .t::after{animation:sheen1 1.1s .5s ease-out 1 forwards}
+@keyframes sheen1{to{left:130%}}
+.rows{border-top:1px solid rgba(24,24,24,.16)}
+.rw{position:relative;display:flex;align-items:center;gap:clamp(16px,1.8vw,26px);min-height:clamp(78px,10vh,104px);padding:10px var(--gut) 10px max(var(--gut),calc((100vw - var(--wrap))/2));border-bottom:1px solid rgba(24,24,24,.16);cursor:default;transition:background .4s}
+.rw.alt{padding-left:calc(max(var(--gut),(100vw - var(--wrap))/2) + 17%)}
+.rw .n{font-size:clamp(48px,min(5vw,8vh),78px);font-weight:400;letter-spacing:-.06em;line-height:.9;color:var(--cyan);transition:color .4s;flex:none}
+.rw p{font-size:clamp(14px,1.1vw,16px);line-height:1.35;color:var(--ink);max-width:300px}
+.rw p small{display:block;color:var(--muted);margin-top:4px}
+.rw:hover,.rw.on{background:rgba(255,255,255,.55)}
+.how .r{position:relative;overflow:hidden;min-height:0;background:var(--ink)}
+.how .r .pic{position:absolute;inset:0;overflow:hidden;z-index:2}
+.how .r .pic img{width:100%;height:100%;object-fit:cover;transform:scale(1.7);transform-origin:62% 42%}
+.how .trail{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen;opacity:.95;pointer-events:none}
+.how .trail .rev{stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset 1.1s var(--ease)}
+
+/* ===== 8. QUEM SOMOS — infinito da Noomi ===== */
+.ab{overflow:hidden}
+.ab .oo{position:absolute;right:-9%;top:-22%;width:min(980px,72vw);pointer-events:none;animation:drift 14s ease-in-out infinite;will-change:transform}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0) scale(1)}33%{transform:translate(-24px,18px) rotate(-3deg) scale(1.04)}66%{transform:translate(14px,-12px) rotate(2deg) scale(.98)}}
+.ab .oo img{width:100%;height:auto;opacity:.3;animation:pulse 7s ease-in-out infinite;will-change:opacity}
+@keyframes pulse{0%,100%{opacity:.24}50%{opacity:.36}}
+.ab::after{content:"";position:absolute;inset:0;background:url(assets/noise.png);opacity:.09;mix-blend-mode:overlay;pointer-events:none}
+.ab .grid{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(32px,6vw,96px);align-items:end}
+.ab .lab{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:22px;display:block}
+.ab .big{font-size:clamp(28px,3.4vw,48px);line-height:1.08;letter-spacing:-.035em;font-weight:500}
+.ab p.tx{font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:rgba(255,255,255,.72)}
+.ab p.tx b{color:#fff;font-weight:500}
+
+/* ===== 9. FAQ ===== */
+.faq .grid{display:grid;grid-template-columns:.8fr 1.4fr;gap:clamp(36px,6vw,96px)}
+.faq h2{position:sticky;top:120px;align-self:start}
+.qs{border-top:1px solid var(--cyan)}
+details{border-bottom:1px solid var(--cyan)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 0;font-size:clamp(17px,1.5vw,21px);letter-spacing:-.02em}
+summary::-webkit-details-marker{display:none}
+summary i{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);position:relative;transition:background .3s,border-color .3s}
+summary i::before,summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
+summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s var(--ease)}
+details[open] summary{font-weight:500}
+details[open] summary i{background:var(--cyan);border-color:var(--cyan)}
+details[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+details .a{padding:0 60px 22px 0;color:var(--ink);font-size:16.5px;line-height:1.55}
+
+/* ===== 10. CTA FINAL ===== */
+.fin{position:relative;min-height:clamp(380px,36vw,500px);display:flex;align-items:center;color:#fff;overflow:hidden}
+.fin>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:22% 45%}
+.fin::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,24,24,.9) 0%,rgba(24,24,24,.55) 50%,rgba(24,24,24,.05) 100%)}
+.fin .wrap{position:relative;z-index:2}
+.fin .cnt{display:grid;gap:22px;justify-items:start;max-width:600px;padding:56px 0}
+.fin h2{font-size:clamp(34px,4.4vw,60px)}
+.fin p{color:rgba(255,255,255,.8);font-size:18px;max-width:420px}
+
+/* ===== RODAPÉ ===== */
+.ft{background:var(--ink);color:rgba(255,255,255,.6);font-size:13.5px;border-top:1px solid var(--line-d)}
+.ft .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px 28px;padding-top:26px;padding-bottom:26px;flex-wrap:wrap}
+.ft .logo img{height:20px;width:auto}
+.ft .mid{display:flex;gap:6px 18px;flex-wrap:wrap}
+.ft a:hover{color:#fff}
+.ft .ig{display:inline-flex;align-items:center;gap:8px;color:#fff}
+.ft .ig svg{width:18px;height:18px}
+
+
+@media (min-width:1025px) and (max-width:1279px){
+  .hero{height:auto;min-height:0;max-height:none}
+  .hero-main{padding-top:150px;padding-bottom:140px}
+  .hero .bg img{object-position:83% 62%;transform:scale(1.22);transform-origin:76% 66%;animation:zooml 2.4s var(--ease) forwards}
+  @keyframes zooml{to{transform:scale(1.16)}}
+  .why .shead{align-items:flex-end;justify-content:flex-start;gap:28px}
+  .why .shead h2{flex:0 0 auto;max-width:450px}
+  .why .shead .r{display:flex;flex:1;align-items:center;justify-content:space-between;gap:24px;max-width:none;text-align:left;padding-bottom:4px}
+  .why .shead .r p{max-width:340px}
+  .why .shead .r .btn{flex:none;white-space:nowrap}
+  .why .shead .r .btn .o{flex:none}
+}
+/* ===== TABLET ===== */
+@media (max-width:1024px){
+  .nav,.cta-h{display:none}
+  .burger{display:grid}
+  .hero{height:auto;min-height:0;max-height:none}
+  .hero .bg img{object-position:86% 50%;transform:translateY(-5%) scale(1.2);transform-origin:86% 0;animation:zoomt 2.4s var(--ease) forwards}
+  @keyframes zoomt{to{transform:translateY(-5%) scale(1.15)}}
+  .hero .bg::after{background:linear-gradient(180deg,rgba(24,24,24,.6) 0%,rgba(24,24,24,.15) 40%,rgba(24,24,24,0) 60%,rgba(24,24,24,.7) 92%)}
+  .hero-main{flex:none;justify-content:flex-start;align-items:center;text-align:center;min-height:690px;padding-top:104px;padding-bottom:0;gap:12px}
+  .hero-main .kick{margin-bottom:10px}
+  .hero-side{gap:14px}
+  .hero h1{max-width:none;margin:0 auto}
+  .hero-side{justify-items:center}
+  .hero-side{max-width:520px}
+  .bens .grid{grid-template-columns:1fr 1fr}
+  .ben{min-height:120px}
+  .shead{flex-direction:column;align-items:flex-start}
+  .why .shead{display:grid;grid-template-columns:minmax(0,max-content);justify-content:center;gap:18px}
+  .why .shead h2{text-align:center}
+  .why .shead .r{display:flex;justify-content:space-between;align-items:center;gap:24px;max-width:none;text-align:left}
+  .why .shead .r p{max-width:none}
+  #modelos .shead{align-items:center;text-align:center;gap:10px}
+  #modelos .shead p{max-width:420px}
+  .plans{grid-template-columns:1fr 1fr}
+  .wrow{flex-direction:column;height:auto;gap:10px}
+  .wc{flex:none;padding:20px 22px;gap:0;transition:none}
+  .wc>div{margin-top:14px}
+  .wc .ic{width:34px;height:34px}
+  .wc::before{transition:height .6s var(--ease)}
+  .wc.on::before{height:100%}
+  .wc p{max-width:none}
+  .wc.on p{max-height:160px}
+  .faq .grid,.ab .grid{grid-template-columns:1fr}
+  .faq h2{text-align:center;position:static}
+  .how{grid-template-columns:1fr}
+  .how .l{display:contents}
+  .how .hh{order:1;padding-top:clamp(48px,7vw,72px);text-align:center}
+  .how .r{order:2;margin:0 var(--gut) clamp(20px,3vw,28px);border-radius:22px;aspect-ratio:16/9}
+  .how .rows{order:3}
+  .how .l .go{order:4;padding-bottom:clamp(48px,7vw,72px);justify-content:center}
+  .how .hh,.how .go{padding-left:var(--gut)}
+  .how{min-height:0}
+  .rw,.rw.alt{padding-left:max(var(--gut),calc(50% - 250px));padding-right:var(--gut)}
+  .rw.alt{padding-left:calc(max(var(--gut),50% - 250px) + 90px)}
+  .how .r{min-height:0}
+  .ft .wrap{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:18px;row-gap:8px;padding-top:16px;padding-bottom:16px;text-align:center}
+  .ft .logo img{height:18px}
+  .ft .ig{font-size:13px;order:2}
+  .ft .logo{order:1}
+  .ft .mid{order:3;width:100%;justify-content:center;flex-wrap:wrap;gap:2px 14px;font-size:12px;white-space:nowrap}
+    .ab .oo{width:80vw;right:-44%;top:-16%}
+  .deck{padding:34px 34px 0 0;max-width:640px}
+  .sl{top:34px;right:34px}
+  .sl.p1{transform:translate(17px,-17px) scale(.96)}
+  .sl.p2{transform:translate(34px,-34px) scale(.92)}
+}
+/* ===== CELULAR ===== */
+@media (max-width:720px){
+  .rw,.rw.alt{padding-left:30px;padding-right:30px}
+  .rw.alt{padding-left:calc(30px + 9%)}
+  .rw{min-height:64px}
+  .rw .n{font-size:44px}
+  .rw p{max-width:none;font-size:14px}
+  .how .go{grid-template-columns:1fr max-content}
+  .how .go .t{justify-content:center}
+  .how .r{min-height:0;aspect-ratio:16/10}
+    .how .txt .btn{width:100%}
+
+  .hd .wrap{height:70px}
+  .hd .logo img{height:23px}
+  .hero{min-height:0}
+  .hero .bg img{object-position:84% 50%;transform:translateY(-6%) scale(1.1);transform-origin:84% 0;animation:zoomm 2.4s var(--ease) forwards}
+  @keyframes zoomm{to{transform:translateY(-6%) scale(1.06)}}
+  .hero h1{font-size:clamp(42px,12.5vw,62px)}
+  .hero-main{min-height:680px;padding-bottom:62px;padding-top:84px;gap:16px;justify-content:space-between}
+  .band .in{min-height:260px}
+  .hero-side .btn{width:100%}
+  .hero-side .btn .t{flex:1;justify-content:center}
+  .bens{margin-top:-48px}
+  .bens .grid{display:flex;overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;gap:10px;margin:0 calc(-1*var(--gut));padding:12px var(--gut) 24px;scroll-padding:0 var(--gut);scrollbar-width:none}
+  .bens .grid::-webkit-scrollbar{display:none}
+  .ben{flex:0 0 68%;scroll-snap-align:start;min-height:128px}
+  #modelos{padding-top:36px}
+  .shead{align-items:center;text-align:center;gap:10px}
+  .shead p{max-width:330px}
+  .why .shead .r{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:18px}
+  .why .shead{gap:10px}
+  .plans{display:flex;overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;gap:10px;margin:0 calc(-1*var(--gut));padding:0 var(--gut);scroll-padding:0 var(--gut);scrollbar-width:none}
+  .plans::-webkit-scrollbar{display:none}
+  .card{flex:0 0 84%;scroll-snap-align:start;padding:22px}
+  .deck{padding:24px 24px 0 0}
+  .sl{top:24px;right:24px}
+  .sl.p1{transform:translate(12px,-12px) scale(.96)}
+  .sl.p2{transform:translate(24px,-24px) scale(.92)}
+  .band .in{min-height:240px;clip-path:inset(0 round 22px)}
+  .band .in img{object-position:45% 92%}
+  .band .cnt{padding:24px 18px}
+  .band .big{font-size:clamp(25px,7vw,30px)}
+  .btn.xl{width:100%}
+  .btn.xl .t{flex:1;justify-content:center;padding:0 20px;font-size:16px}
+  .ab .oo{width:120vw;right:-72%;top:-10%}
+  details .a{padding-right:0}
+  .fin{align-items:flex-end}
+  .fin::after{background:linear-gradient(180deg,rgba(24,24,24,.1) 0%,rgba(24,24,24,.92) 70%)}
+  .fin .cnt{padding:200px 0 48px}
+  .ft .mid{gap:2px 12px}
+}
+.selo{position:absolute;right:-4px;top:50%;width:76px;height:76px;transform:translateY(-50%) rotate(-10deg);filter:drop-shadow(0 6px 14px rgba(0,0,0,.18));transition:transform .5s var(--ease)}
+.card:hover .selo{transform:translateY(-50%) rotate(0deg) scale(1.05)}
+.how .selo.hs{top:clamp(16px,2vw,24px);right:clamp(16px,2vw,24px);width:clamp(100px,8.4vw,130px);height:auto;transform:rotate(-10deg);z-index:4}
+.how .selo.hs.wig{animation:wig .9s ease-out}
+@keyframes wig{from{opacity:0;transform:rotate(-16deg) scale(.92)}to{opacity:1;transform:rotate(-10deg) scale(1)}}
+@media (min-width:721px){.mb{display:none}}
+.tb{display:none}
+@media (min-width:721px) and (max-width:1024px){.tb{display:inline}}
+@media (max-width:720px){.selo{width:66px;height:66px}.card .md{padding-right:72px}.how .selo.hs{width:82px;top:12px;right:12px}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#topo" aria-label="Noomi — início"><img src="assets/noomi-white.png" alt="Noomi"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#modelos">Modelos</a>
+      <a href="#saiba-mais">Saiba mais</a>
+      <a href="#frota">Frota</a>
+    </nav>
+    <a class="cta-h" href="#como-funciona">Fale com um consultor</a>
+    <button class="burger" aria-label="Abrir menu" aria-expanded="false"><i></i></button>
+  </div>
+</header>
+<div class="mm">
+  <a class="l" href="#quem-somos">Quem somos</a>
+  <a class="l" href="#modelos">Modelos</a>
+  <a class="l" href="#saiba-mais">Saiba mais</a>
+  <a class="l" href="#frota">Frota</a>
+  <a class="btn light" href="#como-funciona"><span class="t">Fale com um consultor</span><span class="o"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></a>
+</div>
+
+<main id="topo">
+<!-- 1. CAPA -->
+<section class="hero">
+  <div class="bg"><img src="assets/img/hero.jpg" alt="Carro 0km na estrada"></div>
+  <div class="wrap hero-main">
+    <div>
+      <span class="kick">A economia que move você!</span>
+      <h1>Carro por assinatura é com a <span class="c">Noomi</span></h1>
+    </div>
+    <div class="hero-side">
+      <p>Praticidade, economia e carro 0km sempre!</p>
+      <a class="btn light" href="#como-funciona"><span class="t">Fale com um consultor</span><span class="o"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></a>
+    </div>
+  </div>
+</section>
+<div class="bens">
+  <div class="wrap grid">
+    <div class="ben rv"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 8.5a6 6 0 0 0-8 8L4 24l4 4 7.5-7.5a6 6 0 0 0 8-8l-3.5 3.5-3.2-.8-.8-3.2z"/></svg></span><p>Esqueça a dor de cabeça com oficina, papelada e burocracia.</p></div>
+    <div class="ben rv d1"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l10 4v8c0 7-4.5 11.5-10 13-5.5-1.5-10-6-10-13V7z"/><path d="M11.5 16l3 3 6-6"/></svg></span><p>Seguro e assistência 24h inclusos.</p></div>
+    <div class="ben rv d2"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="16" height="26" rx="4"/><path d="M13.5 24h5M12.5 13.5l2.5 2.5 4.5-4.5"/></svg></span><p>Contratação digital, com total transparência e comodidade.</p></div>
+    <div class="ben rv d3"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h19l-4-4M27 21H8l4 4"/></svg></span><p>Troque de carro a cada renovação de contrato.</p></div>
+  </div>
+</div>
+
+<!-- 2. PLANOS -->
+<section class="sec" id="modelos">
+  <div class="wrap">
+    <div class="shead">
+      <h2 class="rv">Seu carro <span class="c">está aqui</span></h2>
+      <p class="rv d1">Escolha a categoria ideal para a sua rotina ou para a operação da sua empresa.</p>
+    </div>
+    <div class="plans">
+      <a class="card rv" href="#como-funciona">
+        <div class="top"><h3>Hatch</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/hatch.webp" alt="Carro hatch"></div>
+        <p class="md">Kwid, Mobi, Argo<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Praticidade, economia e versatilidade para rotinas urbanas, deslocamentos comerciais e equipes que precisam de agilidade no dia a dia.</p>
+      </a>
+      <a class="card rv d1" href="#como-funciona">
+        <div class="top"><h3>Sedan</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/sedan.webp" alt="Carro sedan"></div>
+        <p class="md">Cronos, HB20S, Virtus<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Conforto, espaço interno e elegância para equipes comerciais, executivos, visitas a clientes e deslocamentos corporativos.</p>
+      </a>
+      <a class="card rv d2" href="#como-funciona">
+        <div class="top"><h3>Executivo</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/executivo.webp" alt="Carro executivo"></div>
+        <p class="md">Corolla, Versa, Sentra<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Desempenho, sofisticação e tecnologia para quem busca mais conforto, espaço e presença em cada trajeto.</p>
+      </a>
+      <a class="card rv" href="#como-funciona">
+        <div class="top"><h3>SUV</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/suv.webp" alt="Carro SUV"></div>
+        <p class="md">T-Cross, Tracker, Kicks<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Versatilidade, segurança e desempenho para empresas que precisam de presença, conforto e liberdade na operação.</p>
+      </a>
+      <a class="card rv d1" href="#como-funciona">
+        <div class="top"><h3>Utilitário</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/utilitario.webp" alt="Picape utilitária"></div>
+        <p class="md">Strada, Oroch, Saveiro<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Robustez, capacidade de carga e conforto para empresas que precisam transportar materiais, ferramentas, equipamentos ou equipes.</p>
+      </a>
+      <a class="card rv d2" href="#como-funciona">
+        <div class="top"><h3>4x4</h3><span class="ar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></div>
+        <div class="car"><img src="assets/cars/4x4.webp" alt="Picape 4x4"></div>
+        <p class="md">Rampage, Ranger, Hilux<small>e outros modelos</small><img class="selo" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade"></p>
+        <p class="ds">Agilidade, capacidade de carga e custo-benefício para operações que exigem mais força, resistência e adaptação a diferentes terrenos.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. POR QUE ASSINAR -->
+<section class="sec beige why" id="saiba-mais">
+  <div class="wrap">
+    <div class="shead">
+      <h2 class="rv">Por que escolher um carro <span class="c">por assinatura?</span></h2>
+      <div class="r rv d1">
+        <p>Tenha um 0km com mais previsibilidade,<br class="tb"> praticidade e menos preocupações.</p>
+        <a class="btn" href="#como-funciona"><span class="t">Fale com um consultor</span><span class="o"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></a>
+      </div>
+    </div>
+    <div class="wrow">
+      <div class="wc on rv"><span class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="30" height="27" rx="5"/><path d="M5 16h30M13 4v7M27 4v7M12 24h5M12 29h10"/></svg></span><div><h3>Previsibilidade financeira</h3><p>Uma mensalidade com IPVA, seguro, documentação e manutenções previstas no plano.</p></div></div>
+      <div class="wc rv d1"><span class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="17" cy="11" rx="11" ry="5"/><path d="M6 11v7c0 2.8 4.9 5 11 5s11-2.2 11-5v-7M6 18v7c0 2.8 4.9 5 11 5"/><path d="M30 22v14M24 30l6 6 6-6"/></svg></span><div><h3>Capital livre para outras prioridades</h3><p>Sem imobilizar um alto valor na compra ou entrada de um veículo.</p></div></div>
+      <div class="wc rv d2"><span class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 15A13 13 0 0 0 8.5 12M8 25a13 13 0 0 0 23.5 3"/><path d="M8 5v7h7M32 35v-7h-7"/></svg></span><div><h3>Sem revenda e desvalorização</h3><p>Ao final do contrato, devolva o veículo e escolha seu próximo 0km.</p></div></div>
+      <div class="wc rv d3"><span class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h14l8 8v24H10z"/><path d="M24 4v8h8M15 24l4 4 7-8"/></svg></span><div><h3>Menos burocracia no dia a dia</h3><p>Documentação, licenciamento e manutenções ficam por conta da assinatura.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAIXA (transição bege → preto) -->
+<section class="band">
+  <div class="wrap">
+    <div class="in rv">
+      <img src="assets/img/banner.jpg" alt="">
+      <div class="cnt"><p class="big">Você aproveita o carro.<br><span class="c">A Noomi simplifica o resto.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. LOCADORAS -->
+<section class="partners dark" id="frota">
+  <div class="wrap"><h2 class="rv">Representamos as maiores <span class="c">locadoras do Brasil</span></h2></div>
+  <div class="marquee rv d1" aria-label="Localiza, Movida, Unidas, Flua!, Sign&amp;Drive e LM AssineCar">
+    <div class="track">
+      <span><img src="assets/logos-w/lg-localiza.webp" alt="Localiza"></span>
+      <span><img src="assets/logos-w/lg-movida.webp" alt="Movida"></span>
+      <span><img src="assets/logos-w/lg-unidas.webp" alt="Unidas"></span>
+      <span><img src="assets/logos-w/lg-flua.webp" alt="Flua!"></span>
+      <span><img src="assets/logos-w/lg-signdrive.webp" alt="Sign&amp;Drive"></span>
+      <span><img src="assets/logos-w/lg-lm.webp" alt="LM AssineCar"></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-localiza.webp" alt=""></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-movida.webp" alt=""></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-unidas.webp" alt=""></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-flua.webp" alt=""></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-signdrive.webp" alt=""></span>
+      <span aria-hidden="true"><img src="assets/logos-w/lg-lm.webp" alt=""></span>
+    </div>
+  </div>
+</section>
+
+<!-- 6. DEPOIMENTOS -->
+<section class="tst">
+  <div class="wrap">
+    <h2 class="rv tst-h">Quem assina, <span class="c">recomenda</span></h2>
+  </div>
+  <div class="stage3 rv d1" aria-label="Depoimentos de clientes">
+    <article class="tc"><p><b>Nunca pensei que fosse tão fácil alugar um carro.</b> Tinha muito receio com relação ao carro por assinatura, mas fui surpreendida desde o atendimento até aos benefícios que obtive. Estou muito feliz por ter feito esta escolha porque minha experiência tem sido incrível, tudo aconteceu de forma fácil, transparente e digital, não precisei nem sair da minha casa.</p><div class="tf"><span class="av">M</span><div><i aria-label="5 estrelas">★★★★★</i><strong>Monique Brito</strong><span>Pessoa Física</span></div></div></article>
+    <article class="tc"><p><b>Minha experiência com a Noomi tem sido excelente.</b> O atendimento é sempre rápido, atencioso e resolutivo. A facilidade no processo de assinatura faz toda a diferença no dia a dia. Sem dúvida, é uma solução prática e confiável para quem precisa de mobilidade com economia e segurança. Recomendo de olhos fechados.</p><div class="tf"><span class="av">P</span><div><i aria-label="5 estrelas">★★★★★</i><strong>Pedro Reis</strong><span>Pessoa Jurídica</span></div></div></article>
+    <article class="tc"><p><b>Experiência super positiva,</b> atendimento claro e com detalhes, o veículo superou as expectativas. Recomendo!</p><div class="tf"><span class="av">P</span><div><i aria-label="5 estrelas">★★★★★</i><strong>Paulo Zanim</strong><span>Pessoa Jurídica</span></div></div></article>
+  </div>
+  <div class="ctrl">
+    <button class="prev" aria-label="Depoimento anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button>
+    <button class="next" aria-label="Próximo depoimento"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+  </div>
+</section>
+
+<!-- 7. COMO FUNCIONA -->
+<section class="how" id="como-funciona">
+  <div class="l">
+    <div class="hh rv"><h2>Como funciona <span class="c">na prática?</span></h2><p>Do primeiro contato até a chave na mão,<br class="mb"> em 5 etapas.</p></div>
+    <ol class="rows">
+        <li class="rw" data-i="0"><span class="n">01</span><p>Preencha o formulário e entraremos em contato com você.</p></li>
+        <li class="rw alt" data-i="1"><span class="n">02</span><p>Escolha o modelo, prazo de contrato e quilometragem mensal.<small>Contratos de 12 a 48 meses</small></p></li>
+        <li class="rw" data-i="2"><span class="n">03</span><p>Enviaremos sua ficha para análise.</p></li>
+        <li class="rw alt" data-i="3"><span class="n">04</span><p>Após aprovação do seu crédito, assine o contrato digital.</p></li>
+        <li class="rw" data-i="4"><span class="n">05</span><p>Receba seu carro 0km!</p></li>
+    </ol>
+    <div class="go rv">
+      <a class="btn xl" data-form href="#"><span class="t">Solicite sua cotação</span><span class="o"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></a>
+      <small>Você será direcionado ao formulário.</small>
+    </div>
+  </div>
+  <div class="r rv">
+    <img class="selo hs" src="assets/img/selo.webp" alt="Não atendemos app de mobilidade">
+    <div class="pic" aria-hidden="true">
+      <img src="assets/img/how.jpg" alt="" loading="lazy">
+      <svg class="trail" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0"><stop offset="0" stop-color="#09dde0"/><stop offset=".6" stop-color="#5cf0f2"/><stop offset="1" stop-color="#b8fbfc"/></linearGradient>
+          <filter id="tb" filterUnits="userSpaceOnUse" x="-300" y="-300" width="1600" height="1600"><feGaussianBlur stdDeviation="34"/></filter>
+        </defs>
+        <path class="rev" d="M-80 640 C 160 380 340 780 560 540 S 860 300 1080 460" fill="none" stroke="url(#tg)" stroke-width="170" stroke-linecap="round" pathLength="100" filter="url(#tb)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 8. QUEM SOMOS -->
+<section class="sec dark ab" id="quem-somos">
+  <div class="oo" aria-hidden="true">
+    <img src="assets/oo-blur.webp" alt="">
+  </div>
+  <div class="wrap grid">
+    <div class="rv">
+      <span class="lab">Quem somos</span>
+      <p class="big">A Noomi é uma corretora de carros por assinatura que nasceu para <span class="c">transformar a mobilidade em uma experiência mais inteligente, econômica e prática.</span></p>
+    </div>
+    <div class="rv d1">
+      <p class="tx">Nosso foco está em soluções de Mobilidade Circular, com acesso a veículos novos, planos flexíveis e sem burocracia. Atuamos conectando clientes às melhores oportunidades do mercado por meio de um atendimento personalizado, consultivo e humanizado. <b>Queremos redefinir a relação com o carro, promovendo um novo olhar para a mobilidade:</b> mais inteligente, sustentável e centrada nas pessoas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="sec faq" id="faq">
+  <div class="wrap grid">
+    <h2 class="rv">Esclareça suas <span class="c">dúvidas</span></h2>
+    <div class="qs rv d1">
+      <details><summary>A Noomi é uma locadora?<i></i></summary><div class="a">A Noomi é uma corretora de mobilidade. Conectamos você a diferentes locadoras parceiras e ajudamos a encontrar o carro e o plano de assinatura que fazem sentido para sua rotina.</div></details>
+      <details><summary>Como funciona o carro por assinatura?<i></i></summary><div class="a">Você escolhe um veículo, o prazo do contrato e a franquia de quilometragem. Paga uma mensalidade para usar o carro, com os serviços previstos no plano incluídos, sem precisar comprar ou financiar.</div></details>
+      <details><summary>Qual é a diferença entre assinatura e aluguel tradicional?<i></i></summary><div class="a">A assinatura é uma modalidade de locação voltada ao uso por períodos mais longos. Você contrata um plano com prazo, quilometragem e mensalidade definidos, em vez de alugar um carro por diárias.</div></details>
+      <details><summary>Vale mais a pena assinar ou financiar?<i></i></summary><div class="a">Depende das suas prioridades. No financiamento, você compra o veículo. Na assinatura, paga pelo uso e mantém disponível o valor que destinaria à compra ou à entrada, sem precisar cuidar da revenda ao final do contrato. A equipe da Noomi ajuda você a conhecer as opções.</div></details>
+      <details><summary>O que está incluso na mensalidade?<i></i></summary><div class="a">Em geral, IPVA, documentação, seguro ou proteção e manutenções previstas no plano. Os serviços, as coberturas e eventuais cobranças adicionais são detalhados na proposta e no contrato da locadora escolhida.</div></details>
+      <details><summary>Tem análise de crédito?<i></i></summary><div class="a">Sim. A análise de crédito e a validação dos documentos são realizadas pela locadora parceira, conforme seus próprios critérios. A Noomi acompanha o atendimento, mas a aprovação depende da locadora.</div></details>
+      <details><summary>Posso contratar como pessoa física ou jurídica?<i></i></summary><div class="a">Sim. A Noomi trabalha com opções para pessoas físicas e empresas. As condições disponíveis dependem do perfil, da documentação e das regras de cada locadora parceira.</div></details>
+      <details><summary>Quais carros estão disponíveis?<i></i></summary><div class="a">Trabalhamos com diferentes marcas e modelos por meio das nossas parceiras. Preencha o formulário para que nossa equipe consulte a disponibilidade e apresente opções de acordo com sua necessidade.</div></details>
+      <details><summary>Posso escolher a quilometragem do plano?<i></i></summary><div class="a">Sim. Existem diferentes franquias de quilometragem, conforme o veículo e a locadora. Nossa equipe ajuda você a escolher uma opção compatível com sua rotina. Caso ultrapasse a franquia contratada, haverá cobrança conforme as condições do contrato.</div></details>
+      <details><summary>O carro pode ser usado para aplicativos de mobilidade?<i></i></summary><div class="a">Não. A Noomi não trabalha com planos destinados a motoristas de aplicativos.</div></details>
+      <details><summary>Como recebo uma proposta?<i></i></summary><div class="a">Preencha o formulário desta página. Nossa equipe entrará em contato para entender o que você procura, consultar as condições nas locadoras parceiras e apresentar uma proposta personalizada.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. CTA FINAL -->
+<section class="fin">
+  <img src="assets/img/cta.jpg" alt="Entrega da chave do carro">
+  <div class="wrap">
+    <div class="cnt rv">
+      <h2>Seu próximo 0km <span class="c">começa aqui.</span></h2>
+      <p>Fale com um consultor Noomi e monte o plano ideal para você ou sua empresa.</p>
+      <a class="btn light up" href="#como-funciona"><span class="t">Fale com um consultor</span><span class="o"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12L12 4M5 4h7v7"/></svg></span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <a class="logo" href="#topo"><img src="assets/noomi-white.png" alt="Noomi"></a>
+    <div class="mid"><span>Copyright © Noomi – Todos os direitos reservados.</span><a href="#">Termos de Uso</a><a href="#">Políticas de Privacidade</a><span>CNPJ 61.433.648/0001-46</span></div>
+    <a class="ig" href="https://www.instagram.com/noomioficial/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@noomioficial</a>
+  </div>
+</footer>
+
+<script>
+// Formulário: usado só no botão "Solicite sua cotação"
+const FORM_URL = "#";
+document.querySelectorAll('[data-form]').forEach(a => { a.href = FORM_URL; if (FORM_URL !== "#") { a.target = "_blank"; a.rel = "noopener"; } });
+
+const wcs = [...document.querySelectorAll('.wc')];
+const hd = document.querySelector('.hd'), heroBg = document.querySelector('.hero .bg');
+const bandIn = document.querySelector('.band .in'), bandImg = bandIn.querySelector('img');
+const onScroll = () => {
+  hd.classList.toggle('s', scrollY > 30);
+  if (scrollY < innerHeight * 1.2) heroBg.style.transform = `translateY(${scrollY * .3}px)`;
+  const r = bandIn.getBoundingClientRect();
+
+  // por que (tablet/celular): abre o card que estiver no centro da tela
+  if (matchMedia('(max-width:1024px)').matches) {
+    let best = null, bd = 1e9;
+    wcs.forEach(c => { const r = c.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - innerHeight * .5); if (d < bd) { bd = d; best = c; } });
+    wcs.forEach(c => c.classList.toggle('on', c === best));
+  }
+};
+let tick = false; addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { onScroll(); tick = false; }); } }, {passive:true}); addEventListener('resize', onScroll); onScroll();
+
+const bg = document.querySelector('.burger');
+bg.addEventListener('click', () => { const o = document.body.classList.toggle('open'); bg.setAttribute('aria-expanded', o); });
+document.querySelectorAll('.mm a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('open')));
+
+// por que: card ativo expande no hover
+wcs.forEach(c => c.addEventListener('mouseenter', () => wcs.forEach(x => x.classList.toggle('on', x === c))));
+
+// depoimentos: card central em destaque, laterais cortados, navegação pelas setas
+const st3 = document.querySelector('.stage3'), tcs = [...st3.querySelectorAll('.tc')]; let tk = 0;
+const layT = () => { const n = tcs.length; tcs.forEach((c, j) => { const d = (j - tk + n) % n; c.className = 'tc ' + (d === 0 ? 'c0' : d === 1 ? 'cr' : 'cl'); }); };
+const sizeT = () => { tcs.forEach(c => c.style.minHeight = '0'); const h = Math.max(...tcs.map(c => c.offsetHeight)); st3.style.setProperty('--h', h + 'px'); tcs.forEach(c => c.style.minHeight = ''); };
+const goT = d => { tk = (tk + d + tcs.length) % tcs.length; layT(); };
+document.querySelector('.tst .next').onclick = () => goT(1);
+document.querySelector('.tst .prev').onclick = () => goT(-1);
+tcs.forEach(c => c.addEventListener('click', () => { if (c.classList.contains('cr')) goT(1); else if (c.classList.contains('cl')) goT(-1); }));
+let tsx = null; st3.addEventListener('touchstart', e => tsx = e.touches[0].clientX, {passive:true});
+st3.addEventListener('touchend', e => { if (tsx === null) return; const dx = e.changedTouches[0].clientX - tsx; if (Math.abs(dx) > 40) goT(dx < 0 ? 1 : -1); tsx = null; });
+layT(); sizeT(); addEventListener('resize', sizeT); document.fonts && document.fonts.ready.then(sizeT);
+
+// como funciona: passar o mouse (ou tocar) numa etapa troca a foto
+const rws = [...document.querySelectorAll('.how .rw')], trail = document.querySelector('.how .trail .rev');
+const pick = i => { rws.forEach((r, j) => r.classList.toggle('on', j === i)); trail.style.strokeDashoffset = 100 - (i + 1) * 20; };
+new IntersectionObserver(es => { if (es[0].isIntersecting && !document.querySelector('.how .rw.on')) pick(0); }, {threshold:.4}).observe(document.querySelector('.how'));
+rws.forEach((r, i) => { r.addEventListener('mouseenter', () => pick(i)); r.addEventListener('click', () => pick(i)); });
+// tablet/celular: a etapa no centro da tela fica ativa e o caminho avança junto
+let rwT = false;
+addEventListener('scroll', () => { if (rwT || !matchMedia('(max-width:1024px)').matches) return; rwT = true; requestAnimationFrame(() => {
+  rwT = false; let best = -1, bd = 1e9;
+  rws.forEach((r, i) => { const b = r.getBoundingClientRect(); if (b.bottom < 0 || b.top > innerHeight) return; const d = Math.abs(b.top + b.height / 2 - innerHeight * .55); if (d < bd) { bd = d; best = i; } });
+  if (best >= 0 && !rws[best].classList.contains('on')) pick(best);
+}); }, {passive:true});
+
+// faixa: imagem primeiro, depois a frase "digitada"
+(() => {
+  const big = document.querySelector('.band .big'); if (!big) return; let k = 0;
+  (function wrap(n){ [...n.childNodes].forEach(c => {
+    if (c.nodeType === 3) { const f = document.createDocumentFragment(); [...c.textContent].forEach(ch => { const sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ch; sp.style.transitionDelay = (k++ * 30) + 'ms'; f.appendChild(sp); }); c.replaceWith(f); }
+    else if (c.nodeType === 1 && c.tagName !== 'BR') wrap(c);
+  }); })(big);
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { setTimeout(() => { big.classList.add('typed'); big.closest('.in').classList.add('dim'); }, 450); o.disconnect(); } }, {threshold:.55}).observe(big.closest('.in'));
+})();
+// selo do "como funciona" dá uma giradinha ao entrar na dobra
+(() => {
+  const sl = document.querySelector('.how .selo.hs'); if (!sl) return;
+  new IntersectionObserver(es => { if (es[0].isIntersecting) { sl.classList.remove('wig'); void sl.offsetWidth; sl.classList.add('wig'); } }, {threshold:.35}).observe(document.querySelector('.how .r'));
+})();
+// bullets no celular: passam sozinhos para mostrar que há mais
+(() => {
+  const g = document.querySelector('.bens .grid'); if (!g) return; let t = null, stop = false;
+  ['touchstart','pointerdown','wheel'].forEach(ev => g.addEventListener(ev, () => { stop = true; clearInterval(t); t = null; }, {passive:true}));
+  new IntersectionObserver(es => {
+    if (es[0].isIntersecting && !t && !stop && g.scrollWidth > g.clientWidth + 4) {
+      t = setInterval(() => { const step = g.children[0].offsetWidth + 10; let n = g.scrollLeft + step; if (n > g.scrollWidth - g.clientWidth - 4) n = 0; g.scrollTo({left:n, behavior:'smooth'}); }, 2600);
+    } else if (!es[0].isIntersecting) { clearInterval(t); t = null; }
+  }, {threshold:.6}).observe(g);
+})();
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
