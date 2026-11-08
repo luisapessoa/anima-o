@@ -274,8 +274,11 @@ details .a{padding:0 60px 22px 0;color:var(--ink);font-size:16.5px;line-height:1
   .hero-main{padding-top:150px;padding-bottom:140px}
   .hero .bg img{object-position:83% 62%;transform:scale(1.22);transform-origin:76% 66%;animation:zooml 2.4s var(--ease) forwards}
   @keyframes zooml{to{transform:scale(1.16)}}
-  .why .shead{align-items:flex-end;justify-content:flex-start;gap:28px}
-  .why .shead h2{flex:0 0 auto;max-width:450px}
+}
+/* "Por que escolher": texto alinhado à esquerda, ao lado do título; botão à direita (desktop e notebook) */
+@media (min-width:1025px){
+  .why .shead{align-items:flex-end;justify-content:flex-start;gap:clamp(28px,3.4vw,56px)}
+  .why .shead h2{flex:0 0 auto;max-width:10.2em}
   .why .shead .r{display:flex;flex:1;align-items:center;justify-content:space-between;gap:24px;max-width:none;text-align:left;padding-bottom:4px}
   .why .shead .r p{max-width:340px}
   .why .shead .r .btn{flex:none;white-space:nowrap}
