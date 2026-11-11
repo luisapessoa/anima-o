@@ -267,7 +267,7 @@ function Legacy() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   const fill = E.easeInOutCubic(clamp((lt - 1.5) / 1.6, 0, 1));
   const num = ease(lt, 1.1, 0.6);
-  const big = { ...BOLD(440, 400), letterSpacing: '-0.06em', paddingRight: 60 };
+  const big = { ...BOLD(440, 400), letterSpacing: '-70px', paddingRight: 60 };
   return (
     <div style={{ ...shell, background: GREY, ...iris(lt) }}>
       {RT.showLogo ? <Logo dark /> : null}
