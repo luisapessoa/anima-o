@@ -926,7 +926,7 @@ function Closing() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 8.0,
+    end: 9.8,
     speed: 0.95,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.55)"
