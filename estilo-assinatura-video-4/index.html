@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estilo Assinaturas — vídeo vertical 4</title>
+<!-- background videos: same Amarok pickup across Telas 1, 2, 4 and 7, each with its own clip (full-bleed) -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-7.mp4" fetchpriority="high" />
+<script>
+  [
+    ['assets/bg-2.mp4', 500],    // Tela 2 ~5.5s in
+    ['assets/bg-4.mp4', 9000],   // Tela 4 ~19s in
+    ['assets/bg-7b.mp4', 38000], // Tela 7 ~42s in
+  ].forEach(function (pair) {
+    setTimeout(function () {
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'video'; l.type = 'video/mp4';
+      l.href = pair[0];
+      document.head.appendChild(l);
+    }, pair[1]);
+  });
+</script>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/urbanist-300.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/urbanist-700.woff2" crossorigin="anonymous" />
+<link rel="preload" as="image" type="image/png" href="assets/estilo/opt-logo-white.png" fetchpriority="high" />
+<style>
+  /* Urbanist self-hosted — evita depender de fonts.googleapis.com em tempo de exportação. */
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 300; font-display: swap;
+    src: url("assets/fonts/urbanist-300-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 300; font-display: swap;
+    src: url("assets/fonts/urbanist-300.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/urbanist-400-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/urbanist-400.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("assets/fonts/urbanist-500-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("assets/fonts/urbanist-500.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("assets/fonts/urbanist-600-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("assets/fonts/urbanist-600.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/urbanist-700-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/urbanist-700.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("assets/fonts/urbanist-800-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("assets/fonts/urbanist-800.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  html, body { margin: 0; padding: 0; background: #000000; height: 100%; }
+  a { color: #173ded; }
+  a:hover { color: #4b6bf5; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+
+<script>
+  // Lista de telas (7 telas) e configuração de playback — copiado verbatim
+  // do OM_SCENES do pacote de design handoff, nenhum texto alterado.
+  window.OM_SCENES="[{\"name\":\"Tela 1\",\"layout\":\"quote\",\"dur\":5.5,\"head\":[\"“Não quero assinar um carro\",\"porque a quilometragem\",\"vai me limitar.”\"],\"tail\":\"Quem te disse isso?\"},{\"name\":\"Tela 2\",\"layout\":\"outline\",\"dur\":6.5,\"body\":[\"Antes de concluir que o\",\"plano não será suficiente,\",\"existe uma pergunta\",\"importante:\"],\"tail\":[\"Você sabe quantos quilômetros\",\"realmente dirige por mês?\"]},{\"name\":\"Tela 3\",\"layout\":\"kbb\",\"dur\":7,\"body\":[\"Um levantamento da\",\"KBB Brasil mostrou que\",\"o brasileiro percorre, em\",\"média, cerca de 12.900\",\"km no primeiro ano de\",\"uso do carro.\"],\"hi\":[\"Isso representa\",\"aproximadamente\",\"1.075 km por mês.\"]},{\"name\":\"Tela 4\",\"layout\":\"panel\",\"dur\":8,\"body\":[\"Por isso, planos de 1.000 ou 1.500\",\"km mensais podem atender à\",\"rotina de muitos motoristas.\"],\"body2\":[\"Essas faixas não são escolhidas\",\"ao acaso:\"],\"hi\":[\"elas acompanham\",\"diferentes perfis de uso.\"]},{\"name\":\"Tela 5\",\"layout\":\"checklist\",\"dur\":7.5,\"head\":[\"Para encontrar a\",\"quilometragem ideal,\",\"considere:\"],\"items\":[[\"os trajetos para o trabalho;\"],[\"os compromissos da\",\"semana;\"],[\"os passeios aos finais\",\"de semana;\"],[\"as viagens mais frequentes;\"],[\"uma margem para\",\"deslocamentos extras.\"]]},{\"name\":\"Tela 6\",\"layout\":\"divider\",\"dur\":7.5,\"head\":\"E se você dirige mais?\",\"body\":[\"A solução não é deixar de\",\"assinar, mas escolher uma\",\"faixa de quilometragem\",\"compatível com a sua\",\"realidade.\"],\"body2\":[\"Caso o limite seja\",\"ultrapassado, as condições e\",\"eventuais valores adicionais\",\"seguem o contrato do plano.\"]},{\"name\":\"Tela 7\",\"layout\":\"closing\",\"dur\":5.5,\"head\":[\"A quilometragem não existe\",\"para limitar o uso do carro.\"],\"body\":[\"Ela existe para que o plano seja\",\"escolhido de acordo com a sua rotina!\"]}]";
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  // videoBg:true — fundos de vídeo ligados por padrão (Telas 4 e 7, full-bleed).
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenesEstilo4.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(EstiloVideo4)
+  );
+</script>
+</body>
+</html>

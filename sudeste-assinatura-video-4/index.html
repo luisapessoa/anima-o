@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sudeste Assinaturas — vídeo vertical 4</title>
+<!-- Only Tela 1's clip is preloaded — it has to be ready the instant the
+     page paints. The other four video scenes' clips load on their own
+     when each scene mounts, so they don't compete with Tela 1 for
+     bandwidth right at page load. -->
+<link rel="preload" as="video" type="video/mp4" href="assets/videos/t1.mp4" fetchpriority="high" />
+<!-- DM Sans self-hosted woff2 preloaded so Tela 1's text reveal never races
+     the font load (font-display:swap would otherwise flash a fallback
+     font first). -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-ext.woff2" crossorigin="anonymous" />
+<link rel="preload" as="image" type="image/png" href="assets/logo-white.png" fetchpriority="high" />
+<style>
+  /* DM Sans self-hospedada (mesmos arquivos usados nos projetos anteriores) —
+     evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
+     em algumas redes e trocar a fonte por um fallback com métricas
+     diferentes, quebrando as linhas nos pontos errados. */
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  html, body { margin: 0; padding: 0; background: #012019; height: 100%; }
+  a { color: #00d1b2; }
+  a:hover { color: #c6f6d6; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React / ReactDOM (mesmas versões usadas nos projetos anteriores). Os
+     arquivos .jsx são pré-compilados para .compiled.js em vez de
+     transpilados no navegador. -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+<script>
+  // Copiado verbatim do window.OM_SCENES do documento de referência
+  // (Sudeste_Assinatura_Video_4.dc.html) — nenhum texto, cor ou tempo alterado.
+  window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "bracket", dur: 6 },
+    { name: "Tela 2", layout: "ruled", dur: 6,
+      p1: ["Muitos olham para a franquia de", "quilometragem como se ela fosse", "uma limitação."],
+      p2: ["Mas essa análise não deve", "ser feita no achismo."] },
+    { name: "Tela 3", layout: "roads", dur: 6.5,
+      p1: ["Levantamentos do mercado", "automotivo apontam que a", "média de rodagem no Brasil", "costuma ficar entre **10 e 15**", "**mil km por ano.**"],
+      p2: ["Isso dá algo", "próximo de **830 a**", "**1.250 km por mês.**"] },
+    { name: "Tela 4", layout: "mintcard", dur: 6.5 },
+    { name: "Tela 5", layout: "titlelead", dur: 6,
+      title: ["Claro, isso não vale", "para todo mundo."],
+      body: ["Quem roda muito a trabalho, viaja", "com frequência ou tem uma rotina", "fora da média precisa avaliar uma", "franquia diferente."] },
+    { name: "Tela 6", layout: "checklist", dur: 7,
+      title: ["Por isso, antes de", "contratar, o ideal é", "entender:"],
+      items: [
+        ["quanto você roda por mês"],
+        ["se usa mais o carro na", "cidade ou na estrada"],
+        ["se viaja com frequência"],
+        ["qual tipo de uso faz", "parte da sua rotina"]
+      ] },
+    { name: "Tela 7", layout: "closer", dur: 6,
+      top: ["A franquia não existe para", "te limitar. Ela existe para", "ajustar o plano ao que você", "realmente precisa."],
+      box: ["Na assinatura, escolher", "bem a quilometragem também", "faz parte de uma mobilidade", "mais inteligente!"] }
+  ]);
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenes4.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(SudesteVideo4)
+  );
+</script>
+</body>
+</html>

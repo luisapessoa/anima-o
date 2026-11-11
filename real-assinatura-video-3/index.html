@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Real Assinatura 3 — vídeo vertical</title>
+<!-- background video for Tela 7 (only black video zone) -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-7.mp4" fetchpriority="low" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/readexpro-400.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/readexpro-700.woff2" crossorigin="anonymous" />
+<link rel="preload" as="image" type="image/png" href="assets/real/logo-navy.png" fetchpriority="high" />
+<style>
+  /* Readex Pro self-hosted — evita depender de fonts.googleapis.com em tempo de exportação. */
+  @font-face { font-family: 'Readex Pro'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/readexpro-400-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Readex Pro'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/readexpro-400.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Readex Pro'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/readexpro-700-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Readex Pro'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/readexpro-700.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  html, body { margin: 0; padding: 0; background: #000000; height: 100%; }
+  a { color: #9fd3e5; }
+  a:hover { color: #c4e6f2; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+
+<script>
+  // Lista de telas (7 telas) e configuração de playback — copiado verbatim
+  // do OM_SCENES do pacote de design handoff, nenhum texto alterado.
+  window.OM_SCENES="[{\"name\":\"Tela 1\",\"layout\":\"suvgrid\",\"dur\":5.6,\"head\":[\"Se você fosse assinar hoje,\",\"qual destes SUVs escolheria?\"]},{\"name\":\"Tela 2\",\"layout\":\"modelcard\",\"dur\":7,\"theme\":\"navy\",\"model\":\"Tera\",\"car\":\"assets/real/suv-tera.png\",\"items\":[[\"Central multimídia VW Play Connect 10,1”\"],[\"Painel digital de até 10,25”\"],[\"Apple CarPlay e Android Auto sem fio\"],[\"Frenagem Autônoma de Emergência (AEB)\"],[\"Controle Adaptativo de Cruzeiro\",\"(ACC) nas versões superiores\"],[\"Carregador de celular por\",\"indução (versões superiores)\"]]},{\"name\":\"Tela 3\",\"layout\":\"modelcard\",\"dur\":7,\"theme\":\"grey\",\"model\":\"T-Cross\",\"car\":\"assets/real/suv-tcross.png\",\"items\":[[\"Central multimídia VW Play 10,1”\"],[\"Painel Digital de 10,25”\"],[\"Carregamento de celular por indução\"],[\"Ar-condicionado digital Climatronic Touch\"],[\"Assistentes de condução (ADAS)\",\"em versões superiores\"],[\"Porta-malas de até 420 litros\"]]},{\"name\":\"Tela 4\",\"layout\":\"modelcard\",\"dur\":7,\"theme\":\"navy\",\"model\":\"Taos\",\"car\":\"assets/real/suv-taos.png\",\"items\":[[\"Motor 250 TSI de 150 cv\"],[\"Câmbio automático de 8 velocidades\"],[\"Painel Digital de 10,25”\"],[\"Central VW Play Connect 10,1”\"],[\"Ar-condicionado digital de duas zonas\"],[\"Pacote ADAS com ACC, assistente de\",\"permanência em faixa e monitor de ponto\",\"cego (conforme versão)\"]]},{\"name\":\"Tela 5\",\"carW\":1120,\"carTop\":550,\"boxH\":1330,\"layout\":\"modelcard\",\"dur\":7,\"theme\":\"grey\",\"model\":\"Tiguan\",\"car\":\"assets/real/suv-tiguan.png\",\"items\":[[\"Motor 2.0 TSI\"],[\"Tração 4Motion (AWD) (conforme versão)\"],[\"Painel Digital (Digital Cockpit)\"],[\"Central multimídia de última geração\"],[\"Bancos com ajustes elétricos\",\"(conforme versão)\"],[\"Pacote completo de assistentes de\",\"condução e segurança\"]]},{\"name\":\"Tela 6\",\"layout\":\"boxchain\",\"dur\":5.2,\"boxes\":[\"Tecnologia\",\"Conforto\",\"Espaço\",\"Desempenho\"],\"tail\":[\"O melhor SUV é aquele\",\"que faz sentido para a\",\"sua rotina.\"]},{\"name\":\"Tela 7\",\"layout\":\"finalrule\",\"dur\":5.5,\"body\":[\"Na Real Assinatura, você encontra\",\"diferentes SUVs Volkswagen 0 km\",\"para dirigir por assinatura.\"],\"tail\":\"Qual deles seria a sua escolha?\"}]";
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  window.TWEAK_DEFAULTS = { showLogo: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenesReal3.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(RealVideo3)
+  );
+</script>
+</body>
+</html>

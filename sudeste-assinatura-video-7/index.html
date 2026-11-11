@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sudeste Assinaturas — vídeo vertical 7 (Geração Z)</title>
+<!-- Telas 1, 4 e 6 (trechos reaproveitados do Vídeo 6) preload on demand when
+     sua cena monta, para não competir com o primeiro paint. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-ext.woff2" crossorigin="anonymous" />
+<link rel="preload" as="image" type="image/png" href="assets/logo-white.png" fetchpriority="high" />
+<style>
+  /* DM Sans self-hospedada (mesmos arquivos usados nos projetos anteriores) —
+     evita depender de fonts.googleapis.com, que pode falhar/ficar bloqueado
+     em algumas redes e trocar a fonte por um fallback com métricas
+     diferentes, quebrando as linhas nos pontos errados. */
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("assets/fonts/dm-sans-latin.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  html, body { margin: 0; padding: 0; background: #012019; height: 100%; }
+  a { color: #00d1b2; }
+  a:hover { color: #5edcc8; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React / ReactDOM (mesmas versões usadas nos projetos anteriores). Os
+     arquivos .jsx são pré-compilados para .compiled.js em vez de
+     transpilados no navegador. -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+<script>
+  // Copiado verbatim do window.OM_SCENES do documento de referência
+  // (Sudeste Assinatura Video 7 v2.dc.html) — nenhum texto, cor ou tempo alterado.
+  window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "question", dur: 5,
+      a: ["Será que a"], word: "Geração Z", b: ["**ainda quer ter**", "**um carro?**"] },
+    { name: "Tela 2", layout: "answer", dur: 8,
+      head: "A resposta é", word: "sim.", stat: 51,
+      side: ["da Geração Z"],
+      body: ["pretendem comprar ou trocar de", "carro nos próximos três anos."],
+      close: ["O interesse pelo automóvel", "continua **forte entre os jovens.**"] },
+    { name: "Tela 3", layout: "shift", dur: 9.5,
+      lead: ["Mas uma coisa", "começou a mudar:"],
+      quote: ["a forma como as novas gerações", "enxergam o **acesso ao carro.**"],
+      pre: "Na mesma pesquisa,", stat: 31,
+      body: ["dos entrevistados consideram a", "**assinatura uma opção viável,**", "com maior interesse entre as", "gerações mais jovens."],
+      source: "Fonte: Localiza&Co" },
+    { name: "Tela 4", layout: "paths", dur: 8,
+      head: ["**Ou seja:** o desejo", "de dirigir continua."],
+      node: "0km", labels: ["compra à vista", "financiamento", "assinatura"],
+      body: ["Mas hoje existem diferentes", "formas de chegar ao **0km** e a", "**assinatura** passou a fazer", "parte dessas possibilidades."] },
+    { name: "Tela 5", layout: "legacy", dur: 8.5,
+      lead: ["Por isso, nós da **Sudeste**", "também acompanhamos", "essa mudança."],
+      cardPre: "há mais de", years: "30", unit: "anos", cardPost: ["vivendo o mercado", "automotivo"],
+      body: ["Entendemos que acompanhar", "novas gerações também", "significa oferecer"],
+      close: ["novas formas", "de **mobilidade.**"] },
+    { name: "Tela 6", layout: "closing", dur: 7.5,
+      a: ["E se você faz parte desse público", "e enxerga o carro mais pelo"],
+      pills: ["uso", "praticidade", "liberdade de escolha"],
+      close: ["a Sudeste Assinaturas", "também foi pensada"], you: "para você!" }
+  ]);
+  window.OM_PLAYBACK = '{"mode":"loop"}';
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenesSudeste7b.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(SudesteVideo7b)
+  );
+</script>
+</body>
+</html>
