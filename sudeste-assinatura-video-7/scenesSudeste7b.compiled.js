@@ -274,7 +274,7 @@ function Question() {
     style: {
       position: 'relative',
       display: 'inline-block',
-      margin: '28px 0 30px',
+      margin: '72px 0 13px',
       padding: '6px 26px 20px'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -306,7 +306,7 @@ function Question() {
       letterSpacing: '-0.045em',
       whiteSpace: 'nowrap',
       opacity: word,
-      transform: `translateY(${(1 - word) * 30}px)`
+      transform: `translateY(${(1 - word) * 30 - 23}px)`
     }
   }, sc.word)), /*#__PURE__*/React.createElement(Lines, {
     list: sc.b,
@@ -779,7 +779,7 @@ function Legacy() {
   const num = ease(lt, 1.1, 0.6);
   const big = {
     ...BOLD(440, 400),
-    letterSpacing: '-50px',
+    letterSpacing: '-40px',
     paddingRight: 60
   };
   return /*#__PURE__*/React.createElement("div", {

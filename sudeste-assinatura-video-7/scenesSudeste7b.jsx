@@ -109,13 +109,13 @@ function Question() {
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 110, top: 330, color: WHITE }}>
         <Lines list={sc.a} lt={lt} delay={0.3} step={0.12} style={LIGHT} />
-        <div style={{ position: 'relative', display: 'inline-block', margin: '28px 0 30px', padding: '6px 26px 20px' }}>
+        <div style={{ position: 'relative', display: 'inline-block', margin: '72px 0 13px', padding: '6px 26px 20px' }}>
           <div style={{ position: 'absolute', inset: 0, border: `3px dashed ${WHITE}`, opacity: sel,
             clipPath: `inset(0 ${(1 - sel) * 100}% 0 0)` }}></div>
           {handle({ left: 0, top: 0 }, 0)}{handle({ left: '100%', top: 0 }, 1)}
           {handle({ left: '100%', top: '100%' }, 2)}{handle({ left: 0, top: '100%' }, 3)}
           <div style={{ color: YEL, fontWeight: 700, fontSize: 158, lineHeight: '160px', letterSpacing: '-0.045em', whiteSpace: 'nowrap',
-            opacity: word, transform: `translateY(${(1 - word) * 30}px)` }}>{sc.word}</div>
+            opacity: word, transform: `translateY(${(1 - word) * 30 - 23}px)` }}>{sc.word}</div>
         </div>
         <Lines list={sc.b} lt={lt} delay={1.8} step={0.12} style={MIX} accent={WHITE} />
       </div>
@@ -267,7 +267,7 @@ function Legacy() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   const fill = E.easeInOutCubic(clamp((lt - 1.5) / 1.6, 0, 1));
   const num = ease(lt, 1.1, 0.6);
-  const big = { ...BOLD(440, 400), letterSpacing: '-50px', paddingRight: 60 };
+  const big = { ...BOLD(440, 400), letterSpacing: '-40px', paddingRight: 60 };
   return (
     <div style={{ ...shell, background: GREY, ...iris(lt) }}>
       {RT.showLogo ? <Logo dark /> : null}
