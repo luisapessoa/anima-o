@@ -310,7 +310,7 @@ function Closing() {
   const pills = sc.pills || [];
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={8.12} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.55)" />
+      <BgVideo src={VID_6} start={0} end={7.72} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.55)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: WHITE }}>
         <Lines list={sc.a} lt={lt} delay={0.2} step={0.1} style={REG(54, 66)} />
