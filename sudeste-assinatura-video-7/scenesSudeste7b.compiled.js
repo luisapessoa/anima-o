@@ -779,7 +779,7 @@ function Legacy() {
   const num = ease(lt, 1.1, 0.6);
   const big = {
     ...BOLD(440, 400),
-    letterSpacing: '-70px',
+    letterSpacing: '-50px',
     paddingRight: 60
   };
   return /*#__PURE__*/React.createElement("div", {
