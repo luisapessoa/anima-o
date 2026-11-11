@@ -1,7 +1,8 @@
 /* Sudeste Assinatura — VÍDEO 7 v2 (1080×1920). Novos layouts: digitação, carimbo + waffle,
    donut, caminhos até o 0km, "30" enchendo, pílulas. Telas 1, 4 e 6: preto, com vídeo de
-   fundo full-bleed (trechos já usados no Vídeo 6 — making-of Park Assist/Otto VW Brasil —
-   reaproveitados do repositório de vídeos por falta de material novo para este projeto). */
+   fundo full-bleed (trechos do vídeo "For all life's journeys — The new Tiguan" VW Brasil,
+   recortados do 16:9 original para preencher a tela vertical inteira e remover as legendas
+   que o clipe tinha). */
 const { useScene, SceneStage, Easing, clamp, useTweaks, TweaksPanel,
         TweakSection, TweakToggle, VideoSprite } = window;
 
@@ -14,9 +15,9 @@ const LOGO_W = 640, LOGO_TOP = 200;
 const E = Easing;
 const RT = { showLogo: true, videoBg: true };
 
-// Vídeos de fundo das Telas 1, 4 e 6 — reaproveitados do Vídeo 6 (mesma fonte
-// Park Assist/Otto VW Brasil), já conferidos quadro a quadro sem nenhuma
-// escrita em tela.
+// Vídeos de fundo das Telas 1, 4 e 6 — trechos do Tiguan (estrada, chegada no
+// camping, montanha/lago), já conferidos quadro a quadro sem nenhuma escrita
+// em tela.
 const VID_1 = 'assets/videos/tela1.mp4';
 const VID_4 = 'assets/videos/tela4.mp4';
 const VID_6 = 'assets/videos/tela6.mp4';
@@ -104,7 +105,7 @@ function Question() {
   );
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={5.1} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.5)" />
+      <BgVideo src={VID_1} start={0} end={5.8} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.5)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 110, top: 330, color: WHITE }}>
         <Lines list={sc.a} lt={lt} delay={0.3} step={0.12} style={LIGHT} />
@@ -227,7 +228,7 @@ function Paths() {
   const node = pop(lt, 2.3, 0.8);
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_4} start={0} end={8.4} speed={0.9} scale={1.08} overlay="rgba(0,0,0,0.55)" />
+      <BgVideo src={VID_4} start={0} end={8.0} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.55)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 120, top: 440, color: WHITE }}>
         <Lines list={sc.head} lt={lt} delay={0.2} step={0.1} style={BOLD(72, 84)} accent={YEL} />
@@ -309,7 +310,7 @@ function Closing() {
   const pills = sc.pills || [];
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_6} start={0} end={8.4} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.55)" />
+      <BgVideo src={VID_6} start={0} end={8.0} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.55)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: WHITE }}>
         <Lines list={sc.a} lt={lt} delay={0.2} step={0.1} style={REG(54, 66)} />

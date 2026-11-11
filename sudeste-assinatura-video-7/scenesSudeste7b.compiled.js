@@ -1,7 +1,8 @@
 /* Sudeste Assinatura — VÍDEO 7 v2 (1080×1920). Novos layouts: digitação, carimbo + waffle,
    donut, caminhos até o 0km, "30" enchendo, pílulas. Telas 1, 4 e 6: preto, com vídeo de
-   fundo full-bleed (trechos já usados no Vídeo 6 — making-of Park Assist/Otto VW Brasil —
-   reaproveitados do repositório de vídeos por falta de material novo para este projeto). */
+   fundo full-bleed (trechos do vídeo "For all life's journeys — The new Tiguan" VW Brasil,
+   recortados do 16:9 original para preencher a tela vertical inteira e remover as legendas
+   que o clipe tinha). */
 const {
   useScene,
   SceneStage,
@@ -32,9 +33,9 @@ const RT = {
   videoBg: true
 };
 
-// Vídeos de fundo das Telas 1, 4 e 6 — reaproveitados do Vídeo 6 (mesma fonte
-// Park Assist/Otto VW Brasil), já conferidos quadro a quadro sem nenhuma
-// escrita em tela.
+// Vídeos de fundo das Telas 1, 4 e 6 — trechos do Tiguan (estrada, chegada no
+// camping, montanha/lago), já conferidos quadro a quadro sem nenhuma escrita
+// em tela.
 const VID_1 = 'assets/videos/tela1.mp4';
 const VID_4 = 'assets/videos/tela4.mp4';
 const VID_6 = 'assets/videos/tela6.mp4';
@@ -252,7 +253,7 @@ function Question() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 5.1,
+    end: 5.8,
     speed: 0.95,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.5)"
@@ -659,8 +660,8 @@ function Paths() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 8.4,
-    speed: 0.9,
+    end: 8.0,
+    speed: 0.95,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.55)"
   }), RT.showLogo ? /*#__PURE__*/React.createElement(Logo, null) : null, /*#__PURE__*/React.createElement("div", {
@@ -925,7 +926,7 @@ function Closing() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_6,
     start: 0,
-    end: 8.4,
+    end: 8.0,
     speed: 0.95,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.55)"
