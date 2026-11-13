@@ -56,6 +56,7 @@ As seções estão separadas por comentários `<!-- =================== NN · NO
   - uma luz neon sobe de baixo até tomar a tela;
   - as palavras da dobra 2 aparecem uma a uma.
 - O controle é feito pelo script comentado `/* capa → dobra 2 ... */`, no final do arquivo.
+- **Tablet:** a animação usa uma versão mais leve da luz neon (classe `.fast`, regra `v28` no CSS), em que um círculo pequeno é ampliado com `transform` em vez de redesenhar a máscara a cada quadro. Também precisa de menos rolagem para o texto aparecer. Desktop e celular não mudam.
 - **Cuidado:** `.flow` precisa manter `overflow: clip`. Sem isso, o fundo neon "vaza" para a seção do manual.
 - Quem configura o sistema para reduzir animações (`prefers-reduced-motion`) vê tudo estático, já com os textos visíveis.
 

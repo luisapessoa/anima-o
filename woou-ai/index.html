@@ -1192,6 +1192,12 @@ footer .disc{margin-top:12px;padding-top:14px}
  .ident8{min-height:0;display:block;padding:100px 0 64px}
  .ident8 .turn5{margin-top:56px}
 }
+
+/* v28 — tablet: luz neon animada com transform (mais leve que a máscara) para não travar.
+   O círculo tem 400px e é ampliado pela placa de vídeo (--nk = escala, calculada no script). */
+.flow.fast .flowbg .neo{-webkit-mask:none;mask:none;inset:auto;left:50%;top:118%;width:400px;height:400px;margin:-200px 0 0 -200px;border-radius:50%;
+  background:radial-gradient(closest-side,var(--ne) 70%,rgba(188,254,136,0) 100%);
+  transform:scale(calc(var(--p) * var(--nk,3)));opacity:clamp(0,calc((var(--p) - .14) * 5),1);will-change:transform,opacity}
 </style>
 </head>
 <body>
@@ -1434,9 +1440,12 @@ if(matchMedia('(hover:none), (max-width:640px)').matches){
  const idn=fl.querySelector('.ident8'), tg=fl.querySelector('.ident8 .tagl'), b8=fl.querySelector('.ident8 .b8');
  const blocks=[...fl.querySelectorAll('.ident8 .sq')].map(el=>({el,ws:[...el.querySelectorAll('.w')]}));
  if(reduce){fl.classList.add('static');bg.style.setProperty('--p',1);return}
- const cl=(v)=>Math.min(1,Math.max(0,v)); let tick=false;
+ const cl=(v)=>Math.min(1,Math.max(0,v)); let tick=false; const touch=matchMedia('(hover:none)').matches;
  function upd(){tick=false; const vh=innerHeight, hh=hero.offsetHeight;
-  const s0=scrollY/(hh*.55), W=innerWidth, D=Math.hypot(W/2,vh*1.18);
+  const W=innerWidth, D=Math.hypot(W/2,vh*1.18), tab=W>640&&(W<=1180||touch);
+  if(fl._tab!==tab){fl._tab=tab;fl.classList.toggle('fast',tab)}
+  if(tab&&bg._D!==D){bg._D=D;bg.style.setProperty('--nk',(3*D/400).toFixed(3))}
+  const s0=scrollY/(Math.min(hh,tab?820:hh)*.55);
   const p0=Math.min(.32,Math.max(0,(vh*1.18-hh+vh*.06)/(1.5*D)));
   const p=cl(p0+(1-p0)*cl(s0)); const big=innerWidth>640; const gate=big?cl((s0-.42)/.3):cl((p-p0-.06)/.26);
   const mt=big?Math.round(-hh*.45):0; if(idn._mt!==mt){idn._mt=mt;idn.style.marginTop=mt+'px'}
