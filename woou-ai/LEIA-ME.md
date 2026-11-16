@@ -1,6 +1,6 @@
 # Landing page — "E aí, Claude?" (Woou Aí)
 
-Landing page de venda do manual digital **E aí, Claude?**, da Woou Aí.
+Landing page de venda do treinamento **E aí, Claude?**, da Woou Aí.
 Design aprovado em 13/11/2026. Falta só ligar os links reais e publicar.
 
 ## O que tem nesta pasta
@@ -22,7 +22,7 @@ Os pontos pendentes estão marcados no `index.html` com o comentário `<!-- PEND
 
 1. **Checkout**: o botão "QUERO ADQUIRIR O E AÍ, CLAUDE?", no card de preço da seção 07 · Oferta, está com `href="#"`. Troque pelo link do checkout.
 2. **Rodapé**: os links **Contato**, **Política de Privacidade** e **Termos de Uso** estão com `href="#"`. O link do Instagram já está certo: https://www.instagram.com/woou_ai/.
-3. **Botões internos**: os outros botões ("QUERO CONHECER O MANUAL" e o "E aí, bora?" final) levam até a seção de oferta (`#oferta`). Isso é proposital, não precisa mudar.
+3. **Botões internos**: os outros botões ("QUERO CONHECER O TREINAMENTO" e o "E aí, bora?" final) levam até a seção de oferta (`#oferta`). Isso é proposital, não precisa mudar.
 4. **Antes de publicar** (sugestões):
    - revisar o `<title>` (já preenchido) e adicionar `<meta name="description">` para SEO;
    - adicionar favicon e imagem de compartilhamento (Open Graph);
@@ -40,7 +40,7 @@ As seções estão separadas por comentários `<!-- =================== NN · NO
 | 01 | Capa | `#top` | Barra de prompt com o texto "E aí, Claude," digitando pedidos em sequência, mais selos flutuantes. |
 | 02 | Identificação | `#ident` | **Transição animada** (ver abaixo). |
 | 03 | Possibilidades | `#possibilidades` | 3 cards. No desktop, o texto sobe no hover. No celular e em telas de toque, o texto aparece quando o card passa pelo meio da tela. |
-| 04 | O manual | `#manual` | 7 módulos em linhas numeradas. |
+| 04 | O treinamento | `#manual` | 7 módulos em linhas numeradas. |
 | 05 | Quem somos | `#quem-somos` | Faixa de tags em loop, mais a apresentação da Woou Aí. |
 | 06 | Para quem é | `#para-quem` | Texto à esquerda e tópicos com ícones à direita. |
 | 07 | Oferta | `#oferta` | De R$ 97,90 por **R$ 67,90**, pagamento único. **Contém o link do checkout.** |
@@ -56,8 +56,8 @@ As seções estão separadas por comentários `<!-- =================== NN · NO
   - uma luz neon sobe de baixo até tomar a tela;
   - as palavras da dobra 2 aparecem uma a uma.
 - O controle é feito pelo script comentado `/* capa → dobra 2 ... */`, no final do arquivo.
-- **Tablet:** a animação usa uma versão mais leve da luz neon (classe `.fast`, regra `v28` no CSS), em que um círculo pequeno é ampliado com `transform` em vez de redesenhar a máscara a cada quadro. Também precisa de menos rolagem para o texto aparecer. Desktop e celular não mudam.
-- **Cuidado:** `.flow` precisa manter `overflow: clip`. Sem isso, o fundo neon "vaza" para a seção do manual.
+- **Tablet:** a animação usa uma versão mais leve da luz neon (classe `.fast`, comentário "tablet — luz neon animada com transform" no fim do CSS), em que um círculo pequeno é ampliado com `transform` em vez de redesenhar a máscara a cada quadro. Também precisa de menos rolagem para o texto aparecer. Desktop e celular não mudam.
+- **Cuidado:** `.flow` precisa manter `overflow: clip`. Sem isso, o fundo neon "vaza" para a seção do treinamento.
 - Quem configura o sistema para reduzir animações (`prefers-reduced-motion`) vê tudo estático, já com os textos visíveis.
 
 ---
