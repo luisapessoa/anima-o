@@ -248,8 +248,8 @@ function Cover() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 3.48,
-    speed: 0.65,
+    end: 1.8,
+    speed: 0.33,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.4)"
   }), /*#__PURE__*/React.createElement("div", {
