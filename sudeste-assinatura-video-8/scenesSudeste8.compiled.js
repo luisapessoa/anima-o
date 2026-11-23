@@ -248,8 +248,8 @@ function Cover() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 4.24,
-    speed: 0.75,
+    end: 3.48,
+    speed: 0.65,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.4)"
   }), /*#__PURE__*/React.createElement("div", {
@@ -359,6 +359,7 @@ function Answer() {
   return /*#__PURE__*/React.createElement("div", {
     style: {
       ...shell,
+      background: PALE,
       ...iris(lt)
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -646,8 +647,8 @@ function Assist() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 2.32,
-    speed: 0.29,
+    end: 6.76,
+    speed: 0.83,
     overlay: "rgba(0,0,0,0.25)"
   })));
 }
@@ -673,8 +674,8 @@ function Closing() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_5,
     start: 0,
-    end: 6.5,
-    speed: 0.95,
+    end: 5.2,
+    speed: 0.78,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.45)"
   }), /*#__PURE__*/React.createElement("div", {

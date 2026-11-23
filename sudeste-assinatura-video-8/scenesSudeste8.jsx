@@ -99,7 +99,7 @@ function Cover() {
   const Q = { position: 'absolute', color: MINT, fontFamily: 'Georgia, serif', fontWeight: 700, fontSize: 260, lineHeight: '200px', height: 130, transformOrigin: '50% 50%' };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={4.24} speed={0.75} scale={1.08} overlay="rgba(0,0,0,0.4)" />
+      <BgVideo src={VID_1} start={0} end={3.48} speed={0.65} scale={1.08} overlay="rgba(0,0,0,0.4)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: MID, bottom: 0, background: PALE, transform: `translateY(${(1 - bg) * 100}%)` }}></div>
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: CT, height: CH, opacity: ease(lt, 1.0, 0.3), transform: `translateY(${(1 - c) * 260}px)` }}>
@@ -137,7 +137,7 @@ function Answer() {
   const pan = E.easeInOutCubic(clamp((lt - (dur - PAN)) / PAN, 0, 1));
   const hl = easeIO(lt, 0.9, 0.5);
   return (
-    <div style={{ ...shell, ...iris(lt) }}>
+    <div style={{ ...shell, background: PALE, ...iris(lt) }}>
       <div style={{ position: 'absolute', inset: 0, background: PALE, transform: `translateX(${-pan * W}px)` }}>
         {RT.showLogo ? <Logo dark /> : null}
         <div style={{ position: 'absolute', left: 120 + dx, top: 520, color: TEAL, ...BOLD(170, 176), letterSpacing: '-0.04em', ...rise(lt, 0.4, 30) }}>
@@ -234,7 +234,7 @@ function Assist() {
       <div style={{ position: 'absolute', left: -40, right: -40, top: 980, bottom: -120, background: BLACK,
         borderTopRightRadius: 100, borderBottomLeftRadius: 100, overflow: 'hidden',
         clipPath: `inset(${(1 - vid) * 100}% 0 0 0 round 0 100px 0 100px)` }}>
-        <BgVideo src={VID_4} start={0} end={2.32} speed={0.29} overlay="rgba(0,0,0,0.25)" />
+        <BgVideo src={VID_4} start={0} end={6.76} speed={0.83} overlay="rgba(0,0,0,0.25)" />
       </div>
     </div>
   );
@@ -247,7 +247,7 @@ function Closing() {
   const rows = sc.rows || [];
   return (
     <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: FONT, background: BLACK }}>
-      <BgVideo src={VID_5} start={0} end={6.5} speed={0.95} scale={1.08} overlay="rgba(0,0,0,0.45)" />
+      <BgVideo src={VID_5} start={0} end={5.2} speed={0.78} scale={1.08} overlay="rgba(0,0,0,0.45)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 1100,
         background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%)' }}></div>
       {RT.showLogo ? <Logo /> : null}
