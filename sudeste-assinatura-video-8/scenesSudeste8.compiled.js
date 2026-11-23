@@ -245,23 +245,14 @@ function Cover() {
     style: {
       ...shell
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      height: MID,
-      overflow: 'hidden'
-    }
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 5,
-    speed: 0.95,
+    end: 4.24,
+    speed: 0.75,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.4)"
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       left: 0,
@@ -655,8 +646,8 @@ function Assist() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
-    end: 8,
-    speed: 1,
+    end: 2.32,
+    speed: 0.29,
     overlay: "rgba(0,0,0,0.25)"
   })));
 }
@@ -700,7 +691,7 @@ function Closing() {
       position: 'absolute',
       left: 0,
       right: 0,
-      top: 380,
+      top: 330,
       color: WHITE
     }
   }, rows.map((r, i) => {
