@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/logo-dark.png">
+  <link rel="preload" as="image" href="assets/logo-white.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #012019; }
+    a { color: #00d1b2; }
+    a:hover { color: #5edcc8; }
+  </style>
+  <script>window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "cover", dur: 5,
+      a: ["Posso viajar", "com meu carro"], hl: "por assinatura?" },
+    { name: "Tela 2", layout: "answer", dur: 6,
+      head: "Pode,", word: "sim.",
+      body: ["Seu carro por assinatura", "**não precisa ficar limitado**", "aos trajetos do dia a dia."] },
+    { name: "Tela 3", layout: "road", dur: 7,
+      body: ["Você pode **pegar a estrada,**", "**viajar nas férias, visitar a**", "**família** ou aproveitar um fim", "de semana fora normalmente."] },
+    { name: "Tela 4", layout: "assist", dur: 8,
+      lines: ["E ainda conta com recursos", "da assinatura que trazem", "mais **tranquilidade**", "durante o uso, como", "**assistência 24h.**"],
+      shieldAt: 2, clockAt: 4 },
+    { name: "Tela 5", layout: "closing", dur: 6.5,
+      rows: [
+        { tag: "ou seja:", x: 445 },
+        { t: "com o carro", x: 155 },
+        { t: "por assinatura,", x: 395 },
+        { t: "a liberdade de", x: 105 },
+        { t: "ir mais longe", x: 475, far: true },
+        { t: "continua sendo sua!", x: 195 }
+      ] }
+  ]);</script>
+  <script>window.OM_PLAYBACK='{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"showLogo":true,"motionEditor":false}/*EDITMODE-END*/;</script>
+</helmet>
+<x-import component-from-global-scope="SudesteVideo8" from="./animations-v2.jsx ./tweaks-panel.jsx ./scenesSudeste8.jsx" hint-size="100%,100%"></x-import>
+</x-dc>
+</body>
+</html>
