@@ -99,7 +99,7 @@ function Cover() {
   const Q = { position: 'absolute', color: MINT, fontFamily: 'Georgia, serif', fontWeight: 700, fontSize: 260, lineHeight: '200px', height: 130, transformOrigin: '50% 50%' };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={1.8} speed={0.33} scale={1.08} overlay="rgba(0,0,0,0.4)" />
+      <BgVideo src={VID_1} start={0} end={2.12} speed={0.37} scale={1.08} overlay="rgba(0,0,0,0.4)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: MID, bottom: 0, background: PALE, transform: `translateY(${(1 - bg) * 100}%)` }}></div>
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: CT, height: CH, opacity: ease(lt, 1.0, 0.3), transform: `translateY(${(1 - c) * 260}px)` }}>
@@ -234,7 +234,7 @@ function Assist() {
       <div style={{ position: 'absolute', left: -40, right: -40, top: 980, bottom: -120, background: BLACK,
         borderTopRightRadius: 100, borderBottomLeftRadius: 100, overflow: 'hidden',
         clipPath: `inset(${(1 - vid) * 100}% 0 0 0 round 0 100px 0 100px)` }}>
-        <BgVideo src={VID_4} start={0} end={6.76} speed={0.83} overlay="rgba(0,0,0,0.25)" />
+        {vid > 0.001 ? <BgVideo src={VID_4} start={0} end={6.76} speed={0.83} overlay="rgba(0,0,0,0.25)" /> : null}
       </div>
     </div>
   );

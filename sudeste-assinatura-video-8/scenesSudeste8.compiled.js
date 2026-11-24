@@ -248,8 +248,8 @@ function Cover() {
   }, /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_1,
     start: 0,
-    end: 1.8,
-    speed: 0.33,
+    end: 2.12,
+    speed: 0.37,
     scale: 1.08,
     overlay: "rgba(0,0,0,0.4)"
   }), /*#__PURE__*/React.createElement("div", {
@@ -644,13 +644,13 @@ function Assist() {
       overflow: 'hidden',
       clipPath: `inset(${(1 - vid) * 100}% 0 0 0 round 0 100px 0 100px)`
     }
-  }, /*#__PURE__*/React.createElement(BgVideo, {
+  }, vid > 0.001 ? /*#__PURE__*/React.createElement(BgVideo, {
     src: VID_4,
     start: 0,
     end: 6.76,
     speed: 0.83,
     overlay: "rgba(0,0,0,0.25)"
-  })));
+  }) : null));
 }
 
 /* 5 · preto (vídeo) — linhas desalinhadas em escada + "[ ou seja ]"; "ir mais longe" puxa a linha */
