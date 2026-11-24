@@ -99,7 +99,7 @@ function Cover() {
   const Q = { position: 'absolute', color: MINT, fontFamily: 'Georgia, serif', fontWeight: 700, fontSize: 260, lineHeight: '200px', height: 130, transformOrigin: '50% 50%' };
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_1} start={0} end={2.0} speed={0.39} scale={1.08} overlay="rgba(0,0,0,0.4)" />
+      <BgVideo src={VID_1} start={0} end={3.0} speed={0.6} scale={1.08} overlay="rgba(0,0,0,0.4)" />
       <div style={{ position: 'absolute', left: 0, right: 0, top: MID, bottom: 0, background: PALE, transform: `translateY(${(1 - bg) * 100}%)` }}></div>
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 60, right: 60, top: CT, height: CH, opacity: ease(lt, 1.0, 0.3), transform: `translateY(${(1 - c) * 260}px)` }}>
