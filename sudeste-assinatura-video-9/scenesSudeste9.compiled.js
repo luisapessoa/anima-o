@@ -433,7 +433,7 @@ function Closing() {
   return React.createElement(
     'div',
     { style: _extends({}, shell) },
-    React.createElement(BgVideo, { src: VID_5, start: 0, end: 2.0, speed: 0.333, overlay: 'rgba(0,0,0,0.45)' }),
+    React.createElement(BgVideo, { src: VID_5, start: 0, end: 3.0, speed: 0.5, overlay: 'rgba(0,0,0,0.45)' }),
     RT.showLogo ? React.createElement(Logo, null) : null,
     React.createElement(
       'div',

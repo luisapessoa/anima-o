@@ -250,7 +250,7 @@ function Closing() {
   const big = sc.big || [];
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_5} start={0} end={2.0} speed={0.333} overlay="rgba(0,0,0,0.45)" />
+      <BgVideo src={VID_5} start={0} end={3.0} speed={0.5} overlay="rgba(0,0,0,0.45)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 120, right: 120, top: 700, textAlign: 'center', color: WHITE }}>
         {big.map((t, i) => {
