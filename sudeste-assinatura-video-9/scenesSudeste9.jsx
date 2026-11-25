@@ -226,7 +226,7 @@ function Paper() {
       {RT.showLogo ? <Logo dark /> : null}
       <div style={{ position: 'absolute', inset: 0, ...exitOut(lt, sc.dur) }}>
       <div style={{ position: 'absolute', left: M, top: 450, color: TEAL }}>
-        <Lines list={sc.title} lt={lt} delay={0.4} step={0.14} style={LIGHT(100, 104)} accent={MINT} />
+        <Lines list={sc.title} lt={lt} delay={0.4} step={0.14} style={BOLD(100, 104)} accent={MINT} />
       </div>
       <div style={{ position: 'absolute', left: M, top: 690, color: TEAL }}>
         <Lines list={sc.sub} lt={lt} delay={1.2} step={0.09} style={{ ...REG(52, 62), letterSpacing: '-0.02em' }} accent={TEAL} />
@@ -234,7 +234,7 @@ function Paper() {
       <div style={{ position: 'absolute', right: M + 24, top: 720, width: 3, height: 440, background: MINT,
         transform: `scaleY(${easeIO(lt, 1.8, 1.2)})`, transformOrigin: 'top' }}></div>
       <div style={{ position: 'absolute', right: M, top: 1200, color: TEAL, textAlign: 'right' }}>
-        <Lines list={sc.micro} lt={lt} delay={2.8} step={0.14} style={LIGHT(100, 104)} accent={MINT} />
+        <Lines list={sc.micro} lt={lt} delay={2.8} step={0.14} style={BOLD(100, 104)} accent={MINT} />
       </div>
       <div style={{ position: 'absolute', right: M, top: 1450, color: TEAL, textAlign: 'right' }}>
         <Lines list={sc.ans} lt={lt} delay={3.6} step={0.1} style={{ ...REG(52, 62), letterSpacing: '-0.02em' }} accent={TEAL} />

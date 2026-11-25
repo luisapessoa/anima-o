@@ -403,7 +403,7 @@ function Paper() {
       React.createElement(
         'div',
         { style: { position: 'absolute', left: M, top: 450, color: TEAL } },
-        React.createElement(Lines, { list: sc.title, lt: lt, delay: 0.4, step: 0.14, style: LIGHT(100, 104), accent: MINT })
+        React.createElement(Lines, { list: sc.title, lt: lt, delay: 0.4, step: 0.14, style: BOLD(100, 104), accent: MINT })
       ),
       React.createElement(
         'div',
@@ -415,7 +415,7 @@ function Paper() {
       React.createElement(
         'div',
         { style: { position: 'absolute', right: M, top: 1200, color: TEAL, textAlign: 'right' } },
-        React.createElement(Lines, { list: sc.micro, lt: lt, delay: 2.8, step: 0.14, style: LIGHT(100, 104), accent: MINT })
+        React.createElement(Lines, { list: sc.micro, lt: lt, delay: 2.8, step: 0.14, style: BOLD(100, 104), accent: MINT })
       ),
       React.createElement(
         'div',
