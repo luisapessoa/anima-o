@@ -380,7 +380,7 @@ function Hero(_ref8) {
     ),
     React.createElement(
       'div',
-      { style: { display: 'flex', alignItems: 'center', gap: 36, marginTop: 34 } },
+      { style: { display: 'flex', alignItems: 'center', gap: 36, marginTop: 60 } },
       React.createElement('div', { style: { width: 150, height: 3, background: PALE, transform: 'scaleX(' + r + ')', transformOrigin: 'right' } }),
       React.createElement(
         'div',
@@ -391,7 +391,7 @@ function Hero(_ref8) {
     ),
     React.createElement(
       'div',
-      { style: { marginTop: 34, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
+      { style: { marginTop: -10, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
       React.createElement(Lines, { list: h.body, lt: lt, delay: h.at + 0.5, step: 0.08, style: REG(50, 64), accent: WHITE })
     )
   );

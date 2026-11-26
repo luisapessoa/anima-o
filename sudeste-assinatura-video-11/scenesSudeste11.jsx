@@ -216,12 +216,12 @@ function Hero({ lt, h, th }) {
   return (
     <div style={{ position: 'absolute', left: 0, right: 0, top: h.top, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: th.ink }}>
       <div style={{ ...LIGHT(100, 104), ...rise(lt, h.at, 20) }}>{h.pre}</div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 36, marginTop: 34 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 36, marginTop: 60 }}>
         <div style={{ width: 150, height: 3, background: PALE, transform: `scaleX(${r})`, transformOrigin: 'right' }}></div>
         <div style={{ ...LIGHT(210, 200), color: PALE, fontWeight: 400, ...rise(lt, h.at + 0.15, 30) }}>{h.year}</div>
         <div style={{ width: 150, height: 3, background: PALE, transform: `scaleX(${r})`, transformOrigin: 'left' }}></div>
       </div>
-      <div style={{ marginTop: 34, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ marginTop: -10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Lines list={h.body} lt={lt} delay={h.at + 0.5} step={0.08} style={REG(50, 64)} accent={WHITE} />
       </div>
     </div>
