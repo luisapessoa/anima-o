@@ -344,7 +344,7 @@ function Care() {
             { key: i, style: { position: 'absolute', left: i * (D - OV), top: 0, width: D, height: D, borderRadius: '50%', boxSizing: 'border-box',
                 border: '3px solid ' + TEAL, display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transform: 'scale(' + pop(lt, d0, 0.7) + ')' } },
-            React.createElement(
+            it.icon === 'man' ? React.createElement('img', { src: 'assets/icon-manutencao.png', alt: '', style: { width: 92, height: 92, opacity: easeIO(lt, d0 + 0.15, 0.8) } }) : React.createElement(
               'svg',
               { width: '92', height: '92', viewBox: '0 0 160 160' },
               IC[it.icon](easeIO(lt, d0 + 0.15, 0.8), TEAL)
@@ -423,7 +423,7 @@ function SudesteVideo10() {
   RT.showLogo = t.showLogo !== false;
   RT.videoBg = t.videoBg !== false;
   React.useEffect(function () {
-    ['assets/logo-dark.png', 'assets/logo-white.png', CAR].forEach(function (src) {
+    ['assets/logo-dark.png', 'assets/logo-white.png', CAR, 'assets/icon-manutencao.png'].forEach(function (src) {
       var im = new Image();im.src = src;if (im.decode) im.decode()['catch'](function () {});
     });
   }, []);

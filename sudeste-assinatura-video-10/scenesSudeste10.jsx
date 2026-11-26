@@ -191,7 +191,9 @@ function Care() {
               <div key={i} style={{ position: 'absolute', left: i * (D - OV), top: 0, width: D, height: D, borderRadius: '50%', boxSizing: 'border-box',
                 border: `3px solid ${TEAL}`, display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transform: `scale(${pop(lt, d0, 0.7)})` }}>
-                <svg width="92" height="92" viewBox="0 0 160 160">{IC[it.icon](easeIO(lt, d0 + 0.15, 0.8), TEAL)}</svg>
+                {it.icon === 'man'
+                  ? <img src="assets/icon-manutencao.png" alt="" style={{ width: 92, height: 92, opacity: easeIO(lt, d0 + 0.15, 0.8) }} />
+                  : <svg width="92" height="92" viewBox="0 0 160 160">{IC[it.icon](easeIO(lt, d0 + 0.15, 0.8), TEAL)}</svg>}
               </div>
             );
           })}
@@ -252,7 +254,7 @@ function SudesteVideo10() {
   RT.showLogo = t.showLogo !== false;
   RT.videoBg = t.videoBg !== false;
   React.useEffect(() => {
-    ['assets/logo-dark.png', 'assets/logo-white.png', CAR].forEach((src) => { const im = new Image(); im.src = src; if (im.decode) im.decode().catch(() => {}); });
+    ['assets/logo-dark.png', 'assets/logo-white.png', CAR, 'assets/icon-manutencao.png'].forEach((src) => { const im = new Image(); im.src = src; if (im.decode) im.decode().catch(() => {}); });
   }, []);
   const scenes = JSON.parse(window.OM_SCENES);
   const children = {};
