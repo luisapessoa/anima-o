@@ -374,10 +374,10 @@ function Strip() {
       { style: { position: 'absolute', left: X, top: 480, color: TEAL } },
       React.createElement(Lines, { list: sc.title, lt: lt, delay: 0.6, step: 0.14, style: LIGHT(118, 118), accent: MINT, w: 600 })
     ),
-    React.createElement('div', { style: { position: 'absolute', left: X, top: 934, width: 420, height: 4, background: MINT, transform: 'scaleX(' + easeIO(lt, 1.4, 0.7) + ')', transformOrigin: 'left' } }),
+    React.createElement('div', { style: { position: 'absolute', left: X, top: 980, width: 420, height: 4, background: MINT, transform: 'scaleX(' + easeIO(lt, 1.4, 0.7) + ')', transformOrigin: 'left' } }),
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: X, top: 1040, color: TEAL } },
+      { style: { position: 'absolute', left: X, top: 1086, color: TEAL } },
       React.createElement(Lines, { list: sc.body, lt: lt, delay: 1.8, step: 0.1, style: REG(52, 64), accent: TEAL })
     ),
     React.createElement(
@@ -398,7 +398,7 @@ function Closing() {
     RT.showLogo ? React.createElement(Logo, null) : null,
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: 0, right: 0, top: 1290, display: 'flex', justifyContent: 'center' } },
+      { style: { position: 'absolute', left: 0, right: 0, top: 420, display: 'flex', justifyContent: 'center' } },
       React.createElement(
         'div',
         { style: { color: WHITE } },
