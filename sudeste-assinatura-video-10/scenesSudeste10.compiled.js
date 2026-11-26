@@ -326,8 +326,8 @@ function Care() {
       React.createElement(
         'svg',
         { width: W, height: H, style: { position: 'absolute', inset: 0 } },
-        React.createElement(Draw, { d: 'M540 740 V1000', p: ln, color: TEAL, w: 3 }),
-        React.createElement(Draw, { d: 'M522 982 L540 1000 L558 982', p: clamp(ln * 3 - 2, 0, 1), color: TEAL, w: 3 })
+        React.createElement(Draw, { d: 'M540 775 V1035', p: ln, color: TEAL, w: 3 }),
+        React.createElement(Draw, { d: 'M522 1017 L540 1035 L558 1017', p: clamp(ln * 3 - 2, 0, 1), color: TEAL, w: 3 })
       ),
       React.createElement(
         'div',

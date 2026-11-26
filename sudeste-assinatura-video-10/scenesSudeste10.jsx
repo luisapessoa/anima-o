@@ -178,8 +178,8 @@ function Care() {
           <Lines list={sc.top} lt={lt} delay={0.4} step={0.12} style={LIGHT(68, 76)} accent={TEAL} w={600} />
         </div>
         <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
-          <Draw d="M540 740 V1000" p={ln} color={TEAL} w={3} />
-          <Draw d="M522 982 L540 1000 L558 982" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
+          <Draw d="M540 775 V1035" p={ln} color={TEAL} w={3} />
+          <Draw d="M522 1017 L540 1035 L558 1017" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
         </svg>
         <div style={{ position: 'absolute', left: 0, right: 0, top: 1130, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.bottom} lt={lt} delay={2.5} step={0.1} style={REG(50, 62)} accent={TEAL} />
