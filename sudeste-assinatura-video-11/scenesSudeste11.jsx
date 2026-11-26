@@ -168,7 +168,7 @@ function Cover() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene; const th = THEMES.black;
   const v = easeIO(lt, 1.3, 0.5), h = easeIO(lt, 1.7, 0.6);
   return (
-    <Frame theme="black" lt={lt} dur={sc.dur} video={VID_A} overlay="rgba(0,0,0,0.45)">
+    <Frame theme="black" lt={lt} dur={sc.dur} video={VID_A} overlay="rgba(0,0,0,0.58)">
       <div style={{ position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' }}>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', color: WHITE }}>
           <div><Lines list={sc.intro} lt={lt} delay={0.3} step={0.1} style={LIGHT(66, 76)} accent={WHITE} w={700} /></div>
@@ -221,7 +221,7 @@ function Hero({ lt, h, th }) {
         <div style={{ ...LIGHT(210, 200), color: PALE, fontWeight: 400, ...rise(lt, h.at + 0.15, 30) }}>{h.year}</div>
         <div style={{ width: 150, height: 3, background: PALE, transform: `scaleX(${r})`, transformOrigin: 'left' }}></div>
       </div>
-      <div style={{ marginTop: -10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ marginTop: 26, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Lines list={h.body} lt={lt} delay={h.at + 0.5} step={0.08} style={REG(50, 64)} accent={WHITE} />
       </div>
     </div>

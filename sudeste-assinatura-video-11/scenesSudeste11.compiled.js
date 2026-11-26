@@ -300,7 +300,7 @@ function Cover() {
       h = easeIO(lt, 1.7, 0.6);
   return React.createElement(
     Frame,
-    { theme: 'black', lt: lt, dur: sc.dur, video: VID_A, overlay: 'rgba(0,0,0,0.45)' },
+    { theme: 'black', lt: lt, dur: sc.dur, video: VID_A, overlay: 'rgba(0,0,0,0.58)' },
     React.createElement(
       'div',
       { style: { position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' } },
@@ -391,7 +391,7 @@ function Hero(_ref8) {
     ),
     React.createElement(
       'div',
-      { style: { marginTop: -10, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
+      { style: { marginTop: 26, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
       React.createElement(Lines, { list: h.body, lt: lt, delay: h.at + 0.5, step: 0.08, style: REG(50, 64), accent: WHITE })
     )
   );
