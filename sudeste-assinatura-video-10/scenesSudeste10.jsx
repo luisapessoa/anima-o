@@ -174,17 +174,17 @@ function Care() {
     <div style={{ ...shell, background: MINT }}>
       {RT.showLogo ? <Logo dark /> : null}
       <div style={{ position: 'absolute', inset: 0, ...exitOut(lt, sc.dur) }}>
-        <div style={{ position: 'absolute', left: 0, right: 0, top: 430, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ position: 'absolute', left: 0, right: 0, top: 400, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.top} lt={lt} delay={0.4} step={0.12} style={LIGHT(68, 76)} accent={TEAL} w={600} />
         </div>
         <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
-          <Draw d="M540 830 V1110" p={ln} color={TEAL} w={3} />
-          <Draw d="M522 1092 L540 1110 L558 1092" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
+          <Draw d="M540 800 V1080" p={ln} color={TEAL} w={3} />
+          <Draw d="M522 1062 L540 1080 L558 1062" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
         </svg>
-        <div style={{ position: 'absolute', left: 0, right: 0, top: 1160, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ position: 'absolute', left: 0, right: 0, top: 1130, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.bottom} lt={lt} delay={2.5} step={0.1} style={REG(50, 62)} accent={TEAL} />
         </div>
-        <div style={{ position: 'absolute', left: (W - rowW) / 2, top: 1460, width: rowW, height: D }}>
+        <div style={{ position: 'absolute', left: (W - rowW) / 2, top: 1430, width: rowW, height: D }}>
           {items.map((it, i) => {
             const d0 = 3.6 + i * 0.35;
             return (
@@ -234,7 +234,7 @@ function Closing() {
     <div style={{ ...shell }}>
       <BgVideo src={VID_B} start={7} end={13} speed={1} fixed overlay="rgba(0,0,0,0.35)" />
       {RT.showLogo ? <Logo /> : null}
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 420, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 360, display: 'flex', justifyContent: 'center' }}>
       <div style={{ color: WHITE }}>
         <Lines list={sc.head} lt={lt} delay={0.4} step={0.12} style={BOLD(76, 82)} />
         <div style={{ width: 120, height: 6, background: MINT, margin: '44px 0 40px', transform: `scaleX(${easeIO(lt, 1.0, 0.6)})`, transformOrigin: 'left' }}></div>
