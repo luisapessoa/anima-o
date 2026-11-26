@@ -113,7 +113,7 @@ function Cover() {
     <div style={{ ...shell }}>
       <BgVideo src={VID_A} start={0} end={6.7} speed={1} overlay="rgba(0,0,0,0.4)" />
       {RT.showLogo ? <Logo /> : null}
-      <div style={{ position: 'absolute', left: 80, right: 80, top: 0, bottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <div style={{ position: 'absolute', left: 110, right: 110, top: 0, bottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         paddingTop: 120, ...exitOut(lt, sc.dur) }}>
         {rows.map((row, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: row.length === 1 ? (i % 2 ? 'flex-end' : 'flex-start') : 'space-between' }}>
@@ -175,7 +175,7 @@ function Care() {
       {RT.showLogo ? <Logo dark /> : null}
       <div style={{ position: 'absolute', inset: 0, ...exitOut(lt, sc.dur) }}>
         <div style={{ position: 'absolute', left: 0, right: 0, top: 430, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Lines list={sc.top} lt={lt} delay={0.4} step={0.12} style={LIGHT(80, 88)} accent={TEAL} w={600} />
+          <Lines list={sc.top} lt={lt} delay={0.4} step={0.12} style={LIGHT(68, 76)} accent={TEAL} w={600} />
         </div>
         <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
           <Draw d="M540 830 V1110" p={ln} color={TEAL} w={3} />
@@ -232,9 +232,7 @@ function Closing() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_B} start={7} end={13} speed={1} fixed />
-      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 900, zIndex: 1,
-        background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 55%)' }}></div>
+      <BgVideo src={VID_B} start={7} end={13} speed={1} fixed overlay="rgba(0,0,0,0.35)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1290, display: 'flex', justifyContent: 'center' }}>
       <div style={{ color: WHITE }}>

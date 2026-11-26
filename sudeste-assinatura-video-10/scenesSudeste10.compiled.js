@@ -235,7 +235,7 @@ function Cover() {
     RT.showLogo ? React.createElement(Logo, null) : null,
     React.createElement(
       'div',
-      { style: _extends({ position: 'absolute', left: 80, right: 80, top: 0, bottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      { style: _extends({ position: 'absolute', left: 110, right: 110, top: 0, bottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center',
           paddingTop: 120 }, exitOut(lt, sc.dur)) },
       rows.map(function (row, i) {
         return React.createElement(
@@ -321,7 +321,7 @@ function Care() {
       React.createElement(
         'div',
         { style: { position: 'absolute', left: 0, right: 0, top: 430, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
-        React.createElement(Lines, { list: sc.top, lt: lt, delay: 0.4, step: 0.12, style: LIGHT(80, 88), accent: TEAL, w: 600 })
+        React.createElement(Lines, { list: sc.top, lt: lt, delay: 0.4, step: 0.12, style: LIGHT(68, 76), accent: TEAL, w: 600 })
       ),
       React.createElement(
         'svg',
@@ -394,9 +394,7 @@ function Closing() {
   return React.createElement(
     'div',
     { style: _extends({}, shell) },
-    React.createElement(BgVideo, { src: VID_B, start: 7, end: 13, speed: 1, fixed: true }),
-    React.createElement('div', { style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 900, zIndex: 1,
-        background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 55%)' } }),
+    React.createElement(BgVideo, { src: VID_B, start: 7, end: 13, speed: 1, fixed: true, overlay: 'rgba(0,0,0,0.35)' }),
     RT.showLogo ? React.createElement(Logo, null) : null,
     React.createElement(
       'div',
