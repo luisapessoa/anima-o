@@ -226,6 +226,7 @@ function NextIn(_ref4) {
   );
 }
 var GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
+var GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function Frame(_ref5) {
   var theme = _ref5.theme;
   var lt = _ref5.lt;
@@ -300,7 +301,7 @@ function Cover() {
     { theme: 'black', lt: lt, dur: sc.dur, video: VID_A, overlay: 'rgba(0,0,0,0.45)' },
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' } },
+      { style: { position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', justifyContent: 'center' } },
       React.createElement(
         'div',
         { style: { position: 'relative', display: 'flex', flexDirection: 'column', color: WHITE } },
@@ -337,7 +338,7 @@ function Timeline() {
   var f = track(lt, keys);
   return React.createElement(
     Frame,
-    { theme: sc.theme, lt: lt, dur: sc.dur, last: sc.last, video: sc.video, overlay: GRADIENT_OVERLAY },
+    { theme: sc.theme, lt: lt, dur: sc.dur, last: sc.last, video: sc.video, overlay: sc.video === 'assets/videos/videoB.mp4' ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY },
     React.createElement(Line, { d: sc.path, f: f, color: th.line, dots: sc.dots, lt: lt, head: true }),
     (sc.topics || []).map(function (tp, i) {
       return React.createElement(Topic, { key: i, lt: lt, delay: tp.at, tp: tp, th: th });

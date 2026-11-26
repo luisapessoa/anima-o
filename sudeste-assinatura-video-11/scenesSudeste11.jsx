@@ -115,6 +115,7 @@ function NextIn({ p }) {
   );
 }
 const GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
+const GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function Frame({ theme, lt, dur, children, last, video, overlay }) {
   const th = THEMES[theme] || THEMES.black;
   const p = last ? 0 : usePush(lt, dur);
@@ -164,7 +165,7 @@ function Cover() {
   const v = easeIO(lt, 1.3, 0.5), h = easeIO(lt, 1.7, 0.6);
   return (
     <Frame theme="black" lt={lt} dur={sc.dur} video={VID_A} overlay="rgba(0,0,0,0.45)">
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', justifyContent: 'center' }}>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', color: WHITE }}>
           <div><Lines list={sc.intro} lt={lt} delay={0.3} step={0.1} style={LIGHT(66, 76)} accent={WHITE} w={700} /></div>
           <div style={{ position: 'absolute', left: 30, top: 170, width: 3, height: 82, background: PALE, transform: `scaleY(${v})`, transformOrigin: 'top' }}></div>
@@ -185,7 +186,7 @@ function Timeline() {
   const keys = React.useMemo(() => sc.keys.map(([t, v]) => [t, typeof v === 'string' ? m.near(sc.dots[+v.slice(1)][0], sc.dots[+v.slice(1)][1]) + 0.004 : v]), [sc.path, JSON.stringify(sc.keys)]);
   const f = track(lt, keys);
   return (
-    <Frame theme={sc.theme} lt={lt} dur={sc.dur} last={sc.last} video={sc.video} overlay={GRADIENT_OVERLAY}>
+    <Frame theme={sc.theme} lt={lt} dur={sc.dur} last={sc.last} video={sc.video} overlay={sc.video === 'assets/videos/videoB.mp4' ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY}>
       <Line d={sc.path} f={f} color={th.line} dots={sc.dots} lt={lt} head />
       {(sc.topics || []).map((tp, i) => (
         <Topic key={i} lt={lt} delay={tp.at} tp={tp} th={th} />
