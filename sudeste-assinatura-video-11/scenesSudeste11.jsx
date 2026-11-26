@@ -102,6 +102,8 @@ function Line({ d, f, color, dots, lt, head }) {
 }
 /* push: a cena atual sai para a esquerda, a próxima (cor + começo da linha) entra pela direita */
 function usePush(lt, dur) { return easeIO(lt, dur - PUSH, PUSH); }
+const GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
+const GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function NextIn({ p }) {
   const s = useScene(); const sc = s.scene;
   const i = RT.scenes.findIndex((x) => x.name === sc.name);
@@ -110,12 +112,14 @@ function NextIn({ p }) {
   const th = THEMES[nx.theme] || THEMES.black;
   return (
     <div style={{ position: 'absolute', inset: 0, background: th.bg, transform: `translateX(${(1 - p) * W}px)`, zIndex: 30, overflow: 'hidden' }}>
+      {/* vídeo da próxima tela já tocando durante o push — sem isso, a tela
+          preta deste painel ficava visível por um instante na transição. */}
+      {nx.video ? <BgVideo src={nx.video} /> : null}
+      {nx.video ? <div style={{ position: 'absolute', inset: 0, background: nx.video === VID_B ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY }} /> : null}
       {nx.path && !nx.fresh ? <Line d={nx.path} f={HEAD * clamp((p - 0.5) / 0.5, 0, 1)} color={th.line} lt={0} head /> : null}
     </div>
   );
 }
-const GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
-const GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function Frame({ theme, lt, dur, children, last, video, overlay }) {
   const th = THEMES[theme] || THEMES.black;
   const p = last ? 0 : usePush(lt, dur);
@@ -165,7 +169,7 @@ function Cover() {
   const v = easeIO(lt, 1.3, 0.5), h = easeIO(lt, 1.7, 0.6);
   return (
     <Frame theme="black" lt={lt} dur={sc.dur} video={VID_A} overlay="rgba(0,0,0,0.45)">
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' }}>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', color: WHITE }}>
           <div><Lines list={sc.intro} lt={lt} delay={0.3} step={0.1} style={LIGHT(66, 76)} accent={WHITE} w={700} /></div>
           <div style={{ position: 'absolute', left: 30, top: 170, width: 3, height: 82, background: PALE, transform: `scaleY(${v})`, transformOrigin: 'top' }}></div>
@@ -186,7 +190,7 @@ function Timeline() {
   const keys = React.useMemo(() => sc.keys.map(([t, v]) => [t, typeof v === 'string' ? m.near(sc.dots[+v.slice(1)][0], sc.dots[+v.slice(1)][1]) + 0.004 : v]), [sc.path, JSON.stringify(sc.keys)]);
   const f = track(lt, keys);
   return (
-    <Frame theme={sc.theme} lt={lt} dur={sc.dur} last={sc.last} video={sc.video} overlay={sc.video === 'assets/videos/videoB.mp4' ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY}>
+    <Frame theme={sc.theme} lt={lt} dur={sc.dur} last={sc.last} video={sc.video} overlay={sc.video === VID_B ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY}>
       <Line d={sc.path} f={f} color={th.line} dots={sc.dots} lt={lt} head />
       {(sc.topics || []).map((tp, i) => (
         <Topic key={i} lt={lt} delay={tp.at} tp={tp} th={th} />
@@ -212,13 +216,13 @@ function Hero({ lt, h, th }) {
   return (
     <div style={{ position: 'absolute', left: 0, right: 0, top: h.top, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: th.ink }}>
       <div style={{ ...LIGHT(100, 104), ...rise(lt, h.at, 20) }}>{h.pre}</div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 36, marginTop: 4 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 36, marginTop: 34 }}>
         <div style={{ width: 150, height: 3, background: PALE, transform: `scaleX(${r})`, transformOrigin: 'right' }}></div>
         <div style={{ ...LIGHT(210, 200), color: PALE, fontWeight: 400, ...rise(lt, h.at + 0.15, 30) }}>{h.year}</div>
         <div style={{ width: 150, height: 3, background: PALE, transform: `scaleX(${r})`, transformOrigin: 'left' }}></div>
       </div>
       <div style={{ marginTop: 34, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Lines list={h.body} lt={lt} delay={h.at + 0.5} step={0.08} style={REG(50, 64)} accent={PALE} />
+        <Lines list={h.body} lt={lt} delay={h.at + 0.5} step={0.08} style={REG(50, 64)} accent={WHITE} />
       </div>
     </div>
   );

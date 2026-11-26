@@ -209,6 +209,8 @@ function Line(_ref3) {
 function usePush(lt, dur) {
   return easeIO(lt, dur - PUSH, PUSH);
 }
+var GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
+var GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function NextIn(_ref4) {
   var p = _ref4.p;
 
@@ -222,11 +224,11 @@ function NextIn(_ref4) {
   return React.createElement(
     'div',
     { style: { position: 'absolute', inset: 0, background: th.bg, transform: 'translateX(' + (1 - p) * W + 'px)', zIndex: 30, overflow: 'hidden' } },
+    nx.video ? React.createElement(BgVideo, { src: nx.video }) : null,
+    nx.video ? React.createElement('div', { style: { position: 'absolute', inset: 0, background: nx.video === VID_B ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY } }) : null,
     nx.path && !nx.fresh ? React.createElement(Line, { d: nx.path, f: HEAD * clamp((p - 0.5) / 0.5, 0, 1), color: th.line, lt: 0, head: true }) : null
   );
 }
-var GRADIENT_OVERLAY = 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 100%)';
-var GRADIENT_OVERLAY_B = 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.4) 100%)';
 function Frame(_ref5) {
   var theme = _ref5.theme;
   var lt = _ref5.lt;
@@ -301,7 +303,7 @@ function Cover() {
     { theme: 'black', lt: lt, dur: sc.dur, video: VID_A, overlay: 'rgba(0,0,0,0.45)' },
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: 0, right: 0, top: 640, display: 'flex', justifyContent: 'center' } },
+      { style: { position: 'absolute', left: 0, right: 0, top: 370, display: 'flex', justifyContent: 'center' } },
       React.createElement(
         'div',
         { style: { position: 'relative', display: 'flex', flexDirection: 'column', color: WHITE } },
@@ -338,7 +340,7 @@ function Timeline() {
   var f = track(lt, keys);
   return React.createElement(
     Frame,
-    { theme: sc.theme, lt: lt, dur: sc.dur, last: sc.last, video: sc.video, overlay: sc.video === 'assets/videos/videoB.mp4' ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY },
+    { theme: sc.theme, lt: lt, dur: sc.dur, last: sc.last, video: sc.video, overlay: sc.video === VID_B ? GRADIENT_OVERLAY_B : GRADIENT_OVERLAY },
     React.createElement(Line, { d: sc.path, f: f, color: th.line, dots: sc.dots, lt: lt, head: true }),
     (sc.topics || []).map(function (tp, i) {
       return React.createElement(Topic, { key: i, lt: lt, delay: tp.at, tp: tp, th: th });
@@ -378,7 +380,7 @@ function Hero(_ref8) {
     ),
     React.createElement(
       'div',
-      { style: { display: 'flex', alignItems: 'center', gap: 36, marginTop: 4 } },
+      { style: { display: 'flex', alignItems: 'center', gap: 36, marginTop: 34 } },
       React.createElement('div', { style: { width: 150, height: 3, background: PALE, transform: 'scaleX(' + r + ')', transformOrigin: 'right' } }),
       React.createElement(
         'div',
@@ -390,7 +392,7 @@ function Hero(_ref8) {
     React.createElement(
       'div',
       { style: { marginTop: 34, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
-      React.createElement(Lines, { list: h.body, lt: lt, delay: h.at + 0.5, step: 0.08, style: REG(50, 64), accent: PALE })
+      React.createElement(Lines, { list: h.body, lt: lt, delay: h.at + 0.5, step: 0.08, style: REG(50, 64), accent: WHITE })
     )
   );
 }
@@ -491,3 +493,5 @@ function SudesteVideo11() {
   );
 }
 window.SudesteVideo11 = SudesteVideo11;
+/* vídeo da próxima tela já tocando durante o push — sem isso, a tela
+   preta deste painel ficava visível por um instante na transição. */
