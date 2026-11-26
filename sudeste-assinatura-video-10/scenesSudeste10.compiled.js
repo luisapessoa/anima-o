@@ -326,8 +326,8 @@ function Care() {
       React.createElement(
         'svg',
         { width: W, height: H, style: { position: 'absolute', inset: 0 } },
-        React.createElement(Draw, { d: 'M540 800 V1080', p: ln, color: TEAL, w: 3 }),
-        React.createElement(Draw, { d: 'M522 1062 L540 1080 L558 1062', p: clamp(ln * 3 - 2, 0, 1), color: TEAL, w: 3 })
+        React.createElement(Draw, { d: 'M540 740 V1000', p: ln, color: TEAL, w: 3 }),
+        React.createElement(Draw, { d: 'M522 982 L540 1000 L558 982', p: clamp(ln * 3 - 2, 0, 1), color: TEAL, w: 3 })
       ),
       React.createElement(
         'div',
@@ -394,7 +394,7 @@ function Closing() {
   return React.createElement(
     'div',
     { style: _extends({}, shell) },
-    React.createElement(BgVideo, { src: VID_B, start: 7, end: 13, speed: 1, fixed: true, overlay: 'rgba(0,0,0,0.35)' }),
+    React.createElement(BgVideo, { src: VID_B, start: 7, end: 13, speed: 1, fixed: true, overlay: 'rgba(0,0,0,0.45)' }),
     RT.showLogo ? React.createElement(Logo, null) : null,
     React.createElement(
       'div',

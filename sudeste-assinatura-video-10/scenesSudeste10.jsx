@@ -178,8 +178,8 @@ function Care() {
           <Lines list={sc.top} lt={lt} delay={0.4} step={0.12} style={LIGHT(68, 76)} accent={TEAL} w={600} />
         </div>
         <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
-          <Draw d="M540 800 V1080" p={ln} color={TEAL} w={3} />
-          <Draw d="M522 1062 L540 1080 L558 1062" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
+          <Draw d="M540 740 V1000" p={ln} color={TEAL} w={3} />
+          <Draw d="M522 982 L540 1000 L558 982" p={clamp(ln * 3 - 2, 0, 1)} color={TEAL} w={3} />
         </svg>
         <div style={{ position: 'absolute', left: 0, right: 0, top: 1130, textAlign: 'center', color: TEAL, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.bottom} lt={lt} delay={2.5} step={0.1} style={REG(50, 62)} accent={TEAL} />
@@ -232,7 +232,7 @@ function Closing() {
   const s = useScene(); const lt = s.localTime; const sc = s.scene;
   return (
     <div style={{ ...shell }}>
-      <BgVideo src={VID_B} start={7} end={13} speed={1} fixed overlay="rgba(0,0,0,0.35)" />
+      <BgVideo src={VID_B} start={7} end={13} speed={1} fixed overlay="rgba(0,0,0,0.45)" />
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 360, display: 'flex', justifyContent: 'center' }}>
       <div style={{ color: WHITE }}>
