@@ -293,11 +293,11 @@ function Fleet() {
       )
     ),
     [-1, 1].map(function (side) {
-      return React.createElement('img', { key: side, src: CAR, alt: '', style: { position: 'absolute', left: (W - CW) / 2, top: 1120, width: CW, height: 'auto', zIndex: 2,
+      return React.createElement('img', { key: side, src: CAR, alt: '', style: { position: 'absolute', left: (W - CW) / 2, top: 1210, width: CW, height: 'auto', zIndex: 2,
           opacity: spread > 0 ? 1 : 0, filter: 'brightness(' + (1 + 0.15 * spread) + ')', transformOrigin: '50% 80%',
           transform: 'translate(' + side * 330 * spread + 'px, ' + -110 * spread + 'px) scale(' + (1 - 0.22 * spread) + ')' } });
     }),
-    React.createElement('img', { src: CAR, alt: '', style: { position: 'absolute', left: (W - CW) / 2, top: 1120, width: CW, height: 'auto', zIndex: 3,
+    React.createElement('img', { src: CAR, alt: '', style: { position: 'absolute', left: (W - CW) / 2, top: 1210, width: CW, height: 'auto', zIndex: 3,
         opacity: car0, transform: 'translateY(' + (1 - car0) * 60 + 'px) scale(1)' } }),
     React.createElement(NextPanel, { lt: lt, dur: sc.dur, color: MINT, dir: 'up' })
   );
@@ -371,13 +371,13 @@ function Strip() {
     RT.showLogo ? React.createElement('img', { src: 'assets/logo-dark.png', alt: 'Sudeste Assinaturas', style: { position: 'absolute', top: LOGO_TOP, left: X, width: 520, height: 'auto' } }) : null,
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: X, top: 640, color: TEAL } },
+      { style: { position: 'absolute', left: X, top: 480, color: TEAL } },
       React.createElement(Lines, { list: sc.title, lt: lt, delay: 0.6, step: 0.14, style: LIGHT(118, 118), accent: MINT, w: 600 })
     ),
-    React.createElement('div', { style: { position: 'absolute', left: X, top: 1060, width: 420, height: 4, background: MINT, transform: 'scaleX(' + easeIO(lt, 1.4, 0.7) + ')', transformOrigin: 'left' } }),
+    React.createElement('div', { style: { position: 'absolute', left: X, top: 934, width: 420, height: 4, background: MINT, transform: 'scaleX(' + easeIO(lt, 1.4, 0.7) + ')', transformOrigin: 'left' } }),
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: X, top: 1130, color: TEAL } },
+      { style: { position: 'absolute', left: X, top: 1040, color: TEAL } },
       React.createElement(Lines, { list: sc.body, lt: lt, delay: 1.8, step: 0.1, style: REG(52, 64), accent: TEAL })
     ),
     React.createElement(
@@ -402,7 +402,7 @@ function Closing() {
       React.createElement(
         'div',
         { style: { color: WHITE } },
-        React.createElement(Lines, { list: sc.head, lt: lt, delay: 0.4, step: 0.12, style: BOLD(88, 94) }),
+        React.createElement(Lines, { list: sc.head, lt: lt, delay: 0.4, step: 0.12, style: BOLD(76, 82) }),
         React.createElement('div', { style: { width: 120, height: 6, background: MINT, margin: '44px 0 40px', transform: 'scaleX(' + easeIO(lt, 1.0, 0.6) + ')', transformOrigin: 'left' } }),
         React.createElement(Lines, { list: sc.sub, lt: lt, delay: 1.2, step: 0.12, style: REG(52, 64), accent: MINT })
       )

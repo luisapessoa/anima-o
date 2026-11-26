@@ -153,11 +153,11 @@ function Fleet() {
         </div>
       </div>
       {[-1, 1].map((side) => (
-        <img key={side} src={CAR} alt="" style={{ position: 'absolute', left: (W - CW) / 2, top: 1120, width: CW, height: 'auto', zIndex: 2,
+        <img key={side} src={CAR} alt="" style={{ position: 'absolute', left: (W - CW) / 2, top: 1210, width: CW, height: 'auto', zIndex: 2,
           opacity: spread > 0 ? 1 : 0, filter: `brightness(${1 + 0.15 * spread})`, transformOrigin: '50% 80%',
           transform: `translate(${side * 330 * spread}px, ${-110 * spread}px) scale(${1 - 0.22 * spread})` }} />
       ))}
-      <img src={CAR} alt="" style={{ position: 'absolute', left: (W - CW) / 2, top: 1120, width: CW, height: 'auto', zIndex: 3,
+      <img src={CAR} alt="" style={{ position: 'absolute', left: (W - CW) / 2, top: 1210, width: CW, height: 'auto', zIndex: 3,
         opacity: car0, transform: `translateY(${(1 - car0) * 60}px) scale(1)` }} />
       <NextPanel lt={lt} dur={sc.dur} color={MINT} dir="up" />
     </div>
@@ -212,11 +212,11 @@ function Strip() {
   return (
     <div style={{ ...shell, background: WHITE }}>
       {RT.showLogo ? <img src="assets/logo-dark.png" alt="Sudeste Assinaturas" style={{ position: 'absolute', top: LOGO_TOP, left: X, width: 520, height: 'auto' }} /> : null}
-      <div style={{ position: 'absolute', left: X, top: 640, color: TEAL }}>
+      <div style={{ position: 'absolute', left: X, top: 480, color: TEAL }}>
         <Lines list={sc.title} lt={lt} delay={0.6} step={0.14} style={LIGHT(118, 118)} accent={MINT} w={600} />
       </div>
-      <div style={{ position: 'absolute', left: X, top: 1060, width: 420, height: 4, background: MINT, transform: `scaleX(${easeIO(lt, 1.4, 0.7)})`, transformOrigin: 'left' }}></div>
-      <div style={{ position: 'absolute', left: X, top: 1130, color: TEAL }}>
+      <div style={{ position: 'absolute', left: X, top: 934, width: 420, height: 4, background: MINT, transform: `scaleX(${easeIO(lt, 1.4, 0.7)})`, transformOrigin: 'left' }}></div>
+      <div style={{ position: 'absolute', left: X, top: 1040, color: TEAL }}>
         <Lines list={sc.body} lt={lt} delay={1.8} step={0.1} style={REG(52, 64)} accent={TEAL} />
       </div>
       {/* área do vídeo (mesmo vídeo da tela 5) — janela estreita revelando a borda esquerda do quadro cheio */}
@@ -236,7 +236,7 @@ function Closing() {
       {RT.showLogo ? <Logo /> : null}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1290, display: 'flex', justifyContent: 'center' }}>
       <div style={{ color: WHITE }}>
-        <Lines list={sc.head} lt={lt} delay={0.4} step={0.12} style={BOLD(88, 94)} />
+        <Lines list={sc.head} lt={lt} delay={0.4} step={0.12} style={BOLD(76, 82)} />
         <div style={{ width: 120, height: 6, background: MINT, margin: '44px 0 40px', transform: `scaleX(${easeIO(lt, 1.0, 0.6)})`, transformOrigin: 'left' }}></div>
         <Lines list={sc.sub} lt={lt} delay={1.2} step={0.12} style={REG(52, 64)} accent={MINT} />
       </div>
