@@ -119,9 +119,9 @@ function CarCard({ c, i }) {
   return (
     <div style={{ width: CARD_W, height: CARD_H, borderRadius: 52, background: WHITE, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 370, background: 'linear-gradient(180deg, #dde6e2 0%, #efefef 100%)' }}></div>
-      <div style={{ position: 'absolute', top: 26, right: 28, padding: '9px 22px', borderRadius: '22px 0 22px 0', background: TEAL, color: WHITE, ...MED(26, 32), letterSpacing: '0.02em' }}>{c.tag}</div>
+      <div style={{ position: 'absolute', top: 26, right: 28, padding: '12px 22px 6px', borderRadius: '22px 0 22px 0', background: TEAL, color: WHITE, ...MED(26, 32), letterSpacing: '0.02em' }}>{c.tag}</div>
       <img src={c.src} alt={c.name} style={{ position: 'absolute', left: -80, top: 50, width: 720, height: 'auto' }} />
-      <div style={{ position: 'absolute', left: 30, right: 30, top: 410, textAlign: 'center' }}>
+      <div style={{ position: 'absolute', left: 30, right: 30, top: 428, textAlign: 'center' }}>
         <div style={{ ...BOLD(70, 72), color: TEAL }}>{c.name}</div>
         <div style={{ marginTop: 2, ...REG(32, 38), color: '#4b6260' }}>{c.feat.map((f, j) => <div key={j}>{f}</div>)}</div>
       </div>
@@ -211,7 +211,7 @@ function Editorial() {
 const RICONS = {
   city: 'M6 42 H42 M9 42 V18 H19 V42 M19 42 V8 H31 V42 M31 42 V24 H39 V42 M13 24 V26 M13 32 V34 M25 14 V16 M25 22 V24 M25 30 V32 M35 30 V32',
   rural: 'M4 42 C13 32 21 32 29 38 C34 34 39 33 44 36 M12 34 V24 M12 24 C7 24 6 14 12 11 C18 14 17 24 12 24 M36 10 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0',
-  family: 'M12 14 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M36 14 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M4 42 V31 C4 24 20 24 20 31 V42 M28 42 V31 C28 24 44 24 44 31 V42 M24 33 m-3 0 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0 M20.5 42 C20.5 38.5 27.5 38.5 27.5 42',
+  family: 'M12 14 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M36 14 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M4 42 V31 C4 24 20 24 20 31 V42 M28 42 V31 C28 24 44 24 44 31 V42 M24 18 m-4.5 0 a4.5 4.5 0 1 0 9 0 a4.5 4.5 0 1 0 -9 0 M17.5 42 V33 C17.5 28 30.5 28 30.5 33 V42',
 };
 /* ── 3 · verde: chips (círculo + retângulo de cantos opostos) + carro ─── */
 const ICONS = {
@@ -305,7 +305,7 @@ function Closing() {
     <Frame theme="black" lt={lt} dur={sc.dur} video={sc.video} last>
       <div style={{ position: 'absolute', left: 0, right: 0, top: sc.top || 1260, color: WHITE, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <Lines list={sc.pre} lt={lt} delay={0.5} step={0.12} style={REG(56, 68)} accent={YEL} />
-        <div style={{ marginTop: 30, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.big} lt={lt} delay={1.6} step={0.18} style={LIGHT(140, 138)} accent={YEL} w={400} italic />
         </div>
       </div>
