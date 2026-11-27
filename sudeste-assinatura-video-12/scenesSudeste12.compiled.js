@@ -54,7 +54,7 @@ function rich(text, o) {
       var m = o.mark == null ? 1 : o.mark;
       out.push(React.createElement(
         'span',
-        { key: k++, style: { color: TEAL, fontWeight: o.mw || 500, padding: '0 10px', margin: '0 -4px', backgroundImage: 'linear-gradient(' + YEL + ', ' + YEL + ')', backgroundRepeat: 'no-repeat', backgroundPosition: 'left 58%', backgroundSize: m * 100 + '% 78%' } },
+        { key: k++, style: { color: TEAL, fontWeight: o.mw || 500, padding: '0 10px', margin: '0 -4px', backgroundImage: 'linear-gradient(' + YEL + ', ' + YEL + ')', backgroundRepeat: 'no-repeat', backgroundPosition: o.markPos || 'left 58%', backgroundSize: m * 100 + '% ' + (o.markHeight || 78) + '%' } },
         seg
       ));
       return;
@@ -83,6 +83,9 @@ function Lines(_ref) {
   var w = _ref.w;
   var italic = _ref.italic;
   var markAt = _ref.markAt;
+  var mw = _ref.mw;
+  var markHeight = _ref.markHeight;
+  var markPos = _ref.markPos;
 
   return (list || []).map(function (ln, i) {
     var d = (delay || 0) + i * (step || 0.08);
@@ -90,7 +93,7 @@ function Lines(_ref) {
     return React.createElement(
       'div',
       { key: i, style: _extends({}, rise(lt, d, 18), { whiteSpace: 'nowrap' }, style) },
-      rich(ln, { accent: accent, w: w, italic: italic, mark: mark })
+      rich(ln, { accent: accent, w: w, italic: italic, mark: mark, mw: mw, markHeight: markHeight, markPos: markPos })
     );
   });
 }
@@ -279,7 +282,7 @@ function Cover() {
     { theme: 'teal', lt: lt, dur: sc.dur },
     React.createElement(
       'div',
-      { style: { position: 'absolute', left: 0, right: 0, top: 410, color: WHITE, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' } },
+      { style: { position: 'absolute', left: 0, right: 0, top: 370, color: WHITE, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' } },
       React.createElement(Lines, { list: sc.intro, lt: lt, delay: 0.2, step: 0.1, style: REG(70, 84), accent: YEL }),
       React.createElement(
         'div',
@@ -471,7 +474,7 @@ function Centered() {
     React.createElement(
       'div',
       { style: { position: 'absolute', left: 0, right: 0, top: R1 + 40, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: WHITE } },
-      React.createElement(Lines, { list: sc.bottom, lt: lt, delay: 2.3, step: 0.1, style: MED(70, 84), accent: YEL, markAt: 2.65 })
+      React.createElement(Lines, { list: sc.bottom, lt: lt, delay: 2.3, step: 0.1, style: MED(70, 84), accent: YEL, markAt: 2.65, mw: 700, markHeight: 60, markPos: 'left 50%' })
     ),
     React.createElement('div', { style: { position: 'absolute', left: 130, right: 130, top: R2, height: 3, background: YEL, transform: 'scaleX(' + r2 + ')' } })
   );

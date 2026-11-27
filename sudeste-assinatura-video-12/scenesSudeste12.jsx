@@ -20,7 +20,7 @@ function rich(text, o) {
   String(text).split('==').forEach((seg, j) => {
     if (j % 2 === 1) {
       const m = o.mark == null ? 1 : o.mark;
-      out.push(<span key={k++} style={{ color: TEAL, fontWeight: o.mw || 500, padding: '0 10px', margin: '0 -4px', backgroundImage: `linear-gradient(${YEL}, ${YEL})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'left 58%', backgroundSize: `${m * 100}% 78%` }}>{seg}</span>);
+      out.push(<span key={k++} style={{ color: TEAL, fontWeight: o.mw || 500, padding: '0 10px', margin: '0 -4px', backgroundImage: `linear-gradient(${YEL}, ${YEL})`, backgroundRepeat: 'no-repeat', backgroundPosition: o.markPos || 'left 58%', backgroundSize: `${m * 100}% ${o.markHeight || 78}%` }}>{seg}</span>);
       return;
     }
     seg.split('**').forEach((p, i) => out.push(i % 2 === 1
@@ -29,11 +29,11 @@ function rich(text, o) {
   });
   return out;
 }
-function Lines({ list, lt, delay, step, style, accent, w, italic, markAt }) {
+function Lines({ list, lt, delay, step, style, accent, w, italic, markAt, mw, markHeight, markPos }) {
   return (list || []).map((ln, i) => {
     const d = (delay || 0) + i * (step || 0.08);
     const mark = markAt != null ? easeIO(lt, markAt, 0.4) : easeIO(lt, d + 0.35, 0.6);
-    return <div key={i} style={{ ...rise(lt, d, 18), whiteSpace: 'nowrap', ...style }}>{rich(ln, { accent, w, italic, mark })}</div>;
+    return <div key={i} style={{ ...rise(lt, d, 18), whiteSpace: 'nowrap', ...style }}>{rich(ln, { accent, w, italic, mark, mw, markHeight, markPos })}</div>;
   });
 }
 const shell = { position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: FONT };
@@ -156,7 +156,7 @@ function Cover() {
   const top = sc.cardTop || 930, cx = W / 2 - CARD_W / 2;
   return (
     <Frame theme="teal" lt={lt} dur={sc.dur}>
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 410, color: WHITE, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 370, color: WHITE, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <Lines list={sc.intro} lt={lt} delay={0.2} step={0.1} style={REG(70, 84)} accent={YEL} />
         <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Lines list={sc.title} lt={lt} delay={0.6} step={0.12} style={LIGHT(108, 108)} accent={YEL} w={400} italic />
@@ -291,7 +291,7 @@ function Centered() {
       <div style={{ position: 'absolute', left: W / 2 - 1.5, top: VT, width: 3, height: R1 - VT, background: YEL, transform: `scaleY(${v})`, transformOrigin: 'top' }}></div>
       <div style={{ position: 'absolute', left: 130, right: 130, top: R1, height: 3, background: YEL, transform: `scaleX(${r1})` }}></div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: R1 + 40, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', color: WHITE }}>
-        <Lines list={sc.bottom} lt={lt} delay={2.3} step={0.1} style={MED(70, 84)} accent={YEL} markAt={2.65} />
+        <Lines list={sc.bottom} lt={lt} delay={2.3} step={0.1} style={MED(70, 84)} accent={YEL} markAt={2.65} mw={700} markHeight={60} markPos="left 50%" />
       </div>
       <div style={{ position: 'absolute', left: 130, right: 130, top: R2, height: 3, background: YEL, transform: `scaleX(${r2})` }}></div>
     </Frame>
