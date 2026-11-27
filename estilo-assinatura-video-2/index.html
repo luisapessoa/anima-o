@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estilo Assinaturas — vídeo vertical 2</title>
+<!-- background videos for Telas 1, 3, 4, 6, 8 (black scenes) -->
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-1.mp4" fetchpriority="high" />
+<link rel="preload" as="video" type="video/mp4" href="assets/bg-3.mp4" fetchpriority="low" />
+<script>
+  [
+    ['assets/bg-4.mp4', 8000],   // Tela 4 ~18.5s in
+    ['assets/bg-6.mp4', 25000],  // Tela 6 ~31.5s in
+    ['assets/bg-8.mp4', 40000],  // Tela 8 ~44.5s in
+  ].forEach(function (pair) {
+    setTimeout(function () {
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'video'; l.type = 'video/mp4';
+      l.href = pair[0];
+      document.head.appendChild(l);
+    }, pair[1]);
+  });
+</script>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/urbanist-700.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/urbanist-800.woff2" crossorigin="anonymous" />
+<link rel="preload" as="image" type="image/png" href="assets/estilo/opt-logo-white.png" fetchpriority="high" />
+<style>
+  /* Urbanist self-hosted — evita depender de fonts.googleapis.com em tempo de exportação. */
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/urbanist-400-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url("assets/fonts/urbanist-400.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("assets/fonts/urbanist-500-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 500; font-display: swap;
+    src: url("assets/fonts/urbanist-500.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("assets/fonts/urbanist-600-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 600; font-display: swap;
+    src: url("assets/fonts/urbanist-600.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/urbanist-700-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 700; font-display: swap;
+    src: url("assets/fonts/urbanist-700.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("assets/fonts/urbanist-800-ext.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Urbanist'; font-style: normal; font-weight: 800; font-display: swap;
+    src: url("assets/fonts/urbanist-800.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  html, body { margin: 0; padding: 0; background: #000000; height: 100%; }
+  a { color: #173ded; }
+  a:hover { color: #4b6bf5; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+
+<script>
+  // Lista de telas (8 telas) e configuração de playback — copiado verbatim
+  // do OM_SCENES do pacote de design handoff, nenhum texto alterado.
+  window.OM_SCENES='[{"name":"Tela 1","layout":"bubble","dur":5.5,"body":["“Se eu não estou financiando,","por que meu crédito precisa","ser analisado?”"]},{"name":"Tela 2","layout":"carcard","dur":6.5,"body":["Essa é uma dúvida comum","de quem começa a considerar","um carro por assinatura."],"tail":["Afinal, se o carro não está","sendo comprado, por que essa","etapa faz parte do processo?"]},{"name":"Tela 3","layout":"rules","dur":6,"body":["**A assinatura não é um**","**financiamento,** mas continua","sendo um compromisso","financeiro assumido por","um período contratado."]},{"name":"Tela 4","layout":"vrule","dur":6.5,"body":["Por isso, a análise de crédito","existe para **verificar se a**","**proposta está compatível com**","**o perfil financeiro de quem**","**deseja contratar.**"]},{"name":"Tela 5","layout":"starslist","dur":7.5,"head":["Nessa avaliação, alguns","pontos podem influenciar,","como:"],"items":["comprometimento de renda;","pendências financeiras;","histórico de crédito;",["informações cadastrais","inconsistentes;"]]},{"name":"Tela 6","layout":"whitecard","dur":6,"body":["Isso não significa que a análise","exista para dificultar a contratação."],"tail":["Ela faz parte do processo para","trazer mais segurança e coerência","para a proposta."]},{"name":"Tela 7","layout":"nivuscard","dur":6.5,"body":["**E vale lembrar:** uma negativa","não significa, necessariamente,","que a pessoa nunca poderá assinar."],"tail":["Cada proposta é analisada","conforme os critérios da empresa","responsável pelo contrato."]},{"name":"Tela 8","layout":"final","dur":4.5,"body":["Agora você entendeu por","que essa etapa existe?"]}]';
+  window.OM_PLAYBACK = '{"mode":"times","count":1}';
+  // videoBg:true — fundos de vídeo ligados por padrão nas Telas 1, 3, 4, 6 e 8
+  // (as únicas telas de fundo preto; Telas 2/6-card são brancas, 5/7 são navy).
+  window.TWEAK_DEFAULTS = { showLogo: true, videoBg: true, motionEditor: false };
+</script>
+
+<script src="animations-v2.compiled.js"></script>
+<script src="tweaks-panel.compiled.js"></script>
+<script src="scenesEstilo2.compiled.js"></script>
+
+<script>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(EstiloVideo2)
+  );
+</script>
+</body>
+</html>

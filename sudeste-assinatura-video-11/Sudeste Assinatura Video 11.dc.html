@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/logo-dark.png">
+  <link rel="preload" as="image" href="assets/logo-white.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #012019; }
+    a { color: #00d1b2; }
+    a:hover { color: #c6f6d6; }
+  </style>
+  <script>window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "cover", theme: "black", dur: 6,
+      intro: ["Hoje você assina filmes,", "músicas, softwares…"],
+      title: ["Mas quem", "teve a ideia", "de **assinar**", "um carro?"] },
+    { name: "Tela 2 + 3", layout: "timeline", theme: "pale", dur: 12, fresh: true,
+      path: "M 150 930 C 345 930 520 980 560 1060 C 600 1140 520 1200 470 1150 C 420 1100 500 1040 620 1080 C 740 1120 780 1176 850 1176 C 960 1176 980 1060 1060 1060 L 1120 1060",
+      keys: [[0, 0], [1.4, 0], [6.0, "d1"], [10.8, "d1"], [11.55, 1]],
+      dots: [[150, 930, 1.0], [850, 1176, 6.0]],
+      topics: [
+        { at: 1.2, icon: "palm", label: "Havaí", body: ["Um dos primeiros registros do", "modelo moderno surgiu no Havaí.", "Uma **nova alternativa à compra**", "começava a ser testada."], pos: { left: 130, top: 440 } },
+        { at: 6.2, icon: "flag", label: "Estados Unidos", align: "right", body: ["Nos anos seguintes, a ideia", "ganhou espaço nos Estados Unidos:", "**pagar pelo uso do carro,**", "**sem precisar comprá-lo.**"], pos: { right: 130, top: 1240 } }
+      ] },
+    { name: "Tela 4", layout: "timeline", theme: "black", dur: 7, video: "assets/videos/videoB.mp4",
+      path: "M -40 1060 L 0 1060 C 120 1060 160 1100 140 1170 C 120 1240 140 1290 220 1290 C 420 1290 600 1240 680 1140 C 740 1060 700 1000 660 1030 C 620 1060 680 1120 780 1060 C 880 1040 960 980 1060 980 L 1120 980",
+      keys: [[0, 0.05], [1.0, "d0"], [5.4, "d0"], [6.55, 1]],
+      dots: [[220, 1290, 1.0]],
+      big: { top: 1370, at: 1.2, size: [72, 82], lines: ["Logo, grandes **montadoras**", "começaram a testar seus", "próprios programas."], subSize: [52, 64], sub: ["A assinatura começava a ganhar", "o **mercado automotivo.**"] } },
+    { name: "Tela 5 + 6", layout: "timeline", theme: "teal", dur: 12,
+      path: "M -40 980 L 0 980 C 80 980 100 910 170 910 C 260 910 330 960 340 1020 C 360 1120 260 1140 250 1070 C 240 1000 360 980 480 1000 C 680 1030 760 1160 870 1170 C 960 1178 1010 1150 1060 1150 L 1120 1150",
+      keys: [[0, 0.05], [0.9, "d0"], [4.6, "d0"], [6.2, "d1"], [10.8, "d1"], [11.55, 1]],
+      dots: [[170, 910, 0.9], [870, 1170, 6.2]],
+      topics: [
+        { at: 1.1, icon: "pin", label: "Brasil", body: ["Os primeiros serviços surgiram", "em **meados da década de 2010.**", "E a modalidade começou", "a crescer por aqui."], pos: { left: 130, top: 420 } },
+        { at: 6.4, icon: "factory", label: "Montadoras", align: "right", body: ["Com a entrada das grandes", "montadoras, a assinatura de", "**carros 0km** ganhou ainda", "mais espaço no país."], pos: { right: 130, top: 1250 } }
+      ] },
+    { name: "Tela 7", layout: "timeline", theme: "teal", dur: 8,
+      path: "M -40 1150 L 20 1150 C 180 1150 300 990 540 990 C 780 990 900 1040 1060 1040 L 1120 1040",
+      keys: [[0, 0.05], [0.8, "d0"], [6.8, "d0"], [7.55, 1]],
+      dots: [[540, 990, 0.8]],
+      hero: { at: 1.0, top: 360, pre: "Novembro de", year: "2020", body: ["A Volkswagen lançou o **VW**", "**Sign&Drive** no Brasil. Mais um", "capítulo dessa história começava."] },
+      cars: { at: 2.0, top: 1150 } },
+    { name: "Tela 8", layout: "timeline", theme: "black", dur: 6, last: true, video: "assets/videos/videoC.mp4",
+      path: "M -40 1040 L 20 1040 C 200 1040 360 900 320 800 C 280 700 160 760 220 860 C 300 990 500 1060 540 1180 C 552 1220 545 1260 540 1290",
+      keys: [[0, 0.05], [1.4, 1]],
+      dots: [[540, 1290, 1.4]],
+      big: { top: 1370, at: 1.2, center: true, size: [80, 88], lines: ["De uma ideia pouco", "conhecida a uma **nova**", "**forma de usar um carro.**"], subSize: [54, 64], subBold: true, sub: ["Você já conhecia essa história?"] } }
+  ]);</script>
+  <script>window.OM_PLAYBACK='{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"showLogo":true,"motionEditor":false}/*EDITMODE-END*/;</script>
+</helmet>
+<x-import component-from-global-scope="SudesteVideo11" from="./animations-v2.jsx ./tweaks-panel.jsx ./scenesSudeste11.jsx" hint-size="100%,100%"></x-import>
+</x-dc>
+</body>
+</html>

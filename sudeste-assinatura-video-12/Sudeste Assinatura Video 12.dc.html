@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/logo-dark.png">
+  <link rel="preload" as="image" href="assets/logo-white.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #012019; }
+    a { color: #f2ff46; }
+    a:hover { color: #c6f6d6; }
+  </style>
+  <script>window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "cover", theme: "teal", dur: 7, trans: "push",
+      intro: ["“Quero assinar um carro…"],
+      title: ["Mas ainda não sei", "qual **modelo**", "escolher!”"] },
+    { name: "Tela 2", layout: "editorial", theme: "neutral", dur: 7, trans: "up",
+      small: ["E você não precisa", "chegar com essa", "**decisão tomada.**"],
+      big: ["Antes de", "escolher o carro,", "vale entender como", "ele vai entrar na", "sua ==rotina.=="],
+      routines: [{ icon: "city", label: "Urbana" }, { icon: "rural", label: "Rural" }, { icon: "family", label: "Em família" }] },
+    { name: "Tela 3", layout: "questions", theme: "teal", dur: 8, trans: "circle",
+      qs: [
+        { at: 0.4, icon: "gauge", top: 420, lines: ["Quanto você costuma", "**rodar por mês?**"] },
+        { at: 1.2, icon: "road", top: 666, lines: ["Usa mais na **cidade**", "ou na **estrada?**"] },
+        { at: 2.0, icon: "size", top: 912, lines: ["Precisa de mais **espaço** ou", "prefere um **compacto?**"] }
+      ],
+      bottomVideo: { at: 0.2, top: 960, src: "assets/videos/videoA.mp4", start: 0, end: 8.03 } },
+    { name: "Tela 4", layout: "linetext", theme: "black", dur: 7, top: 1180, left: 340, trans: "wipe",
+      big: ["Essas respostas", "ajudam a definir", "não só o **modelo.**"],
+      sub: ["Também ajudam na escolha da"],
+      chips: ["versão", "quilometragem", "período de contratação"],
+      video: { src: "assets/videos/videoB.mp4", start: 0, end: 8.55 } },
+    { name: "Tela 5", layout: "centered", theme: "teal", dur: 8, y: 470, trans: "zoom",
+      top: ["Às vezes, o carro que", "você tinha em mente", "não é o que mais", "combina com o", "seu **uso.**"],
+      bottom: ["E descobrir isso", "antes de assinar", "faz ==toda diferença.=="] },
+    { name: "Tela 6", layout: "closing", theme: "black", dur: 7, last: true, top: 1324,
+      pre: ["Por isso, a escolha", "começa pela **sua rotina.**"],
+      big: ["O carro **vem**", "**depois!**"],
+      video: { src: "assets/videos/videoC.mp4", start: 0, end: 9.217542 } }
+  ]);</script>
+  <script>window.OM_PLAYBACK='{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"showLogo":true,"motionEditor":false,"cardAnim":"carrossel"}/*EDITMODE-END*/;</script>
+</helmet>
+<x-import component-from-global-scope="SudesteVideo12" from="./animations-v2.jsx ./tweaks-panel.jsx ./scenesSudeste12.jsx" hint-size="100%,100%"></x-import>
+</x-dc>
+</body>
+</html>

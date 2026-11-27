@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/logo-dark.png">
+  <link rel="preload" as="image" href="assets/logo-white.png">
+  <link rel="preload" as="image" href="assets/carro-polo.webp">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #012019; }
+    a { color: #00d1b2; }
+    a:hover { color: #c6f6d6; }
+  </style>
+  <script>window.OM_SCENES=JSON.stringify([
+    { name: "Tela 1", layout: "cover", dur: 5.5,
+      q: ["Quais os requisitos", "para eu assinar meu"], big: "0km?",
+      cta: "É **menos** complicado do que parece!" },
+    { name: "Tela 2", layout: "docs", dur: 7.5,
+      label: ["No VW Sign&Drive,", "para pessoa física,"],
+      head: "a análise solicita", hl: "basicamente:",
+      items: [
+        { t: "CNH válida", icon: "cnh" },
+        { t: "Comprovante de renda", icon: "renda" },
+        { t: "Comprovante de residência", icon: "casa" }
+      ] },
+    { name: "Tela 3", layout: "digital", dur: 7,
+      p1: ["Depois, o processo", "segue digitalmente:"],
+      p2: ["você envia seus dados,", "aguarda a análise e, se", "aprovado, recebe o contrato", "para **assinatura digital.**"] },
+    { name: "Tela 4", layout: "paper", dur: 9,
+      title: ["Sem uma pilha", "de **papéis.**"],
+      sub: ["Sem precisar resolver", "**cada etapa** em um", "**lugar diferente.**"],
+      micro: ["E quando estiver", "tudo **certo?**"],
+      ans: ["**A melhor parte é presencial:**", "buscar a **chave** do seu", "**Volkswagen 0km.**"] },
+    { name: "Tela 5", layout: "closing", dur: 6,
+      big: ["Simples,", "rápido e", "prático!"],
+      small: ["Se essa era sua preocupação,", "não precisa ter mais!"] }
+  ]);</script>
+  <script>window.OM_PLAYBACK='{"mode":"loop"}';</script>
+  <script>window.TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"showLogo":true,"motionEditor":false}/*EDITMODE-END*/;</script>
+</helmet>
+<x-import component-from-global-scope="SudesteVideo9" from="./animations-v2.jsx ./tweaks-panel.jsx ./scenesSudeste9.jsx" hint-size="100%,100%"></x-import>
+</x-dc>
+</body>
+</html>
